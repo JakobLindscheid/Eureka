@@ -4,7 +4,9 @@ import json
 import logging 
 import matplotlib.pyplot as plt
 import os
-import openai
+from language_model import LanguageModel
+import torch
+torch.cuda.set_per_process_memory_fraction(1.0, 0)
 import re
 import subprocess
 from pathlib import Path
@@ -25,15 +27,16 @@ def main(cfg):
     logging.info(f"Workspace: {workspace_dir}")
     logging.info(f"Project Root: {EUREKA_ROOT_DIR}")
 
-    openai.api_key = os.getenv("OPENAI_API_KEY")
-
     task = cfg.env.task
     task_description = cfg.env.description
     suffix = cfg.suffix
     model = cfg.model
-    logging.info(f"Using LLM: {model}")
+    provider = cfg.provider
+    logging.info(f"Using LLM: {model} ({provider})")
     logging.info("Task: " + task)
     logging.info("Task description: " + task_description)
+
+    local_model = LanguageModel(model, provider=provider)
 
     env_name = cfg.env.env_name.lower()
     env_parent = 'isaac' if f'{env_name}.py' in os.listdir(f'{EUREKA_ROOT_DIR}/envs/isaac') else 'dexterity'
@@ -79,7 +82,7 @@ def main(cfg):
         total_samples = 0
         total_token = 0
         total_completion_token = 0
-        chunk_size = cfg.sample if "gpt-3.5" in model else 4
+        chunk_size = cfg.sample # if "gpt-3.5" in model else 4
 
         logging.info(f"Iteration {iter}: Generating {cfg.sample} samples with {cfg.model}")
 
@@ -88,12 +91,7 @@ def main(cfg):
                 break
             for attempt in range(1000):
                 try:
-                    response_cur = openai.ChatCompletion.create(
-                        model=model,
-                        messages=messages,
-                        temperature=cfg.temperature,
-                        n=chunk_size
-                    )
+                    response_cur = local_model.generate_text(messages, cfg.temperature, chunk_size)
                     total_samples += chunk_size
                     break
                 except Exception as e:
@@ -107,15 +105,17 @@ def main(cfg):
                 exit()
 
             responses.extend(response_cur["choices"])
-            prompt_tokens = response_cur["usage"]["prompt_tokens"]
-            total_completion_token += response_cur["usage"]["completion_tokens"]
-            total_token += response_cur["usage"]["total_tokens"]
+            if "usage" in response_cur.keys():
+                prompt_tokens = response_cur["usage"]["prompt_tokens"]
+                total_completion_token += response_cur["usage"]["completion_tokens"]
+                total_token += response_cur["usage"]["total_tokens"]
 
         if cfg.sample == 1:
             logging.info(f"Iteration {iter}: GPT Output:\n " + responses[0]["message"]["content"] + "\n")
 
         # Logging Token Information
-        logging.info(f"Iteration {iter}: Prompt Tokens: {prompt_tokens}, Completion Tokens: {total_completion_token}, Total Tokens: {total_token}")
+        if "usage" in response_cur.keys():
+            logging.info(f"Iteration {iter}: Prompt Tokens: {prompt_tokens}, Completion Tokens: {total_completion_token}, Total Tokens: {total_token}")
         
         code_runs = [] 
         rl_runs = []
@@ -126,10 +126,7 @@ def main(cfg):
             # Regex patterns to extract python code enclosed in GPT response
             patterns = [
                 r'```python(.*?)```',
-                r'```(.*?)```',
-                r'"""(.*?)"""',
-                r'""(.*?)""',
-                r'"(.*?)"',
+                r'```(.*?)```'
             ]
             for pattern in patterns:
                 code_string = re.search(pattern, response_cur, re.DOTALL)
@@ -189,7 +186,7 @@ def main(cfg):
             # Execute the python file with flags
             rl_filepath = f"env_iter{iter}_response{response_id}.txt"
             with open(rl_filepath, 'w') as f:
-                process = subprocess.Popen(['python', '-u', f'{ISAAC_ROOT_DIR}/train.py',  
+                process = subprocess.Popen(['python', '-u', f'{ISAAC_ROOT_DIR}/../train.py',  
                                             'hydra/output=subprocess',
                                             f'task={task}{suffix}', f'wandb_activate={cfg.use_wandb}',
                                             f'wandb_entity={cfg.wandb_username}', f'wandb_project={cfg.wandb_project}',
@@ -197,6 +194,7 @@ def main(cfg):
                                             f'max_iterations={cfg.max_iterations}'],
                                             stdout=f, stderr=f)
             block_until_training(rl_filepath, log_status=True, iter_num=iter, response_id=response_id)
+            process.wait()
             rl_runs.append(process)
         
         # Gather RL training results and construct reward reflection
@@ -286,7 +284,7 @@ def main(cfg):
             continue
 
         # Select the best code sample based on the success rate
-        best_sample_idx = np.argmax(np.array(successes))
+        best_sample_idx = np.argmax(np.array(successes)) if cfg.sample > 1 else 0
         best_content = contents[best_sample_idx]
             
         max_success = successes[best_sample_idx]
@@ -355,7 +353,7 @@ def main(cfg):
         # Execute the python file with flags
         rl_filepath = f"reward_code_eval{i}.txt"
         with open(rl_filepath, 'w') as f:
-            process = subprocess.Popen(['python', '-u', f'{ISAAC_ROOT_DIR}/train.py',  
+            process = subprocess.Popen(['python', '-u', f'{ISAAC_ROOT_DIR}/../train.py',  
                                         'hydra/output=subprocess',
                                         f'task={task}{suffix}', f'wandb_activate={cfg.use_wandb}',
                                         f'wandb_entity={cfg.wandb_username}', f'wandb_project={cfg.wandb_project}',
@@ -364,6 +362,7 @@ def main(cfg):
                                         stdout=f, stderr=f)
 
         block_until_training(rl_filepath)
+        process.wait()
         eval_runs.append(process)
 
     reward_code_final_successes = []

@@ -271,7 +271,7 @@ class RLGPUEnv(vecenv.IVecEnv):
         if hasattr(self.env, "amp_observation_space"):
             info['amp_observation_space'] = self.env.amp_observation_space
 
-        if self.env.num_states > 0:
+        if hasattr(self.env, "num_states") and self.env.num_states > 0:
             info['state_space'] = self.env.state_space
             print(info['action_space'], info['observation_space'], info['state_space'])
         else:

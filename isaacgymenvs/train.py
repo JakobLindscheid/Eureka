@@ -32,13 +32,13 @@ import logging
 import os
 import datetime
 
-import isaacgym
+# import isaacgym
 
 import hydra
 from hydra.utils import to_absolute_path
-from isaacgymenvs.tasks import isaacgym_task_map
+# from isaacgymenvs.tasks import isaacgym_task_map
 from omegaconf import DictConfig, OmegaConf
-import gym
+import gymnasium as gym
 import sys 
 import shutil
 from pathlib import Path
@@ -47,7 +47,7 @@ from isaacgymenvs.utils.reformat import omegaconf_to_dict, print_dict
 from isaacgymenvs.utils.utils import set_np_formatting, set_seed
 
 # ROOT_DIR = os.getcwd()
-ROOT_DIR = os.path.dirname(os.path.realpath(__file__))
+ROOT_DIR = os.path.dirname(os.path.realpath(__file__)) + "/isaacgymenvs"
 
 def preprocess_train_config(cfg, config_dict):
     """
@@ -72,7 +72,7 @@ def preprocess_train_config(cfg, config_dict):
     return config_dict
 
 
-@hydra.main(config_name="config", config_path="./cfg")
+@hydra.main(config_name="config", config_path="./isaacgymenvs/cfg", version_base="1.1")
 def launch_rlg_hydra(cfg: DictConfig):
 
     from isaacgymenvs.utils.rlgames_utils import RLGPUEnv, RLGPUAlgoObserver, MultiObserver, ComplexObsRLGPUEnv
@@ -184,7 +184,7 @@ def launch_rlg_hydra(cfg: DictConfig):
         observers.append(wandb_observer)
 
     # dump config dict
-    exp_date = cfg.train.params.config.name + '-{date:%Y-%m-%d_%H-%M-%S}'.format(date=datetime.datetime.now())
+    exp_date = cfg.train.params.config.name + '_{date:%d-%H-%M-%S}'.format(date=datetime.datetime.now())
     experiment_dir = os.path.join('runs', exp_date)
     print("Network Directory:", Path.cwd() / experiment_dir / "nn")
     print("Tensorboard Directory:", Path.cwd() / experiment_dir / "summaries")
