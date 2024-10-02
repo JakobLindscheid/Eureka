@@ -26,7 +26,7 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from .ant import Ant
+""" from .ant import Ant
 from .anymal import Anymal
 from .anymal_terrain import AnymalTerrain
 from .ball_balance import BallBalance
@@ -116,5 +116,5 @@ isaacgym_task_map = {
     "ShadowHandSwingCup": ShadowHandSwingCup,
     "ShadowHandSwitch": ShadowHandSwitch,
     "ShadowHandTwoCatchUnderarm": ShadowHandTwoCatchUnderarm,
-}
+} """
 

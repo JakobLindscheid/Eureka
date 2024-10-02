@@ -37,9 +37,9 @@ from rl_games.common import env_configurations, vecenv
 from rl_games.common.algo_observer import AlgoObserver
 from rl_games.algos_torch import torch_ext
 
-from isaacgymenvs.tasks import isaacgym_task_map
+# from isaacgymenvs.tasks import isaacgym_task_map
 from isaacgymenvs.utils.utils import set_seed, flatten_dict
-from eureka.utils.file_utils import import_class_from_file
+# from eureka.utils.file_utils import import_class_from_file
 
 def multi_gpu_get_rank(multi_gpu):
     if multi_gpu:
@@ -115,7 +115,8 @@ def get_rlgames_env_creator(
             module_name = f"isaacgymenvs.tasks.{task_config['env']['env_name'].lower()}"
             module = importlib.import_module(module_name)
             task_caller = getattr(module, task_name)
-        except:
+        except Exception as e:
+            raise e
             task_caller = isaacgym_task_map[task_name]
         
         env = task_caller(

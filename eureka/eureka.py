@@ -39,7 +39,7 @@ def main(cfg):
     local_model = LanguageModel(model, provider=provider)
 
     env_name = cfg.env.env_name.lower()
-    env_parent = 'isaac' if f'{env_name}.py' in os.listdir(f'{EUREKA_ROOT_DIR}/envs/isaac') else 'dexterity'
+    env_parent = "gym" # 'isaac' if f'{env_name}.py' in os.listdir(f'{EUREKA_ROOT_DIR}/envs/isaac') else 'dexterity'
     task_file = f'{EUREKA_ROOT_DIR}/envs/{env_parent}/{env_name}.py'
     task_obs_file = f'{EUREKA_ROOT_DIR}/envs/{env_parent}/{env_name}_obs.py'
     shutil.copy(task_obs_file, f"env_init_obs.py")
@@ -61,7 +61,6 @@ def main(cfg):
     initial_user = initial_user.format(task_obs_code_string=task_obs_code_string, task_description=task_description)
     messages = [{"role": "system", "content": initial_system}, {"role": "user", "content": initial_user}]
 
-    task_code_string = task_code_string.replace(task, task+suffix)
     # Create Task YAML files
     create_task(ISAAC_ROOT_DIR, cfg.env.task, cfg.env.env_name, suffix)
 
@@ -154,24 +153,22 @@ def main(cfg):
                 f"self.extras['gpt_reward'] = self.rew_buf.mean()",
                 f"for rew_state in self.rew_dict: self.extras[rew_state] = self.rew_dict[rew_state].mean()",
             ]
-            indent = " " * 8
-            reward_signature = "\n".join([indent + line for line in reward_signature])
+            indent = " " * 4
+            reward_signature = "\n".join([indent*2 + line for line in reward_signature])
             if "def compute_reward(self)" in task_code_string:
                 task_code_string_iter = task_code_string.replace("def compute_reward(self):", "def compute_reward(self):\n" + reward_signature)
             elif "def compute_reward(self, actions)" in task_code_string:
                 task_code_string_iter = task_code_string.replace("def compute_reward(self, actions):", "def compute_reward(self, actions):\n" + reward_signature)
+            elif "def compute_reward_wrapper(self)" in task_code_string:
+                task_code_string_iter = task_code_string.replace("def compute_reward_wrapper(self):", "def compute_reward_wrapper(self):\n" + reward_signature)
             else:
                 raise NotImplementedError
 
             # Save the new environment code when the output contains valid code string!
             with open(output_file, 'w') as file:
                 file.writelines(task_code_string_iter + '\n')
-                file.writelines("from typing import Tuple, Dict" + '\n')
-                file.writelines("import math" + '\n')
-                file.writelines("import torch" + '\n')
-                file.writelines("from torch import Tensor" + '\n')
-                if "@torch.jit.script" not in code_string:
-                    code_string = "@torch.jit.script\n" + code_string
+                if gpt_reward_signature.startswith("self") and code_string.startswith("def"):
+                    code_string = indent + code_string.replace("\n", f"\n{indent}")
                 file.writelines(code_string + '\n')
 
             with open(f"env_iter{iter}_response{response_id}_rewardonly.py", 'w') as file:
