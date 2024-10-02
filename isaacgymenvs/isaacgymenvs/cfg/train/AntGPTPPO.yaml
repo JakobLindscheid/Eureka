@@ -17,7 +17,7 @@ params:
     lr_schedule: adaptive
     max_epochs: ${resolve_default:500,${....max_iterations}}
     mini_epochs: 4
-    minibatch_size: 32768
+    minibatch_size: 512
     mixed_precision: true
     multi_gpu: ${....multi_gpu}
     name: ${resolve_default:AntGPT,${....experiment}}

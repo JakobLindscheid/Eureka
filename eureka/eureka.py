@@ -148,11 +148,12 @@ def main(cfg):
                 continue
 
             code_runs.append(code_string)
-            reward_signature = [
+            """ reward_signature = [
                 f"self.rew_buf[:], self.rew_dict = {gpt_reward_signature}",
-                f"self.extras['gpt_reward'] = self.rew_buf.mean()",
+                f"self.extras['gpt_reward'] = self.rew_buf.mean().item()",
                 f"for rew_state in self.rew_dict: self.extras[rew_state] = self.rew_dict[rew_state].mean()",
-            ]
+            ] """
+            reward_signature = [f"return {gpt_reward_signature}"]
             indent = " " * 4
             reward_signature = "\n".join([indent*2 + line for line in reward_signature])
             if "def compute_reward(self)" in task_code_string:
