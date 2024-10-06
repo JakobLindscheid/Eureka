@@ -340,3 +340,130 @@ Some helpful tips for writing the reward function code:
 [2024-10-06 19:40:47,072][root][INFO] - Iteration 3: Code Run 1 successfully training!
 [2024-10-06 20:07:43,702][root][INFO] - Iteration 3: Processing Code Run 2
 [2024-10-06 20:07:49,553][root][INFO] - Iteration 3: Code Run 2 successfully training!
+[2024-10-06 20:33:49,791][root][INFO] - Iteration 3: Processing Code Run 3
+[2024-10-06 20:33:55,553][root][INFO] - Iteration 3: Code Run 3 successfully training!
+[2024-10-06 21:01:40,638][root][INFO] - Iteration 3: Processing Code Run 4
+[2024-10-06 21:01:46,450][root][INFO] - Iteration 3: Code Run 4 successfully training!
+[2024-10-06 21:30:51,873][tensorboard][INFO] - No path found after /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-06_15-05-55/policy-2024-10-06_19-12-42/runs/HumanoidGPT-2024-10-06_19-12-42/summaries/events.out.tfevents.1728234763.Rhino
+[2024-10-06 21:30:53,375][tensorboard][INFO] - No path found after /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-06_15-05-55/policy-2024-10-06_19-40-43/runs/HumanoidGPT-2024-10-06_19-40-43/summaries/events.out.tfevents.1728236445.Rhino
+[2024-10-06 21:30:54,880][tensorboard][INFO] - No path found after /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-06_15-05-55/policy-2024-10-06_20-07-46/runs/HumanoidGPT-2024-10-06_20-07-46/summaries/events.out.tfevents.1728238067.Rhino
+[2024-10-06 21:30:56,420][tensorboard][INFO] - No path found after /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-06_15-05-55/policy-2024-10-06_20-33-52/runs/HumanoidGPT-2024-10-06_20-33-52/summaries/events.out.tfevents.1728239633.Rhino
+[2024-10-06 21:30:57,957][tensorboard][INFO] - No path found after /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-06_15-05-55/policy-2024-10-06_21-01-42/runs/HumanoidGPT-2024-10-06_21-01-43/summaries/events.out.tfevents.1728241304.Rhino
+[2024-10-06 21:30:57,981][root][INFO] - Iteration 3: Max Success: 7.309169769287109, Execute Rate: 1.0, Max Success Reward Correlation: 0.9143202319880015
+[2024-10-06 21:30:57,981][root][INFO] - Iteration 3: Best Generation ID: 4
+[2024-10-06 21:30:57,981][root][INFO] - Iteration 3: GPT Output Content:
+Upon analyzing the feedback from the RL policy training and the associated metrics, we can make the following observations regarding the reward components:
+
+1. **Speed Reward**:
+   - The speed reward shows significant variability, with maximum values reaching as high as **5.17** and mean values around **4.14**. This indicates it is being utilized effectively.
+   - However, the minimum value being **-0.00** suggests that it might dip into zero at times, which could hinder exploration. 
+   - Nonetheless, the speed reward seems to be driving positive performance overall.
+
+2. **Forward Progress Reward**:
+   - The forward progress reward displays a concerning pattern; it remains static at **0.02** across all evaluations. This means the agent is unable to exploit or learn from this component effectively.
+   - Given it contributes no meaningful change, we will need to rewrite this component entirely to measure an actual distance moved toward the target or the success of the humanoid's directionality in motion.
+
+3. **Task Score**:
+   - The task score exhibits extreme values, maxing out at **2903422905985531904.00**, with a mean of **1478301593050195.25**. This discrepancy suggests that the scoring has spiraled into a range that is not manageable for effective learning.
+   - This reward component must also be rescaled significantly to restrict its influence in the total reward.
+
+4. **Episode Lengths**:
+   - The average episode length is around **53.82**, indicating that the humanoid might be achieving at least a baseline performance, but with fluctuations in episode lengths (a minimum of **24.73** shows poor runs). Analyzing the balance between positive reward achievement and episode sustainability is crucial.
+
+Based on these observations, we need to redesign the reward function as follows:
+
+- **Speed Reward**: Use the existing mechanism but ensure it does not drop to zero.
+- **Forward Progress Reward**: Redefine it to reflect how far the humanoid has moved towards the target.
+- **Task Score**: Normalize this component drastically since its current scale is erratic.
+
+### Revised Reward Function
+
+```python
+@torch.jit.script
+def compute_reward(root_states: torch.Tensor, targets: torch.Tensor, dt: float) -> Tuple[torch.Tensor, Dict[str, torch.Tensor]]:
+    """
+    Computes the reward for the humanoid task focused on running as fast as possible with improved components.
+
+    Inputs:
+    - root_states: Tensor containing the state of the humanoid (position and velocity).
+    - targets: Tensor containing the target position for the humanoid.
+    - dt: Time step for the environment.
+
+    Returns:
+    - reward: Total reward based on the humanoid's speed, progress towards the target, and scaled task score.
+    - reward_components: Dictionary of individual reward components.
+    """
+
+    # Define temperature parameters for normalization
+    speed_temp = 1.5  # Temperature for speed normalization
+    forward_progress_temp = 1.0  # Temperature for forward progress normalization
+    task_score_temp = 2000.0  # Temperature for task score normalization
+
+    # Extracting torso state
+    torso_velocity = root_states[:, 7:10]  # [vx, vy, vz]
+    torso_position = root_states[:, 0:3]  # [x, y, z]
+
+    # Calculate forward speed (only in x-axis) and ensure positive reward
+    forward_speed = torso_velocity[:, 0]  
+    normalized_speed_reward = torch.clamp(torch.exp(forward_speed / speed_temp) - 1, min=0.0)  # Ensure it is non-negative
+
+    # Calculate forward progress towards the target along the x-axis
+    distance_to_target = targets[:, 0] - torso_position[:, 0]  # x-component only
+    forward_progress_reward = torch.clamp(distance_to_target / (torch.norm(distance_to_target) + 1e-5), min=0.0, max=1.0)
+
+    # Rewriting task score to avoid extreme scaling
+    overall_task_score = normalized_speed_reward + forward_progress_reward
+    normalized_task_score = torch.exp(overall_task_score / task_score_temp) - 1  
+
+    # Total reward aggregation
+    total_reward = normalized_speed_reward + forward_progress_reward + normalized_task_score
+
+    # Creating the reward components dictionary
+    reward_components = {
+        'speed_reward': normalized_speed_reward,
+        'forward_progress_reward': forward_progress_reward,
+        'task_score': normalized_task_score
+    }
+
+    return total_reward, reward_components
+```
+
+### Explanation of the Changes:
+- **Speed Reward**: Adjusted to avoid negative values while maintaining positive feedback for higher speeds.
+- **Forward Progress Reward**: Now reflects a more dynamic measure of how close the humanoid is to the target.
+- **Task Score**: Recalibrated to prevent excessive values influencing the total reward.
+
+This revised reward function aims to achieve a better balance in learning, encouraging the agent to optimize running speed while making tangible forward progress toward the target, all within a manageable scoring system.
+
+[2024-10-06 21:30:57,981][root][INFO] - Iteration 3: User Content:
+We trained a RL policy using the provided reward function code and tracked the values of the individual components in the reward function as well as global policy metrics such as success rates and episode lengths after every 300 epochs and the maximum, mean, minimum values encountered:
+speed_reward: ['0.11', '15.19', '24.72', '37.09', '61.23', '96.18', '149.11', '197.41', '236.91', '300.63'], Max: 383.01, Mean: 130.72, Min: 0.11 
+forward_progress_reward: ['0.02', '0.02', '0.02', '0.02', '0.02', '0.02', '0.02', '0.02', '0.02', '0.02'], Max: 0.02, Mean: 0.02, Min: 0.02 
+task_score: ['0.00', '0.01', '0.01', '0.02', '0.03', '0.05', '0.08', '0.12', '0.14', '0.19'], Max: 0.26, Mean: 0.08, Min: 0.00 
+task_score: ['-0.05', '3.36', '3.92', '4.40', '4.90', '5.50', '6.04', '6.43', '6.66', '7.00'], Max: 7.31, Mean: 5.27, Min: -0.05 
+episode_lengths: ['31.92', '79.18', '99.55', '109.94', '143.80', '171.92', '196.38', '213.77', '228.59', '257.17'], Max: 309.30, Mean: 168.52, Min: 24.59 
+Please carefully analyze the policy feedback and provide a new, improved reward function that can better solve the task. Some helpful tips for analyzing the policy feedback:
+    (1) If the success rates are always near zero, then you must rewrite the entire reward function
+    (2) If the values for a certain reward component are near identical throughout, then this means RL is not able to optimize this component as it is written. You may consider
+        (a) Changing its scale or the value of its temperature parameter
+        (b) Re-writing the reward component 
+        (c) Discarding the reward component
+    (3) If some reward components' magnitude is significantly larger, then you must re-scale its value to a proper range
+Please analyze each existing reward component in the suggested manner above first, and then write the reward function code. The output of the reward function should consist of two items:
+    (1) the total reward,
+    (2) a dictionary of each individual reward component.
+The code output should be formatted as a python code string: "```python ... ```".
+
+Some helpful tips for writing the reward function code:
+    (1) You may find it helpful to normalize the reward to a fixed range by applying transformations like torch.exp to the overall reward or its components
+    (2) If you choose to transform a reward component, then you must also introduce a temperature parameter inside the transformation function; this parameter must be a named variable in the reward function and it must not be an input variable. Each transformed reward component should have its own temperature variable
+    (3) Make sure the type of each input variable is correctly specified; a float input variable should not be specified as torch.Tensor
+    (4) Most importantly, the reward code's input variables must contain only attributes of the provided environment class definition (namely, variables that have prefix self.). Under no circumstance can you introduce new input variables.
+
+
+[2024-10-06 21:30:58,117][root][INFO] - Iteration 4: Generating 5 samples with gpt-4o-mini
+[2024-10-06 21:31:13,574][httpx][INFO] - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2024-10-06 21:31:32,501][httpx][INFO] - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2024-10-06 21:31:32,762][root][INFO] - Iteration 4: Prompt Tokens: 2983, Completion Tokens: 8648, Total Tokens: 14614
+[2024-10-06 21:31:32,762][root][INFO] - Iteration 4: Processing Code Run 0
+[2024-10-06 21:31:38,609][root][INFO] - Iteration 4: Code Run 0 successfully training!
