@@ -1,0 +1,37 @@
+@torch.jit.script
+def compute_reward(root_states: torch.Tensor, targets: torch.Tensor, dt: float) -> Tuple[torch.Tensor, Dict[str, torch.Tensor]]:
+    # Extract torso position and velocity
+    torso_position = root_states[:, 0:3]  # Shape: (batch_size, 3)
+    velocity = root_states[:, 7:10]  # Shape: (batch_size, 3)
+
+    # Compute distance to the target
+    to_target = targets - torso_position
+    distance = torch.norm(to_target, p=2, dim=-1)  # Distance to target
+
+    # Reward for minimizing distance to target (encouraging moving forward)
+    distance_reward = -distance
+
+    # Reward for forward speed (absolute value of x component of velocity)
+    forward_speed_reward = torch.abs(velocity[:, 0])  # Absolute forward x speed
+
+    # Combined reward for progress towards target and speed
+    total_reward = distance_reward + forward_speed_reward
+
+    # Temperature parameters
+    temp_distance = 2.0  # Tuned for more sensitivity
+    temp_speed = 1.0     # Tuned for larger absolute reward scaling
+    
+    # Apply temperature scaling
+    distance_reward_transformed = torch.exp(distance_reward / temp_distance)
+    forward_speed_reward_transformed = torch.exp(forward_speed_reward / temp_speed)
+
+    # Total reward after transformation
+    total_reward_transformed = distance_reward_transformed + forward_speed_reward_transformed
+
+    # Create reward components dictionary
+    reward_components = {
+        'distance_reward': distance_reward,
+        'forward_speed_reward': forward_speed_reward
+    }
+    
+    return total_reward_transformed, reward_components

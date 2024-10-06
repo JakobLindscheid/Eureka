@@ -1,0 +1,22 @@
+@torch.jit.script
+def compute_reward(root_states: torch.Tensor, actions: torch.Tensor) -> Tuple[torch.Tensor, Dict[str, torch.Tensor]]:
+    # Extract the torso's velocity in the x direction
+    velocity = root_states[:, 7:10]  # Assuming the x, y, z velocities are in this slice
+    forward_velocity = velocity[:, 0]  # Forward direction is the x axis
+    
+    # Enhanced reward for running forward: scale forward velocity
+    running_reward = forward_velocity * 2.0  # Increased scaling factor for higher incentive
+  
+    # Stronger penalty for excessive actions (to encourage efficient movement)
+    action_penalty = -torch.norm(actions, p=2, dim=-1) ** 2 - 1.0  # Squared penalty with a constant offset to increase negativity
+    
+    # Normalize rewards to keep overall reward within a fixed range (after summing)
+    total_reward = torch.clip(running_reward + action_penalty, min=-10.0, max=10.0)
+
+    # Create reward components dictionary
+    reward_components = {
+        "running_reward": running_reward,
+        "action_penalty": action_penalty
+    }
+    
+    return total_reward, reward_components

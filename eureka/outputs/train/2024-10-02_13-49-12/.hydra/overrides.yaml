@@ -1,0 +1,5 @@
+- test=True
+- headless=False
+- force_render=True
+- task=Ant
+- checkpoint=/home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-01_14-35-40/policy-2024-10-01_19-46-08/runs/AntGPT-2024-10-01_19-46-08/nn/Ant.pth

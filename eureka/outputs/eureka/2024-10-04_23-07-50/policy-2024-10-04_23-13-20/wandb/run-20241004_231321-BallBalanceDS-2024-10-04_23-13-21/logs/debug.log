@@ -1,0 +1,760 @@
+2024-10-04 23:13:21,522 INFO    MainThread:1078955 [wandb_setup.py:_flush():76] Configure stats pid to 1078955
+2024-10-04 23:13:21,522 INFO    MainThread:1078955 [wandb_setup.py:_flush():76] Loading settings from /home/vandriel/.config/wandb/settings
+2024-10-04 23:13:21,522 INFO    MainThread:1078955 [wandb_setup.py:_flush():76] Loading settings from /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/settings
+2024-10-04 23:13:21,522 INFO    MainThread:1078955 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2024-10-04 23:13:21,522 INFO    MainThread:1078955 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'isaacgymenvs/isaacgymenvs/train.py', 'program': '/home/vandriel/Documents/GitHub/Eureka/eureka/../isaacgymenvs/isaacgymenvs/train.py'}
+2024-10-04 23:13:21,522 INFO    MainThread:1078955 [wandb_init.py:_log_setup():461] Logging user logs to /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/logs/debug.log
+2024-10-04 23:13:21,522 INFO    MainThread:1078955 [wandb_init.py:_log_setup():462] Logging internal logs to /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/logs/debug-internal.log
+2024-10-04 23:13:21,522 INFO    MainThread:1078955 [wandb_init.py:init():495] calling init triggers
+2024-10-04 23:13:21,522 INFO    MainThread:1078955 [wandb_init.py:init():498] wandb.init called with sweep_config: {}
+config: {}
+2024-10-04 23:13:21,522 INFO    MainThread:1078955 [wandb_init.py:init():548] starting backend
+2024-10-04 23:13:21,522 INFO    MainThread:1078955 [backend.py:_multiprocessing_setup():97] multiprocessing start_methods=fork,spawn,forkserver, using: fork
+2024-10-04 23:13:21,524 INFO    MainThread:1078955 [backend.py:ensure_launched():217] starting backend process...
+2024-10-04 23:13:21,530 INFO    MainThread:1078955 [backend.py:ensure_launched():222] started backend process with pid: 1079101
+2024-10-04 23:13:21,530 INFO    MainThread:1078955 [wandb_init.py:init():558] backend started and connected
+2024-10-04 23:13:21,532 INFO    MainThread:1079101 [internal.py:wandb_internal():90] W&B internal server running at pid: 1079101, started at: 2024-10-04 23:13:21.531015
+2024-10-04 23:13:21,536 INFO    MainThread:1078955 [wandb_init.py:init():634] updated telemetry
+2024-10-04 23:13:21,537 INFO    WriterThread:1079101 [datastore.py:open_for_write():75] open: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/run-BallBalanceDS-2024-10-04_23-13-21.wandb
+2024-10-04 23:13:21,551 INFO    MainThread:1078955 [wandb_init.py:init():665] communicating run to backend with 30 second timeout
+2024-10-04 23:13:21,553 INFO    SenderThread:1079101 [sender.py:_maybe_setup_resume():493] checking resume status for koza/eureka/BallBalanceDS-2024-10-04_23-13-21
+2024-10-04 23:13:22,755 INFO    SenderThread:1079101 [dir_watcher.py:__init__():216] watching files in: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files
+2024-10-04 23:13:22,756 INFO    SenderThread:1079101 [sender.py:_start_run_threads():815] run started: BallBalanceDS-2024-10-04_23-13-21 with start time 1728076401
+2024-10-04 23:13:22,756 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:22,756 INFO    MainThread:1078955 [wandb_run.py:_on_init():1919] communicating current version
+2024-10-04 23:13:22,822 INFO    MainThread:1078955 [wandb_run.py:_on_init():1923] got version response upgrade_message: "wandb version 0.18.3 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2024-10-04 23:13:22,822 INFO    MainThread:1078955 [wandb_init.py:init():700] starting run threads in backend
+2024-10-04 23:13:23,758 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/conda-environment.yaml
+2024-10-04 23:13:23,758 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/requirements.txt
+2024-10-04 23:13:23,758 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:13:24,070 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-metadata.json with policy now
+2024-10-04 23:13:24,073 INFO    MainThread:1078955 [wandb_run.py:_console_start():1893] atexit reg
+2024-10-04 23:13:24,074 INFO    MainThread:1078955 [wandb_run.py:_redirect():1766] redirect: SettingsConsole.REDIRECT
+2024-10-04 23:13:24,074 INFO    MainThread:1078955 [wandb_run.py:_redirect():1771] Redirecting console.
+2024-10-04 23:13:24,075 INFO    MainThread:1078955 [wandb_run.py:_redirect():1827] Redirects installed.
+2024-10-04 23:13:24,075 INFO    MainThread:1078955 [wandb_init.py:init():732] run started, returning control to user process
+2024-10-04 23:13:24,086 INFO    MainThread:1078955 [wandb_run.py:_config_callback():1131] config_cb None None {'task_name': 'BallBalanceDS', 'experiment': '', 'env_path': '', 'num_envs': '', 'seed': 42, 'torch_deterministic': False, 'max_iterations': 300, 'physics_engine': 'physx', 'pipeline': 'gpu', 'sim_device': 'cuda:0', 'rl_device': 'cuda:0', 'graphics_device_id': 0, 'num_threads': 4, 'solver_type': 1, 'num_subscenes': 4, 'test': False, 'checkpoint': '', 'sigma': '', 'multi_gpu': False, 'wandb_activate': True, 'wandb_group': '', 'wandb_name': 'BallBalanceDS', 'wandb_entity': 'koza', 'wandb_project': 'eureka', 'wandb_tags': [], 'wandb_logcode_dir': '', 'capture_video': False, 'capture_video_freq': 5000, 'capture_video_len': 200, 'force_render': False, 'headless': True, 'task': {'env': {'actionSpeedScale': 20, 'clipActions': 1.0, 'clipObservations': 5.0, 'enableCameraSensors': False, 'enableDebugVis': False, 'envSpacing': 2.0, 'env_name': 'ball_balanceDS', 'maxEpisodeLength': 500, 'numEnvs': 4096}, 'name': 'BallBalanceDS', 'physics_engine': 'physx', 'sim': {'dt': 0.01, 'gravity': [0.0, 0.0, -9.81], 'physx': {'bounce_threshold_velocity': 0.2, 'contact_collection': 0, 'contact_offset': 0.02, 'default_buffer_size_multiplier': 5.0, 'max_depenetration_velocity': 1000.0, 'max_gpu_contact_pairs': 8388608, 'num_position_iterations': 8, 'num_subscenes': 4, 'num_threads': 4, 'num_velocity_iterations': 0, 'rest_offset': 0.001, 'solver_type': 1, 'use_gpu': True}, 'substeps': 1, 'up_axis': 'z', 'use_gpu_pipeline': True}, 'task': {'randomize': False}}, 'train': {'params': {'algo': {'name': 'a2c_continuous'}, 'config': {'bounds_loss_coef': 0.0001, 'clip_value': True, 'critic_coef': 4, 'e_clip': 0.2, 'entropy_coef': 0.0, 'env_name': 'rlgpu', 'full_experiment_name': 'BallBalanceDS', 'gamma': 0.99, 'grad_norm': 1.0, 'horizon_length': 16, 'kl_threshold': 0.008, 'learning_rate': 0.0003, 'lr_schedule': 'adaptive', 'max_epochs': 300, 'mini_epochs': 8, 'minibatch_size': 8192, 'mixed_precision': False, 'multi_gpu': False, 'name': 'BallBalanceDS', 'normalize_advantage': True, 'normalize_input': True, 'normalize_value': True, 'num_actors': 4096, 'ppo': True, 'reward_shaper': {'scale_value': 0.1}, 'save_best_after': 50, 'save_frequency': 100, 'score_to_win': 20000, 'seq_len': 4, 'tau': 0.95, 'truncate_grads': True}, 'load_checkpoint': False, 'load_path': '', 'model': {'name': 'continuous_a2c_logstd'}, 'network': {'mlp': {'activation': 'elu', 'initializer': {'name': 'default'}, 'regularizer': {'name': 'None'}, 'units': [128, 64, 32]}, 'name': 'actor_critic', 'separate': False, 'space': {'continuous': {'fixed_sigma': True, 'mu_activation': 'None', 'mu_init': {'name': 'default'}, 'sigma_activation': 'None', 'sigma_init': {'name': 'const_initializer', 'val': 0}}}}, 'seed': 42}}}
+2024-10-04 23:13:24,292 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file env.py with policy live
+2024-10-04 23:13:24,608 INFO    Thread-12 :1079101 [upload_job.py:push():138] Uploaded file /tmp/tmpj2_0wk_twandb/8mcrvda0-wandb-metadata.json
+2024-10-04 23:13:24,756 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/conda-environment.yaml
+2024-10-04 23:13:24,757 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:13:24,757 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-metadata.json
+2024-10-04 23:13:24,757 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/env.py
+2024-10-04 23:13:24,800 INFO    Thread-13 :1079101 [upload_job.py:push():138] Uploaded file /tmp/tmpj2_0wk_twandb/i33gb77e-env.py
+2024-10-04 23:13:25,301 INFO    MainThread:1078955 [wandb_run.py:_tensorboard_callback():1239] tensorboard callback: runs/BallBalanceDS-2024-10-04_23-13-21/summaries, True
+2024-10-04 23:13:25,301 INFO    HandlerThread:1079101 [handler.py:handle_tbrecord():723] handling tbrecord: tbrecord {
+  log_dir: "runs/BallBalanceDS-2024-10-04_23-13-21/summaries"
+  save: true
+}
+
+2024-10-04 23:13:25,304 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file events.out.tfevents.1728076405.Rhino with policy live
+2024-10-04 23:13:25,757 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:26,757 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:26,757 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:13:27,322 INFO    Thread-16 :1079101 [upload_job.py:push():138] Uploaded file /tmp/tmpj2_0wk_twandb/cgf2axby-events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:27,758 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:28,758 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:28,759 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:13:29,759 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:30,759 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:30,760 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:13:31,760 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:32,760 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:32,760 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:13:33,760 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:34,760 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:34,760 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:13:35,378 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,387 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,389 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,389 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,390 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,390 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,390 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,390 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,391 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,407 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,411 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,411 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,412 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,412 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,412 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,413 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,413 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,414 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,414 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,414 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,415 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,415 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,415 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,416 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,416 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,416 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,417 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,417 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,417 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,418 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,418 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,419 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,419 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,419 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,420 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,420 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,420 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,421 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,421 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,421 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:35,760 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:35,761 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:13:36,435 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:36,436 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:36,437 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:36,437 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:36,438 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:36,438 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:36,439 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:36,761 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:36,761 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:13:36,761 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:13:37,447 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:37,449 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:37,449 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:37,761 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:37,761 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:13:38,465 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:38,467 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:38,467 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:38,468 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:38,761 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:38,761 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:13:38,762 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:13:39,486 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:39,487 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:39,488 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:39,488 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:39,489 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:39,761 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:39,762 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:13:40,504 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:40,504 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:40,505 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:40,505 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:40,762 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:40,762 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:13:40,762 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:13:41,529 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:41,529 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:41,530 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:41,530 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:41,530 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:41,531 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:41,531 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:41,762 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:41,762 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:13:42,538 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:42,540 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:42,541 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:42,762 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:42,762 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:13:42,763 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:13:43,550 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:43,551 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:43,552 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:43,552 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:43,762 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:43,763 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:13:44,576 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:44,577 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:44,578 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:44,578 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:44,579 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:44,579 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:44,579 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:44,763 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:44,763 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:13:44,763 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:13:45,594 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:45,595 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:45,596 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:45,596 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:45,596 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:45,763 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:45,763 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:13:46,611 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:46,612 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:46,612 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:46,612 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:46,613 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:46,763 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:46,763 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:13:46,763 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:13:47,630 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:47,631 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:47,632 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:47,632 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:47,763 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:47,764 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:13:48,647 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:48,648 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:48,648 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:48,649 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:48,649 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:48,764 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:48,764 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:13:48,764 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:13:49,662 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:49,664 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:49,664 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:49,664 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:49,764 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:49,764 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:13:50,679 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:50,681 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:50,681 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:50,681 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:50,682 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:50,764 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:50,764 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:13:50,764 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:13:51,764 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:51,902 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:51,903 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:51,903 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:51,904 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:51,904 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:52,716 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:52,718 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:52,718 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:52,718 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:52,765 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:52,765 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:13:52,765 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:13:52,765 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/config.yaml
+2024-10-04 23:13:53,736 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:53,738 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:53,738 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:53,739 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:53,739 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:53,765 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:53,765 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:13:54,754 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:54,755 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:54,756 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:54,756 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:54,756 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:54,765 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:54,765 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:13:54,765 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:13:55,773 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:55,776 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:55,776 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:55,777 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:13:55,777 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:55,777 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:55,777 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:55,778 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:56,788 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:56,791 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:13:56,791 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:56,791 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:13:56,793 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:56,793 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:56,793 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:56,794 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:57,786 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:57,787 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:13:57,805 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:57,807 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:57,808 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:57,808 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:57,808 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:58,787 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:58,787 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:13:58,787 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:13:58,823 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:58,825 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:58,825 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:58,826 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:59,787 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:13:59,787 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:13:59,846 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:59,848 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:59,848 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:59,849 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:59,849 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:59,849 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:13:59,850 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:00,787 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:00,787 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:14:00,788 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:00,860 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:00,861 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:01,787 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:01,788 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:01,889 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:01,890 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:01,891 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:01,891 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:01,891 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:01,892 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:01,892 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:02,788 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:02,788 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:14:02,788 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:02,899 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:02,905 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:02,905 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:03,788 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:03,788 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:03,918 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:03,927 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:03,936 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:03,939 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:04,789 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:04,789 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:14:04,790 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:04,981 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:04,983 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:04,983 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:04,984 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:04,985 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:05,789 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:05,789 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:05,992 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:05,993 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:06,789 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:06,789 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:14:06,789 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:07,019 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:07,020 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:07,021 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:07,021 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:07,022 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:07,022 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:07,022 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:07,789 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:07,790 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:08,050 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:08,052 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:08,052 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:08,052 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:08,053 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:08,790 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:08,790 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:14:08,790 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:09,070 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:09,072 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:09,072 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:09,073 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:09,790 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:09,791 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:10,108 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:10,384 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:10,386 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:10,386 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:10,387 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:10,790 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:10,791 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:14:10,791 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:11,129 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:11,131 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:11,791 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:11,791 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:12,177 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:12,179 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:12,180 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:12,180 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:12,181 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:12,791 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:12,791 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:14:12,791 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:13,209 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:13,211 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:13,211 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:13,211 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:13,791 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:13,791 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:14,226 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:14,227 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:14,228 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:14,228 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:14,228 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:14,791 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:14,792 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:14:14,792 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:15,243 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:15,245 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:15,245 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:15,245 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:15,246 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:15,792 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:15,792 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:16,256 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:16,258 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:16,258 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:16,259 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:16,792 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:16,792 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:14:16,792 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:17,275 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:17,276 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:17,276 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:17,277 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:17,277 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:17,792 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:17,792 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:18,297 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:18,299 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:18,299 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:18,300 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:18,792 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:18,793 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:14:18,793 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:19,324 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:19,326 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:19,326 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:19,327 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:19,327 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:19,328 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:19,328 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:19,793 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:19,793 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:20,341 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:20,341 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:20,342 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:20,342 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:20,342 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:20,793 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:20,793 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:14:20,793 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:21,350 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:21,365 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:21,377 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:21,388 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:21,793 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:21,794 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:22,403 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:22,405 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:22,408 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:22,410 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:22,410 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:22,794 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:22,794 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:14:22,794 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:23,419 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:23,420 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:23,794 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:23,794 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:24,442 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:24,444 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:24,445 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:24,445 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:24,445 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:24,445 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:24,446 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:24,794 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:24,795 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:14:24,795 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:25,680 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:25,682 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:25,682 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:25,682 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:25,683 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:25,794 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:25,795 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:26,478 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:26,479 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:26,795 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:26,795 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:14:26,795 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:27,501 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:27,501 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:27,502 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:27,503 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:27,503 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:27,795 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:27,795 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:27,860 INFO    Thread-17 :1079101 [upload_job.py:push():138] Uploaded file /tmp/tmpj2_0wk_twandb/voxxc663-events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:28,513 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:28,515 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:28,515 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:28,515 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:28,795 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:28,796 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:14:28,796 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:29,527 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:29,529 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:29,529 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:29,529 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:29,530 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:29,795 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:29,796 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:30,543 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:30,545 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:30,545 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:30,545 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:30,545 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:30,796 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:30,796 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:14:30,796 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:31,581 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:31,582 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:31,583 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:31,584 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:31,796 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:31,796 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:32,324 INFO    MainThread:1078955 [wandb_run.py:_finish():1680] finishing run koza/eureka/BallBalanceDS-2024-10-04_23-13-21
+2024-10-04 23:14:32,325 INFO    MainThread:1078955 [wandb_run.py:_atexit_cleanup():1862] got exitcode: 0
+2024-10-04 23:14:32,326 INFO    MainThread:1078955 [wandb_run.py:_restore():1834] restore
+2024-10-04 23:14:32,600 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:32,606 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:32,797 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:32,797 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:14:32,797 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:33,797 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:14:35,090 INFO    SenderThread:1079101 [sender.py:send_exit():372] handling exit code: 0
+2024-10-04 23:14:35,090 INFO    SenderThread:1079101 [sender.py:send_exit():374] handling runtime: 72
+2024-10-04 23:14:35,091 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:35,091 INFO    SenderThread:1079101 [sender.py:send_exit():380] send defer
+2024-10-04 23:14:35,092 INFO    MainThread:1078955 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 1
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 508661
+  total_bytes: 508661
+}
+
+2024-10-04 23:14:35,092 INFO    HandlerThread:1079101 [handler.py:handle_request_defer():163] handle defer: 0
+2024-10-04 23:14:35,093 INFO    SenderThread:1079101 [sender.py:send_request_defer():389] handle sender defer: 0
+2024-10-04 23:14:35,093 INFO    SenderThread:1079101 [sender.py:transition_state():393] send defer: 1
+2024-10-04 23:14:35,093 INFO    HandlerThread:1079101 [handler.py:handle_request_defer():163] handle defer: 1
+2024-10-04 23:14:35,130 INFO    SenderThread:1079101 [sender.py:send_request_defer():389] handle sender defer: 1
+2024-10-04 23:14:35,131 INFO    SenderThread:1079101 [sender.py:transition_state():393] send defer: 2
+2024-10-04 23:14:35,132 INFO    HandlerThread:1079101 [handler.py:handle_request_defer():163] handle defer: 2
+2024-10-04 23:14:35,132 INFO    SenderThread:1079101 [sender.py:send_request_defer():389] handle sender defer: 2
+2024-10-04 23:14:35,132 INFO    SenderThread:1079101 [sender.py:transition_state():393] send defer: 3
+2024-10-04 23:14:35,132 INFO    HandlerThread:1079101 [handler.py:handle_request_defer():163] handle defer: 3
+2024-10-04 23:14:35,798 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:14:35,798 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:40,193 INFO    MainThread:1078955 [wandb_run.py:_on_finish():1991] got exit ret: None
+2024-10-04 23:14:41,608 INFO    SenderThread:1079101 [sender.py:send_request_defer():389] handle sender defer: 3
+2024-10-04 23:14:41,608 INFO    SenderThread:1079101 [sender.py:transition_state():393] send defer: 4
+2024-10-04 23:14:41,611 INFO    MainThread:1078955 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 1
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 508661
+  total_bytes: 508661
+}
+
+2024-10-04 23:14:41,612 INFO    HandlerThread:1079101 [handler.py:handle_request_defer():163] handle defer: 4
+2024-10-04 23:14:41,616 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:41,618 INFO    SenderThread:1079101 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:14:41,618 INFO    SenderThread:1079101 [sender.py:send_request_defer():389] handle sender defer: 4
+2024-10-04 23:14:41,618 INFO    SenderThread:1079101 [sender.py:transition_state():393] send defer: 5
+2024-10-04 23:14:41,619 INFO    HandlerThread:1079101 [handler.py:handle_request_defer():163] handle defer: 5
+2024-10-04 23:14:41,619 INFO    SenderThread:1079101 [sender.py:send_request_defer():389] handle sender defer: 5
+2024-10-04 23:14:41,801 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:41,818 INFO    SenderThread:1079101 [sender.py:transition_state():393] send defer: 6
+2024-10-04 23:14:41,819 INFO    HandlerThread:1079101 [handler.py:handle_request_defer():163] handle defer: 6
+2024-10-04 23:14:41,819 INFO    SenderThread:1079101 [sender.py:send_request_defer():389] handle sender defer: 6
+2024-10-04 23:14:41,819 INFO    MainThread:1078955 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 1
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 508661
+  total_bytes: 508661
+}
+
+2024-10-04 23:14:41,819 INFO    SenderThread:1079101 [dir_watcher.py:finish():353] shutting down directory watcher
+2024-10-04 23:14:42,801 INFO    Thread-8  :1079101 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/config.yaml
+2024-10-04 23:14:42,802 INFO    SenderThread:1079101 [dir_watcher.py:finish():383] scan: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files
+2024-10-04 23:14:42,803 INFO    SenderThread:1079101 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/config.yaml config.yaml
+2024-10-04 23:14:42,803 INFO    SenderThread:1079101 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/env.py env.py
+2024-10-04 23:14:42,809 INFO    SenderThread:1079101 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log output.log
+2024-10-04 23:14:42,809 INFO    SenderThread:1079101 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/requirements.txt requirements.txt
+2024-10-04 23:14:42,809 INFO    SenderThread:1079101 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-metadata.json wandb-metadata.json
+2024-10-04 23:14:42,809 INFO    SenderThread:1079101 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/events.out.tfevents.1728076405.Rhino events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:42,820 INFO    SenderThread:1079101 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json wandb-summary.json
+2024-10-04 23:14:42,821 INFO    SenderThread:1079101 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/conda-environment.yaml conda-environment.yaml
+2024-10-04 23:14:42,821 INFO    SenderThread:1079101 [sender.py:transition_state():393] send defer: 7
+2024-10-04 23:14:42,822 INFO    MainThread:1078955 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 4
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 508661
+  total_bytes: 549752
+}
+
+2024-10-04 23:14:42,822 INFO    HandlerThread:1079101 [handler.py:handle_request_defer():163] handle defer: 7
+2024-10-04 23:14:42,823 INFO    SenderThread:1079101 [sender.py:send_request_defer():389] handle sender defer: 7
+2024-10-04 23:14:42,823 INFO    SenderThread:1079101 [file_pusher.py:finish():171] shutting down file pusher
+2024-10-04 23:14:42,925 INFO    MainThread:1078955 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 23126
+  total_bytes: 597745
+}
+
+2024-10-04 23:14:43,032 INFO    MainThread:1078955 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 23126
+  total_bytes: 597745
+}
+
+2024-10-04 23:14:43,135 INFO    MainThread:1078955 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 559659
+  total_bytes: 597745
+}
+
+2024-10-04 23:14:43,237 INFO    MainThread:1078955 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 597745
+  total_bytes: 597745
+}
+
+2024-10-04 23:14:43,292 INFO    Thread-22 :1079101 [upload_job.py:push():138] Uploaded file /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/wandb-summary.json
+2024-10-04 23:14:43,326 INFO    Thread-23 :1079101 [upload_job.py:push():138] Uploaded file /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/conda-environment.yaml
+2024-10-04 23:14:43,330 INFO    Thread-18 :1079101 [upload_job.py:push():138] Uploaded file /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/config.yaml
+2024-10-04 23:14:43,339 INFO    MainThread:1078955 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 597745
+  total_bytes: 597745
+}
+
+2024-10-04 23:14:43,400 INFO    Thread-20 :1079101 [upload_job.py:push():138] Uploaded file /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/requirements.txt
+2024-10-04 23:14:43,441 INFO    MainThread:1078955 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 597745
+  total_bytes: 597745
+}
+
+2024-10-04 23:14:43,543 INFO    MainThread:1078955 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 597745
+  total_bytes: 597745
+}
+
+2024-10-04 23:14:43,645 INFO    MainThread:1078955 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 597745
+  total_bytes: 597745
+}
+
+2024-10-04 23:14:43,748 INFO    Thread-19 :1079101 [upload_job.py:push():138] Uploaded file /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/files/output.log
+2024-10-04 23:14:43,748 INFO    MainThread:1078955 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 597745
+  total_bytes: 597745
+}
+
+2024-10-04 23:14:43,850 INFO    MainThread:1078955 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 597745
+  total_bytes: 597745
+}
+
+2024-10-04 23:14:43,952 INFO    MainThread:1078955 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 597745
+  total_bytes: 597745
+}
+
+2024-10-04 23:14:43,975 INFO    Thread-21 :1079101 [upload_job.py:push():138] Uploaded file /tmp/tmpj2_0wk_twandb/qn6nk83j-events.out.tfevents.1728076405.Rhino
+2024-10-04 23:14:44,055 INFO    MainThread:1078955 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 597745
+  total_bytes: 597745
+}
+
+2024-10-04 23:14:44,157 INFO    MainThread:1078955 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 597745
+  total_bytes: 597745
+}
+
+2024-10-04 23:14:44,176 INFO    Thread-7  :1079101 [sender.py:transition_state():393] send defer: 8
+2024-10-04 23:14:44,177 INFO    HandlerThread:1079101 [handler.py:handle_request_defer():163] handle defer: 8
+2024-10-04 23:14:44,177 INFO    SenderThread:1079101 [sender.py:send_request_defer():389] handle sender defer: 8
+2024-10-04 23:14:44,639 INFO    SenderThread:1079101 [sender.py:transition_state():393] send defer: 9
+2024-10-04 23:14:44,640 INFO    MainThread:1078955 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 597745
+  total_bytes: 597745
+}
+
+2024-10-04 23:14:44,640 INFO    HandlerThread:1079101 [handler.py:handle_request_defer():163] handle defer: 9
+2024-10-04 23:14:44,641 INFO    SenderThread:1079101 [sender.py:send_request_defer():389] handle sender defer: 9
+2024-10-04 23:14:44,641 INFO    SenderThread:1079101 [sender.py:transition_state():393] send defer: 10
+2024-10-04 23:14:44,642 INFO    HandlerThread:1079101 [handler.py:handle_request_defer():163] handle defer: 10
+2024-10-04 23:14:44,642 INFO    SenderThread:1079101 [sender.py:send_request_defer():389] handle sender defer: 10
+2024-10-04 23:14:44,742 INFO    SenderThread:1079101 [file_pusher.py:join():176] waiting for file pusher
+2024-10-04 23:14:45,082 INFO    MainThread:1078955 [wandb_run.py:_on_finish():1991] got exit ret: done: true
+exit_result {
+}
+file_counts {
+  wandb_count: 6
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 597745
+  total_bytes: 597745
+}
+local_info {
+}
+
+2024-10-04 23:14:45,192 INFO    HandlerThread:1079101 [handler.py:finish():806] shutting down handler
+2024-10-04 23:14:45,642 INFO    WriterThread:1079101 [datastore.py:close():279] close: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-13-20/wandb/run-20241004_231321-BallBalanceDS-2024-10-04_23-13-21/run-BallBalanceDS-2024-10-04_23-13-21.wandb
+2024-10-04 23:14:46,082 INFO    SenderThread:1079101 [sender.py:finish():1114] shutting down sender
+2024-10-04 23:14:46,082 INFO    SenderThread:1079101 [file_pusher.py:finish():171] shutting down file pusher
+2024-10-04 23:14:46,082 INFO    SenderThread:1079101 [file_pusher.py:join():176] waiting for file pusher
+2024-10-04 23:14:46,194 INFO    MainThread:1078955 [wandb_run.py:_footer_history_summary_info():3099] rendering history
+2024-10-04 23:14:46,198 INFO    MainThread:1078955 [wandb_run.py:_footer_history_summary_info():3131] rendering summary
+2024-10-04 23:14:46,201 INFO    MainThread:1078955 [wandb_run.py:_footer_sync_info():3055] logging synced files

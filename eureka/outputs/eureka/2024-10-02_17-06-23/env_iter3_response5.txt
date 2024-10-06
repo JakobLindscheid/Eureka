@@ -1,0 +1,207 @@
+Importing module 'gym_38' (/home/vandriel/Documents/GitHub/Eureka/isaacgym/python/isaacgym/_bindings/linux-x86_64/gym_38.so)
+Setting GYM_USD_PLUG_INFO_PATH to /home/vandriel/Documents/GitHub/Eureka/isaacgym/python/isaacgym/_bindings/linux-x86_64/usd/plugInfo.json
+PyTorch version 2.0.0+cu117
+Device count 1
+/home/vandriel/Documents/GitHub/Eureka/isaacgym/python/isaacgym/_bindings/src/gymtorch
+Using /home/vandriel/.cache/torch_extensions/py38_cu117 as PyTorch extensions root...
+Emitting ninja build file /home/vandriel/.cache/torch_extensions/py38_cu117/gymtorch/build.ninja...
+Building extension module gymtorch...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+ninja: no work to do.
+Loading extension module gymtorch...
+2024-10-02 19:39:13,699 - INFO - logger - logger initialized
+<unknown>:3: DeprecationWarning: invalid escape sequence \*
+Error: FBX library failed to load - importing FBX data will not succeed. Message: No module named 'fbx'
+FBX tools must be installed from https://help.autodesk.com/view/FBX/2020/ENU/?guid=FBX_Developer_Help_scripting_with_python_fbx_installing_python_fbx_html
+/home/vandriel/anaconda3/envs/eureka/lib/python3.8/site-packages/matplotlib/__init__.py:169: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  if LooseVersion(module.__version__) < minver:
+/home/vandriel/anaconda3/envs/eureka/lib/python3.8/site-packages/setuptools/_distutils/version.py:337: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  other = LooseVersion(other)
+/home/vandriel/Documents/GitHub/Eureka/eureka/../isaacgymenvs/isaacgymenvs/train.py:75: UserWarning: 
+The version_base parameter is not specified.
+Please specify a compatability version level, or None.
+Will assume defaults for version 1.1
+  @hydra.main(config_name="config", config_path="./cfg")
+/home/vandriel/anaconda3/envs/eureka/lib/python3.8/site-packages/hydra/_internal/defaults_list.py:415: UserWarning: In config: Invalid overriding of hydra/job_logging:
+Default list overrides requires 'override' keyword.
+See https://hydra.cc/docs/1.2/upgrades/1.0_to_1.1/defaults_list_override for more information.
+
+  deprecation_warning(msg)
+/home/vandriel/anaconda3/envs/eureka/lib/python3.8/site-packages/hydra/_internal/hydra.py:119: UserWarning: Future Hydra versions will no longer change working directory at job runtime by default.
+See https://hydra.cc/docs/1.2/upgrades/1.1_to_1.2/changes_to_job_working_dir/ for more information.
+  ret = run_job(
+/home/vandriel/anaconda3/envs/eureka/lib/python3.8/site-packages/torch/utils/tensorboard/__init__.py:4: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  if not hasattr(tensorboard, "__version__") or LooseVersion(
+Setting seed: 42
+Network Directory: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-02_17-06-23/policy-2024-10-02_19-39-14/runs/AntGPT-2024-10-02_19-39-14/nn
+Tensorboard Directory: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-02_17-06-23/policy-2024-10-02_19-39-14/runs/AntGPT-2024-10-02_19-39-14/summaries
+self.seed = 42
+Started to train
+/home/vandriel/anaconda3/envs/eureka/lib/python3.8/site-packages/gym/spaces/box.py:84: UserWarning: [33mWARN: Box bound precision lowered by casting to float32[0m
+  logger.warn(f"Box bound precision lowered by casting to {self.dtype}")
+[Warning] [carb.gym.plugin] useGpu is set, forcing single scene (0 subscenes)
+Not connected to PVD
++++ Using GPU PhysX
+PxgCudaDeviceMemoryAllocator fail to allocate memory 536870912 bytes!! Result = 2
+PxgCudaDeviceMemoryAllocator fail to allocate memory 67108864 bytes!! Result = 2
+PxgCudaDeviceMemoryAllocator fail to allocate memory 67108864 bytes!! Result = 2
+Physics Engine: PhysX
+Physics Device: cuda:0
+GPU Pipeline: enabled
+num envs 4096 env spacing 5
+/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs/tasks/limpantgpt.py:124: DeprecationWarning: an integer is required (got type isaacgym._bindings.linux-x86_64.gym_38.DofDriveMode).  Implicit conversion to integers using __int__ is deprecated, and may be removed in a future version of Python.
+  asset_options.default_dof_drive_mode = gymapi.DOF_MODE_NONE
+PxgCudaDeviceMemoryAllocator fail to allocate memory 67108864 bytes!! Result = 2
+/buildAgent/work/99bede84aa0a52c2/source/gpucommon/include/PxgCudaUtils.h (54) : internal error : SynchronizeStreams cuEventRecord failed
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpucommon/include/PxgCudaUtils.h (60) : internal error : SynchronizeStreams cuStreamWaitEvent failed
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpunarrowphase/src/PxgNarrowphaseCore.cpp (2408) : internal error : memcpy failed fail!
+  700
+
+PxgCudaDeviceMemoryAllocator fail to allocate memory 67108864 bytes!! Result = 700
+PxgCudaDeviceMemoryAllocator fail to allocate memory 67108864 bytes!! Result = 700
+PxgCudaDeviceMemoryAllocator fail to allocate memory 67108864 bytes!! Result = 700
+/buildAgent/work/99bede84aa0a52c2/source/gpucommon/include/PxgCudaUtils.h (54) : internal error : SynchronizeStreams cuEventRecord failed
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpucommon/include/PxgCudaUtils.h (60) : internal error : SynchronizeStreams cuStreamWaitEvent failed
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpucommon/include/PxgCudaUtils.h (54) : internal error : SynchronizeStreams cuEventRecord failed
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpucommon/include/PxgCudaUtils.h (60) : internal error : SynchronizeStreams cuStreamWaitEvent failed
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpucommon/include/PxgCudaUtils.h (80) : internal error : SynchronizeStreams failed
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpucommon/include/PxgCudaUtils.h (80) : internal error : SynchronizeStreams failed
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpusolver/src/PxgTGSCudaSolverCore.cpp (1492) : internal error : GPU solveContactParallel fail to launch kernel!!
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpusolver/src/PxgTGSCudaSolverCore.cpp (1529) : internal error : GPU solveContactParallel fail to launch kernel!!
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpusolver/src/PxgTGSCudaSolverCore.cpp (1697) : internal error : GPU compute solver bodies average velocities fail to launch kernel!!
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpuarticulation/src/PxgArticulationCore.cpp (859) : internal error : GPU solveSelfConstraints fail to launch kernel!!
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpuarticulation/src/PxgArticulationCore.cpp (879) : internal error : GPU artiSolveInternalTendonConstraints1T fail to launch kernel!!
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpuarticulation/src/PxgArticulationCore.cpp (907) : internal error : GPU solveInternalConstraints fail to launch kernel!!
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpusolver/src/PxgTGSCudaSolverCore.cpp (1784) : internal error : GPU propagate solver bodies average velocities fail to launch kernel!!
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpusolver/src/PxgTGSCudaSolverCore.cpp (1697) : internal error : GPU compute solver bodies average velocities fail to launch kernel!!
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpuarticulation/src/PxgArticulationCore.cpp (859) : internal error : GPU solveSelfConstraints fail to launch kernel!!
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpuarticulation/src/PxgArticulationCore.cpp (879) : internal error : GPU artiSolveInternalTendonConstraints1T fail to launch kernel!!
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpuarticulation/src/PxgArticulationCore.cpp (907) : internal error : GPU solveInternalConstraints fail to launch kernel!!
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpusolver/src/PxgTGSCudaSolverCore.cpp (1784) : internal error : GPU propagate solver bodies average velocities fail to launch kernel!!
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpusolver/src/PxgTGSCudaSolverCore.cpp (1697) : internal error : GPU compute solver bodies average velocities fail to launch kernel!!
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpuarticulation/src/PxgArticulationCore.cpp (859) : internal error : GPU solveSelfConstraints fail to launch kernel!!
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpuarticulation/src/PxgArticulationCore.cpp (879) : internal error : GPU artiSolveInternalTendonConstraints1T fail to launch kernel!!
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpuarticulation/src/PxgArticulationCore.cpp (907) : internal error : GPU solveInternalConstraints fail to launch kernel!!
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpusolver/src/PxgTGSCudaSolverCore.cpp (1784) : internal error : GPU propagate solver bodies average velocities fail to launch kernel!!
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpusolver/src/PxgTGSCudaSolverCore.cpp (1697) : internal error : GPU compute solver bodies average velocities fail to launch kernel!!
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpuarticulation/src/PxgArticulationCore.cpp (859) : internal error : GPU solveSelfConstraints fail to launch kernel!!
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpuarticulation/src/PxgArticulationCore.cpp (879) : internal error : GPU artiSolveInternalTendonConstraints1T fail to launch kernel!!
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpuarticulation/src/PxgArticulationCore.cpp (907) : internal error : GPU solveInternalConstraints fail to launch kernel!!
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpusolver/src/PxgTGSCudaSolverCore.cpp (1784) : internal error : GPU propagate solver bodies average velocities fail to launch kernel!!
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpucommon/include/PxgCudaUtils.h (80) : internal error : SynchronizeStreams failed
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpucommon/include/PxgCudaUtils.h (80) : internal error : SynchronizeStreams failed
+
+
+/buildAgent/work/99bede84aa0a52c2/source/gpucommon/include/PxgCudaUtils.h (80) : internal error : SynchronizeStreams failed
+
+
+/buildAgent/work/99bede84aa0a52c2/source/physx/src/NpScene.cpp (3509) : internal error : PhysX Internal CUDA error. Simulation can not continue!
+
+[Error] [carb.gym.plugin] Gym cuda error: an illegal memory access was encountered: ../../../source/plugins/carb/gym/impl/Gym/GymPhysX.cpp: 1459
+Error executing job with overrides: ['task=AntGPT', 'wandb_activate=False', 'wandb_entity=', 'wandb_project=', 'headless=True', 'capture_video=False', 'force_render=False', 'max_iterations=10000']
+Traceback (most recent call last):
+  File "/home/vandriel/Documents/GitHub/Eureka/eureka/../isaacgymenvs/isaacgymenvs/train.py", line 203, in launch_rlg_hydra
+    statistics = runner.run({
+  File "/home/vandriel/Documents/GitHub/Eureka/rl_games/rl_games/torch_runner.py", line 124, in run
+    self.run_train(args)
+  File "/home/vandriel/Documents/GitHub/Eureka/rl_games/rl_games/torch_runner.py", line 98, in run_train
+    self.agent = self.algo_factory.create(self.algo_name, base_name='run', params=self.params)
+  File "/home/vandriel/Documents/GitHub/Eureka/rl_games/rl_games/common/object_factory.py", line 15, in create
+    return builder(**kwargs)
+  File "/home/vandriel/Documents/GitHub/Eureka/rl_games/rl_games/torch_runner.py", line 37, in <lambda>
+    self.algo_factory.register_builder('a2c_continuous', lambda **kwargs : a2c_continuous.A2CAgent(**kwargs))
+  File "/home/vandriel/Documents/GitHub/Eureka/rl_games/rl_games/algos_torch/a2c_continuous.py", line 16, in __init__
+    a2c_common.ContinuousA2CBase.__init__(self, base_name, params)
+  File "/home/vandriel/Documents/GitHub/Eureka/rl_games/rl_games/common/a2c_common.py", line 1076, in __init__
+    A2CBase.__init__(self, base_name, params)
+  File "/home/vandriel/Documents/GitHub/Eureka/rl_games/rl_games/common/a2c_common.py", line 121, in __init__
+    self.vec_env = vecenv.create_vec_env(self.env_name, self.num_actors, **self.env_config)
+  File "/home/vandriel/Documents/GitHub/Eureka/rl_games/rl_games/common/vecenv.py", line 222, in create_vec_env
+    return vecenv_config[vec_env_name](config_name, num_actors, **kwargs)
+  File "/home/vandriel/Documents/GitHub/Eureka/eureka/../isaacgymenvs/isaacgymenvs/train.py", line 161, in <lambda>
+    vecenv.register('RLGPU', lambda config_name, num_actors, **kwargs: RLGPUEnv(config_name, num_actors, **kwargs))
+  File "/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs/utils/rlgames_utils.py", line 253, in __init__
+    self.env = env_configurations.configurations[config_name]['env_creator'](**kwargs)
+  File "/home/vandriel/Documents/GitHub/Eureka/eureka/../isaacgymenvs/isaacgymenvs/train.py", line 145, in <lambda>
+    'env_creator': lambda **kwargs: create_isaacgym_env(**kwargs),
+  File "/home/vandriel/Documents/GitHub/Eureka/eureka/../isaacgymenvs/isaacgymenvs/train.py", line 111, in create_isaacgym_env
+    envs = isaacgymenvs.make(
+  File "/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs/__init__.py", line 59, in make
+    return create_rlgpu_env()
+  File "/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs/utils/rlgames_utils.py", line 121, in create_rlgpu_env
+    env = task_caller(
+  File "/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs/tasks/limpantgpt.py", line 43, in __init__
+    super().__init__(config=self.cfg, rl_device=rl_device, sim_device=sim_device, graphics_device_id=graphics_device_id, headless=headless, virtual_screen_capture=virtual_screen_capture, force_render=force_render)
+  File "/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs/tasks/base/vec_task.py", line 234, in __init__
+    self.allocate_buffers()
+  File "/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs/tasks/base/vec_task.py", line 276, in allocate_buffers
+    self.obs_buf = torch.zeros(
+RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.

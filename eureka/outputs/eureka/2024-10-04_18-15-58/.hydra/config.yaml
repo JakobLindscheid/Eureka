@@ -1,0 +1,15 @@
+model: deepseek-chat
+temperature: 1.0
+suffix: DS
+iteration: 3
+sample: 5
+max_iterations: 300
+num_eval: 5
+capture_video: false
+use_wandb: true
+wandb_username: koza
+wandb_project: eureka
+env:
+  task: Cartpole
+  env_name: cartpole
+  description: to balance a pole on a cart so that the pole stays upright

@@ -1,0 +1,19 @@
+[2024-10-06 13:55:48,130][root][INFO] - Workspace: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-06_13-55-48
+[2024-10-06 13:55:48,130][root][INFO] - Project Root: /home/vandriel/Documents/GitHub/Eureka/eureka
+[2024-10-06 13:55:48,130][root][INFO] - Using LLM: gpt-4o-mini
+[2024-10-06 13:55:48,130][root][INFO] - Task: Humanoid
+[2024-10-06 13:55:48,130][root][INFO] - Task description: to make the humanoid run as fast as possible
+[2024-10-06 13:55:48,145][root][INFO] - Iteration 0: Generating 5 samples with gpt-4o-mini
+[2024-10-06 13:55:53,007][httpx][INFO] - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2024-10-06 13:56:00,089][httpx][INFO] - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2024-10-06 13:56:00,091][root][INFO] - Iteration 0: Prompt Tokens: 1110, Completion Tokens: 2131, Total Tokens: 4351
+[2024-10-06 13:56:00,091][root][INFO] - Iteration 0: Processing Code Run 0
+[2024-10-06 13:56:05,877][root][INFO] - Iteration 0: Code Run 0 successfully training!
+[2024-10-06 14:24:16,909][root][INFO] - Iteration 0: Processing Code Run 1
+[2024-10-06 14:24:21,818][root][INFO] - Iteration 0: Code Run 1 execution error!
+[2024-10-06 14:24:22,424][root][INFO] - Iteration 0: Processing Code Run 2
+[2024-10-06 14:24:27,358][root][INFO] - Iteration 0: Code Run 2 execution error!
+[2024-10-06 14:24:27,961][root][INFO] - Iteration 0: Processing Code Run 3
+[2024-10-06 14:24:32,814][root][INFO] - Iteration 0: Code Run 3 execution error!
+[2024-10-06 14:24:33,456][root][INFO] - Iteration 0: Processing Code Run 4
+[2024-10-06 14:24:39,182][root][INFO] - Iteration 0: Code Run 4 successfully training!

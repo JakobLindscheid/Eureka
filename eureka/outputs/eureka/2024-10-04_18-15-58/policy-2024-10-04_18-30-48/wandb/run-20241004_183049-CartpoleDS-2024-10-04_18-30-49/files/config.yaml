@@ -1,0 +1,233 @@
+wandb_version: 1
+
+_wandb:
+  desc: null
+  value:
+    cli_version: 0.12.21
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    python_version: 3.8.20
+    start_time: 1728059449
+    t:
+      1:
+      - 1
+      - 30
+      - 50
+      - 55
+      2:
+      - 1
+      - 30
+      - 50
+      - 55
+      3:
+      - 2
+      - 3
+      - 13
+      - 14
+      - 35
+      4: 3.8.20
+      5: 0.12.21
+      8:
+      - 6
+capture_video:
+  desc: null
+  value: false
+capture_video_freq:
+  desc: null
+  value: 5000
+capture_video_len:
+  desc: null
+  value: 200
+checkpoint:
+  desc: null
+  value: ''
+env_path:
+  desc: null
+  value: ''
+experiment:
+  desc: null
+  value: ''
+force_render:
+  desc: null
+  value: false
+graphics_device_id:
+  desc: null
+  value: 0
+headless:
+  desc: null
+  value: true
+max_iterations:
+  desc: null
+  value: 300
+multi_gpu:
+  desc: null
+  value: false
+num_envs:
+  desc: null
+  value: ''
+num_subscenes:
+  desc: null
+  value: 4
+num_threads:
+  desc: null
+  value: 4
+physics_engine:
+  desc: null
+  value: physx
+pipeline:
+  desc: null
+  value: gpu
+rl_device:
+  desc: null
+  value: cuda:0
+seed:
+  desc: null
+  value: 42
+sigma:
+  desc: null
+  value: ''
+sim_device:
+  desc: null
+  value: cuda:0
+solver_type:
+  desc: null
+  value: 1
+task:
+  desc: null
+  value:
+    env:
+      asset:
+        assetFileName: urdf/cartpole.urdf
+        assetRoot: ../../assets
+      clipActions: 1.0
+      clipObservations: 5.0
+      enableCameraSensors: false
+      envSpacing: 4.0
+      env_name: cartpoleDS
+      maxEffort: 400.0
+      numEnvs: 512
+      resetDist: 3.0
+    name: CartpoleDS
+    physics_engine: physx
+    sim:
+      dt: 0.0166
+      gravity:
+      - 0.0
+      - 0.0
+      - -9.81
+      physx:
+        bounce_threshold_velocity: 0.2
+        contact_collection: 0
+        contact_offset: 0.02
+        default_buffer_size_multiplier: 2.0
+        max_depenetration_velocity: 100.0
+        max_gpu_contact_pairs: 1048576
+        num_position_iterations: 4
+        num_subscenes: 4
+        num_threads: 4
+        num_velocity_iterations: 0
+        rest_offset: 0.001
+        solver_type: 1
+        use_gpu: true
+      substeps: 2
+      up_axis: z
+      use_gpu_pipeline: true
+    task:
+      randomize: false
+task_name:
+  desc: null
+  value: CartpoleDS
+test:
+  desc: null
+  value: false
+torch_deterministic:
+  desc: null
+  value: false
+train:
+  desc: null
+  value:
+    params:
+      algo:
+        name: a2c_continuous
+      config:
+        bounds_loss_coef: 0.0001
+        clip_value: true
+        critic_coef: 4
+        e_clip: 0.2
+        entropy_coef: 0.0
+        env_name: rlgpu
+        full_experiment_name: CartpoleDS
+        gamma: 0.99
+        grad_norm: 1.0
+        horizon_length: 16
+        kl_threshold: 0.008
+        learning_rate: 0.0003
+        lr_schedule: adaptive
+        max_epochs: 300
+        mini_epochs: 8
+        minibatch_size: 8192
+        mixed_precision: false
+        multi_gpu: false
+        name: CartpoleDS
+        normalize_advantage: true
+        normalize_input: true
+        normalize_value: true
+        num_actors: 512
+        ppo: true
+        reward_shaper:
+          scale_value: 0.1
+        save_best_after: 50
+        save_frequency: 25
+        score_to_win: 20000
+        seq_len: 4
+        tau: 0.95
+        truncate_grads: true
+      load_checkpoint: false
+      load_path: ''
+      model:
+        name: continuous_a2c_logstd
+      network:
+        mlp:
+          activation: elu
+          initializer:
+            name: default
+          regularizer:
+            name: None
+          units:
+          - 32
+          - 32
+        name: actor_critic
+        separate: false
+        space:
+          continuous:
+            fixed_sigma: true
+            mu_activation: None
+            mu_init:
+              name: default
+            sigma_activation: None
+            sigma_init:
+              name: const_initializer
+              val: 0
+      seed: 42
+wandb_activate:
+  desc: null
+  value: true
+wandb_entity:
+  desc: null
+  value: koza
+wandb_group:
+  desc: null
+  value: ''
+wandb_logcode_dir:
+  desc: null
+  value: ''
+wandb_name:
+  desc: null
+  value: CartpoleDS
+wandb_project:
+  desc: null
+  value: eureka
+wandb_tags:
+  desc: null
+  value: []

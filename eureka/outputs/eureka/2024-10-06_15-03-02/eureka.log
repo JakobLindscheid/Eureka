@@ -1,0 +1,82 @@
+[2024-10-06 15:03:02,655][root][INFO] - Workspace: /home/vandriel/Documents/GitHub/eureka/eureka/outputs/eureka/2024-10-06_15-03-02
+[2024-10-06 15:03:02,655][root][INFO] - Project Root: /home/vandriel/Documents/GitHub/eureka/eureka
+[2024-10-06 15:03:02,655][root][INFO] - Using LLM: gpt-4o-mini
+[2024-10-06 15:03:02,655][root][INFO] - Task: Humanoid
+[2024-10-06 15:03:02,655][root][INFO] - Task description: to make the humanoid run as fast as possible
+[2024-10-06 15:03:02,670][root][INFO] - Iteration 0: Generating 5 samples with gpt-4o-mini
+[2024-10-06 15:03:08,537][httpx][INFO] - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2024-10-06 15:03:14,795][httpx][INFO] - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2024-10-06 15:03:14,798][root][INFO] - Iteration 0: Prompt Tokens: 1110, Completion Tokens: 1914, Total Tokens: 4134
+[2024-10-06 15:03:14,798][root][INFO] - Iteration 0: Processing Code Run 0
+[2024-10-06 15:03:15,071][root][INFO] - Iteration 0: Code Run 0 execution error!
+[2024-10-06 15:03:15,073][root][INFO] - Iteration 0: Processing Code Run 1
+[2024-10-06 15:03:15,324][root][INFO] - Iteration 0: Code Run 1 execution error!
+[2024-10-06 15:03:15,327][root][INFO] - Iteration 0: Processing Code Run 2
+[2024-10-06 15:03:15,576][root][INFO] - Iteration 0: Code Run 2 execution error!
+[2024-10-06 15:03:15,579][root][INFO] - Iteration 0: Processing Code Run 3
+[2024-10-06 15:03:15,825][root][INFO] - Iteration 0: Code Run 3 execution error!
+[2024-10-06 15:03:15,827][root][INFO] - Iteration 0: Processing Code Run 4
+[2024-10-06 15:03:16,070][root][INFO] - Iteration 0: Code Run 4 execution error!
+[2024-10-06 15:03:16,072][root][INFO] - All code generation failed! Repeat this iteration from the current message checkpoint!
+[2024-10-06 15:03:16,072][root][INFO] - Iteration 1: Generating 5 samples with gpt-4o-mini
+[2024-10-06 15:03:20,566][httpx][INFO] - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2024-10-06 15:03:24,717][httpx][INFO] - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2024-10-06 15:03:24,719][root][INFO] - Iteration 1: Prompt Tokens: 1110, Completion Tokens: 1750, Total Tokens: 3970
+[2024-10-06 15:03:24,720][root][INFO] - Iteration 1: Processing Code Run 0
+[2024-10-06 15:03:25,003][root][INFO] - Iteration 1: Code Run 0 execution error!
+[2024-10-06 15:03:25,005][root][INFO] - Iteration 1: Processing Code Run 1
+[2024-10-06 15:03:25,243][root][INFO] - Iteration 1: Code Run 1 execution error!
+[2024-10-06 15:03:25,245][root][INFO] - Iteration 1: Processing Code Run 2
+[2024-10-06 15:03:25,492][root][INFO] - Iteration 1: Code Run 2 execution error!
+[2024-10-06 15:03:25,494][root][INFO] - Iteration 1: Processing Code Run 3
+[2024-10-06 15:03:25,747][root][INFO] - Iteration 1: Code Run 3 execution error!
+[2024-10-06 15:03:25,749][root][INFO] - Iteration 1: Processing Code Run 4
+[2024-10-06 15:03:25,991][root][INFO] - Iteration 1: Code Run 4 execution error!
+[2024-10-06 15:03:25,994][root][INFO] - All code generation failed! Repeat this iteration from the current message checkpoint!
+[2024-10-06 15:03:25,994][root][INFO] - Iteration 2: Generating 5 samples with gpt-4o-mini
+[2024-10-06 15:03:30,940][httpx][INFO] - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2024-10-06 15:03:35,447][httpx][INFO] - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2024-10-06 15:03:35,450][root][INFO] - Iteration 2: Prompt Tokens: 1110, Completion Tokens: 1905, Total Tokens: 4125
+[2024-10-06 15:03:35,450][root][INFO] - Iteration 2: Processing Code Run 0
+[2024-10-06 15:03:35,714][root][INFO] - Iteration 2: Code Run 0 execution error!
+[2024-10-06 15:03:35,717][root][INFO] - Iteration 2: Processing Code Run 1
+[2024-10-06 15:03:35,963][root][INFO] - Iteration 2: Code Run 1 execution error!
+[2024-10-06 15:03:35,966][root][INFO] - Iteration 2: Processing Code Run 2
+[2024-10-06 15:03:36,212][root][INFO] - Iteration 2: Code Run 2 execution error!
+[2024-10-06 15:03:36,214][root][INFO] - Iteration 2: Processing Code Run 3
+[2024-10-06 15:03:36,478][root][INFO] - Iteration 2: Code Run 3 execution error!
+[2024-10-06 15:03:36,480][root][INFO] - Iteration 2: Processing Code Run 4
+[2024-10-06 15:03:36,733][root][INFO] - Iteration 2: Code Run 4 execution error!
+[2024-10-06 15:03:36,735][root][INFO] - All code generation failed! Repeat this iteration from the current message checkpoint!
+[2024-10-06 15:03:36,735][root][INFO] - Iteration 3: Generating 5 samples with gpt-4o-mini
+[2024-10-06 15:03:40,935][httpx][INFO] - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2024-10-06 15:03:44,808][httpx][INFO] - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2024-10-06 15:03:44,811][root][INFO] - Iteration 3: Prompt Tokens: 1110, Completion Tokens: 1789, Total Tokens: 4009
+[2024-10-06 15:03:44,811][root][INFO] - Iteration 3: Processing Code Run 0
+[2024-10-06 15:03:45,077][root][INFO] - Iteration 3: Code Run 0 execution error!
+[2024-10-06 15:03:45,079][root][INFO] - Iteration 3: Processing Code Run 1
+[2024-10-06 15:03:45,329][root][INFO] - Iteration 3: Code Run 1 execution error!
+[2024-10-06 15:03:45,331][root][INFO] - Iteration 3: Processing Code Run 2
+[2024-10-06 15:03:45,580][root][INFO] - Iteration 3: Code Run 2 execution error!
+[2024-10-06 15:03:45,582][root][INFO] - Iteration 3: Processing Code Run 3
+[2024-10-06 15:03:45,834][root][INFO] - Iteration 3: Code Run 3 execution error!
+[2024-10-06 15:03:45,836][root][INFO] - Iteration 3: Processing Code Run 4
+[2024-10-06 15:03:46,076][root][INFO] - Iteration 3: Code Run 4 execution error!
+[2024-10-06 15:03:46,079][root][INFO] - All code generation failed! Repeat this iteration from the current message checkpoint!
+[2024-10-06 15:03:46,079][root][INFO] - Iteration 4: Generating 5 samples with gpt-4o-mini
+[2024-10-06 15:03:50,033][httpx][INFO] - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2024-10-06 15:03:53,819][httpx][INFO] - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2024-10-06 15:03:53,821][root][INFO] - Iteration 4: Prompt Tokens: 1110, Completion Tokens: 1965, Total Tokens: 4185
+[2024-10-06 15:03:53,821][root][INFO] - Iteration 4: Processing Code Run 0
+[2024-10-06 15:03:54,078][root][INFO] - Iteration 4: Code Run 0 execution error!
+[2024-10-06 15:03:54,080][root][INFO] - Iteration 4: Processing Code Run 1
+[2024-10-06 15:03:54,320][root][INFO] - Iteration 4: Code Run 1 execution error!
+[2024-10-06 15:03:54,322][root][INFO] - Iteration 4: Processing Code Run 2
+[2024-10-06 15:03:54,588][root][INFO] - Iteration 4: Code Run 2 execution error!
+[2024-10-06 15:03:54,590][root][INFO] - Iteration 4: Processing Code Run 3
+[2024-10-06 15:03:54,833][root][INFO] - Iteration 4: Code Run 3 execution error!
+[2024-10-06 15:03:54,835][root][INFO] - Iteration 4: Processing Code Run 4
+[2024-10-06 15:03:55,082][root][INFO] - Iteration 4: Code Run 4 execution error!
+[2024-10-06 15:03:55,084][root][INFO] - All code generation failed! Repeat this iteration from the current message checkpoint!
+[2024-10-06 15:03:55,084][root][INFO] - All iterations of code generation failed, aborting...
+[2024-10-06 15:03:55,084][root][INFO] - Please double check the output env_iter*_response*.txt files for repeating errors!

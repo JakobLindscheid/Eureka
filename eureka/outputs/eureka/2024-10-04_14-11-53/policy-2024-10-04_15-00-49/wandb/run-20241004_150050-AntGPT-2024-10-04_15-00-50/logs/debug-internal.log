@@ -1,0 +1,175 @@
+2024-10-04 15:00:50,722 INFO    MainThread:160024 [internal.py:wandb_internal():90] W&B internal server running at pid: 160024, started at: 2024-10-04 15:00:50.720975
+2024-10-04 15:00:50,727 DEBUG   SenderThread:160024 [sender.py:send():236] send: header
+2024-10-04 15:00:50,727 INFO    WriterThread:160024 [datastore.py:open_for_write():75] open: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/run-AntGPT-2024-10-04_15-00-50.wandb
+2024-10-04 15:00:50,738 DEBUG   SenderThread:160024 [sender.py:send():236] send: run
+2024-10-04 15:00:50,739 INFO    SenderThread:160024 [sender.py:_maybe_setup_resume():493] checking resume status for koza/eureka/AntGPT-2024-10-04_15-00-50
+2024-10-04 15:00:51,489 INFO    SenderThread:160024 [dir_watcher.py:__init__():216] watching files in: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/files
+2024-10-04 15:00:51,489 INFO    SenderThread:160024 [sender.py:_start_run_threads():815] run started: AntGPT-2024-10-04_15-00-50 with start time 1728046850
+2024-10-04 15:00:51,489 DEBUG   SenderThread:160024 [sender.py:send():236] send: summary
+2024-10-04 15:00:51,490 INFO    SenderThread:160024 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 15:00:51,490 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: check_version
+2024-10-04 15:00:51,490 DEBUG   SenderThread:160024 [sender.py:send_request():250] send_request: check_version
+2024-10-04 15:00:52,426 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: run_start
+2024-10-04 15:00:52,434 DEBUG   HandlerThread:160024 [meta.py:__init__():35] meta init
+2024-10-04 15:00:52,434 DEBUG   HandlerThread:160024 [meta.py:__init__():49] meta init done
+2024-10-04 15:00:52,434 DEBUG   HandlerThread:160024 [meta.py:probe():209] probe
+2024-10-04 15:00:52,441 DEBUG   HandlerThread:160024 [meta.py:_setup_git():199] setup git
+2024-10-04 15:00:52,460 DEBUG   HandlerThread:160024 [meta.py:_setup_git():206] setup git done
+2024-10-04 15:00:52,460 DEBUG   HandlerThread:160024 [meta.py:_save_pip():53] save pip
+2024-10-04 15:00:52,460 DEBUG   HandlerThread:160024 [meta.py:_save_pip():67] save pip done
+2024-10-04 15:00:52,460 DEBUG   HandlerThread:160024 [meta.py:_save_conda():74] save conda
+2024-10-04 15:00:52,491 INFO    Thread-8  :160024 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/files/requirements.txt
+2024-10-04 15:00:52,491 INFO    Thread-8  :160024 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/files/wandb-summary.json
+2024-10-04 15:00:52,491 INFO    Thread-8  :160024 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/files/conda-environment.yaml
+2024-10-04 15:00:53,618 DEBUG   HandlerThread:160024 [meta.py:_save_conda():84] save conda done
+2024-10-04 15:00:53,618 DEBUG   HandlerThread:160024 [meta.py:probe():247] probe done
+2024-10-04 15:00:53,620 DEBUG   SenderThread:160024 [sender.py:send():236] send: files
+2024-10-04 15:00:53,620 INFO    SenderThread:160024 [sender.py:_save_file():952] saving file wandb-metadata.json with policy now
+2024-10-04 15:00:53,623 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: stop_status
+2024-10-04 15:00:53,624 DEBUG   SenderThread:160024 [sender.py:send_request():250] send_request: stop_status
+2024-10-04 15:00:54,053 DEBUG   SenderThread:160024 [sender.py:send():236] send: telemetry
+2024-10-04 15:00:54,053 DEBUG   SenderThread:160024 [sender.py:send():236] send: telemetry
+2024-10-04 15:00:54,053 DEBUG   SenderThread:160024 [sender.py:send():236] send: files
+2024-10-04 15:00:54,053 INFO    SenderThread:160024 [sender.py:_save_file():952] saving file env.py with policy live
+2024-10-04 15:00:54,054 DEBUG   SenderThread:160024 [sender.py:send():236] send: config
+2024-10-04 15:00:54,492 INFO    Thread-8  :160024 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/files/conda-environment.yaml
+2024-10-04 15:00:54,492 INFO    Thread-8  :160024 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/files/output.log
+2024-10-04 15:00:54,492 INFO    Thread-8  :160024 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/files/wandb-metadata.json
+2024-10-04 15:00:54,492 INFO    Thread-8  :160024 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/files/env.py
+2024-10-04 15:00:54,660 INFO    Thread-12 :160024 [upload_job.py:push():138] Uploaded file /tmp/tmpj0ke3__jwandb/t0vvu5r9-wandb-metadata.json
+2024-10-04 15:00:54,855 INFO    HandlerThread:160024 [handler.py:handle_tbrecord():723] handling tbrecord: tbrecord {
+  log_dir: "runs/AntGPT-2024-10-04_15-00-50/summaries"
+  save: true
+}
+
+2024-10-04 15:00:54,855 DEBUG   HandlerThread:160024 [config_util.py:dict_from_config_file():100] no default config file found in config-defaults.yaml
+2024-10-04 15:00:54,856 DEBUG   SenderThread:160024 [sender.py:send():236] send: tbrecord
+2024-10-04 15:00:54,857 DEBUG   SenderThread:160024 [sender.py:send():236] send: files
+2024-10-04 15:00:54,857 INFO    SenderThread:160024 [sender.py:_save_file():952] saving file events.out.tfevents.1728046854.Rhino with policy live
+2024-10-04 15:00:55,312 INFO    Thread-13 :160024 [upload_job.py:push():138] Uploaded file /tmp/tmpj0ke3__jwandb/0if9w8uj-env.py
+2024-10-04 15:00:55,492 INFO    Thread-8  :160024 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/files/events.out.tfevents.1728046854.Rhino
+2024-10-04 15:00:56,104 DEBUG   SenderThread:160024 [sender.py:send():236] send: telemetry
+2024-10-04 15:00:56,493 INFO    Thread-8  :160024 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/files/events.out.tfevents.1728046854.Rhino
+2024-10-04 15:00:56,494 INFO    Thread-8  :160024 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/files/output.log
+2024-10-04 15:00:56,966 INFO    Thread-16 :160024 [upload_job.py:push():138] Uploaded file /tmp/tmpj0ke3__jwandb/fyij49t8-events.out.tfevents.1728046854.Rhino
+2024-10-04 15:00:58,148 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 15:00:58,148 DEBUG   SenderThread:160024 [sender.py:send():236] send: exit
+2024-10-04 15:00:58,148 INFO    SenderThread:160024 [sender.py:send_exit():372] handling exit code: 1
+2024-10-04 15:00:58,148 INFO    SenderThread:160024 [sender.py:send_exit():374] handling runtime: 5
+2024-10-04 15:00:58,149 INFO    SenderThread:160024 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 15:00:58,149 INFO    SenderThread:160024 [sender.py:send_exit():380] send defer
+2024-10-04 15:00:58,149 DEBUG   SenderThread:160024 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 15:00:58,149 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: defer
+2024-10-04 15:00:58,149 INFO    HandlerThread:160024 [handler.py:handle_request_defer():163] handle defer: 0
+2024-10-04 15:00:58,149 DEBUG   SenderThread:160024 [sender.py:send_request():250] send_request: defer
+2024-10-04 15:00:58,149 INFO    SenderThread:160024 [sender.py:send_request_defer():389] handle sender defer: 0
+2024-10-04 15:00:58,149 INFO    SenderThread:160024 [sender.py:transition_state():393] send defer: 1
+2024-10-04 15:00:58,150 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: defer
+2024-10-04 15:00:58,150 INFO    HandlerThread:160024 [handler.py:handle_request_defer():163] handle defer: 1
+2024-10-04 15:00:58,208 DEBUG   SenderThread:160024 [sender.py:send_request():250] send_request: defer
+2024-10-04 15:00:58,208 INFO    SenderThread:160024 [sender.py:send_request_defer():389] handle sender defer: 1
+2024-10-04 15:00:58,208 INFO    SenderThread:160024 [sender.py:transition_state():393] send defer: 2
+2024-10-04 15:00:58,208 DEBUG   SenderThread:160024 [sender.py:send():236] send: stats
+2024-10-04 15:00:58,209 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: defer
+2024-10-04 15:00:58,209 INFO    HandlerThread:160024 [handler.py:handle_request_defer():163] handle defer: 2
+2024-10-04 15:00:58,209 DEBUG   SenderThread:160024 [sender.py:send_request():250] send_request: defer
+2024-10-04 15:00:58,209 INFO    SenderThread:160024 [sender.py:send_request_defer():389] handle sender defer: 2
+2024-10-04 15:00:58,209 INFO    SenderThread:160024 [sender.py:transition_state():393] send defer: 3
+2024-10-04 15:00:58,209 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: defer
+2024-10-04 15:00:58,209 INFO    HandlerThread:160024 [handler.py:handle_request_defer():163] handle defer: 3
+2024-10-04 15:00:58,494 INFO    Thread-8  :160024 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/files/wandb-summary.json
+2024-10-04 15:00:58,494 INFO    Thread-8  :160024 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/files/output.log
+2024-10-04 15:01:04,857 DEBUG   SenderThread:160024 [sender.py:send_request():250] send_request: defer
+2024-10-04 15:01:04,857 INFO    SenderThread:160024 [sender.py:send_request_defer():389] handle sender defer: 3
+2024-10-04 15:01:04,857 INFO    SenderThread:160024 [sender.py:transition_state():393] send defer: 4
+2024-10-04 15:01:04,857 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 15:01:04,857 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 15:01:04,857 DEBUG   SenderThread:160024 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 15:01:04,857 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: defer
+2024-10-04 15:01:04,857 DEBUG   SenderThread:160024 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 15:01:04,858 INFO    HandlerThread:160024 [handler.py:handle_request_defer():163] handle defer: 4
+2024-10-04 15:01:04,858 DEBUG   SenderThread:160024 [sender.py:send():236] send: summary
+2024-10-04 15:01:04,859 INFO    SenderThread:160024 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 15:01:04,859 DEBUG   SenderThread:160024 [sender.py:send_request():250] send_request: defer
+2024-10-04 15:01:04,859 INFO    SenderThread:160024 [sender.py:send_request_defer():389] handle sender defer: 4
+2024-10-04 15:01:04,859 INFO    SenderThread:160024 [sender.py:transition_state():393] send defer: 5
+2024-10-04 15:01:04,860 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: defer
+2024-10-04 15:01:04,860 INFO    HandlerThread:160024 [handler.py:handle_request_defer():163] handle defer: 5
+2024-10-04 15:01:04,860 DEBUG   SenderThread:160024 [sender.py:send_request():250] send_request: defer
+2024-10-04 15:01:04,860 INFO    SenderThread:160024 [sender.py:send_request_defer():389] handle sender defer: 5
+2024-10-04 15:01:04,958 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 15:01:05,211 INFO    SenderThread:160024 [sender.py:transition_state():393] send defer: 6
+2024-10-04 15:01:05,212 DEBUG   SenderThread:160024 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 15:01:05,212 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: defer
+2024-10-04 15:01:05,212 INFO    HandlerThread:160024 [handler.py:handle_request_defer():163] handle defer: 6
+2024-10-04 15:01:05,212 DEBUG   SenderThread:160024 [sender.py:send_request():250] send_request: defer
+2024-10-04 15:01:05,212 INFO    SenderThread:160024 [sender.py:send_request_defer():389] handle sender defer: 6
+2024-10-04 15:01:05,212 INFO    SenderThread:160024 [dir_watcher.py:finish():353] shutting down directory watcher
+2024-10-04 15:01:05,313 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 15:01:05,495 INFO    SenderThread:160024 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/files/config.yaml
+2024-10-04 15:01:05,495 INFO    SenderThread:160024 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/files/wandb-summary.json
+2024-10-04 15:01:05,495 INFO    SenderThread:160024 [dir_watcher.py:finish():383] scan: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/files
+2024-10-04 15:01:05,495 INFO    SenderThread:160024 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/files/config.yaml config.yaml
+2024-10-04 15:01:05,495 INFO    SenderThread:160024 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/files/env.py env.py
+2024-10-04 15:01:05,498 INFO    SenderThread:160024 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/files/events.out.tfevents.1728046854.Rhino events.out.tfevents.1728046854.Rhino
+2024-10-04 15:01:05,498 INFO    SenderThread:160024 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/files/output.log output.log
+2024-10-04 15:01:05,498 INFO    SenderThread:160024 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/files/requirements.txt requirements.txt
+2024-10-04 15:01:05,500 INFO    SenderThread:160024 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/files/wandb-metadata.json wandb-metadata.json
+2024-10-04 15:01:05,500 INFO    SenderThread:160024 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/files/wandb-summary.json wandb-summary.json
+2024-10-04 15:01:05,502 INFO    SenderThread:160024 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/files/conda-environment.yaml conda-environment.yaml
+2024-10-04 15:01:05,502 INFO    SenderThread:160024 [sender.py:transition_state():393] send defer: 7
+2024-10-04 15:01:05,502 DEBUG   SenderThread:160024 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 15:01:05,506 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: defer
+2024-10-04 15:01:05,507 INFO    HandlerThread:160024 [handler.py:handle_request_defer():163] handle defer: 7
+2024-10-04 15:01:05,507 DEBUG   SenderThread:160024 [sender.py:send_request():250] send_request: defer
+2024-10-04 15:01:05,507 INFO    SenderThread:160024 [sender.py:send_request_defer():389] handle sender defer: 7
+2024-10-04 15:01:05,507 INFO    SenderThread:160024 [file_pusher.py:finish():171] shutting down file pusher
+2024-10-04 15:01:05,605 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 15:01:05,605 DEBUG   SenderThread:160024 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 15:01:05,707 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 15:01:05,707 DEBUG   SenderThread:160024 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 15:01:05,808 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 15:01:05,808 DEBUG   SenderThread:160024 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 15:01:05,909 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 15:01:05,909 DEBUG   SenderThread:160024 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 15:01:05,946 INFO    Thread-20 :160024 [upload_job.py:push():138] Uploaded file /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/files/wandb-summary.json
+2024-10-04 15:01:05,969 INFO    Thread-21 :160024 [upload_job.py:push():138] Uploaded file /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/files/conda-environment.yaml
+2024-10-04 15:01:05,978 INFO    Thread-19 :160024 [upload_job.py:push():138] Uploaded file /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/files/requirements.txt
+2024-10-04 15:01:05,999 INFO    Thread-18 :160024 [upload_job.py:push():138] Uploaded file /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/files/output.log
+2024-10-04 15:01:06,010 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 15:01:06,011 DEBUG   SenderThread:160024 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 15:01:06,016 INFO    Thread-17 :160024 [upload_job.py:push():138] Uploaded file /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/files/config.yaml
+2024-10-04 15:01:06,112 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 15:01:06,112 DEBUG   SenderThread:160024 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 15:01:06,213 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 15:01:06,213 DEBUG   SenderThread:160024 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 15:01:06,216 INFO    Thread-7  :160024 [sender.py:transition_state():393] send defer: 8
+2024-10-04 15:01:06,217 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: defer
+2024-10-04 15:01:06,217 INFO    HandlerThread:160024 [handler.py:handle_request_defer():163] handle defer: 8
+2024-10-04 15:01:06,217 DEBUG   SenderThread:160024 [sender.py:send_request():250] send_request: defer
+2024-10-04 15:01:06,217 INFO    SenderThread:160024 [sender.py:send_request_defer():389] handle sender defer: 8
+2024-10-04 15:01:06,314 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 15:01:06,378 INFO    SenderThread:160024 [sender.py:transition_state():393] send defer: 9
+2024-10-04 15:01:06,379 DEBUG   SenderThread:160024 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 15:01:06,379 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: defer
+2024-10-04 15:01:06,379 INFO    HandlerThread:160024 [handler.py:handle_request_defer():163] handle defer: 9
+2024-10-04 15:01:06,379 DEBUG   SenderThread:160024 [sender.py:send_request():250] send_request: defer
+2024-10-04 15:01:06,379 INFO    SenderThread:160024 [sender.py:send_request_defer():389] handle sender defer: 9
+2024-10-04 15:01:06,379 INFO    SenderThread:160024 [sender.py:transition_state():393] send defer: 10
+2024-10-04 15:01:06,380 DEBUG   SenderThread:160024 [sender.py:send():236] send: final
+2024-10-04 15:01:06,380 DEBUG   SenderThread:160024 [sender.py:send():236] send: footer
+2024-10-04 15:01:06,380 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: defer
+2024-10-04 15:01:06,380 INFO    HandlerThread:160024 [handler.py:handle_request_defer():163] handle defer: 10
+2024-10-04 15:01:06,380 DEBUG   SenderThread:160024 [sender.py:send_request():250] send_request: defer
+2024-10-04 15:01:06,380 INFO    SenderThread:160024 [sender.py:send_request_defer():389] handle sender defer: 10
+2024-10-04 15:01:06,480 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 15:01:06,480 DEBUG   SenderThread:160024 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 15:01:06,480 INFO    SenderThread:160024 [file_pusher.py:join():176] waiting for file pusher
+2024-10-04 15:01:06,913 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: sampled_history
+2024-10-04 15:01:06,914 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: get_summary
+2024-10-04 15:01:06,914 DEBUG   HandlerThread:160024 [handler.py:handle_request():140] handle_request: shutdown
+2024-10-04 15:01:06,914 INFO    HandlerThread:160024 [handler.py:finish():806] shutting down handler
+2024-10-04 15:01:07,380 INFO    WriterThread:160024 [datastore.py:close():279] close: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_15-00-49/wandb/run-20241004_150050-AntGPT-2024-10-04_15-00-50/run-AntGPT-2024-10-04_15-00-50.wandb
+2024-10-04 15:01:07,812 INFO    SenderThread:160024 [sender.py:finish():1114] shutting down sender
+2024-10-04 15:01:07,812 INFO    SenderThread:160024 [file_pusher.py:finish():171] shutting down file pusher
+2024-10-04 15:01:07,812 INFO    SenderThread:160024 [file_pusher.py:join():176] waiting for file pusher

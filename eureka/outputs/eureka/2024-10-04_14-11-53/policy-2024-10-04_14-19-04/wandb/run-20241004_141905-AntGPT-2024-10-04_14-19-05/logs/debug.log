@@ -1,0 +1,223 @@
+2024-10-04 14:19:05,780 INFO    MainThread:73898 [wandb_setup.py:_flush():76] Configure stats pid to 73898
+2024-10-04 14:19:05,780 INFO    MainThread:73898 [wandb_setup.py:_flush():76] Loading settings from /home/vandriel/.config/wandb/settings
+2024-10-04 14:19:05,780 INFO    MainThread:73898 [wandb_setup.py:_flush():76] Loading settings from /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-19-04/wandb/settings
+2024-10-04 14:19:05,780 INFO    MainThread:73898 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2024-10-04 14:19:05,780 INFO    MainThread:73898 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'isaacgymenvs/isaacgymenvs/train.py', 'program': '/home/vandriel/Documents/GitHub/Eureka/eureka/../isaacgymenvs/isaacgymenvs/train.py'}
+2024-10-04 14:19:05,780 INFO    MainThread:73898 [wandb_init.py:_log_setup():461] Logging user logs to /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-19-04/wandb/run-20241004_141905-AntGPT-2024-10-04_14-19-05/logs/debug.log
+2024-10-04 14:19:05,780 INFO    MainThread:73898 [wandb_init.py:_log_setup():462] Logging internal logs to /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-19-04/wandb/run-20241004_141905-AntGPT-2024-10-04_14-19-05/logs/debug-internal.log
+2024-10-04 14:19:05,781 INFO    MainThread:73898 [wandb_init.py:init():495] calling init triggers
+2024-10-04 14:19:05,781 INFO    MainThread:73898 [wandb_init.py:init():498] wandb.init called with sweep_config: {}
+config: {}
+2024-10-04 14:19:05,781 INFO    MainThread:73898 [wandb_init.py:init():548] starting backend
+2024-10-04 14:19:05,781 INFO    MainThread:73898 [backend.py:_multiprocessing_setup():97] multiprocessing start_methods=fork,spawn,forkserver, using: fork
+2024-10-04 14:19:05,783 INFO    MainThread:73898 [backend.py:ensure_launched():217] starting backend process...
+2024-10-04 14:19:05,788 INFO    MainThread:73898 [backend.py:ensure_launched():222] started backend process with pid: 74099
+2024-10-04 14:19:05,789 INFO    MainThread:73898 [wandb_init.py:init():558] backend started and connected
+2024-10-04 14:19:05,790 INFO    MainThread:74099 [internal.py:wandb_internal():90] W&B internal server running at pid: 74099, started at: 2024-10-04 14:19:05.789420
+2024-10-04 14:19:05,794 INFO    MainThread:73898 [wandb_init.py:init():634] updated telemetry
+2024-10-04 14:19:05,795 INFO    WriterThread:74099 [datastore.py:open_for_write():75] open: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-19-04/wandb/run-20241004_141905-AntGPT-2024-10-04_14-19-05/run-AntGPT-2024-10-04_14-19-05.wandb
+2024-10-04 14:19:05,808 INFO    MainThread:73898 [wandb_init.py:init():665] communicating run to backend with 30 second timeout
+2024-10-04 14:19:05,811 INFO    SenderThread:74099 [sender.py:_maybe_setup_resume():493] checking resume status for koza/eureka/AntGPT-2024-10-04_14-19-05
+2024-10-04 14:19:06,299 INFO    SenderThread:74099 [dir_watcher.py:__init__():216] watching files in: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-19-04/wandb/run-20241004_141905-AntGPT-2024-10-04_14-19-05/files
+2024-10-04 14:19:06,300 INFO    SenderThread:74099 [sender.py:_start_run_threads():815] run started: AntGPT-2024-10-04_14-19-05 with start time 1728044345
+2024-10-04 14:19:06,300 INFO    SenderThread:74099 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 14:19:06,300 INFO    MainThread:73898 [wandb_run.py:_on_init():1919] communicating current version
+2024-10-04 14:19:06,367 INFO    MainThread:73898 [wandb_run.py:_on_init():1923] got version response upgrade_message: "wandb version 0.18.3 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2024-10-04 14:19:06,367 INFO    MainThread:73898 [wandb_init.py:init():700] starting run threads in backend
+2024-10-04 14:19:07,301 INFO    Thread-8  :74099 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-19-04/wandb/run-20241004_141905-AntGPT-2024-10-04_14-19-05/files/requirements.txt
+2024-10-04 14:19:07,302 INFO    Thread-8  :74099 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-19-04/wandb/run-20241004_141905-AntGPT-2024-10-04_14-19-05/files/wandb-summary.json
+2024-10-04 14:19:07,302 INFO    Thread-8  :74099 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-19-04/wandb/run-20241004_141905-AntGPT-2024-10-04_14-19-05/files/conda-environment.yaml
+2024-10-04 14:19:07,549 INFO    SenderThread:74099 [sender.py:_save_file():952] saving file wandb-metadata.json with policy now
+2024-10-04 14:19:07,550 INFO    MainThread:73898 [wandb_run.py:_console_start():1893] atexit reg
+2024-10-04 14:19:07,551 INFO    MainThread:73898 [wandb_run.py:_redirect():1766] redirect: SettingsConsole.REDIRECT
+2024-10-04 14:19:07,551 INFO    MainThread:73898 [wandb_run.py:_redirect():1771] Redirecting console.
+2024-10-04 14:19:07,552 INFO    MainThread:73898 [wandb_run.py:_redirect():1827] Redirects installed.
+2024-10-04 14:19:07,552 INFO    MainThread:73898 [wandb_init.py:init():732] run started, returning control to user process
+2024-10-04 14:19:07,564 INFO    MainThread:73898 [wandb_run.py:_config_callback():1131] config_cb None None {'task_name': 'AntGPT', 'experiment': '', 'env_path': '', 'num_envs': '', 'seed': 42, 'torch_deterministic': False, 'max_iterations': 3000, 'physics_engine': 'physx', 'pipeline': 'gpu', 'sim_device': 'cuda:0', 'rl_device': 'cuda:0', 'graphics_device_id': 0, 'num_threads': 4, 'solver_type': 1, 'num_subscenes': 4, 'test': False, 'checkpoint': '', 'sigma': '', 'multi_gpu': False, 'wandb_activate': True, 'wandb_group': '', 'wandb_name': 'AntGPT', 'wandb_entity': 'koza', 'wandb_project': 'eureka', 'wandb_tags': [], 'wandb_logcode_dir': '', 'capture_video': False, 'capture_video_freq': 5000, 'capture_video_len': 200, 'force_render': False, 'headless': True, 'task': {'env': {'actionsCost': 0.005, 'asset': {'assetFileName': 'mjcf/nv_ant.xml'}, 'clipActions': 1.0, 'contactForceScale': 0.1, 'controlFrequencyInv': 1, 'deathCost': -2.0, 'dofVelocityScale': 0.2, 'enableCameraSensors': False, 'enableDebugVis': False, 'energyCost': 0.05, 'envSpacing': 5, 'env_name': 'limpantGPT', 'episodeLength': 1000, 'headingWeight': 0.5, 'jointsAtLimitCost': 0.1, 'numEnvs': 4096, 'plane': {'dynamicFriction': 1.0, 'restitution': 0.0, 'staticFriction': 1.0}, 'powerScale': 1.0, 'terminationHeight': 0.31, 'upWeight': 0.1}, 'name': 'AntGPT', 'physics_engine': 'physx', 'sim': {'dt': 0.0166, 'gravity': [0.0, 0.0, -9.81], 'physx': {'bounce_threshold_velocity': 0.2, 'contact_collection': 0, 'contact_offset': 0.02, 'default_buffer_size_multiplier': 5.0, 'max_depenetration_velocity': 10.0, 'max_gpu_contact_pairs': 8388608, 'num_position_iterations': 4, 'num_subscenes': 4, 'num_threads': 4, 'num_velocity_iterations': 0, 'rest_offset': 0.0, 'solver_type': 1, 'use_gpu': True}, 'substeps': 2, 'up_axis': 'z', 'use_gpu_pipeline': True}, 'task': {'randomization_params': {'actions': {'distribution': 'gaussian', 'operation': 'additive', 'range': [0.0, 0.02]}, 'actor_params': {'ant': {'color': True, 'dof_properties': {'damping': {'distribution': 'uniform', 'operation': 'scaling', 'range': [0.5, 1.5]}, 'lower': {'distribution': 'gaussian', 'operation': 'additive', 'range': [0, 0.01]}, 'stiffness': {'distribution': 'uniform', 'operation': 'scaling', 'range': [0.5, 1.5]}, 'upper': {'distribution': 'gaussian', 'operation': 'additive', 'range': [0, 0.01]}}, 'rigid_body_properties': {'mass': {'distribution': 'uniform', 'operation': 'scaling', 'range': [0.5, 1.5], 'setup_only': True}}}}, 'frequency': 600, 'observations': {'distribution': 'gaussian', 'operation': 'additive', 'range': [0, 0.002]}}, 'randomize': False}}, 'train': {'params': {'algo': {'name': 'a2c_continuous'}, 'config': {'bounds_loss_coef': 0.0001, 'clip_value': True, 'critic_coef': 2, 'e_clip': 0.2, 'entropy_coef': 0.0, 'env_name': 'rlgpu', 'full_experiment_name': 'AntGPT', 'gamma': 0.99, 'grad_norm': 1.0, 'horizon_length': 16, 'kl_threshold': 0.008, 'learning_rate': 0.0003, 'lr_schedule': 'adaptive', 'max_epochs': 3000, 'mini_epochs': 4, 'minibatch_size': 32768, 'mixed_precision': True, 'multi_gpu': False, 'name': 'AntGPT', 'normalize_advantage': True, 'normalize_input': True, 'normalize_value': True, 'num_actors': 4096, 'ppo': True, 'reward_shaper': {'scale_value': 0.01}, 'save_best_after': 200, 'save_frequency': 50, 'schedule_type': 'legacy', 'score_to_win': 20000, 'seq_len': 4, 'tau': 0.95, 'truncate_grads': False, 'value_bootstrap': True}, 'load_checkpoint': False, 'load_path': '', 'model': {'name': 'continuous_a2c_logstd'}, 'network': {'mlp': {'activation': 'elu', 'd2rl': False, 'initializer': {'name': 'default'}, 'regularizer': {'name': 'None'}, 'units': [256, 128, 64]}, 'name': 'actor_critic', 'separate': False, 'space': {'continuous': {'fixed_sigma': True, 'mu_activation': 'None', 'mu_init': {'name': 'default'}, 'sigma_activation': 'None', 'sigma_init': {'name': 'const_initializer', 'val': 0}}}}, 'seed': 42}}}
+2024-10-04 14:19:07,687 INFO    MainThread:73898 [wandb_run.py:_atexit_cleanup():1862] got exitcode: 1
+2024-10-04 14:19:07,688 INFO    MainThread:73898 [wandb_run.py:_restore():1834] restore
+2024-10-04 14:19:07,821 INFO    SenderThread:74099 [sender.py:_save_file():952] saving file env.py with policy live
+2024-10-04 14:19:08,061 INFO    Thread-12 :74099 [upload_job.py:push():138] Uploaded file /tmp/tmpd1yr2xa0wandb/5ofbg2ik-wandb-metadata.json
+2024-10-04 14:19:08,300 INFO    Thread-8  :74099 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-19-04/wandb/run-20241004_141905-AntGPT-2024-10-04_14-19-05/files/conda-environment.yaml
+2024-10-04 14:19:08,301 INFO    Thread-8  :74099 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-19-04/wandb/run-20241004_141905-AntGPT-2024-10-04_14-19-05/files/output.log
+2024-10-04 14:19:08,301 INFO    Thread-8  :74099 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-19-04/wandb/run-20241004_141905-AntGPT-2024-10-04_14-19-05/files/wandb-metadata.json
+2024-10-04 14:19:08,301 INFO    Thread-8  :74099 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-19-04/wandb/run-20241004_141905-AntGPT-2024-10-04_14-19-05/files/env.py
+2024-10-04 14:19:08,401 INFO    Thread-13 :74099 [upload_job.py:push():138] Uploaded file /tmp/tmpd1yr2xa0wandb/dgxzst8e-env.py
+2024-10-04 14:19:10,153 INFO    SenderThread:74099 [sender.py:send_exit():372] handling exit code: 1
+2024-10-04 14:19:10,153 INFO    SenderThread:74099 [sender.py:send_exit():374] handling runtime: 3
+2024-10-04 14:19:10,153 INFO    SenderThread:74099 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 14:19:10,153 INFO    SenderThread:74099 [sender.py:send_exit():380] send defer
+2024-10-04 14:19:10,153 INFO    HandlerThread:74099 [handler.py:handle_request_defer():163] handle defer: 0
+2024-10-04 14:19:10,154 INFO    SenderThread:74099 [sender.py:send_request_defer():389] handle sender defer: 0
+2024-10-04 14:19:10,154 INFO    SenderThread:74099 [sender.py:transition_state():393] send defer: 1
+2024-10-04 14:19:10,154 INFO    MainThread:73898 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 1
+  other_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 20120
+  total_bytes: 20120
+}
+
+2024-10-04 14:19:10,154 INFO    HandlerThread:74099 [handler.py:handle_request_defer():163] handle defer: 1
+2024-10-04 14:19:10,228 INFO    SenderThread:74099 [sender.py:send_request_defer():389] handle sender defer: 1
+2024-10-04 14:19:10,228 INFO    SenderThread:74099 [sender.py:transition_state():393] send defer: 2
+2024-10-04 14:19:10,228 INFO    HandlerThread:74099 [handler.py:handle_request_defer():163] handle defer: 2
+2024-10-04 14:19:10,229 INFO    SenderThread:74099 [sender.py:send_request_defer():389] handle sender defer: 2
+2024-10-04 14:19:10,229 INFO    SenderThread:74099 [sender.py:transition_state():393] send defer: 3
+2024-10-04 14:19:10,229 INFO    HandlerThread:74099 [handler.py:handle_request_defer():163] handle defer: 3
+2024-10-04 14:19:10,229 INFO    SenderThread:74099 [sender.py:send_request_defer():389] handle sender defer: 3
+2024-10-04 14:19:10,229 INFO    SenderThread:74099 [sender.py:transition_state():393] send defer: 4
+2024-10-04 14:19:10,229 INFO    HandlerThread:74099 [handler.py:handle_request_defer():163] handle defer: 4
+2024-10-04 14:19:10,229 INFO    SenderThread:74099 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 14:19:10,229 INFO    SenderThread:74099 [sender.py:send_request_defer():389] handle sender defer: 4
+2024-10-04 14:19:10,230 INFO    SenderThread:74099 [sender.py:transition_state():393] send defer: 5
+2024-10-04 14:19:10,230 INFO    HandlerThread:74099 [handler.py:handle_request_defer():163] handle defer: 5
+2024-10-04 14:19:10,230 INFO    SenderThread:74099 [sender.py:send_request_defer():389] handle sender defer: 5
+2024-10-04 14:19:10,301 INFO    Thread-8  :74099 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-19-04/wandb/run-20241004_141905-AntGPT-2024-10-04_14-19-05/files/output.log
+2024-10-04 14:19:10,301 INFO    Thread-8  :74099 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-19-04/wandb/run-20241004_141905-AntGPT-2024-10-04_14-19-05/files/wandb-summary.json
+2024-10-04 14:19:10,436 INFO    SenderThread:74099 [sender.py:transition_state():393] send defer: 6
+2024-10-04 14:19:10,436 INFO    HandlerThread:74099 [handler.py:handle_request_defer():163] handle defer: 6
+2024-10-04 14:19:10,436 INFO    MainThread:73898 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 1
+  other_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 20120
+  total_bytes: 20120
+}
+
+2024-10-04 14:19:10,436 INFO    SenderThread:74099 [sender.py:send_request_defer():389] handle sender defer: 6
+2024-10-04 14:19:10,436 INFO    SenderThread:74099 [dir_watcher.py:finish():353] shutting down directory watcher
+2024-10-04 14:19:11,301 INFO    Thread-8  :74099 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-19-04/wandb/run-20241004_141905-AntGPT-2024-10-04_14-19-05/files/config.yaml
+2024-10-04 14:19:11,302 INFO    SenderThread:74099 [dir_watcher.py:finish():383] scan: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-19-04/wandb/run-20241004_141905-AntGPT-2024-10-04_14-19-05/files
+2024-10-04 14:19:11,302 INFO    SenderThread:74099 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-19-04/wandb/run-20241004_141905-AntGPT-2024-10-04_14-19-05/files/config.yaml config.yaml
+2024-10-04 14:19:11,302 INFO    SenderThread:74099 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-19-04/wandb/run-20241004_141905-AntGPT-2024-10-04_14-19-05/files/env.py env.py
+2024-10-04 14:19:11,305 INFO    SenderThread:74099 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-19-04/wandb/run-20241004_141905-AntGPT-2024-10-04_14-19-05/files/output.log output.log
+2024-10-04 14:19:11,305 INFO    SenderThread:74099 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-19-04/wandb/run-20241004_141905-AntGPT-2024-10-04_14-19-05/files/requirements.txt requirements.txt
+2024-10-04 14:19:11,306 INFO    SenderThread:74099 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-19-04/wandb/run-20241004_141905-AntGPT-2024-10-04_14-19-05/files/wandb-metadata.json wandb-metadata.json
+2024-10-04 14:19:11,307 INFO    SenderThread:74099 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-19-04/wandb/run-20241004_141905-AntGPT-2024-10-04_14-19-05/files/wandb-summary.json wandb-summary.json
+2024-10-04 14:19:11,309 INFO    SenderThread:74099 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-19-04/wandb/run-20241004_141905-AntGPT-2024-10-04_14-19-05/files/conda-environment.yaml conda-environment.yaml
+2024-10-04 14:19:11,311 INFO    SenderThread:74099 [sender.py:transition_state():393] send defer: 7
+2024-10-04 14:19:11,311 INFO    HandlerThread:74099 [handler.py:handle_request_defer():163] handle defer: 7
+2024-10-04 14:19:11,312 INFO    MainThread:73898 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 5
+  other_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 20120
+  total_bytes: 34270
+}
+
+2024-10-04 14:19:11,314 INFO    SenderThread:74099 [sender.py:send_request_defer():389] handle sender defer: 7
+2024-10-04 14:19:11,314 INFO    SenderThread:74099 [file_pusher.py:finish():171] shutting down file pusher
+2024-10-04 14:19:11,413 INFO    MainThread:73898 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 20120
+  total_bytes: 39079
+}
+
+2024-10-04 14:19:11,514 INFO    MainThread:73898 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 20120
+  total_bytes: 39079
+}
+
+2024-10-04 14:19:11,616 INFO    MainThread:73898 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 39079
+  total_bytes: 39079
+}
+
+2024-10-04 14:19:11,717 INFO    MainThread:73898 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 39079
+  total_bytes: 39079
+}
+
+2024-10-04 14:19:11,819 INFO    MainThread:73898 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 39079
+  total_bytes: 39079
+}
+
+2024-10-04 14:19:11,824 INFO    Thread-15 :74099 [upload_job.py:push():138] Uploaded file /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-19-04/wandb/run-20241004_141905-AntGPT-2024-10-04_14-19-05/files/output.log
+2024-10-04 14:19:11,831 INFO    Thread-16 :74099 [upload_job.py:push():138] Uploaded file /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-19-04/wandb/run-20241004_141905-AntGPT-2024-10-04_14-19-05/files/requirements.txt
+2024-10-04 14:19:11,833 INFO    Thread-18 :74099 [upload_job.py:push():138] Uploaded file /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-19-04/wandb/run-20241004_141905-AntGPT-2024-10-04_14-19-05/files/conda-environment.yaml
+2024-10-04 14:19:11,845 INFO    Thread-17 :74099 [upload_job.py:push():138] Uploaded file /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-19-04/wandb/run-20241004_141905-AntGPT-2024-10-04_14-19-05/files/wandb-summary.json
+2024-10-04 14:19:11,846 INFO    Thread-14 :74099 [upload_job.py:push():138] Uploaded file /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-19-04/wandb/run-20241004_141905-AntGPT-2024-10-04_14-19-05/files/config.yaml
+2024-10-04 14:19:11,920 INFO    MainThread:73898 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 39079
+  total_bytes: 39079
+}
+
+2024-10-04 14:19:12,023 INFO    MainThread:73898 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 39079
+  total_bytes: 39079
+}
+
+2024-10-04 14:19:12,046 INFO    Thread-7  :74099 [sender.py:transition_state():393] send defer: 8
+2024-10-04 14:19:12,046 INFO    HandlerThread:74099 [handler.py:handle_request_defer():163] handle defer: 8
+2024-10-04 14:19:12,047 INFO    SenderThread:74099 [sender.py:send_request_defer():389] handle sender defer: 8
+2024-10-04 14:19:12,371 INFO    SenderThread:74099 [sender.py:transition_state():393] send defer: 9
+2024-10-04 14:19:12,372 INFO    HandlerThread:74099 [handler.py:handle_request_defer():163] handle defer: 9
+2024-10-04 14:19:12,372 INFO    MainThread:73898 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 39079
+  total_bytes: 39079
+}
+
+2024-10-04 14:19:12,372 INFO    SenderThread:74099 [sender.py:send_request_defer():389] handle sender defer: 9
+2024-10-04 14:19:12,372 INFO    SenderThread:74099 [sender.py:transition_state():393] send defer: 10
+2024-10-04 14:19:12,373 INFO    HandlerThread:74099 [handler.py:handle_request_defer():163] handle defer: 10
+2024-10-04 14:19:12,373 INFO    SenderThread:74099 [sender.py:send_request_defer():389] handle sender defer: 10
+2024-10-04 14:19:12,473 INFO    SenderThread:74099 [file_pusher.py:join():176] waiting for file pusher
+2024-10-04 14:19:12,797 INFO    MainThread:73898 [wandb_run.py:_on_finish():1991] got exit ret: done: true
+exit_result {
+}
+file_counts {
+  wandb_count: 6
+  other_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 39079
+  total_bytes: 39079
+}
+local_info {
+}
+
+2024-10-04 14:19:12,900 INFO    HandlerThread:74099 [handler.py:finish():806] shutting down handler
+2024-10-04 14:19:13,373 INFO    WriterThread:74099 [datastore.py:close():279] close: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-19-04/wandb/run-20241004_141905-AntGPT-2024-10-04_14-19-05/run-AntGPT-2024-10-04_14-19-05.wandb
+2024-10-04 14:19:13,797 INFO    SenderThread:74099 [sender.py:finish():1114] shutting down sender
+2024-10-04 14:19:13,797 INFO    SenderThread:74099 [file_pusher.py:finish():171] shutting down file pusher
+2024-10-04 14:19:13,797 INFO    SenderThread:74099 [file_pusher.py:join():176] waiting for file pusher
+2024-10-04 14:19:13,901 INFO    MainThread:73898 [wandb_run.py:_footer_history_summary_info():3099] rendering history
+2024-10-04 14:19:13,901 INFO    MainThread:73898 [wandb_run.py:_footer_history_summary_info():3131] rendering summary
+2024-10-04 14:19:13,903 INFO    MainThread:73898 [wandb_run.py:_footer_sync_info():3055] logging synced files

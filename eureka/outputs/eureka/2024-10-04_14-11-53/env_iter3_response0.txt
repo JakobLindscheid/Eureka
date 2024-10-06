@@ -1,0 +1,100 @@
+Importing module 'gym_38' (/home/vandriel/Documents/GitHub/Eureka/isaacgym/python/isaacgym/_bindings/linux-x86_64/gym_38.so)
+Setting GYM_USD_PLUG_INFO_PATH to /home/vandriel/Documents/GitHub/Eureka/isaacgym/python/isaacgym/_bindings/linux-x86_64/usd/plugInfo.json
+PyTorch version 2.0.0+cu117
+Device count 1
+/home/vandriel/Documents/GitHub/Eureka/isaacgym/python/isaacgym/_bindings/src/gymtorch
+Using /home/vandriel/.cache/torch_extensions/py38_cu117 as PyTorch extensions root...
+Emitting ninja build file /home/vandriel/.cache/torch_extensions/py38_cu117/gymtorch/build.ninja...
+Building extension module gymtorch...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+ninja: no work to do.
+Loading extension module gymtorch...
+2024-10-04 14:46:40,234 - INFO - logger - logger initialized
+<unknown>:3: DeprecationWarning: invalid escape sequence \*
+Error: FBX library failed to load - importing FBX data will not succeed. Message: No module named 'fbx'
+FBX tools must be installed from https://help.autodesk.com/view/FBX/2020/ENU/?guid=FBX_Developer_Help_scripting_with_python_fbx_installing_python_fbx_html
+/home/vandriel/anaconda3/envs/eureka/lib/python3.8/site-packages/matplotlib/__init__.py:169: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  if LooseVersion(module.__version__) < minver:
+/home/vandriel/anaconda3/envs/eureka/lib/python3.8/site-packages/setuptools/_distutils/version.py:337: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  other = LooseVersion(other)
+/home/vandriel/Documents/GitHub/Eureka/eureka/../isaacgymenvs/isaacgymenvs/train.py:75: UserWarning: 
+The version_base parameter is not specified.
+Please specify a compatability version level, or None.
+Will assume defaults for version 1.1
+  @hydra.main(config_name="config", config_path="./cfg")
+/home/vandriel/anaconda3/envs/eureka/lib/python3.8/site-packages/hydra/_internal/defaults_list.py:415: UserWarning: In config: Invalid overriding of hydra/job_logging:
+Default list overrides requires 'override' keyword.
+See https://hydra.cc/docs/1.2/upgrades/1.0_to_1.1/defaults_list_override for more information.
+
+  deprecation_warning(msg)
+/home/vandriel/anaconda3/envs/eureka/lib/python3.8/site-packages/hydra/_internal/hydra.py:119: UserWarning: Future Hydra versions will no longer change working directory at job runtime by default.
+See https://hydra.cc/docs/1.2/upgrades/1.1_to_1.2/changes_to_job_working_dir/ for more information.
+  ret = run_job(
+/home/vandriel/anaconda3/envs/eureka/lib/python3.8/site-packages/torch/utils/tensorboard/__init__.py:4: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  if not hasattr(tensorboard, "__version__") or LooseVersion(
+Setting seed: 42
+/home/vandriel/anaconda3/envs/eureka/lib/python3.8/site-packages/wandb/util.py:116: SentryHubDeprecationWarning: `sentry_sdk.Hub` is deprecated and will be removed in a future major release. Please consult our 1.x to 2.x migration guide for details on how to migrate `Hub` usage to the new API: https://docs.sentry.io/platforms/python/migration/1.x-to-2.x
+  sentry_hub = sentry_sdk.Hub(sentry_client)
+Network Directory: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-46-40/runs/AntGPT-2024-10-04_14-46-41/nn
+Tensorboard Directory: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-46-40/runs/AntGPT-2024-10-04_14-46-41/summaries
+self.seed = 42
+Started to train
+Wandb using unique id AntGPT-2024-10-04_14-46-41
+Initializing WandB...
+wandb: Currently logged in as: driel4d (koza). Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.18.3 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.12.21
+wandb: Run data is saved locally in /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_14-11-53/policy-2024-10-04_14-46-40/wandb/run-20241004_144641-AntGPT-2024-10-04_14-46-41
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run AntGPT-2024-10-04_14-46-41
+wandb: ⭐️ View project at https://wandb.ai/koza/eureka
+wandb: 🚀 View run at https://wandb.ai/koza/eureka/runs/AntGPT-2024-10-04_14-46-41
+[Warning] [carb.gym.plugin] useGpu is set, forcing single scene (0 subscenes)
+/home/vandriel/anaconda3/envs/eureka/lib/python3.8/site-packages/gym/spaces/box.py:84: UserWarning: [33mWARN: Box bound precision lowered by casting to float32[0m
+  logger.warn(f"Box bound precision lowered by casting to {self.dtype}")
+Not connected to PVD
++++ Using GPU PhysX
+Physics Engine: PhysX
+Physics Device: cuda:0
+GPU Pipeline: enabled
+num envs 4096 env spacing 5
+/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs/tasks/limpantgpt.py:124: DeprecationWarning: an integer is required (got type isaacgym._bindings.linux-x86_64.gym_38.DofDriveMode).  Implicit conversion to integers using __int__ is deprecated, and may be removed in a future version of Python.
+  asset_options.default_dof_drive_mode = gymapi.DOF_MODE_NONE
+Box(-1.0, 1.0, (8,), float32) Box(-inf, inf, (60,), float32)
+current training device: cuda:0
+build mlp: 60
+RunningMeanStd:  (1,)
+RunningMeanStd:  (60,)
+Error executing job with overrides: ['task=AntGPT', 'wandb_activate=True', 'wandb_entity=koza', 'wandb_project=eureka', 'headless=True', 'capture_video=False', 'force_render=False', 'max_iterations=3000']
+Traceback (most recent call last):
+  File "/home/vandriel/Documents/GitHub/Eureka/eureka/../isaacgymenvs/isaacgymenvs/train.py", line 203, in launch_rlg_hydra
+    statistics = runner.run({
+  File "/home/vandriel/Documents/GitHub/Eureka/rl_games/rl_games/torch_runner.py", line 124, in run
+    self.run_train(args)
+  File "/home/vandriel/Documents/GitHub/Eureka/rl_games/rl_games/torch_runner.py", line 101, in run_train
+    self.agent.train()
+  File "/home/vandriel/Documents/GitHub/Eureka/rl_games/rl_games/common/a2c_common.py", line 1251, in train
+    step_time, play_time, update_time, sum_time, a_losses, c_losses, b_losses, entropies, kls, last_lr, lr_mul = self.train_epoch()
+  File "/home/vandriel/Documents/GitHub/Eureka/rl_games/rl_games/common/a2c_common.py", line 1115, in train_epoch
+    batch_dict = self.play_steps()
+  File "/home/vandriel/Documents/GitHub/Eureka/rl_games/rl_games/common/a2c_common.py", line 686, in play_steps
+    self.obs, rewards, self.dones, infos = self.env_step(res_dict['actions'])
+  File "/home/vandriel/Documents/GitHub/Eureka/rl_games/rl_games/common/a2c_common.py", line 504, in env_step
+    obs, rewards, dones, infos = self.vec_env.step(actions)
+  File "/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs/utils/rlgames_utils.py", line 256, in step
+    return  self.env.step(actions)
+  File "/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs/tasks/base/vec_task.py", line 355, in step
+    self.post_physics_step()
+  File "/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs/tasks/limpantgpt.py", line 272, in post_physics_step
+    self.compute_reward(self.actions)
+  File "/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs/tasks/limpantgpt.py", line 185, in compute_reward
+    self.rew_buf[:], self.rew_dict = compute_reward(self.root_states, self.targets, self.dt, self.distance_threshold)
+AttributeError: 'AntGPT' object has no attribute 'distance_threshold'
+
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.
+wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
+wandb: - 0.020 MB of 0.020 MB uploaded (0.000 MB deduped)wandb: \ 0.020 MB of 0.020 MB uploaded (0.000 MB deduped)wandb: | 0.020 MB of 0.020 MB uploaded (0.000 MB deduped)wandb: / 0.020 MB of 0.020 MB uploaded (0.000 MB deduped)wandb: - 0.020 MB of 0.036 MB uploaded (0.000 MB deduped)wandb: \ 0.020 MB of 0.036 MB uploaded (0.000 MB deduped)wandb: | 0.028 MB of 0.036 MB uploaded (0.000 MB deduped)wandb: / 0.036 MB of 0.036 MB uploaded (0.000 MB deduped)wandb: - 0.036 MB of 0.036 MB uploaded (0.000 MB deduped)wandb: \ 0.036 MB of 0.036 MB uploaded (0.000 MB deduped)wandb: | 0.036 MB of 0.036 MB uploaded (0.000 MB deduped)wandb: / 0.036 MB of 0.036 MB uploaded (0.000 MB deduped)wandb: - 0.036 MB of 0.036 MB uploaded (0.000 MB deduped)wandb:                                                                                
+wandb: Synced AntGPT-2024-10-04_14-46-41: https://wandb.ai/koza/eureka/runs/AntGPT-2024-10-04_14-46-41
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 2 other file(s)
+wandb: Find logs at: ./policy-2024-10-04_14-46-40/wandb/run-20241004_144641-AntGPT-2024-10-04_14-46-41/logs

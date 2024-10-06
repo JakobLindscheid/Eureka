@@ -1,0 +1,181 @@
+2024-10-04 23:09:26,299 INFO    MainThread:1074259 [internal.py:wandb_internal():90] W&B internal server running at pid: 1074259, started at: 2024-10-04 23:09:26.297667
+2024-10-04 23:09:26,304 DEBUG   SenderThread:1074259 [sender.py:send():236] send: header
+2024-10-04 23:09:26,304 INFO    WriterThread:1074259 [datastore.py:open_for_write():75] open: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/run-BallBalanceDS-2024-10-04_23-09-25.wandb
+2024-10-04 23:09:26,318 DEBUG   SenderThread:1074259 [sender.py:send():236] send: run
+2024-10-04 23:09:26,320 INFO    SenderThread:1074259 [sender.py:_maybe_setup_resume():493] checking resume status for koza/eureka/BallBalanceDS-2024-10-04_23-09-25
+2024-10-04 23:09:26,790 INFO    SenderThread:1074259 [dir_watcher.py:__init__():216] watching files in: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/files
+2024-10-04 23:09:26,790 INFO    SenderThread:1074259 [sender.py:_start_run_threads():815] run started: BallBalanceDS-2024-10-04_23-09-25 with start time 1728076166
+2024-10-04 23:09:26,790 DEBUG   SenderThread:1074259 [sender.py:send():236] send: summary
+2024-10-04 23:09:26,790 INFO    SenderThread:1074259 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:09:26,791 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: check_version
+2024-10-04 23:09:26,792 DEBUG   SenderThread:1074259 [sender.py:send_request():250] send_request: check_version
+2024-10-04 23:09:26,947 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: run_start
+2024-10-04 23:09:26,958 DEBUG   HandlerThread:1074259 [meta.py:__init__():35] meta init
+2024-10-04 23:09:26,959 DEBUG   HandlerThread:1074259 [meta.py:__init__():49] meta init done
+2024-10-04 23:09:26,959 DEBUG   HandlerThread:1074259 [meta.py:probe():209] probe
+2024-10-04 23:09:26,965 DEBUG   HandlerThread:1074259 [meta.py:_setup_git():199] setup git
+2024-10-04 23:09:26,995 DEBUG   HandlerThread:1074259 [meta.py:_setup_git():206] setup git done
+2024-10-04 23:09:26,995 DEBUG   HandlerThread:1074259 [meta.py:_save_pip():53] save pip
+2024-10-04 23:09:26,995 DEBUG   HandlerThread:1074259 [meta.py:_save_pip():67] save pip done
+2024-10-04 23:09:26,995 DEBUG   HandlerThread:1074259 [meta.py:_save_conda():74] save conda
+2024-10-04 23:09:27,792 INFO    Thread-8  :1074259 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/files/conda-environment.yaml
+2024-10-04 23:09:27,792 INFO    Thread-8  :1074259 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/files/requirements.txt
+2024-10-04 23:09:27,792 INFO    Thread-8  :1074259 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/files/wandb-summary.json
+2024-10-04 23:09:28,203 DEBUG   HandlerThread:1074259 [meta.py:_save_conda():84] save conda done
+2024-10-04 23:09:28,203 DEBUG   HandlerThread:1074259 [meta.py:probe():247] probe done
+2024-10-04 23:09:28,205 DEBUG   SenderThread:1074259 [sender.py:send():236] send: files
+2024-10-04 23:09:28,205 INFO    SenderThread:1074259 [sender.py:_save_file():952] saving file wandb-metadata.json with policy now
+2024-10-04 23:09:28,208 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: stop_status
+2024-10-04 23:09:28,209 DEBUG   SenderThread:1074259 [sender.py:send_request():250] send_request: stop_status
+2024-10-04 23:09:28,434 DEBUG   SenderThread:1074259 [sender.py:send():236] send: telemetry
+2024-10-04 23:09:28,434 DEBUG   SenderThread:1074259 [sender.py:send():236] send: telemetry
+2024-10-04 23:09:28,434 DEBUG   SenderThread:1074259 [sender.py:send():236] send: files
+2024-10-04 23:09:28,434 INFO    SenderThread:1074259 [sender.py:_save_file():952] saving file env.py with policy live
+2024-10-04 23:09:28,434 DEBUG   SenderThread:1074259 [sender.py:send():236] send: config
+2024-10-04 23:09:28,739 INFO    Thread-12 :1074259 [upload_job.py:push():138] Uploaded file /tmp/tmpwr_k093iwandb/bu6tydge-wandb-metadata.json
+2024-10-04 23:09:28,791 INFO    Thread-8  :1074259 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/files/conda-environment.yaml
+2024-10-04 23:09:28,791 INFO    Thread-8  :1074259 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/files/env.py
+2024-10-04 23:09:28,791 INFO    Thread-8  :1074259 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/files/output.log
+2024-10-04 23:09:28,791 INFO    Thread-8  :1074259 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/files/wandb-metadata.json
+2024-10-04 23:09:28,975 INFO    Thread-13 :1074259 [upload_job.py:push():138] Uploaded file /tmp/tmpwr_k093iwandb/denlvsl4-env.py
+2024-10-04 23:09:29,423 INFO    HandlerThread:1074259 [handler.py:handle_tbrecord():723] handling tbrecord: tbrecord {
+  log_dir: "runs/BallBalanceDS-2024-10-04_23-09-25/summaries"
+  save: true
+}
+
+2024-10-04 23:09:29,423 DEBUG   HandlerThread:1074259 [config_util.py:dict_from_config_file():100] no default config file found in config-defaults.yaml
+2024-10-04 23:09:29,424 DEBUG   SenderThread:1074259 [sender.py:send():236] send: tbrecord
+2024-10-04 23:09:29,425 DEBUG   SenderThread:1074259 [sender.py:send():236] send: files
+2024-10-04 23:09:29,425 INFO    SenderThread:1074259 [sender.py:_save_file():952] saving file events.out.tfevents.1728076169.Rhino with policy live
+2024-10-04 23:09:29,791 INFO    Thread-8  :1074259 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/files/events.out.tfevents.1728076169.Rhino
+2024-10-04 23:09:30,107 DEBUG   SenderThread:1074259 [sender.py:send():236] send: telemetry
+2024-10-04 23:09:30,791 INFO    Thread-8  :1074259 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/files/events.out.tfevents.1728076169.Rhino
+2024-10-04 23:09:30,792 INFO    Thread-8  :1074259 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/files/output.log
+2024-10-04 23:09:31,267 INFO    Thread-16 :1074259 [upload_job.py:push():138] Uploaded file /tmp/tmpwr_k093iwandb/e8ppk05w-events.out.tfevents.1728076169.Rhino
+2024-10-04 23:09:32,574 DEBUG   SenderThread:1074259 [sender.py:send():236] send: exit
+2024-10-04 23:09:32,579 INFO    SenderThread:1074259 [sender.py:send_exit():372] handling exit code: 1
+2024-10-04 23:09:32,579 INFO    SenderThread:1074259 [sender.py:send_exit():374] handling runtime: 5
+2024-10-04 23:09:32,579 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 23:09:32,580 INFO    SenderThread:1074259 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:09:32,580 INFO    SenderThread:1074259 [sender.py:send_exit():380] send defer
+2024-10-04 23:09:32,580 DEBUG   SenderThread:1074259 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 23:09:32,580 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: defer
+2024-10-04 23:09:32,580 INFO    HandlerThread:1074259 [handler.py:handle_request_defer():163] handle defer: 0
+2024-10-04 23:09:32,580 DEBUG   SenderThread:1074259 [sender.py:send_request():250] send_request: defer
+2024-10-04 23:09:32,580 INFO    SenderThread:1074259 [sender.py:send_request_defer():389] handle sender defer: 0
+2024-10-04 23:09:32,580 INFO    SenderThread:1074259 [sender.py:transition_state():393] send defer: 1
+2024-10-04 23:09:32,581 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: defer
+2024-10-04 23:09:32,581 INFO    HandlerThread:1074259 [handler.py:handle_request_defer():163] handle defer: 1
+2024-10-04 23:09:32,613 DEBUG   SenderThread:1074259 [sender.py:send_request():250] send_request: defer
+2024-10-04 23:09:32,613 INFO    SenderThread:1074259 [sender.py:send_request_defer():389] handle sender defer: 1
+2024-10-04 23:09:32,613 INFO    SenderThread:1074259 [sender.py:transition_state():393] send defer: 2
+2024-10-04 23:09:32,613 DEBUG   SenderThread:1074259 [sender.py:send():236] send: stats
+2024-10-04 23:09:32,613 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: defer
+2024-10-04 23:09:32,613 INFO    HandlerThread:1074259 [handler.py:handle_request_defer():163] handle defer: 2
+2024-10-04 23:09:32,613 DEBUG   SenderThread:1074259 [sender.py:send_request():250] send_request: defer
+2024-10-04 23:09:32,613 INFO    SenderThread:1074259 [sender.py:send_request_defer():389] handle sender defer: 2
+2024-10-04 23:09:32,613 INFO    SenderThread:1074259 [sender.py:transition_state():393] send defer: 3
+2024-10-04 23:09:32,614 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: defer
+2024-10-04 23:09:32,614 INFO    HandlerThread:1074259 [handler.py:handle_request_defer():163] handle defer: 3
+2024-10-04 23:09:32,792 INFO    Thread-8  :1074259 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/files/output.log
+2024-10-04 23:09:32,792 INFO    Thread-8  :1074259 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/files/wandb-summary.json
+2024-10-04 23:09:39,426 DEBUG   SenderThread:1074259 [sender.py:send_request():250] send_request: defer
+2024-10-04 23:09:39,426 INFO    SenderThread:1074259 [sender.py:send_request_defer():389] handle sender defer: 3
+2024-10-04 23:09:39,426 INFO    SenderThread:1074259 [sender.py:transition_state():393] send defer: 4
+2024-10-04 23:09:39,427 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 23:09:39,427 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 23:09:39,428 DEBUG   SenderThread:1074259 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 23:09:39,428 DEBUG   SenderThread:1074259 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 23:09:39,429 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: defer
+2024-10-04 23:09:39,429 INFO    HandlerThread:1074259 [handler.py:handle_request_defer():163] handle defer: 4
+2024-10-04 23:09:39,429 DEBUG   SenderThread:1074259 [sender.py:send():236] send: summary
+2024-10-04 23:09:39,432 INFO    SenderThread:1074259 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 23:09:39,432 DEBUG   SenderThread:1074259 [sender.py:send_request():250] send_request: defer
+2024-10-04 23:09:39,432 INFO    SenderThread:1074259 [sender.py:send_request_defer():389] handle sender defer: 4
+2024-10-04 23:09:39,433 INFO    SenderThread:1074259 [sender.py:transition_state():393] send defer: 5
+2024-10-04 23:09:39,433 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: defer
+2024-10-04 23:09:39,433 INFO    HandlerThread:1074259 [handler.py:handle_request_defer():163] handle defer: 5
+2024-10-04 23:09:39,433 DEBUG   SenderThread:1074259 [sender.py:send_request():250] send_request: defer
+2024-10-04 23:09:39,433 INFO    SenderThread:1074259 [sender.py:send_request_defer():389] handle sender defer: 5
+2024-10-04 23:09:39,534 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 23:09:39,636 INFO    SenderThread:1074259 [sender.py:transition_state():393] send defer: 6
+2024-10-04 23:09:39,637 DEBUG   SenderThread:1074259 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 23:09:39,637 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: defer
+2024-10-04 23:09:39,637 INFO    HandlerThread:1074259 [handler.py:handle_request_defer():163] handle defer: 6
+2024-10-04 23:09:39,638 DEBUG   SenderThread:1074259 [sender.py:send_request():250] send_request: defer
+2024-10-04 23:09:39,638 INFO    SenderThread:1074259 [sender.py:send_request_defer():389] handle sender defer: 6
+2024-10-04 23:09:39,638 INFO    SenderThread:1074259 [dir_watcher.py:finish():353] shutting down directory watcher
+2024-10-04 23:09:39,738 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 23:09:39,794 INFO    SenderThread:1074259 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/files/wandb-summary.json
+2024-10-04 23:09:39,794 INFO    SenderThread:1074259 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/files/config.yaml
+2024-10-04 23:09:39,795 INFO    SenderThread:1074259 [dir_watcher.py:finish():383] scan: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/files
+2024-10-04 23:09:39,795 INFO    SenderThread:1074259 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/files/config.yaml config.yaml
+2024-10-04 23:09:39,795 INFO    SenderThread:1074259 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/files/env.py env.py
+2024-10-04 23:09:39,795 INFO    SenderThread:1074259 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/files/events.out.tfevents.1728076169.Rhino events.out.tfevents.1728076169.Rhino
+2024-10-04 23:09:39,801 INFO    SenderThread:1074259 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/files/output.log output.log
+2024-10-04 23:09:39,801 INFO    SenderThread:1074259 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/files/requirements.txt requirements.txt
+2024-10-04 23:09:39,802 INFO    SenderThread:1074259 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/files/wandb-metadata.json wandb-metadata.json
+2024-10-04 23:09:39,802 INFO    SenderThread:1074259 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/files/wandb-summary.json wandb-summary.json
+2024-10-04 23:09:39,802 INFO    SenderThread:1074259 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/files/conda-environment.yaml conda-environment.yaml
+2024-10-04 23:09:39,802 INFO    SenderThread:1074259 [sender.py:transition_state():393] send defer: 7
+2024-10-04 23:09:39,802 DEBUG   SenderThread:1074259 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 23:09:39,808 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: defer
+2024-10-04 23:09:39,813 INFO    HandlerThread:1074259 [handler.py:handle_request_defer():163] handle defer: 7
+2024-10-04 23:09:39,818 DEBUG   SenderThread:1074259 [sender.py:send_request():250] send_request: defer
+2024-10-04 23:09:39,818 INFO    SenderThread:1074259 [sender.py:send_request_defer():389] handle sender defer: 7
+2024-10-04 23:09:39,818 INFO    SenderThread:1074259 [file_pusher.py:finish():171] shutting down file pusher
+2024-10-04 23:09:39,910 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 23:09:39,910 DEBUG   SenderThread:1074259 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 23:09:40,012 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 23:09:40,012 DEBUG   SenderThread:1074259 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 23:09:40,114 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 23:09:40,115 DEBUG   SenderThread:1074259 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 23:09:40,217 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 23:09:40,217 DEBUG   SenderThread:1074259 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 23:09:40,284 INFO    Thread-17 :1074259 [upload_job.py:push():138] Uploaded file /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/files/config.yaml
+2024-10-04 23:09:40,288 INFO    Thread-19 :1074259 [upload_job.py:push():138] Uploaded file /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/files/requirements.txt
+2024-10-04 23:09:40,319 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 23:09:40,319 DEBUG   SenderThread:1074259 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 23:09:40,385 INFO    Thread-20 :1074259 [upload_job.py:push():138] Uploaded file /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/files/wandb-summary.json
+2024-10-04 23:09:40,404 INFO    Thread-18 :1074259 [upload_job.py:push():138] Uploaded file /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/files/output.log
+2024-10-04 23:09:40,421 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 23:09:40,421 DEBUG   SenderThread:1074259 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 23:09:40,523 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 23:09:40,523 DEBUG   SenderThread:1074259 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 23:09:40,624 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 23:09:40,624 DEBUG   SenderThread:1074259 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 23:09:40,708 INFO    Thread-21 :1074259 [upload_job.py:push():138] Uploaded file /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/files/conda-environment.yaml
+2024-10-04 23:09:40,726 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 23:09:40,727 DEBUG   SenderThread:1074259 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 23:09:40,828 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 23:09:40,829 DEBUG   SenderThread:1074259 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 23:09:40,909 INFO    Thread-7  :1074259 [sender.py:transition_state():393] send defer: 8
+2024-10-04 23:09:40,909 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: defer
+2024-10-04 23:09:40,910 INFO    HandlerThread:1074259 [handler.py:handle_request_defer():163] handle defer: 8
+2024-10-04 23:09:40,910 DEBUG   SenderThread:1074259 [sender.py:send_request():250] send_request: defer
+2024-10-04 23:09:40,910 INFO    SenderThread:1074259 [sender.py:send_request_defer():389] handle sender defer: 8
+2024-10-04 23:09:40,931 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 23:09:41,068 INFO    SenderThread:1074259 [sender.py:transition_state():393] send defer: 9
+2024-10-04 23:09:41,068 DEBUG   SenderThread:1074259 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 23:09:41,069 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: defer
+2024-10-04 23:09:41,069 INFO    HandlerThread:1074259 [handler.py:handle_request_defer():163] handle defer: 9
+2024-10-04 23:09:41,069 DEBUG   SenderThread:1074259 [sender.py:send_request():250] send_request: defer
+2024-10-04 23:09:41,069 INFO    SenderThread:1074259 [sender.py:send_request_defer():389] handle sender defer: 9
+2024-10-04 23:09:41,069 INFO    SenderThread:1074259 [sender.py:transition_state():393] send defer: 10
+2024-10-04 23:09:41,070 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: defer
+2024-10-04 23:09:41,070 INFO    HandlerThread:1074259 [handler.py:handle_request_defer():163] handle defer: 10
+2024-10-04 23:09:41,070 DEBUG   SenderThread:1074259 [sender.py:send():236] send: final
+2024-10-04 23:09:41,070 DEBUG   SenderThread:1074259 [sender.py:send():236] send: footer
+2024-10-04 23:09:41,070 DEBUG   SenderThread:1074259 [sender.py:send_request():250] send_request: defer
+2024-10-04 23:09:41,070 INFO    SenderThread:1074259 [sender.py:send_request_defer():389] handle sender defer: 10
+2024-10-04 23:09:41,170 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: poll_exit
+2024-10-04 23:09:41,170 DEBUG   SenderThread:1074259 [sender.py:send_request():250] send_request: poll_exit
+2024-10-04 23:09:41,170 INFO    SenderThread:1074259 [file_pusher.py:join():176] waiting for file pusher
+2024-10-04 23:09:41,592 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: sampled_history
+2024-10-04 23:09:41,594 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: get_summary
+2024-10-04 23:09:41,595 DEBUG   HandlerThread:1074259 [handler.py:handle_request():140] handle_request: shutdown
+2024-10-04 23:09:41,595 INFO    HandlerThread:1074259 [handler.py:finish():806] shutting down handler
+2024-10-04 23:09:42,070 INFO    WriterThread:1074259 [datastore.py:close():279] close: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_23-07-50/policy-2024-10-04_23-09-25/wandb/run-20241004_230926-BallBalanceDS-2024-10-04_23-09-25/run-BallBalanceDS-2024-10-04_23-09-25.wandb
+2024-10-04 23:09:42,491 INFO    SenderThread:1074259 [sender.py:finish():1114] shutting down sender
+2024-10-04 23:09:42,491 INFO    SenderThread:1074259 [file_pusher.py:finish():171] shutting down file pusher
+2024-10-04 23:09:42,491 INFO    SenderThread:1074259 [file_pusher.py:join():176] waiting for file pusher

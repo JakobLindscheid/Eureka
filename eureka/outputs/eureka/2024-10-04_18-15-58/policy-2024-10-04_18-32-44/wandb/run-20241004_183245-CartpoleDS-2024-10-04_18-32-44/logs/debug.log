@@ -1,0 +1,394 @@
+2024-10-04 18:32:45,253 INFO    MainThread:634301 [wandb_setup.py:_flush():76] Configure stats pid to 634301
+2024-10-04 18:32:45,254 INFO    MainThread:634301 [wandb_setup.py:_flush():76] Loading settings from /home/vandriel/.config/wandb/settings
+2024-10-04 18:32:45,254 INFO    MainThread:634301 [wandb_setup.py:_flush():76] Loading settings from /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/settings
+2024-10-04 18:32:45,254 INFO    MainThread:634301 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2024-10-04 18:32:45,254 INFO    MainThread:634301 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'isaacgymenvs/isaacgymenvs/train.py', 'program': '/home/vandriel/Documents/GitHub/Eureka/eureka/../isaacgymenvs/isaacgymenvs/train.py'}
+2024-10-04 18:32:45,254 INFO    MainThread:634301 [wandb_init.py:_log_setup():461] Logging user logs to /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/logs/debug.log
+2024-10-04 18:32:45,254 INFO    MainThread:634301 [wandb_init.py:_log_setup():462] Logging internal logs to /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/logs/debug-internal.log
+2024-10-04 18:32:45,254 INFO    MainThread:634301 [wandb_init.py:init():495] calling init triggers
+2024-10-04 18:32:45,254 INFO    MainThread:634301 [wandb_init.py:init():498] wandb.init called with sweep_config: {}
+config: {}
+2024-10-04 18:32:45,254 INFO    MainThread:634301 [wandb_init.py:init():548] starting backend
+2024-10-04 18:32:45,254 INFO    MainThread:634301 [backend.py:_multiprocessing_setup():97] multiprocessing start_methods=fork,spawn,forkserver, using: fork
+2024-10-04 18:32:45,257 INFO    MainThread:634301 [backend.py:ensure_launched():217] starting backend process...
+2024-10-04 18:32:45,262 INFO    MainThread:634301 [backend.py:ensure_launched():222] started backend process with pid: 634502
+2024-10-04 18:32:45,262 INFO    MainThread:634301 [wandb_init.py:init():558] backend started and connected
+2024-10-04 18:32:45,264 INFO    MainThread:634502 [internal.py:wandb_internal():90] W&B internal server running at pid: 634502, started at: 2024-10-04 18:32:45.263092
+2024-10-04 18:32:45,268 INFO    MainThread:634301 [wandb_init.py:init():634] updated telemetry
+2024-10-04 18:32:45,269 INFO    WriterThread:634502 [datastore.py:open_for_write():75] open: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/run-CartpoleDS-2024-10-04_18-32-44.wandb
+2024-10-04 18:32:45,283 INFO    MainThread:634301 [wandb_init.py:init():665] communicating run to backend with 30 second timeout
+2024-10-04 18:32:45,285 INFO    SenderThread:634502 [sender.py:_maybe_setup_resume():493] checking resume status for koza/eureka/CartpoleDS-2024-10-04_18-32-44
+2024-10-04 18:32:45,778 INFO    SenderThread:634502 [dir_watcher.py:__init__():216] watching files in: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files
+2024-10-04 18:32:45,778 INFO    SenderThread:634502 [sender.py:_start_run_threads():815] run started: CartpoleDS-2024-10-04_18-32-44 with start time 1728059565
+2024-10-04 18:32:45,778 INFO    MainThread:634301 [wandb_run.py:_on_init():1919] communicating current version
+2024-10-04 18:32:45,778 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:32:45,936 INFO    MainThread:634301 [wandb_run.py:_on_init():1923] got version response upgrade_message: "wandb version 0.18.3 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2024-10-04 18:32:45,936 INFO    MainThread:634301 [wandb_init.py:init():700] starting run threads in backend
+2024-10-04 18:32:46,779 INFO    Thread-8  :634502 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/wandb-summary.json
+2024-10-04 18:32:46,780 INFO    Thread-8  :634502 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/conda-environment.yaml
+2024-10-04 18:32:46,780 INFO    Thread-8  :634502 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/requirements.txt
+2024-10-04 18:32:47,127 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-metadata.json with policy now
+2024-10-04 18:32:47,129 INFO    MainThread:634301 [wandb_run.py:_console_start():1893] atexit reg
+2024-10-04 18:32:47,130 INFO    MainThread:634301 [wandb_run.py:_redirect():1766] redirect: SettingsConsole.REDIRECT
+2024-10-04 18:32:47,130 INFO    MainThread:634301 [wandb_run.py:_redirect():1771] Redirecting console.
+2024-10-04 18:32:47,131 INFO    MainThread:634301 [wandb_run.py:_redirect():1827] Redirects installed.
+2024-10-04 18:32:47,132 INFO    MainThread:634301 [wandb_init.py:init():732] run started, returning control to user process
+2024-10-04 18:32:47,145 INFO    MainThread:634301 [wandb_run.py:_config_callback():1131] config_cb None None {'task_name': 'CartpoleDS', 'experiment': '', 'env_path': '', 'num_envs': '', 'seed': 2, 'torch_deterministic': False, 'max_iterations': '', 'physics_engine': 'physx', 'pipeline': 'gpu', 'sim_device': 'cuda:0', 'rl_device': 'cuda:0', 'graphics_device_id': 0, 'num_threads': 4, 'solver_type': 1, 'num_subscenes': 4, 'test': False, 'checkpoint': '', 'sigma': '', 'multi_gpu': False, 'wandb_activate': True, 'wandb_group': '', 'wandb_name': 'CartpoleDS', 'wandb_entity': 'koza', 'wandb_project': 'eureka', 'wandb_tags': [], 'wandb_logcode_dir': '', 'capture_video': False, 'capture_video_freq': 5000, 'capture_video_len': 200, 'force_render': False, 'headless': True, 'task': {'env': {'asset': {'assetFileName': 'urdf/cartpole.urdf', 'assetRoot': '../../assets'}, 'clipActions': 1.0, 'clipObservations': 5.0, 'enableCameraSensors': False, 'envSpacing': 4.0, 'env_name': 'cartpoleDS', 'maxEffort': 400.0, 'numEnvs': 512, 'resetDist': 3.0}, 'name': 'CartpoleDS', 'physics_engine': 'physx', 'sim': {'dt': 0.0166, 'gravity': [0.0, 0.0, -9.81], 'physx': {'bounce_threshold_velocity': 0.2, 'contact_collection': 0, 'contact_offset': 0.02, 'default_buffer_size_multiplier': 2.0, 'max_depenetration_velocity': 100.0, 'max_gpu_contact_pairs': 1048576, 'num_position_iterations': 4, 'num_subscenes': 4, 'num_threads': 4, 'num_velocity_iterations': 0, 'rest_offset': 0.001, 'solver_type': 1, 'use_gpu': True}, 'substeps': 2, 'up_axis': 'z', 'use_gpu_pipeline': True}, 'task': {'randomize': False}}, 'train': {'params': {'algo': {'name': 'a2c_continuous'}, 'config': {'bounds_loss_coef': 0.0001, 'clip_value': True, 'critic_coef': 4, 'e_clip': 0.2, 'entropy_coef': 0.0, 'env_name': 'rlgpu', 'full_experiment_name': 'CartpoleDS', 'gamma': 0.99, 'grad_norm': 1.0, 'horizon_length': 16, 'kl_threshold': 0.008, 'learning_rate': 0.0003, 'lr_schedule': 'adaptive', 'max_epochs': 100, 'mini_epochs': 8, 'minibatch_size': 8192, 'mixed_precision': False, 'multi_gpu': False, 'name': 'CartpoleDS', 'normalize_advantage': True, 'normalize_input': True, 'normalize_value': True, 'num_actors': 512, 'ppo': True, 'reward_shaper': {'scale_value': 0.1}, 'save_best_after': 50, 'save_frequency': 25, 'score_to_win': 20000, 'seq_len': 4, 'tau': 0.95, 'truncate_grads': True}, 'load_checkpoint': False, 'load_path': '', 'model': {'name': 'continuous_a2c_logstd'}, 'network': {'mlp': {'activation': 'elu', 'initializer': {'name': 'default'}, 'regularizer': {'name': 'None'}, 'units': [32, 32]}, 'name': 'actor_critic', 'separate': False, 'space': {'continuous': {'fixed_sigma': True, 'mu_activation': 'None', 'mu_init': {'name': 'default'}, 'sigma_activation': 'None', 'sigma_init': {'name': 'const_initializer', 'val': 0}}}}, 'seed': 2}}}
+2024-10-04 18:32:47,406 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file env.py with policy live
+2024-10-04 18:32:47,662 INFO    MainThread:634301 [wandb_run.py:_tensorboard_callback():1239] tensorboard callback: runs/CartpoleDS-2024-10-04_18-32-44/summaries, True
+2024-10-04 18:32:47,663 INFO    HandlerThread:634502 [handler.py:handle_tbrecord():723] handling tbrecord: tbrecord {
+  log_dir: "runs/CartpoleDS-2024-10-04_18-32-44/summaries"
+  save: true
+}
+
+2024-10-04 18:32:47,665 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file events.out.tfevents.1728059567.Rhino with policy live
+2024-10-04 18:32:47,699 INFO    Thread-12 :634502 [upload_job.py:push():138] Uploaded file /tmp/tmpd3qfzsotwandb/y2kn0ogl-wandb-metadata.json
+2024-10-04 18:32:47,779 INFO    Thread-8  :634502 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/conda-environment.yaml
+2024-10-04 18:32:47,779 INFO    Thread-8  :634502 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/env.py
+2024-10-04 18:32:47,779 INFO    Thread-8  :634502 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/output.log
+2024-10-04 18:32:47,779 INFO    Thread-8  :634502 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/events.out.tfevents.1728059567.Rhino
+2024-10-04 18:32:47,779 INFO    Thread-8  :634502 [dir_watcher.py:_on_file_created():269] file/dir created: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/wandb-metadata.json
+2024-10-04 18:32:47,974 INFO    Thread-13 :634502 [upload_job.py:push():138] Uploaded file /tmp/tmpd3qfzsotwandb/akd7v5rd-env.py
+2024-10-04 18:32:48,779 INFO    Thread-8  :634502 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/events.out.tfevents.1728059567.Rhino
+2024-10-04 18:32:49,366 INFO    Thread-16 :634502 [upload_job.py:push():138] Uploaded file /tmp/tmpd3qfzsotwandb/truowfbn-events.out.tfevents.1728059567.Rhino
+2024-10-04 18:32:49,779 INFO    Thread-8  :634502 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/output.log
+2024-10-04 18:32:49,779 INFO    Thread-8  :634502 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/events.out.tfevents.1728059567.Rhino
+2024-10-04 18:32:50,779 INFO    Thread-8  :634502 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/events.out.tfevents.1728059567.Rhino
+2024-10-04 18:32:51,780 INFO    Thread-8  :634502 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/output.log
+2024-10-04 18:32:51,780 INFO    Thread-8  :634502 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/events.out.tfevents.1728059567.Rhino
+2024-10-04 18:32:52,799 INFO    Thread-8  :634502 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/events.out.tfevents.1728059567.Rhino
+2024-10-04 18:32:53,800 INFO    Thread-8  :634502 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/output.log
+2024-10-04 18:32:53,800 INFO    Thread-8  :634502 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/events.out.tfevents.1728059567.Rhino
+2024-10-04 18:32:54,435 INFO    MainThread:634301 [wandb_run.py:_finish():1680] finishing run koza/eureka/CartpoleDS-2024-10-04_18-32-44
+2024-10-04 18:32:54,435 INFO    MainThread:634301 [wandb_run.py:_atexit_cleanup():1862] got exitcode: 0
+2024-10-04 18:32:54,435 INFO    MainThread:634301 [wandb_run.py:_restore():1834] restore
+2024-10-04 18:32:54,800 INFO    Thread-8  :634502 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/events.out.tfevents.1728059567.Rhino
+2024-10-04 18:32:55,800 INFO    Thread-8  :634502 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/output.log
+2024-10-04 18:32:57,177 INFO    SenderThread:634502 [sender.py:send_exit():372] handling exit code: 0
+2024-10-04 18:32:57,177 INFO    SenderThread:634502 [sender.py:send_exit():374] handling runtime: 11
+2024-10-04 18:32:57,179 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:32:57,179 INFO    SenderThread:634502 [sender.py:send_exit():380] send defer
+2024-10-04 18:32:57,179 INFO    HandlerThread:634502 [handler.py:handle_request_defer():163] handle defer: 0
+2024-10-04 18:32:57,179 INFO    MainThread:634301 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 1
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 18076
+  total_bytes: 18076
+}
+
+2024-10-04 18:32:57,179 INFO    SenderThread:634502 [sender.py:send_request_defer():389] handle sender defer: 0
+2024-10-04 18:32:57,179 INFO    SenderThread:634502 [sender.py:transition_state():393] send defer: 1
+2024-10-04 18:32:57,180 INFO    HandlerThread:634502 [handler.py:handle_request_defer():163] handle defer: 1
+2024-10-04 18:32:57,233 INFO    SenderThread:634502 [sender.py:send_request_defer():389] handle sender defer: 1
+2024-10-04 18:32:57,233 INFO    SenderThread:634502 [sender.py:transition_state():393] send defer: 2
+2024-10-04 18:32:57,234 INFO    HandlerThread:634502 [handler.py:handle_request_defer():163] handle defer: 2
+2024-10-04 18:32:57,234 INFO    SenderThread:634502 [sender.py:send_request_defer():389] handle sender defer: 2
+2024-10-04 18:32:57,234 INFO    SenderThread:634502 [sender.py:transition_state():393] send defer: 3
+2024-10-04 18:32:57,234 INFO    HandlerThread:634502 [handler.py:handle_request_defer():163] handle defer: 3
+2024-10-04 18:32:57,820 INFO    Thread-8  :634502 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/output.log
+2024-10-04 18:32:57,820 INFO    Thread-8  :634502 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/wandb-summary.json
+2024-10-04 18:33:02,280 INFO    MainThread:634301 [wandb_run.py:_on_finish():1991] got exit ret: None
+2024-10-04 18:33:03,820 INFO    SenderThread:634502 [sender.py:send_request_defer():389] handle sender defer: 3
+2024-10-04 18:33:03,820 INFO    SenderThread:634502 [sender.py:transition_state():393] send defer: 4
+2024-10-04 18:33:03,828 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,847 INFO    Thread-8  :634502 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/wandb-summary.json
+2024-10-04 18:33:03,848 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,859 INFO    HandlerThread:634502 [handler.py:handle_request_defer():163] handle defer: 4
+2024-10-04 18:33:03,860 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,861 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,862 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,862 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,863 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,864 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,864 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,864 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,865 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,865 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,866 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,866 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,866 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,867 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,867 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,867 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,867 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,868 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,868 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,868 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,869 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,869 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,869 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,869 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,870 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,870 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,870 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,870 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,871 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,871 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,871 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,872 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,872 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,872 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,872 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,873 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,873 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,873 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,873 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,874 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,874 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,874 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,875 INFO    MainThread:634301 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 1
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 18076
+  total_bytes: 18076
+}
+
+2024-10-04 18:33:03,875 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,875 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,875 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,876 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,876 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,876 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,876 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,877 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,877 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,877 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,877 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,878 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,878 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,878 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,878 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,879 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,879 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,879 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,879 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,880 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,880 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,880 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,881 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,881 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,881 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,881 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,882 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,882 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,882 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,882 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,883 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,883 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,883 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,883 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,884 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,884 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,884 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,884 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,885 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,885 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,885 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,885 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,886 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,886 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,886 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,887 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,887 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,887 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,887 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,888 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,888 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,888 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,888 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,889 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,889 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,889 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,889 INFO    SenderThread:634502 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2024-10-04 18:33:03,889 INFO    SenderThread:634502 [sender.py:send_request_defer():389] handle sender defer: 4
+2024-10-04 18:33:03,889 INFO    SenderThread:634502 [sender.py:transition_state():393] send defer: 5
+2024-10-04 18:33:03,890 INFO    HandlerThread:634502 [handler.py:handle_request_defer():163] handle defer: 5
+2024-10-04 18:33:03,890 INFO    SenderThread:634502 [sender.py:send_request_defer():389] handle sender defer: 5
+2024-10-04 18:33:04,083 INFO    SenderThread:634502 [sender.py:transition_state():393] send defer: 6
+2024-10-04 18:33:04,083 INFO    HandlerThread:634502 [handler.py:handle_request_defer():163] handle defer: 6
+2024-10-04 18:33:04,084 INFO    SenderThread:634502 [sender.py:send_request_defer():389] handle sender defer: 6
+2024-10-04 18:33:04,084 INFO    MainThread:634301 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 1
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 18076
+  total_bytes: 18076
+}
+
+2024-10-04 18:33:04,084 INFO    SenderThread:634502 [dir_watcher.py:finish():353] shutting down directory watcher
+2024-10-04 18:33:04,848 INFO    Thread-8  :634502 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/config.yaml
+2024-10-04 18:33:04,848 INFO    SenderThread:634502 [dir_watcher.py:_on_file_modified():286] file/dir modified: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/wandb-summary.json
+2024-10-04 18:33:04,848 INFO    SenderThread:634502 [dir_watcher.py:finish():383] scan: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files
+2024-10-04 18:33:04,848 INFO    SenderThread:634502 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/config.yaml config.yaml
+2024-10-04 18:33:04,848 INFO    SenderThread:634502 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/env.py env.py
+2024-10-04 18:33:04,849 INFO    SenderThread:634502 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/output.log output.log
+2024-10-04 18:33:04,849 INFO    SenderThread:634502 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/requirements.txt requirements.txt
+2024-10-04 18:33:04,851 INFO    SenderThread:634502 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/wandb-metadata.json wandb-metadata.json
+2024-10-04 18:33:04,853 INFO    SenderThread:634502 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/events.out.tfevents.1728059567.Rhino events.out.tfevents.1728059567.Rhino
+2024-10-04 18:33:04,855 INFO    SenderThread:634502 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/wandb-summary.json wandb-summary.json
+2024-10-04 18:33:04,855 INFO    SenderThread:634502 [dir_watcher.py:finish():397] scan save: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/conda-environment.yaml conda-environment.yaml
+2024-10-04 18:33:04,855 INFO    SenderThread:634502 [sender.py:transition_state():393] send defer: 7
+2024-10-04 18:33:04,856 INFO    HandlerThread:634502 [handler.py:handle_request_defer():163] handle defer: 7
+2024-10-04 18:33:04,856 INFO    MainThread:634301 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 4
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 18076
+  total_bytes: 36085
+}
+
+2024-10-04 18:33:04,856 INFO    SenderThread:634502 [sender.py:send_request_defer():389] handle sender defer: 7
+2024-10-04 18:33:04,856 INFO    SenderThread:634502 [file_pusher.py:finish():171] shutting down file pusher
+2024-10-04 18:33:04,957 INFO    MainThread:634301 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 9908
+  total_bytes: 201346
+}
+
+2024-10-04 18:33:05,058 INFO    MainThread:634301 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 9908
+  total_bytes: 201346
+}
+
+2024-10-04 18:33:05,159 INFO    MainThread:634301 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 26332
+  total_bytes: 201346
+}
+
+2024-10-04 18:33:05,261 INFO    MainThread:634301 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 201346
+  total_bytes: 201346
+}
+
+2024-10-04 18:33:05,314 INFO    Thread-17 :634502 [upload_job.py:push():138] Uploaded file /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/config.yaml
+2024-10-04 18:33:05,314 INFO    Thread-18 :634502 [upload_job.py:push():138] Uploaded file /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/output.log
+2024-10-04 18:33:05,362 INFO    MainThread:634301 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 201346
+  total_bytes: 201346
+}
+
+2024-10-04 18:33:05,374 INFO    Thread-21 :634502 [upload_job.py:push():138] Uploaded file /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/wandb-summary.json
+2024-10-04 18:33:05,414 INFO    Thread-22 :634502 [upload_job.py:push():138] Uploaded file /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/conda-environment.yaml
+2024-10-04 18:33:05,418 INFO    Thread-19 :634502 [upload_job.py:push():138] Uploaded file /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/files/requirements.txt
+2024-10-04 18:33:05,463 INFO    MainThread:634301 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 201346
+  total_bytes: 201346
+}
+
+2024-10-04 18:33:05,564 INFO    MainThread:634301 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 201346
+  total_bytes: 201346
+}
+
+2024-10-04 18:33:05,666 INFO    MainThread:634301 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 201346
+  total_bytes: 201346
+}
+
+2024-10-04 18:33:05,767 INFO    MainThread:634301 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 201346
+  total_bytes: 201346
+}
+
+2024-10-04 18:33:05,780 INFO    Thread-20 :634502 [upload_job.py:push():138] Uploaded file /tmp/tmpd3qfzsotwandb/wq9pztu2-events.out.tfevents.1728059567.Rhino
+2024-10-04 18:33:05,868 INFO    MainThread:634301 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 201346
+  total_bytes: 201346
+}
+
+2024-10-04 18:33:05,970 INFO    MainThread:634301 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 201346
+  total_bytes: 201346
+}
+
+2024-10-04 18:33:05,980 INFO    Thread-7  :634502 [sender.py:transition_state():393] send defer: 8
+2024-10-04 18:33:05,980 INFO    HandlerThread:634502 [handler.py:handle_request_defer():163] handle defer: 8
+2024-10-04 18:33:05,981 INFO    SenderThread:634502 [sender.py:send_request_defer():389] handle sender defer: 8
+2024-10-04 18:33:06,512 INFO    SenderThread:634502 [sender.py:transition_state():393] send defer: 9
+2024-10-04 18:33:06,513 INFO    HandlerThread:634502 [handler.py:handle_request_defer():163] handle defer: 9
+2024-10-04 18:33:06,513 INFO    SenderThread:634502 [sender.py:send_request_defer():389] handle sender defer: 9
+2024-10-04 18:33:06,513 INFO    SenderThread:634502 [sender.py:transition_state():393] send defer: 10
+2024-10-04 18:33:06,513 INFO    HandlerThread:634502 [handler.py:handle_request_defer():163] handle defer: 10
+2024-10-04 18:33:06,513 INFO    MainThread:634301 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 201346
+  total_bytes: 201346
+}
+
+2024-10-04 18:33:06,514 INFO    SenderThread:634502 [sender.py:send_request_defer():389] handle sender defer: 10
+2024-10-04 18:33:06,614 INFO    SenderThread:634502 [file_pusher.py:join():176] waiting for file pusher
+2024-10-04 18:33:06,970 INFO    MainThread:634301 [wandb_run.py:_on_finish():1991] got exit ret: done: true
+exit_result {
+}
+file_counts {
+  wandb_count: 6
+  other_count: 2
+}
+pusher_stats {
+  uploaded_bytes: 201346
+  total_bytes: 201346
+}
+local_info {
+}
+
+2024-10-04 18:33:07,082 INFO    HandlerThread:634502 [handler.py:finish():806] shutting down handler
+2024-10-04 18:33:07,514 INFO    WriterThread:634502 [datastore.py:close():279] close: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-04_18-15-58/policy-2024-10-04_18-32-44/wandb/run-20241004_183245-CartpoleDS-2024-10-04_18-32-44/run-CartpoleDS-2024-10-04_18-32-44.wandb
+2024-10-04 18:33:07,969 INFO    SenderThread:634502 [sender.py:finish():1114] shutting down sender
+2024-10-04 18:33:07,969 INFO    SenderThread:634502 [file_pusher.py:finish():171] shutting down file pusher
+2024-10-04 18:33:07,969 INFO    SenderThread:634502 [file_pusher.py:join():176] waiting for file pusher
+2024-10-04 18:33:08,084 INFO    MainThread:634301 [wandb_run.py:_footer_history_summary_info():3099] rendering history
+2024-10-04 18:33:08,088 INFO    MainThread:634301 [wandb_run.py:_footer_history_summary_info():3131] rendering summary
+2024-10-04 18:33:08,092 INFO    MainThread:634301 [wandb_run.py:_footer_sync_info():3055] logging synced files

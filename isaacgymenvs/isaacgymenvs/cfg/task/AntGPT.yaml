@@ -11,7 +11,7 @@ env:
   enableDebugVis: false
   energyCost: 0.05
   envSpacing: 5
-  env_name: antGPT
+  env_name: limpantGPT
   episodeLength: 1000
   headingWeight: 0.5
   jointsAtLimitCost: 0.1
