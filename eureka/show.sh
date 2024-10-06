@@ -7,7 +7,8 @@ model='DS' #GPT or DS
 #model_path='2024-10-04_14-11-53/policy-2024-10-04_14-33-20/runs/AntGPT-2024-10-04_14-33-20/nn' # limp ant, slope, success = 1.53
 #model_path='2024-10-04_18-15-58/policy-2024-10-04_18-17-37/runs/CartpoleDS-2024-10-04_18-17-38/nn' # cartpole, success, deepseek 
 #model_path='2024-10-04_23-07-50/policy-2024-10-04_23-10-21/runs/BallBalanceDS-2024-10-04_23-10-22/nn' # ballbalance, success, deepseek
-model_path='2024-10-06_10-52-49/policy-2024-10-06_11-11-39/runs/HumanoidDS-2024-10-06_11-11-39/nn' # humanoid, success
+#model_path='2024-10-06_10-52-49/policy-2024-10-06_11-11-39/runs/HumanoidDS-2024-10-06_11-11-39/nn' # humanoid, success = 7.05
+model_path='2024-10-06_15-05-55/policy-2024-10-06_21-01-42/runs/HumanoidGPT-2024-10-06_21-01-43/nn' # humanoid, success = 7.31
 eureka_path="/home/vandriel/Documents/GitHub/Eureka/"
 show_path="${eureka_path}eureka/outputs/eureka/${model_path}/"
 python $eureka_path/isaacgymenvs/isaacgymenvs/train.py test=True headless=False force_render=True task=$sim checkpoint="${show_path}${sim}${model}.pth"
