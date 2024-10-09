@@ -32,7 +32,7 @@ class LanguageModel:
                 bnb_4bit_quant_type="nf4",
                 bnb_4bit_compute_dtype=torch.bfloat16
             )
-            tokenizer = AutoTokenizer.from_pretrained(model_name, truncation=True, padding=True, padding_side="left", maximum_length = 2048, model_max_length = 2048, token=HF_TOKEN)
+            tokenizer = AutoTokenizer.from_pretrained(model_name, truncation=True, padding=True, padding_side="left", maximum_length = 2048, model_max_length = 2048, token=os.getenv("HF_TOKEN"))
             model = AutoModelForCausalLM.from_pretrained(model_name, quantization_config=bnb_config, device_map = 'auto', token=os.getenv("HF_TOKEN"))
             """ tokenizer.pad_token = tokenizer.eos_token
             model.generation_config.pad_token_id = model.generation_config.eos_token_id """

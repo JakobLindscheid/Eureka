@@ -54,15 +54,15 @@ class Wrapper():
     def compute_reward_wrapper(self):
         return None, {}
     
-class AntGPT(Wrapper):
+class HumanoidGPT(Wrapper):
     def __init__(self, cfg, **kwargs):
-        super().__init__("Ant-v4", cfg, **kwargs)
+        super().__init__("Humanoid-v4", cfg, **kwargs)
 
     def compute_success(self, obs, actions, info):
-        if "reward_forward" not in info:
+        if "forward_reward" not in info:
             success = np.zeros(obs.shape[0])
         else:
-            success = info["reward_forward"]
+            success = info["forward_reward"]
         return success
 
     def compute_observations(self, obs, actions, info):
@@ -76,6 +76,6 @@ class AntGPT(Wrapper):
         else:
             self.y_positions = torch.tensor(info["y_position"])
         self.z_positions = torch.tensor(obs[:, 0])
-        self.x_velocities = torch.tensor(obs[:, 13])
-        self.y_velocities = torch.tensor(obs[:, 14])
-        self.z_velocities = torch.tensor(obs[:, 15])
+        self.x_velocities = torch.tensor(obs[:, 22])
+        self.y_velocities = torch.tensor(obs[:, 23])
+        self.z_velocities = torch.tensor(obs[:, 24])

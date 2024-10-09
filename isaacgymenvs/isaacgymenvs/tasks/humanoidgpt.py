@@ -28,7 +28,7 @@ class Wrapper():
         
         # if training on human reward
         if reward is None:
-            reward = torch.tensor(gt_rew)
+            reward = gt_rew
         
         info = {
             "gt_reward": gt_rew.mean(),
@@ -52,17 +52,18 @@ class Wrapper():
         raise NotImplementedError
     
     def compute_reward_wrapper(self):
+        return compute_reward(self.x_velocities, self.x_positions)
         return None, {}
     
-class AntGPT(Wrapper):
+class HumanoidGPT(Wrapper):
     def __init__(self, cfg, **kwargs):
-        super().__init__("Ant-v4", cfg, **kwargs)
+        super().__init__("Humanoid-v4", cfg, **kwargs)
 
     def compute_success(self, obs, actions, info):
-        if "reward_forward" not in info:
+        if "forward_reward" not in info:
             success = np.zeros(obs.shape[0])
         else:
-            success = info["reward_forward"]
+            success = info["forward_reward"]
         return success
 
     def compute_observations(self, obs, actions, info):
@@ -76,6 +77,36 @@ class AntGPT(Wrapper):
         else:
             self.y_positions = torch.tensor(info["y_position"])
         self.z_positions = torch.tensor(obs[:, 0])
-        self.x_velocities = torch.tensor(obs[:, 13])
-        self.y_velocities = torch.tensor(obs[:, 14])
-        self.z_velocities = torch.tensor(obs[:, 15])
+        self.x_velocities = torch.tensor(obs[:, 22])
+        self.y_velocities = torch.tensor(obs[:, 23])
+        self.z_velocities = torch.tensor(obs[:, 24])
+def compute_reward(
+    x_velocities: torch.Tensor, 
+    x_positions: torch.Tensor
+) -> Tuple[torch.Tensor, Dict[str, torch.Tensor]]:
+    """
+    Compute the reward for the humanoid task: to make the humanoid run as fast as possible.
+
+    The reward function consists of two components:
+    - A velocity-based reward, which encourages the humanoid to run faster.
+    - A position-based reward, which encourages the humanoid to keep moving forward.
+
+    :param x_velocities: The x-velocities of the humanoid.
+    :param x_positions: The x-positions of the humanoid.
+    :return: A tuple containing the total reward and a dictionary of individual reward components.
+    """
+
+    # Velocity-based reward: encourage the humanoid to run faster
+    velocity_reward = torch.tanh(x_velocities / 5.0)  # Scale the velocity to a proper range
+
+    # Position-based reward: encourage the humanoid to keep moving forward
+    position_reward = torch.tanh(x_positions / 10.0)  # Scale the position to a proper range
+
+    # Total reward: a weighted sum of velocity and position rewards
+    total_reward = 0.8 * velocity_reward + 0.2 * position_reward  # Adjust weights to balance the rewards
+
+    # Return the total reward and individual reward components
+    return total_reward, {
+        "velocity_reward": velocity_reward,
+        "position_reward": position_reward,
+    }

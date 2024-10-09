@@ -173,9 +173,7 @@ class CartpoleGPT(VectorEnv):
         return self.state.T.astype(np.float32), self.rew_buf, done, self.extras
 
     def compute_reward_wrapper(self):
-        self.rew_buf[:], self.rew_dict = compute_reward(self.state)
-        self.extras['gpt_reward'] = self.rew_buf.mean().item()
-        for rew_state in self.rew_dict: self.extras[rew_state] = self.rew_dict[rew_state].mean()
+        return compute_reward(self.theta, self.theta_dot, self.x, self.x_dot)
         pole_angle = self.state[2]
         pole_vel = self.state[3]
         cart_vel = self.state[1]
@@ -343,21 +341,42 @@ class CartpoleGPT(VectorEnv):
         else:
             consecutive_successes = torch.zeros_like(consecutive_successes).mean()
         return reward, reset, consecutive_successes
-def compute_reward(state: torch.Tensor) -> Tuple[torch.Tensor, Dict[str, torch.Tensor]]:
-    # Calculate the pole angle (normalized to (-1, 1)) and pole angle velocity
-    theta = 2 * torch.acos(state[2]) / torch.tensor(np.pi) - 1
-    theta_dot = state[3]
-
-    # Calculate the temperature parameter for scaling the pole angle and pole angle velocity
-    theta_temperature = torch.tensor(1.0)  # Start with a temperature of 1.0
-    theta_dot_temperature = torch.tensor(0.1)  # Start with a temperature of 0.1
-
-    # Calculate the scaled pole angle and pole angle velocity
-    scaled_theta = theta * theta_temperature
-    scaled_theta_dot = theta_dot * theta_dot_temperature
-
-    # Calculate the reward based on the scaled pole angle and pole angle velocity
-    reward = -(scaled_theta**2 + scaled_theta_dot**2 + state[0]**2)
-
-    # Return the reward and a dictionary of individual reward components
-    return reward, {'scaled_theta': scaled_theta, 'scaled_theta_dot': scaled_theta_dot, 'x': state[0]}
+def compute_reward(theta: torch.Tensor, theta_dot: torch.Tensor, 
+                    x: torch.Tensor, x_dot: torch.Tensor) -> Tuple[torch.Tensor, Dict[str, torch.Tensor]]:
+    # Pole balance reward
+    # A higher balance reward is issued for smaller absolute angle
+    theta_balance_reward = -torch.abs(theta)
+    
+    # Angular velocity reward
+    # Give a larger reward when the pole's angular velocity is closer to zero
+    theta_dot_reward = -torch.abs(theta_dot)
+    
+    # Cart position reward
+    # Give a larger reward when the cart is closer to the origin
+    cart_position_reward = -torch.abs(x)
+    
+    # Cart velocity reward
+    # Give a larger reward when the cart's velocity is closer to zero
+    cart_velocity_reward = -torch.abs(x_dot)
+    
+    # Set temperature parameters for rewards
+    balance_reward_temperature = 0.1
+    angular_velocity_temperature = 0.1
+    cart_position_temperature = 0.1
+    cart_velocity_temperature = 0.1
+    
+    # Apply temperature transformations to make the rewards more sensitive to change
+    temp_theta_balance_reward = balance_reward_temperature * torch.exp(theta_balance_reward)
+    temp_theta_dot_reward = angular_velocity_temperature * torch.exp(theta_dot_reward)
+    temp_cart_position_reward = cart_position_temperature * torch.exp(cart_position_reward)
+    temp_cart_velocity_reward = cart_velocity_temperature * torch.exp(cart_velocity_reward)
+    
+    # The total reward is the sum of individual rewards after applying transformations
+    total_reward = temp_theta_balance_reward + temp_theta_dot_reward + temp_cart_position_reward + temp_cart_velocity_reward
+    
+    return total_reward, {
+        'pole_balance_reward': temp_theta_balance_reward,
+        'angular_velocity_reward': temp_theta_dot_reward,
+        'cart_position_reward': temp_cart_position_reward,
+        'cart_velocity_reward': temp_cart_velocity_reward
+    }
