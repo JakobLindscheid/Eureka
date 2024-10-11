@@ -18,7 +18,7 @@ from typing import Dict
 
 import time
 
-class CartpoleGPT(VectorEnv):
+class Cartpole(VectorEnv):
     metadata = {
         "render_modes": ["human", "rgb_array"],
         "render_fps": 50,

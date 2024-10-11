@@ -29,9 +29,8 @@ params:
     reward_shaper:
       scale_value: 0.01
     save_best_after: 200
-    save_frequency: 50
+    save_frequency: 0
     schedule_type: legacy
-    score_to_win: 20000
     seq_len: 4
     tau: 0.95
     truncate_grads: false

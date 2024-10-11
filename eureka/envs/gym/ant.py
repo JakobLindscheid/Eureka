@@ -54,7 +54,7 @@ class Wrapper():
     def compute_reward_wrapper(self):
         return None, {}
     
-class AntGPT(Wrapper):
+class Ant(Wrapper):
     def __init__(self, cfg, **kwargs):
         super().__init__("Ant-v4", cfg, **kwargs)
 

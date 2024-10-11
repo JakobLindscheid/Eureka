@@ -54,7 +54,7 @@ class Wrapper():
     def compute_reward_wrapper(self):
         return None, {}
     
-class HumanoidGPT(Wrapper):
+class Humanoid(Wrapper):
     def __init__(self, cfg, **kwargs):
         super().__init__("Humanoid-v4", cfg, **kwargs)
 

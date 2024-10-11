@@ -1,5 +1,5 @@
 import hydra
-import numpy as np 
+import numpy as np
 import json
 import logging 
 import matplotlib.pyplot as plt
@@ -61,6 +61,10 @@ def main(cfg):
     initial_user = initial_user.format(task_obs_code_string=task_obs_code_string, task_description=task_description)
     messages = [{"role": "system", "content": initial_system}, {"role": "user", "content": initial_user}]
 
+    with open("messages.txt", 'w') as f:
+        f.write(f"System:\n{initial_system}\n\nUser:\n{initial_user}")
+
+    task_code_string = task_code_string.replace(f"class {task}", f"class {task+suffix}")
     # Create Task YAML files
     create_task(ISAAC_ROOT_DIR, cfg.env.task, cfg.env.env_name, suffix)
 
@@ -302,8 +306,10 @@ def main(cfg):
 
         logging.info(f"Iteration {iter}: Max Success: {max_success}, Execute Rate: {execute_rate}, Max Success Reward Correlation: {max_success_reward_correlation}")
         logging.info(f"Iteration {iter}: Best Generation ID: {best_sample_idx}")
-        logging.info(f"Iteration {iter}: GPT Output Content:\n" +  responses[best_sample_idx]["message"]["content"] + "\n")
-        logging.info(f"Iteration {iter}: User Content:\n" + best_content + "\n")
+        with open("messages.txt", 'a') as f:
+            f.write(f'\n\nAssistant:\n{responses[best_sample_idx]["message"]["content"]}\n\nUser:\n{best_content}')
+        # logging.info(f"Iteration {iter}: GPT Output Content:\n" +  responses[best_sample_idx]["message"]["content"] + "\n")
+        # logging.info(f"Iteration {iter}: User Content:\n" + best_content + "\n")
             
         # Plot the success rate
         fig, axs = plt.subplots(2, figsize=(6, 6))

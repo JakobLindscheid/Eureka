@@ -22,7 +22,11 @@ class LanguageModel:
             self.model = genai.GenerativeModel(model_name)
 
         elif self.provider == "groq":
-            self.client = Groq(api_key=os.getenv("GROQ_KEY"))
+            self.client = Groq(api_key=GROQ_KEY)
+            
+            import logging
+            httpx_logger = logging.getLogger("httpx")
+            httpx_logger.setLevel(logging.WARNING)
         
         elif self.provider == "local":
             
