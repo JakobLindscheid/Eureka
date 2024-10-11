@@ -1,17 +1,18 @@
 import hydra
 import numpy as np
+import datetime
 import json
 import logging 
 import matplotlib.pyplot as plt
 import os
 from language_model import LanguageModel
-import torch
-torch.cuda.set_per_process_memory_fraction(1.0, 0)
+# import torch
+# torch.cuda.set_per_process_memory_fraction(1.0, 0)
 import re
 import subprocess
 from pathlib import Path
 import shutil
-import time 
+import time
 
 from utils.misc import * 
 from utils.file_utils import find_files_with_substring, load_tensorboard_logs
@@ -23,6 +24,17 @@ ISAAC_ROOT_DIR = f"{EUREKA_ROOT_DIR}/../isaacgymenvs/isaacgymenvs"
 
 @hydra.main(config_path="cfg", config_name="config", version_base="1.1")
 def main(cfg):
+
+    if cfg.use_wandb:
+        import wandb
+        wandb.init(
+            project=cfg.wandb_project, 
+            entity=cfg.wandb_username, 
+            name=f"{cfg.wandb_name}_main",
+            group=cfg.wandb_name,
+        )
+        wandb.config.update(cfg)
+
     workspace_dir = Path.cwd()
     logging.info(f"Workspace: {workspace_dir}")
     logging.info(f"Project Root: {EUREKA_ROOT_DIR}")
@@ -176,27 +188,29 @@ def main(cfg):
                     code_string = indent + code_string.replace("\n", f"\n{indent}")
                 file.writelines(code_string + '\n')
 
-            with open(f"env_iter{iter}_response{response_id}_rewardonly.py", 'w') as file:
+            os.mkdir(f"iter{iter}_response{response_id}")
+            with open(f"iter{iter}_response{response_id}/env_iter{iter}_response{response_id}_rewardonly.py", 'w') as file:
                 file.writelines(code_string + '\n')
 
             # Copy the generated environment code to hydra output directory for bookkeeping
-            shutil.copy(output_file, f"env_iter{iter}_response{response_id}.py")
+            shutil.copy(output_file, f"iter{iter}_response{response_id}/env_iter{iter}_response{response_id}.py")
 
             # Find the freest GPU to run GPU-accelerated RL
             set_freest_gpu()
             
             # Execute the python file with flags
-            rl_filepath = f"env_iter{iter}_response{response_id}.txt"
+            rl_filepath = f"iter{iter}_response{response_id}/env_iter{iter}_response{response_id}.txt"
             with open(rl_filepath, 'w') as f:
                 process = subprocess.Popen(['python', '-u', f'{ISAAC_ROOT_DIR}/../train.py',  
-                                            'hydra/output=subprocess',
-                                            f'task={task}{suffix}', f'wandb_activate={cfg.use_wandb}',
-                                            f'wandb_entity={cfg.wandb_username}', f'wandb_project={cfg.wandb_project}',
+                                            'hydra/output=subprocess',  f'hydra.run.dir=./iter{iter}_response{response_id}',
+                                            f'task={task}{suffix}', 
+                                            # f'wandb_activate={cfg.use_wandb}',
+                                            # f'wandb_entity={cfg.wandb_username}', f'wandb_project={cfg.wandb_project}',
                                             f'headless={not cfg.capture_video}', f'capture_video={cfg.capture_video}', 'force_render=False',
                                             f'max_iterations={cfg.max_iterations}'],
                                             stdout=f, stderr=f)
             block_until_training(rl_filepath, log_status=True, iter_num=iter, response_id=response_id)
-            process.wait()
+            # process.wait()
             rl_runs.append(process)
         
         # Gather RL training results and construct reward reflection
@@ -209,8 +223,8 @@ def main(cfg):
         exec_success = False 
         for response_id, (code_run, rl_run) in enumerate(zip(code_runs, rl_runs)):
             rl_run.communicate()
-            rl_filepath = f"env_iter{iter}_response{response_id}.txt"
-            code_paths.append(f"env_iter{iter}_response{response_id}.py")
+            rl_filepath = f"iter{iter}_response{response_id}/env_iter{iter}_response{response_id}.txt"
+            code_paths.append(f"iter{iter}_response{response_id}/env_iter{iter}_response{response_id}.py")
             try:
                 with open(rl_filepath, 'r') as f:
                     stdout_str = f.read() 
@@ -304,6 +318,8 @@ def main(cfg):
         max_successes_reward_correlation.append(max_success_reward_correlation)
         best_code_paths.append(code_paths[best_sample_idx])
 
+        if cfg.use_wandb:
+            wandb.log({"Max Success": max_success, "Execute Rate": execute_rate, "Max Success Reward Correlation": max_success_reward_correlation})
         logging.info(f"Iteration {iter}: Max Success: {max_success}, Execute Rate: {execute_rate}, Max Success Reward Correlation: {max_success_reward_correlation}")
         logging.info(f"Iteration {iter}: Best Generation ID: {best_sample_idx}")
         with open("messages.txt", 'a') as f:
@@ -327,7 +343,7 @@ def main(cfg):
 
         fig.tight_layout(pad=3.0)
         plt.savefig('summary.png')
-        np.savez('summary.npz', max_successes=max_successes, execute_rates=execute_rates, best_code_paths=best_code_paths, max_successes_reward_correlation=max_successes_reward_correlation)
+        # np.savez('summary.npz', max_successes=max_successes, execute_rates=execute_rates, best_code_paths=best_code_paths, max_successes_reward_correlation=max_successes_reward_correlation)
 
         if len(messages) == 2:
             messages += [{"role": "assistant", "content": responses[best_sample_idx]["message"]["content"]}]
@@ -355,25 +371,28 @@ def main(cfg):
         set_freest_gpu()
         
         # Execute the python file with flags
-        rl_filepath = f"reward_code_eval{i}.txt"
+        os.mkdir(f"eval{i}")
+        rl_filepath = f"eval{i}/reward_code_eval{i}.txt"
         with open(rl_filepath, 'w') as f:
             process = subprocess.Popen(['python', '-u', f'{ISAAC_ROOT_DIR}/../train.py',  
-                                        'hydra/output=subprocess',
-                                        f'task={task}{suffix}', f'wandb_activate={cfg.use_wandb}',
-                                        f'wandb_entity={cfg.wandb_username}', f'wandb_project={cfg.wandb_project}',
+                                        'hydra/output=subprocess', f'hydra.run.dir=./eval{i}',
+                                        f'task={task}{suffix}', 
+                                        f'wandb_activate={cfg.use_wandb}',
+                                        f'wandb_entity={cfg.wandb_username}', f'wandb_project={cfg.wandb_project}', 
+                                        f'wandb_name={cfg.wandb_name}_eval{i}', f'wandb_group={cfg.wandb_name}',
                                         f'headless={not cfg.capture_video}', f'capture_video={cfg.capture_video}', 'force_render=False', f'seed={i}',
                                         ],
                                         stdout=f, stderr=f)
 
         block_until_training(rl_filepath)
-        process.wait()
+        # process.wait()
         eval_runs.append(process)
 
     reward_code_final_successes = []
     reward_code_correlations_final = []
     for i, rl_run in enumerate(eval_runs):
         rl_run.communicate()
-        rl_filepath = f"reward_code_eval{i}.txt"
+        rl_filepath = f"eval{i}/reward_code_eval{i}.txt"
         with open(rl_filepath, 'r') as f:
             stdout_str = f.read() 
         lines = stdout_str.split('\n')
@@ -391,9 +410,11 @@ def main(cfg):
             reward_correlation = np.corrcoef(gt_reward, gpt_reward)[0, 1]
             reward_code_correlations_final.append(reward_correlation)
 
+    if cfg.use_wandb:
+        wandb.log({"Final Success Mean": np.mean(reward_code_final_successes), "Final Success Std": np.std(reward_code_final_successes), "Final Correlation Mean": np.mean(reward_code_correlations_final), "Final Correlation Std": np.std(reward_code_correlations_final)})
     logging.info(f"Final Success Mean: {np.mean(reward_code_final_successes)}, Std: {np.std(reward_code_final_successes)}, Raw: {reward_code_final_successes}")
     logging.info(f"Final Correlation Mean: {np.mean(reward_code_correlations_final)}, Std: {np.std(reward_code_correlations_final)}, Raw: {reward_code_correlations_final}")
-    np.savez('final_eval.npz', reward_code_final_successes=reward_code_final_successes, reward_code_correlations_final=reward_code_correlations_final)
+    # np.savez('final_eval.npz', reward_code_final_successes=reward_code_final_successes, reward_code_correlations_final=reward_code_correlations_final)
 
 
 if __name__ == "__main__":

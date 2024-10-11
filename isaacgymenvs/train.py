@@ -87,8 +87,8 @@ def launch_rlg_hydra(cfg: DictConfig):
     import isaacgymenvs
 
 
-    time_str = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    run_name = f"{cfg.wandb_name}_{time_str}"
+    # time_str = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    run_name = cfg.wandb_name # f"{cfg.wandb_name}_{time_str}"
 
     # ensure checkpoints can be specified as relative paths
     if cfg.checkpoint:
@@ -183,17 +183,9 @@ def launch_rlg_hydra(cfg: DictConfig):
         wandb_observer = WandbAlgoObserver(cfg)
         observers.append(wandb_observer)
 
-    # dump config dict
-    exp_date = cfg.train.params.config.name + '_{date:%d-%H-%M-%S}'.format(date=datetime.datetime.now())
-    experiment_dir = os.path.join('runs', exp_date)
-    print("Network Directory:", Path.cwd() / experiment_dir / "nn")
-    print("Tensorboard Directory:", Path.cwd() / experiment_dir / "summaries")
-
-    os.makedirs(experiment_dir, exist_ok=True)
-    with open(os.path.join(experiment_dir, 'config.yaml'), 'w') as f:
-        f.write(OmegaConf.to_yaml(cfg))
-    rlg_config_dict['params']['config']['log_dir'] = exp_date
-
+    print(cfg.wandb_name)
+    rlg_config_dict['params']['config']['full_experiment_name'] = cfg.wandb_name
+    
     # convert CLI arguments into dictionary
     # create runner and set the settings
     runner = build_runner(MultiObserver(observers))
@@ -207,6 +199,17 @@ def launch_rlg_hydra(cfg: DictConfig):
         'sigma': cfg.sigma if cfg.sigma != '' else None
     })
 
+    # dump config dict
+    # exp_date = cfg.train.params.config.name + '_{date:%d-%H-%M-%S}'.format(date=datetime.datetime.now())
+    experiment_dir = os.path.join('runs', os.listdir('runs')[0])
+    print("Network Directory:", Path.cwd() / experiment_dir / "nn")
+    print("Tensorboard Directory:", Path.cwd() / experiment_dir / "summaries")
+
+    os.makedirs(experiment_dir, exist_ok=True)
+    with open(os.path.join(experiment_dir, 'config.yaml'), 'w') as f:
+        f.write(OmegaConf.to_yaml(cfg))
+    # rlg_config_dict['params']['config']['log_dir'] = exp_date
+    
     if cfg.wandb_activate and rank == 0:
         wandb.finish()
         
