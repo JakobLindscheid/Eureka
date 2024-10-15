@@ -5,10 +5,19 @@ import math
 from typing import Optional, Tuple, Union, Dict, Any
 from gym.spaces import Box, Discrete
 
-class Wrapper():
+class Wrapper(gym.Env):
+    
+    metadata = {"render_modes": ["human", "rgb_array"], "render_fps": 20}
+
     def __init__(self, env_name, cfg,  **kwargs):
+        self.recording = False
         if kwargs["force_render"]:
             self.env = gym.make_vec(env_name, num_envs=1, render_mode="human")
+            self.render_mode = "human"
+        elif kwargs["virtual_screen_capture"]:
+            self.recording = True
+            self.env = gym.make_vec(env_name, num_envs=1, render_mode="rgb_array")
+            self.render_mode = "rgb_array"
         else:
             self.env = gym.make_vec(env_name, num_envs=cfg["env"]["numEnvs"])
         
@@ -49,8 +58,8 @@ class Wrapper():
 
         return obs, reward.numpy(), done, info # rl_games formatting (done instead of terminated/truncated)
 
-    def reset(self):
-        return self.env.reset()[0] # rl_games formatting
+    def reset(self, seed=None, options=None):
+        return self.env.reset(seed=seed, options=options)[0] # rl_games formatting
     
     def __getattr__(self, name):
         return getattr(self.env, name)
@@ -63,12 +72,16 @@ class Wrapper():
     
     def compute_reward_wrapper(self):
         return None, {}
+
+    def render(self, **kwargs):
+        res = self.env.render()[0]
+        return res
     
 class Humanoid(Wrapper):
     def __init__(self, cfg, **kwargs):
         super().__init__("Humanoid-v4", cfg, **kwargs)
 
-    def compute_success(self, obs, actions, rew, info):
+    def compute_success(self, obs, actions, rew, done, info):
         if "forward_reward" not in info:
             success = np.zeros(obs.shape[0])
         else:

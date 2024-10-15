@@ -14,6 +14,10 @@ provider: groq # LLM provider (huggingface, gemini, groq, local)
 temperature: 1.0
 suffix: GPT  # suffix for generated files (indicates LLM model)
 
+env_parent: gym
+evaluate: False
+reward_code_path: ""
+
 # Eureka parameters
 iteration: 1 # how many iterations of Eureka to run
 sample: 3 # number of Eureka samples to generate per iteration
@@ -23,6 +27,6 @@ capture_video: False # whether to capture policy rollout videos
 
 # Weights and Biases
 use_wandb: False # whether to use wandb for logging
-wandb_username: "" # wandb username if logging with wandb
-wandb_project: "" # wandb project if logging with wandb
+wandb_username: "liacs_eureka" # wandb username if logging with wandb
+wandb_project: "eureka" # wandb project if logging with wandb
 wandb_name: "${env.env_name}_${now:%Y-%m-%d}_${now:%H-%M-%S}" # wandb name if logging with wandb

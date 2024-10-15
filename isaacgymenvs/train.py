@@ -38,7 +38,7 @@ import hydra
 from hydra.utils import to_absolute_path
 # from isaacgymenvs.tasks import isaacgym_task_map
 from omegaconf import DictConfig, OmegaConf
-import gymnasium as gym
+import gym
 import sys 
 import shutil
 from pathlib import Path
@@ -183,7 +183,6 @@ def launch_rlg_hydra(cfg: DictConfig):
         wandb_observer = WandbAlgoObserver(cfg)
         observers.append(wandb_observer)
 
-    print(cfg.wandb_name)
     rlg_config_dict['params']['config']['full_experiment_name'] = cfg.wandb_name
     
     # convert CLI arguments into dictionary
@@ -200,18 +199,14 @@ def launch_rlg_hydra(cfg: DictConfig):
     })
 
     # dump config dict
-    # exp_date = cfg.train.params.config.name + '_{date:%d-%H-%M-%S}'.format(date=datetime.datetime.now())
-    experiment_dir = os.path.join('runs', os.listdir('runs')[0])
-    print("Network Directory:", Path.cwd() / experiment_dir / "nn")
-    print("Tensorboard Directory:", Path.cwd() / experiment_dir / "summaries")
+    if not cfg.test:
+        experiment_dir = os.path.join('runs', os.listdir('runs')[0])
+        print("Network Directory:", Path.cwd() / experiment_dir / "nn")
+        print("Tensorboard Directory:", Path.cwd() / experiment_dir / "summaries")
 
-    os.makedirs(experiment_dir, exist_ok=True)
-    with open(os.path.join(experiment_dir, 'config.yaml'), 'w') as f:
-        f.write(OmegaConf.to_yaml(cfg))
-    # rlg_config_dict['params']['config']['log_dir'] = exp_date
-    
-    if cfg.wandb_activate and rank == 0:
-        wandb.finish()
+        os.makedirs(experiment_dir, exist_ok=True)
+        with open(os.path.join(experiment_dir, 'config.yaml'), 'w') as f:
+            f.write(OmegaConf.to_yaml(cfg))
         
 if __name__ == "__main__":
     launch_rlg_hydra()

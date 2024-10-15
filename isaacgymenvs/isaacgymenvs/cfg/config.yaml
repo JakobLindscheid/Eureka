@@ -52,18 +52,18 @@ sigma: ''
 multi_gpu: False
 
 wandb_activate: False
-wandb_group: ''
-wandb_name: ${train.params.config.name}
+wandb_group: '${train.params.config.name}_human_reward'
+wandb_name: "${train.params.config.name}_human-reward_${now:%Y-%m-%d}_${now:%H-%M-%S}"
 # wandb_entity: ''
 # wandb_project: 'isaacgymenvs'
-wandb_entity: 'jma2020'
-wandb_project: 'isaac_gpt'
+wandb_entity: 'liacs_eureka'
+wandb_project: 'eureka'
 wandb_tags: []
 wandb_logcode_dir: '' 
 
 capture_video: False
-capture_video_freq: 5000
-capture_video_len: 200
+capture_video_freq: 1
+capture_video_len: 12000
 force_render: False
 
 # disables rendering

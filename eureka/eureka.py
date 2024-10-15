@@ -25,6 +25,9 @@ ISAAC_ROOT_DIR = f"{EUREKA_ROOT_DIR}/../isaacgymenvs/isaacgymenvs"
 @hydra.main(config_path="cfg", config_name="config", version_base="1.1")
 def main(cfg):
 
+    if cfg.evaluate:
+        evaluate(cfg, cfg.reward_code_path)
+    
     if cfg.use_wandb:
         import wandb
         wandb.init(
@@ -51,7 +54,7 @@ def main(cfg):
     local_model = LanguageModel(model, provider=provider)
 
     env_name = cfg.env.env_name.lower()
-    env_parent = "gym" # 'isaac' if f'{env_name}.py' in os.listdir(f'{EUREKA_ROOT_DIR}/envs/isaac') else 'dexterity'
+    env_parent = cfg.env_parent # 'isaac' if f'{env_name}.py' in os.listdir(f'{EUREKA_ROOT_DIR}/envs/isaac') else 'dexterity'
     task_file = f'{EUREKA_ROOT_DIR}/envs/{env_parent}/{env_name}.py'
     task_obs_file = f'{EUREKA_ROOT_DIR}/envs/{env_parent}/{env_name}_obs.py'
     shutil.copy(task_obs_file, f"env_init_obs.py")
@@ -188,21 +191,21 @@ def main(cfg):
                     code_string = indent + code_string.replace("\n", f"\n{indent}")
                 file.writelines(code_string + '\n')
 
-            os.mkdir(f"iter{iter}_response{response_id}")
-            with open(f"iter{iter}_response{response_id}/env_iter{iter}_response{response_id}_rewardonly.py", 'w') as file:
+            os.makedirs(f"iter{iter}/response{response_id}")
+            with open(f"iter{iter}/response{response_id}/env_iter{iter}_response{response_id}_rewardonly.py", 'w') as file:
                 file.writelines(code_string + '\n')
 
             # Copy the generated environment code to hydra output directory for bookkeeping
-            shutil.copy(output_file, f"iter{iter}_response{response_id}/env_iter{iter}_response{response_id}.py")
+            shutil.copy(output_file, f"iter{iter}/response{response_id}/env_iter{iter}_response{response_id}.py")
 
             # Find the freest GPU to run GPU-accelerated RL
             set_freest_gpu()
             
             # Execute the python file with flags
-            rl_filepath = f"iter{iter}_response{response_id}/env_iter{iter}_response{response_id}.txt"
+            rl_filepath = f"iter{iter}/response{response_id}/env_iter{iter}_response{response_id}.txt"
             with open(rl_filepath, 'w') as f:
                 process = subprocess.Popen(['python', '-u', f'{ISAAC_ROOT_DIR}/../train.py',  
-                                            'hydra/output=subprocess',  f'hydra.run.dir=./iter{iter}_response{response_id}',
+                                            'hydra/output=subprocess',  f'hydra.run.dir=./iter{iter}/response{response_id}',
                                             f'task={task}{suffix}', 
                                             # f'wandb_activate={cfg.use_wandb}',
                                             # f'wandb_entity={cfg.wandb_username}', f'wandb_project={cfg.wandb_project}',
@@ -223,8 +226,8 @@ def main(cfg):
         exec_success = False 
         for response_id, (code_run, rl_run) in enumerate(zip(code_runs, rl_runs)):
             rl_run.communicate()
-            rl_filepath = f"iter{iter}_response{response_id}/env_iter{iter}_response{response_id}.txt"
-            code_paths.append(f"iter{iter}_response{response_id}/env_iter{iter}_response{response_id}.py")
+            rl_filepath = f"iter{iter}/response{response_id}/env_iter{iter}_response{response_id}.txt"
+            code_paths.append(f"iter{iter}/response{response_id}/env_iter{iter}_response{response_id}.py")
             try:
                 with open(rl_filepath, 'r') as f:
                     stdout_str = f.read() 
@@ -357,12 +360,33 @@ def main(cfg):
         with open('messages.json', 'w') as file:
             json.dump(messages, file, indent=4)
     
-    # Evaluate the best reward code many times
     if max_reward_code_path is None: 
         logging.info("All iterations of code generation failed, aborting...")
         logging.info("Please double check the output env_iter*_response*.txt files for repeating errors!")
         exit()
     logging.info(f"Task: {task}, Max Training Success {max_success_overall}, Correlation {max_success_reward_correlation_overall}, Best Reward Code Path: {max_reward_code_path}")
+    
+    evaluate(cfg, max_reward_code_path)
+
+def evaluate(cfg, max_reward_code_path):
+    
+    if cfg.use_wandb:
+        import wandb
+        if wandb.run is None:
+            wandb.init(
+                project=cfg.wandb_project, 
+                entity=cfg.wandb_username, 
+                name=f"{cfg.wandb_name}_evaluation",
+                group=cfg.wandb_name,
+            )
+            wandb.config.update(cfg)
+    
+    task = cfg.env.task
+    suffix = cfg.suffix
+    env_name = cfg.env.env_name.lower()
+    output_file = f"{ISAAC_ROOT_DIR}/tasks/{env_name}{suffix.lower()}.py"
+    
+    # Evaluate the best reward code many times    
     logging.info(f"Evaluating best reward code {cfg.num_eval} times")
     shutil.copy(max_reward_code_path, output_file)
     
