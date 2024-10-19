@@ -1,0 +1,4 @@
+- task.sim.gravity=[0.0, 0.0, -9.81]
+- experiment=Ant_random_flat
+- task=Ant
+- task.task.randomize=True

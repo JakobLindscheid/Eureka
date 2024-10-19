@@ -1,0 +1,3 @@
+- task.sim.gravity=[-0.855, 0.0, -9.77]
+- experiment=Ant3_up05
+- task=Ant3

@@ -1,0 +1,3 @@
+- task.sim.gravity=[1.70, 0.0, -9.66]
+- experiment=Anymal_down10
+- task=Anymal

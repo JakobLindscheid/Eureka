@@ -1,0 +1,4 @@
+- task.sim.gravity=[2.54, 0.0, -9.475]
+- experiment=Humanoid_random_down10
+- task=Humanoid
+- task.task.randomize=True

@@ -1,0 +1,3 @@
+- task.sim.gravity=[3.36, 0.0, -9.22]
+- experiment=Humanoid_down20
+- task=Humanoid

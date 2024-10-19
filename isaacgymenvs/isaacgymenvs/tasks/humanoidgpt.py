@@ -382,23 +382,23 @@ from torch import Tensor
 def compute_reward(root_states: torch.Tensor, actions: torch.Tensor) -> Tuple[torch.Tensor, Dict[str, torch.Tensor]]:
     # Extract necessary components from root_states
     velocity = root_states[:, 7:10]  # Get the velocity of the torso
-    speed = torch.norm(velocity, p=2, dim=-1)  # Overall speed of the humanoid
-    forward_velocity = velocity[:, 0]  # Forward (x) velocity
-
+    speed = torch.norm(velocity, p=2, dim=-1) ** 2  # Use squared speed for reward
+    forward_velocity = velocity[:, 0]  # Positive forward movement
+    
     # Reward components
-    speed_reward = speed ** 2  # Squared reward proportional to overall speed
-    direction_bonus = torch.maximum(torch.zeros_like(forward_velocity), forward_velocity) * 2.0  # Forward direction emphasis
-    action_penalty = -torch.norm(actions, p=2, dim=-1) ** 3  # Cubed penalty for excessive action usage
+    speed_reward = speed  # Reward based on squared speed
+    direction_bonus = torch.clamp(forward_velocity, min=0)  # Reward for moving forward
+    action_penalty = -torch.norm(actions, p=2, dim=-1)  # Linear penalty for action usage
 
-    # Temperature parameters for bounding the components
-    speed_temp = 0.1  # Increased temperature for speed
-    direction_temp = 0.1  # Keep direction-focused
-    action_temp = 0.03  # Increased impact on action penalty
+    # Temperature parameters (for reward normalization)
+    speed_temp = 0.01  # Reduced temperature for speed reward
+    direction_temp = 0.05  # Adjusted temperature for direction bonus
+    action_temp = 0.1  # Reduced temperature for action penalty
 
     # Transformed rewards
     transformed_speed_reward = torch.exp(speed_temp * speed_reward)  # Normalizing speed reward
-    transformed_direction_bonus = torch.exp(direction_temp * direction_bonus)  # Increase variability in direction
-    transformed_action_penalty = torch.exp(action_temp * action_penalty)  # More sensitive action penalty
+    transformed_direction_bonus = torch.exp(direction_temp * direction_bonus)  # Normalizing direction bonus
+    transformed_action_penalty = torch.exp(action_temp * action_penalty)  # Normalizing action penalty
 
     # Total reward
     total_reward = transformed_speed_reward + transformed_direction_bonus + transformed_action_penalty
