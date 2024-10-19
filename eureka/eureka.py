@@ -25,8 +25,9 @@ ISAAC_ROOT_DIR = f"{EUREKA_ROOT_DIR}/../isaacgymenvs/isaacgymenvs"
 @hydra.main(config_path="cfg", config_name="config", version_base="1.1")
 def main(cfg):
 
-    if cfg.evaluate:
+    if cfg.evaluate_only:
         evaluate(cfg, cfg.reward_code_path)
+        return
     
     if cfg.use_wandb:
         import wandb
@@ -128,8 +129,8 @@ def main(cfg):
                 total_completion_token += response_cur["usage"]["completion_tokens"]
                 total_token += response_cur["usage"]["total_tokens"]
 
-        if cfg.sample == 1:
-            logging.info(f"Iteration {iter}: GPT Output:\n " + responses[0]["message"]["content"] + "\n")
+        """ if cfg.sample == 1:
+            logging.info(f"Iteration {iter}: GPT Output:\n " + responses[0]["message"]["content"] + "\n") """
 
         # Logging Token Information
         if "usage" in response_cur.keys():
@@ -167,12 +168,14 @@ def main(cfg):
                 continue
 
             code_runs.append(code_string)
-            """ reward_signature = [
-                f"self.rew_buf[:], self.rew_dict = {gpt_reward_signature}",
-                f"self.extras['gpt_reward'] = self.rew_buf.mean().item()",
-                f"for rew_state in self.rew_dict: self.extras[rew_state] = self.rew_dict[rew_state].mean()",
-            ] """
-            reward_signature = [f"return {gpt_reward_signature}"]
+            if env_parent == 'isaac':
+                reward_signature = [
+                    f"self.rew_buf[:], self.rew_dict = {gpt_reward_signature}",
+                    f"self.extras['gpt_reward'] = self.rew_buf.mean().item()",
+                    f"for rew_state in self.rew_dict: self.extras[rew_state] = self.rew_dict[rew_state].mean()",
+                ]
+            else:
+                reward_signature = [f"return {gpt_reward_signature}"]
             indent = " " * 4
             reward_signature = "\n".join([indent*2 + line for line in reward_signature])
             if "def compute_reward(self)" in task_code_string:
@@ -187,7 +190,14 @@ def main(cfg):
             # Save the new environment code when the output contains valid code string!
             with open(output_file, 'w') as file:
                 file.writelines(task_code_string_iter + '\n')
-                if gpt_reward_signature.startswith("self") and code_string.startswith("def"):
+                if env_parent == 'isaac':
+                    file.writelines("from typing import Tuple, Dict" + '\n')
+                    file.writelines("import math" + '\n')
+                    file.writelines("import torch" + '\n')
+                    file.writelines("from torch import Tensor" + '\n')
+                    if "@torch.jit.script" not in code_string:
+                        code_string = "@torch.jit.script\n" + code_string
+                elif gpt_reward_signature.startswith("self") and code_string.startswith("def"):
                     code_string = indent + code_string.replace("\n", f"\n{indent}")
                 file.writelines(code_string + '\n')
 
@@ -242,12 +252,12 @@ def main(cfg):
             content = ''
             traceback_msg = filter_traceback(stdout_str)
 
-            if traceback_msg == '':
+            if traceback_msg == '' and 'Tensorboard Directory:' in stdout_str:
                 # If RL execution has no error, provide policy statistics feedback
                 exec_success = True
                 lines = stdout_str.split('\n')
                 for i, line in enumerate(lines):
-                    if line.startswith('Tensorboard Directory:'):
+                    if line.startswith('Tensorboard Directory:'): # TODO: error handling for tensorboard logdir not found
                         break 
                 tensorboard_logdir = line.split(':')[-1].strip() 
                 tensorboard_logs = load_tensorboard_logs(tensorboard_logdir)
@@ -388,7 +398,10 @@ def evaluate(cfg, max_reward_code_path):
     
     # Evaluate the best reward code many times    
     logging.info(f"Evaluating best reward code {cfg.num_eval} times")
-    shutil.copy(max_reward_code_path, output_file)
+    try:
+        shutil.copy(max_reward_code_path, output_file)
+    except shutil.SameFileError:
+        pass
     
     eval_runs = []
     for i in range(cfg.num_eval):
@@ -419,20 +432,26 @@ def evaluate(cfg, max_reward_code_path):
         rl_filepath = f"eval{i}/reward_code_eval{i}.txt"
         with open(rl_filepath, 'r') as f:
             stdout_str = f.read() 
-        lines = stdout_str.split('\n')
-        for i, line in enumerate(lines):
-            if line.startswith('Tensorboard Directory:'):
-                break 
-        tensorboard_logdir = line.split(':')[-1].strip() 
-        tensorboard_logs = load_tensorboard_logs(tensorboard_logdir)
-        max_success = max(tensorboard_logs['consecutive_successes'])
-        reward_code_final_successes.append(max_success)
+        
+        traceback_msg = filter_traceback(stdout_str)
+        if traceback_msg == '' and 'Tensorboard Directory:' in stdout_str:
+            lines = stdout_str.split('\n')
+            for i, line in enumerate(lines):
+                if line.startswith('Tensorboard Directory:'):
+                    break 
+            tensorboard_logdir = line.split(':')[-1].strip() 
+            tensorboard_logs = load_tensorboard_logs(tensorboard_logdir)
+            max_success = max(tensorboard_logs['consecutive_successes'])
+            reward_code_final_successes.append(max_success)
 
-        if "gt_reward" in tensorboard_logs and "gpt_reward" in tensorboard_logs:
-            gt_reward = np.array(tensorboard_logs["gt_reward"])
-            gpt_reward = np.array(tensorboard_logs["gpt_reward"])
-            reward_correlation = np.corrcoef(gt_reward, gpt_reward)[0, 1]
-            reward_code_correlations_final.append(reward_correlation)
+            if "gt_reward" in tensorboard_logs and "gpt_reward" in tensorboard_logs:
+                gt_reward = np.array(tensorboard_logs["gt_reward"])
+                gpt_reward = np.array(tensorboard_logs["gpt_reward"])
+                reward_correlation = np.corrcoef(gt_reward, gpt_reward)[0, 1]
+                reward_code_correlations_final.append(reward_correlation)
+
+        else:
+            logging.error(f"Evaluation {i} failed.")
 
     if cfg.use_wandb:
         wandb.log({"Final Success Mean": np.mean(reward_code_final_successes), "Final Success Std": np.std(reward_code_final_successes), "Final Correlation Mean": np.mean(reward_code_correlations_final), "Final Correlation Std": np.std(reward_code_correlations_final)})

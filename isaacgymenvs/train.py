@@ -32,7 +32,7 @@ import logging
 import os
 import datetime
 
-# import isaacgym
+import isaacgym
 
 import hydra
 from hydra.utils import to_absolute_path

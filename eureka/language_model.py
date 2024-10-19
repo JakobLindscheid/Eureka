@@ -1,5 +1,4 @@
 import os
-import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline, BitsAndBytesConfig
 from huggingface_hub import InferenceClient
 from joblib import Parallel, delayed
@@ -30,6 +29,7 @@ class LanguageModel:
         
         elif self.provider == "local":
             
+            import torch
             bnb_config = BitsAndBytesConfig(
                 load_in_4bit=True,
                 bnb_4bit_use_double_quant=True,
@@ -84,7 +84,7 @@ class LanguageModel:
         elif self.provider == "openai":
             return openai.ChatCompletion.create(
                         model=self.model_name,
-                        messages=messages,
+                        messages=prompt,
                         temperature=temperature,
                         n=n
                     )

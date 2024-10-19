@@ -1,382 +1,141 @@
-import math
-from typing import Optional, Tuple, Union
-
-import numpy as np
-
 import gymnasium as gym
-from gymnasium import logger
-from gymnasium.envs.classic_control import utils
-from gymnasium.error import DependencyNotInstalled
-from gymnasium.experimental.vector import VectorEnv
-from gymnasium.vector.utils import batch_space
-
 import torch
+import numpy as np
+import math
+from typing import Optional, Tuple, Union, Dict, Any
+from gym.spaces import Box, Discrete
 
-from gym import spaces
-
-from typing import Dict
-
-import time
-
-class CartpoleGPT(VectorEnv):
-    metadata = {
-        "render_modes": ["human", "rgb_array"],
-        "render_fps": 50,
-    }
-
-    def __init__(
-        self,
-        num_envs: int = 512,
-        max_episode_steps: int = 500,
-        render_mode: Optional[str] = None,
-        **kwargs
-    ):
-        super().__init__()
-        
-        self.num_envs = num_envs
-        
-        self.gravity = 9.8
-        self.masscart = 1.0
-        self.masspole = 0.1
-        self.total_mass = self.masspole + self.masscart
-        self.length = 0.5  # actually half the pole's length
-        self.polemass_length = self.masspole * self.length
-        self.force_mag = 10.0
-        self.tau = 0.02  # seconds between state updates
-        self.kinematics_integrator = "euler"
-
-        self.max_episode_steps = max_episode_steps
-
-        self.state = None
-
-        self.steps = np.zeros(num_envs, dtype=np.int32)
-
-        # Angle at which to fail the episode
-        self.theta_threshold_radians = 12 * 2 * math.pi / 360
-        self.x_threshold = 2.4
-
-        # Angle limit set to 2 * theta_threshold_radians so failing observation
-        # is still within bounds.
-        high = np.array(
-            [
-                self.x_threshold * 2,
-                np.finfo(np.float32).max,
-                self.theta_threshold_radians * 2,
-                np.finfo(np.float32).max,
-            ],
-            dtype=np.float32,
-        )
-
-        self.low = -0.05
-        self.high = 0.05
-
-        self.action_space = spaces.Discrete(2)
-        self.batch_action_space = batch_space(gym.spaces.Discrete(2), num_envs)
-        self.single_observation_space = spaces.Box(-high, high, dtype=np.float32)
-        self.observation_space = self.single_observation_space # batch_space(self.single_observation_space, num_envs)
-
-        self.render_mode = render_mode
-        
-        self.screen_width = 600
-        self.screen_height = 400
-        self.screens = None
-        
-        self.clocks = None
-        self.isopen = True
-        self.state = None
-
-        self.steps_beyond_terminated = None
-
-        self.rew_buf = np.zeros(num_envs, dtype=np.float32)
-        self.extras = {}
-        self.reset_dist = 3.0
-        self.reset_buf = torch.ones(self.num_envs)
-        self.consecutive_successes = torch.zeros(1)
-        self.progress_buf = torch.zeros(self.num_envs)
-
-    def step(
-        self, action: np.ndarray
-    ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, dict]:        
-        assert self.batch_action_space.contains(
-            action
-        ), f"{action!r} ({type(action)}) invalid"
-        assert self.state is not None, "Call reset before using step method."
-
-        x, x_dot, theta, theta_dot = self.state
-        force = np.sign(action - 0.5) * self.force_mag
-        costheta = np.cos(theta)
-        sintheta = np.sin(theta)
-
-        # For the interested reader:
-        # https://coneural.org/florian/papers/05_cart_pole.pdf
-        temp = (
-            force + self.polemass_length * theta_dot**2 * sintheta
-        ) / self.total_mass
-        thetaacc = (self.gravity * sintheta - costheta * temp) / (
-            self.length
-            * (4.0 / 3.0 - self.masspole * costheta**2 / self.total_mass)
-        )
-        xacc = temp - self.polemass_length * thetaacc * costheta / self.total_mass
-
-        if self.kinematics_integrator == "euler":
-            x = x + self.tau * x_dot
-            x_dot = x_dot + self.tau * xacc
-            theta = theta + self.tau * theta_dot
-            theta_dot = theta_dot + self.tau * thetaacc
-        else:  # semi-implicit euler
-            x_dot = x_dot + self.tau * xacc
-            x = x + self.tau * x_dot
-            theta_dot = theta_dot + self.tau * thetaacc
-            theta = theta + self.tau * theta_dot
-
-        self.state = np.stack((x, x_dot, theta, theta_dot))
-
-        terminated: np.ndarray = (
-            (x < -self.x_threshold)
-            | (x > self.x_threshold)
-            | (theta < -self.theta_threshold_radians)
-            | (theta > self.theta_threshold_radians)
-        )
-
-        self.steps += 1
-
-        truncated = self.steps >= self.max_episode_steps
-
-        done = terminated | truncated
-        
-        self.progress_buf += 1
-        """ env_ids = self.reset_buf.nonzero(as_tuple=False).squeeze(-1)
-        if len(env_ids) > 0:
-            self.reset_buf[env_ids] = 0
-            self.progress_buf[env_ids] = 0 """
-
-        self.state = torch.tensor(self.state, dtype=torch.float32)
-        self.compute_reward_wrapper()
-        self.state = self.state.numpy()
-
-        if any(done):
-            # This code was generated by copilot, need to check if it works
-            self.state[:, done] = self.np_random.uniform(
-                low=self.low, high=self.high, size=(4, done.sum())
-            ).astype(np.float32)
-            self.steps[done] = 0
-            
-            self.reset_buf[done] = 0
-            self.progress_buf[done] = 0
-
-        # reward = np.ones_like(terminated, dtype=np.float32)
-
-        if self.render_mode == "human":
-            self.render()
-
-        # return self.state.T.astype(np.float32), self.rew_buf, terminated, truncated, {}
-        return self.state.T.astype(np.float32), self.rew_buf, done, self.extras
-
-    def compute_reward_wrapper(self):
-        return compute_reward(self.theta, self.theta_dot, self.x, self.x_dot)
-        pole_angle = self.state[2]
-        pole_vel = self.state[3]
-        cart_vel = self.state[1]
-        cart_pos = self.state[0]
-
-        self.gt_rew_buf, self.reset_buf[:], self.consecutive_successes[:] = self.compute_success(
-            pole_angle, pole_vel, cart_vel, cart_pos,
-            self.reset_dist, self.reset_buf, self.consecutive_successes, self.progress_buf, self.max_episode_steps
-        )
-        self.extras['gt_reward'] = self.gt_rew_buf.mean()
-        self.extras['consecutive_successes'] = self.consecutive_successes.mean()
-    
-    def reset(
-        self,
-        *,
-        seed: Optional[int] = None,
-        options: Optional[dict] = None,
-    ):
-        
-        # time.sleep(0.001) # to avoid zero division error in rl_games when step_time = 0
-        
-        super().reset(seed=seed)
-        # Note that if you use custom reset bounds, it may lead to out-of-bound
-        # state/observations.
-        self.low, self.high = utils.maybe_parse_reset_bounds(
-            options, -0.05, 0.05  # default low
-        )  # default high
-        self.state = self.np_random.uniform(
-            low=self.low, high=self.high, size=(4, self.num_envs)
-        ).astype(np.float32)
-        self.steps_beyond_terminated = None
-        self.steps = np.zeros(self.num_envs, dtype=np.int32)
-        self.prev_done = np.zeros(self.num_envs, dtype=np.bool_)
-
-        if self.render_mode == "human":
-            self.render()
-        
-        return self.state.T # , {}
-
-    def render(self):
-        if self.render_mode is None:
-            gym.logger.warn(
-                "You are calling render method without specifying any render mode. "
-                "You can specify the render_mode at initialization, "
-                f'e.g. gym("{self.spec.id}", render_mode="rgb_array")'
-            )
-            return
-
-        try:
-            import pygame
-            from pygame import gfxdraw
-        except ImportError:
-            raise DependencyNotInstalled(
-                "pygame is not installed, run `pip install gymnasium[classic_control]`"
-            )
-
-        if self.screens is None:
-            pygame.init()
-            if self.render_mode == "human":
-                pygame.display.init()
-                self.screens = [
-                    pygame.display.set_mode((self.screen_width, self.screen_height))
-                    for _ in range(self.num_envs)
-                ]
-            else:  # mode == "rgb_array"
-                self.screens = [
-                    pygame.Surface((self.screen_width, self.screen_height))
-                    for _ in range(self.num_envs)
-                ]
-        if self.clocks is None:
-            self.clock = [pygame.time.Clock() for _ in range(self.num_envs)]
-
-        world_width = self.x_threshold * 2
-        scale = self.screen_width / world_width
-        polewidth = 10.0
-        polelen = scale * (2 * self.length)
-        cartwidth = 50.0
-        cartheight = 30.0
-
-        if self.state is None:
-            return None
-
-        for state, screen, clock in zip(self.state, self.screens, self.clocks):
-            x = self.state.T
-
-            self.surf = pygame.Surface((self.screen_width, self.screen_height))
-            self.surf.fill((255, 255, 255))
-
-            l, r, t, b = -cartwidth / 2, cartwidth / 2, cartheight / 2, -cartheight / 2
-            axleoffset = cartheight / 4.0
-            cartx = x[0] * scale + self.screen_width / 2.0  # MIDDLE OF CART
-            carty = 100  # TOP OF CART
-            cart_coords = [(l, b), (l, t), (r, t), (r, b)]
-            cart_coords = [(c[0] + cartx, c[1] + carty) for c in cart_coords]
-            gfxdraw.aapolygon(self.surf, cart_coords, (0, 0, 0))
-            gfxdraw.filled_polygon(self.surf, cart_coords, (0, 0, 0))
-
-            l, r, t, b = (
-                -polewidth / 2,
-                polewidth / 2,
-                polelen - polewidth / 2,
-                -polewidth / 2,
-            )
-
-            pole_coords = []
-            for coord in [(l, b), (l, t), (r, t), (r, b)]:
-                coord = pygame.math.Vector2(coord).rotate_rad(-x[2])
-                coord = (coord[0] + cartx, coord[1] + carty + axleoffset)
-                pole_coords.append(coord)
-            gfxdraw.aapolygon(self.surf, pole_coords, (202, 152, 101))
-            gfxdraw.filled_polygon(self.surf, pole_coords, (202, 152, 101))
-
-            gfxdraw.aacircle(
-                self.surf,
-                int(cartx),
-                int(carty + axleoffset),
-                int(polewidth / 2),
-                (129, 132, 203),
-            )
-            gfxdraw.filled_circle(
-                self.surf,
-                int(cartx),
-                int(carty + axleoffset),
-                int(polewidth / 2),
-                (129, 132, 203),
-            )
-
-            gfxdraw.hline(self.surf, 0, self.screen_width, carty, (0, 0, 0))
-
-            self.surf = pygame.transform.flip(self.surf, False, True)
-            screen.blit(self.surf, (0, 0))
-
-        if self.render_mode == "human":
-            pygame.event.pump()
-            [clock.tick(self.metadata["render_fps"]) for clock in self.clocks]
-            pygame.display.flip()
-
-        elif self.render_mode == "rgb_array":
-            return [
-                np.transpose(
-                    np.array(pygame.surfarray.pixels3d(screen)), axes=(1, 0, 2)
-                )
-                for screen in self.screens
-            ]
-
-    def close(self):
-        if self.screens is not None:
-            import pygame
-
-            pygame.quit()
-
-    def compute_success(self, pole_angle, pole_vel, cart_vel, cart_pos,
-                                reset_dist, reset_buf, consecutive_successes, progress_buf, max_episode_length):
-        reward = 1.0 - pole_angle * pole_angle - 0.01 * torch.abs(cart_vel) - 0.005 * torch.abs(pole_vel)
-
-        reward = torch.where(torch.abs(cart_pos) > reset_dist, torch.ones_like(reward) * -2.0, reward)
-        reward = torch.where(torch.abs(pole_angle) > np.pi / 2, torch.ones_like(reward) * -2.0, reward)
-
-        reset = torch.where(torch.abs(cart_pos) > reset_dist, torch.ones_like(reset_buf), reset_buf)
-        reset = torch.where(torch.abs(pole_angle) > np.pi / 2, torch.ones_like(reset_buf), reset)
-        reset = torch.where(progress_buf >= max_episode_length - 1, torch.ones_like(reset_buf), reset)
-
-        if reset.sum() > 0:
-            consecutive_successes = (progress_buf.float() * reset).sum() / reset.sum()
+class Wrapper():
+    def __init__(self, env_name, cfg,  **kwargs):
+        if kwargs["force_render"]:
+            self.env = gym.make_vec(env_name, num_envs=1, render_mode="human")
         else:
-            consecutive_successes = torch.zeros_like(consecutive_successes).mean()
-        return reward, reset, consecutive_successes
-def compute_reward(theta: torch.Tensor, theta_dot: torch.Tensor, 
-                    x: torch.Tensor, x_dot: torch.Tensor) -> Tuple[torch.Tensor, Dict[str, torch.Tensor]]:
-    # Pole balance reward
-    # A higher balance reward is issued for smaller absolute angle
-    theta_balance_reward = -torch.abs(theta)
+            self.env = gym.make_vec(env_name, num_envs=cfg["env"]["numEnvs"])
+        
+        # because rl_games has legacy dependencies
+        obs_space = self.env.observation_space
+        if isinstance(obs_space, gym.spaces.Box):
+            self.observation_space = Box(low=obs_space.low[0], high=obs_space.high[0], shape=obs_space.shape[1:], dtype=obs_space.dtype)
+        elif isinstance(obs_space, gym.spaces.MultiDiscrete):
+            self.observation_space = Discrete(n=obs_space.nvec[0])
+        
+        act_space = self.env.action_space
+        if isinstance(act_space, gym.spaces.Box):
+            self.action_space = Box(low=act_space.low[0], high=act_space.high[0], shape=self.env.action_space.shape[1:], dtype=self.env.action_space.dtype)
+        elif isinstance(act_space, gym.spaces.MultiDiscrete):
+            self.action_space = Discrete(n=act_space.nvec[0])
+
+    def step(self, action):
+        obs, gt_rew, terminated, truncated, info = self.env.step(action)
+
+        gt_rew = torch.tensor(gt_rew)
+        done = np.logical_or(terminated, truncated)
+        
+        self.compute_observations(obs, action, info)
+
+        success = self.compute_success(obs, action, gt_rew, done, info)
+        reward, rew_info = self.compute_reward_wrapper()
+        
+        # if training on human reward
+        if reward is None:
+            reward = torch.tensor(gt_rew)
+        
+        info = {
+            "gt_reward": gt_rew.mean(),
+            "consecutive_successes": success.mean(),
+            "gpt_reward": reward.mean(),
+        }
+        for rew_state in rew_info: info[rew_state] = rew_info[rew_state].mean()
+
+        return obs, reward.numpy(), done, info # rl_games formatting (done instead of terminated/truncated)
+
+    def reset(self):
+        return self.env.reset()[0] # rl_games formatting
     
-    # Angular velocity reward
-    # Give a larger reward when the pole's angular velocity is closer to zero
-    theta_dot_reward = -torch.abs(theta_dot)
+    def __getattr__(self, name):
+        return getattr(self.env, name)
     
-    # Cart position reward
-    # Give a larger reward when the cart is closer to the origin
-    cart_position_reward = -torch.abs(x)
+    def compute_success(self, obs, actions, rew, done, info):
+        raise NotImplementedError
     
-    # Cart velocity reward
-    # Give a larger reward when the cart's velocity is closer to zero
-    cart_velocity_reward = -torch.abs(x_dot)
+    def compute_observations(self, obs, actions, info):
+        raise NotImplementedError
     
-    # Set temperature parameters for rewards
-    balance_reward_temperature = 0.1
-    angular_velocity_temperature = 0.1
-    cart_position_temperature = 0.1
-    cart_velocity_temperature = 0.1
+    def compute_reward_wrapper(self):
+        return compute_reward(self.cart_position, self.cart_velocity, self.pole_angle, self.pole_velocity)
+        return None, {}
     
-    # Apply temperature transformations to make the rewards more sensitive to change
-    temp_theta_balance_reward = balance_reward_temperature * torch.exp(theta_balance_reward)
-    temp_theta_dot_reward = angular_velocity_temperature * torch.exp(theta_dot_reward)
-    temp_cart_position_reward = cart_position_temperature * torch.exp(cart_position_reward)
-    temp_cart_velocity_reward = cart_velocity_temperature * torch.exp(cart_velocity_reward)
-    
-    # The total reward is the sum of individual rewards after applying transformations
-    total_reward = temp_theta_balance_reward + temp_theta_dot_reward + temp_cart_position_reward + temp_cart_velocity_reward
-    
-    return total_reward, {
-        'pole_balance_reward': temp_theta_balance_reward,
-        'angular_velocity_reward': temp_theta_dot_reward,
-        'cart_position_reward': temp_cart_position_reward,
-        'cart_velocity_reward': temp_cart_velocity_reward
+class CartpoleGPT(Wrapper):
+    def __init__(self, cfg, **kwargs):
+        super().__init__("CartPole-v1", cfg, **kwargs)
+        self.success = torch.zeros(self.env.num_envs)
+        self.reset_buffer = np.full((self.env.num_envs), False)
+
+    def compute_success(self, obs, actions, rew, done, info):
+        self.success[self.reset_buffer] = 0
+        self.success += rew
+        self.reset_buffer = done
+        return self.success
+
+    def compute_observations(self, obs, actions, info):
+        self.actions = torch.tensor(actions)
+        self.cart_position = torch.tensor(obs[:, 0])
+        self.cart_velocity = torch.tensor(obs[:, 1])
+        self.pole_angle = torch.tensor(obs[:, 2])
+        self.pole_velocity = torch.tensor(obs[:, 3])
+def compute_reward(cart_position: torch.Tensor, 
+                   cart_velocity: torch.Tensor, 
+                   pole_angle: torch.Tensor, 
+                   pole_velocity: torch.Tensor) -> Tuple[torch.Tensor, Dict[str, torch.Tensor]]:
+    """
+    This reward function encourages the pole to stay upright and balanced on the cart.
+
+    The reward function provides a combination of rewards for the pole angle, pole velocity, 
+    cart position, and cart velocity. Each reward component is designed to encourage the 
+    desired behavior.
+
+    :param cart_position: The position of the cart.
+    :param cart_velocity: The velocity of the cart.
+    :param pole_angle: The angle of the pole.
+    :param pole_velocity: The velocity of the pole.
+    :return: A tuple containing the total reward and a dictionary of individual reward components.
+    """
+
+    # Define the angle limit for the pole
+    ANGLE_LIMIT = 0.2095  # This is the angle limit for the CartPole environment
+
+    # Reward for staying within the angle limit
+    angle_reward = 1 - (pole_angle / ANGLE_LIMIT).abs()
+    # Apply transformation to normalize the reward to a fixed range
+    temperature_angle = 0.5
+    angle_reward = torch.exp(angle_reward / temperature_angle)
+
+    # Reward for keeping the cart close to the center
+    cart_position_reward = 1 - (cart_position / 2.4).abs()  # 2.4 is the position limit for the CartPole environment
+    # Apply transformation to normalize the reward to a fixed range
+    temperature_cart_position = 0.5
+    cart_position_reward = torch.exp(cart_position_reward / temperature_cart_position)
+
+    # Reward for keeping the pole velocity low
+    pole_velocity_reward = 1 - (pole_velocity / 2.0).abs()  # 2.0 is an arbitrary large value
+    # Apply transformation to normalize the reward to a fixed range
+    temperature_pole_velocity = 0.5
+    pole_velocity_reward = torch.exp(pole_velocity_reward / temperature_pole_velocity)
+
+    # Reward for keeping the cart velocity low
+    cart_velocity_reward = 1 - (cart_velocity / 2.0).abs()  # 2.0 is an arbitrary large value
+    # Apply transformation to normalize the reward to a fixed range
+    temperature_cart_velocity = 0.5
+    cart_velocity_reward = torch.exp(cart_velocity_reward / temperature_cart_velocity)
+
+    # Combine the rewards
+    total_reward = angle_reward + cart_position_reward + pole_velocity_reward + cart_velocity_reward
+
+    reward_components = {
+        'angle_reward': angle_reward,
+        'cart_position_reward': cart_position_reward,
+        'pole_velocity_reward': pole_velocity_reward,
+        'cart_velocity_reward': cart_velocity_reward
     }
+
+    return total_reward, reward_components

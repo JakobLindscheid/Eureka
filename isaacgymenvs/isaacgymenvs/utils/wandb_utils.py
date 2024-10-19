@@ -76,7 +76,7 @@ class WandbAlgoObserver(AlgoObserver):
 
     def after_print_stats(self, frame, epoch_num, total_time):
         wandb.log({
-            'success': sum(self.successes) / len(self.successes),
-            'gpt_reward': sum(self.gpt_rewards) / len(self.gpt_rewards),
-            'gt_reward': sum(self.gt_rewards) / len(self.gt_rewards),
+            k: sum(v) / len(v) 
+            for k, v in [('success', self.successes), ('gpt_reward', self.gpt_rewards), ('gt_reward', self.gt_rewards)] 
+            if len(v) > 0
         })

@@ -3,27 +3,46 @@ import torch
 import numpy as np
 import math
 from typing import Optional, Tuple, Union, Dict, Any
-from gym.spaces import Box
+from gym.spaces import Box, Discrete
 
-class Wrapper():
+class Wrapper(gym.Env):
+    
+    metadata = {"render_modes": ["human", "rgb_array"], "render_fps": 20}
+
     def __init__(self, env_name, cfg,  **kwargs):
+        self.recording = False
         if kwargs["force_render"]:
             self.env = gym.make_vec(env_name, num_envs=1, render_mode="human")
+            self.render_mode = "human"
+        elif kwargs["virtual_screen_capture"]:
+            self.recording = True
+            self.env = gym.make_vec(env_name, num_envs=1, render_mode="rgb_array")
+            self.render_mode = "rgb_array"
         else:
             self.env = gym.make_vec(env_name, num_envs=cfg["env"]["numEnvs"])
         
         # because rl_games has legacy dependencies
         obs_space = self.env.observation_space
-        self.observation_space = Box(low=obs_space.low[0], high=obs_space.high[0], shape=obs_space.shape[1:], dtype=obs_space.dtype)
+        if isinstance(obs_space, gym.spaces.Box):
+            self.observation_space = Box(low=obs_space.low[0], high=obs_space.high[0], shape=obs_space.shape[1:], dtype=obs_space.dtype)
+        elif isinstance(obs_space, gym.spaces.MultiDiscrete):
+            self.observation_space = Discrete(n=obs_space.nvec[0])
+        
         act_space = self.env.action_space
-        self.action_space = Box(low=act_space.low[0], high=act_space.high[0], shape=self.env.action_space.shape[1:], dtype=self.env.action_space.dtype)
+        if isinstance(act_space, gym.spaces.Box):
+            self.action_space = Box(low=act_space.low[0], high=act_space.high[0], shape=self.env.action_space.shape[1:], dtype=self.env.action_space.dtype)
+        elif isinstance(act_space, gym.spaces.MultiDiscrete):
+            self.action_space = Discrete(n=act_space.nvec[0])
 
     def step(self, action):
         obs, gt_rew, terminated, truncated, info = self.env.step(action)
 
+        gt_rew = torch.tensor(gt_rew)
+        done = np.logical_or(terminated, truncated)
+        
         self.compute_observations(obs, action, info)
 
-        success = self.compute_success(obs, action, info)
+        success = self.compute_success(obs, action, gt_rew, done, info)
         reward, rew_info = self.compute_reward_wrapper()
         
         # if training on human reward
@@ -37,29 +56,33 @@ class Wrapper():
         }
         for rew_state in rew_info: info[rew_state] = rew_info[rew_state].mean()
 
-        return obs, reward.numpy(), np.logical_or(terminated, truncated), info # rl_games formatting (done instead of terminated/truncated)
+        return obs, reward.numpy(), done, info # rl_games formatting (done instead of terminated/truncated)
 
-    def reset(self):
-        return self.env.reset()[0] # rl_games formatting
+    def reset(self, seed=None, options=None):
+        return self.env.reset(seed=seed, options=options)[0] # rl_games formatting
     
     def __getattr__(self, name):
         return getattr(self.env, name)
     
-    def compute_success(self, obs, actions, info):
+    def compute_success(self, obs, actions, rew, done, info):
         raise NotImplementedError
     
     def compute_observations(self, obs, actions, info):
         raise NotImplementedError
     
     def compute_reward_wrapper(self):
-        return compute_reward(self.x_velocities, self.y_velocities, self.z_velocities, self.x_positions)
+        return compute_reward(self.actions, self.x_positions, self.x_velocities, self.y_positions, self.z_positions, self.z_velocities, self.y_velocities)
         return None, {}
+
+    def render(self, **kwargs):
+        res = self.env.render()[0]
+        return res
     
 class AntGPT(Wrapper):
     def __init__(self, cfg, **kwargs):
         super().__init__("Ant-v4", cfg, **kwargs)
 
-    def compute_success(self, obs, actions, info):
+    def compute_success(self, obs, actions, rew, done, info):
         if "reward_forward" not in info:
             success = np.zeros(obs.shape[0])
         else:
@@ -80,27 +103,33 @@ class AntGPT(Wrapper):
         self.x_velocities = torch.tensor(obs[:, 13])
         self.y_velocities = torch.tensor(obs[:, 14])
         self.z_velocities = torch.tensor(obs[:, 15])
-def compute_reward(x_velocities: torch.Tensor, 
-                  y_velocities: torch.Tensor, 
-                  z_velocities: torch.Tensor, 
-                  x_positions: torch.Tensor) -> Tuple[torch.Tensor, Dict[str, torch.Tensor]]:
-    # Define temperature parameters
-    velocity_temp: float = 2.0  # Increased temperature to encourage more progress
-    position_temp: float = 0.2  # Decreased temperature to make the component more sensitive
+def compute_reward(actions: torch.Tensor, x_positions: torch.Tensor, 
+                   x_velocities: torch.Tensor, y_positions: torch.Tensor, 
+                   z_positions: torch.Tensor, z_velocities: torch.Tensor, y_velocities: torch.Tensor
+                   ) -> Tuple[torch.Tensor, Dict[str, torch.Tensor]]:
+    # Retain task_score as it is
+    task_score = x_velocities
     
-    # Encourage the agent to move forward with high velocity on the x-axis
-    velocity_reward = torch.tanh(velocity_temp * x_velocities) * 0.8 - \
-                       torch.exp(-10.0 * (y_velocities ** 2 + z_velocities ** 2)) * 0.2
+    # Increase the scale of forward_reward
+    temperature_forward = 5.0
+    forward_reward = torch.tanh(temperature_forward * x_velocities)
     
-    # Penalize the agent for going backwards or staying in the same place and encourage progress
-    position_reward = torch.sigmoid(position_temp * x_positions)
+    # Replace tilt_reward with a new reward component
+    temperature_tilt = 20.0
+    tilt_reward = -torch.tanh(temperature_tilt * torch.abs(z_positions))
     
-    # Total reward is the sum of velocity and position rewards
-    total_reward = 0.6 * velocity_reward + 0.4 * position_reward
+    # Replace on_track_reward with a new reward component
+    temperature_on_track = 2.0
+    on_track_reward = -torch.tanh(temperature_on_track * torch.sqrt(x_positions ** 2 + y_positions ** 2))
     
-    reward_dict = {
-        "velocity_reward": velocity_reward,
-        "position_reward": position_reward
+    # Total reward as a sum of the different rewards
+    total_reward = task_score + forward_reward + tilt_reward + on_track_reward
+    
+    rewards_dict = {
+        'task_score': task_score,
+        'forward_reward': forward_reward,
+        'tilt_reward': tilt_reward,
+        'on_track_reward': on_track_reward,
     }
     
-    return total_reward, reward_dict
+    return total_reward, rewards_dict

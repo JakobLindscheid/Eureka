@@ -15,7 +15,7 @@ env:
   episodeLength: 1000
   headingWeight: 0.5
   jointsAtLimitCost: 0.25
-  numEnvs: ${resolve_default:32,${...num_envs}}
+  numEnvs: ${resolve_default:4096,${...num_envs}}
   plane:
     dynamicFriction: 1.0
     restitution: 0.0
