@@ -233,3 +233,8 @@ Some helpful tips for writing the reward function code:
 [2024-10-19 17:17:52,939][root][INFO] - Iteration 4: Prompt Tokens: 2760, Completion Tokens: 7759, Total Tokens: 13279
 [2024-10-19 17:17:52,939][root][INFO] - Iteration 4: Processing Code Run 0
 [2024-10-19 17:18:06,036][root][INFO] - Iteration 4: Code Run 0 successfully training!
+[2024-10-19 03:43:54,179][root][INFO] - Task: Ant3, Max Training Success 9.95644474029541, Correlation 0.967849632529035, Best Reward Code Path: env_iter4_response4.py
+[2024-10-19 03:43:54,179][root][INFO] - Evaluating best reward code 1 times
+[2024-10-19 03:48:56,053][tensorboard][INFO] - No path found after /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-19_01-36-59/policy-2024-10-19_03-43-56/runs/Ant3GPT-2024-10-19_03-43-56/summaries/events.out.tfevents.1729302237.Rhino
+[2024-10-19 03:48:56,066][root][INFO] - Final Success Mean: 6.343642234802246, Std: 0.0, Raw: [6.343642234802246]
+[2024-10-19 03:48:56,066][root][INFO] - Final Correlation Mean: 0.9887463303864137, Std: 0.0, Raw: [0.9887463303864137]
