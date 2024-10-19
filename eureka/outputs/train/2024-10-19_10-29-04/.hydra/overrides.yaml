@@ -1,0 +1,7 @@
+- task=Humanoid
+- checkpoint=/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs/outputs/train/2024-10-18_20-40-45/runs/Humanoid_down20-2024-10-18_20-40-45/nn/Humanoid_down20.pth
+- +task.sim.gravity=[3.36, 0.0, -9.22]
+- test=True
+- num_envs=4096
+- headless=False
+- force_render=True

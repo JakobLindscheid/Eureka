@@ -44,7 +44,7 @@ sim:
   substeps: 2
   up_axis: "z"
   use_gpu_pipeline: ${eq:${...pipeline},"gpu"}
-  gravity: [0.0, 0.0, -9.81]
+  gravity: [0.0, 0.0, -9.81] #10 degree steps is [0,5,10,20,30] = [0.0, 0.855, 1.70, 3.36, 4.91] and [9.81, 9.77, 9.66, 9.22, 8.50]
   physx:
     num_threads: ${....num_threads}
     solver_type: ${....solver_type}

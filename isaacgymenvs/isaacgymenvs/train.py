@@ -31,7 +31,7 @@
 import logging
 import os
 import datetime
-
+import numpy as np
 import isaacgym
 
 import hydra
@@ -48,6 +48,7 @@ from isaacgymenvs.utils.utils import set_np_formatting, set_seed
 
 # ROOT_DIR = os.getcwd()
 ROOT_DIR = os.path.dirname(os.path.realpath(__file__))
+print(f"ROOT_DIR={ROOT_DIR}")
 
 def preprocess_train_config(cfg, config_dict):
     """
@@ -71,10 +72,11 @@ def preprocess_train_config(cfg, config_dict):
 
     return config_dict
 
-
-@hydra.main(config_name="config", config_path="./cfg")
+# @hydra.main(config_name="config", config_path="./cfg")
+@hydra.main(config_name="config", config_path="./cfg", version_base="1.1")
 def launch_rlg_hydra(cfg: DictConfig):
-
+    # print(f"WARNING: {OmegaConf.to_yaml(cfg)}")  # This will print the merged config
+    # exit()
     from isaacgymenvs.utils.rlgames_utils import RLGPUEnv, RLGPUAlgoObserver, MultiObserver, ComplexObsRLGPUEnv
     from isaacgymenvs.utils.wandb_utils import WandbAlgoObserver
     from rl_games.common import env_configurations, vecenv
@@ -85,8 +87,10 @@ def launch_rlg_hydra(cfg: DictConfig):
     from isaacgymenvs.learning import amp_models
     from isaacgymenvs.learning import amp_network_builder
     import isaacgymenvs
-
-
+    # Initialize the log file by creating or clearing it at the start of training
+    log_file_path = f"{ROOT_DIR}/consecutive_successes_log.txt"
+    with open(log_file_path, "w") as f:
+        f.write("")  # This clears the file if it already exists or creates it if it doesn't
     time_str = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     run_name = f"{cfg.wandb_name}_{time_str}"
 
@@ -95,7 +99,7 @@ def launch_rlg_hydra(cfg: DictConfig):
         cfg.checkpoint = to_absolute_path(cfg.checkpoint)
 
     cfg_dict = omegaconf_to_dict(cfg)
-    # print_dict(cfg_dict)
+    print_dict(cfg_dict)
 
     # set numpy formatting for printing only
     set_np_formatting()
@@ -206,6 +210,25 @@ def launch_rlg_hydra(cfg: DictConfig):
         'checkpoint' : cfg.checkpoint,
         'sigma': cfg.sigma if cfg.sigma != '' else None
     })
+
+    # After runner.run() completes, read the log file for consecutive successes
+    try:
+        with open(f"{ROOT_DIR}/consecutive_successes_log.txt", "r") as f:
+            successes = [float(line.strip()) for line in f]
+
+        # Redirect output to a file
+        with open(f"{ROOT_DIR}/output_batch.txt", "a") as output_file:
+            if successes:
+                success_message = f"Test success: {np.mean(successes)} pm {np.std(successes)} with maximum {max(successes)}\n"
+                print(success_message)  # This will still print to the console
+                output_file.write(success_message)  # Write to file
+            else:
+                no_success_message = "No successes logged.\n"
+                print(no_success_message)  # This will still print to the console
+                output_file.write(no_success_message)  # Write to file
+
+    except FileNotFoundError:
+        print("Log file not found. No successes were logged.")
 
     if cfg.wandb_activate and rank == 0:
         wandb.finish()

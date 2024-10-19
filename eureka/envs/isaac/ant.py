@@ -10,6 +10,8 @@ from isaacgym.gymtorch import *
 from isaacgymenvs.utils.torch_jit_utils import *
 from isaacgymenvs.tasks.base.vec_task import VecTask
 
+ROOT_DIR='/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs'
+LOG_PATH = os.path.join(ROOT_DIR, "consecutive_successes_log.txt")
 
 class Ant(VecTask):
 
@@ -150,6 +152,7 @@ class Ant(VecTask):
         self.dof_limits_lower = []
         self.dof_limits_upper = []
 
+
         for i in range(self.num_envs):
             env_ptr = self.gym.create_env(
                 self.sim, lower, upper, num_per_row
@@ -157,8 +160,12 @@ class Ant(VecTask):
             ant_handle = self.gym.create_actor(env_ptr, ant_asset, start_pose, "ant", i, 1, 0)
 
             for j in range(self.num_bodies):
-                self.gym.set_rigid_body_color(
-                    env_ptr, ant_handle, j, gymapi.MESH_VISUAL, gymapi.Vec3(0.97, 0.38, 0.06))
+                # if j in target_leg_indices:
+                #     color = gymapi.Vec3(0.0, 1.0, 0.0)  # Green color for the target leg
+                # else:
+                color = gymapi.Vec3(0.97, 0.38, 0.06)  # Original color
+
+                self.gym.set_rigid_body_color(env_ptr, ant_handle, j, gymapi.MESH_VISUAL, color)
 
             self.envs.append(env_ptr)
             self.ant_handles.append(ant_handle)
@@ -198,6 +205,18 @@ class Ant(VecTask):
         )
         self.extras['gt_reward'] = self.gt_rew_buf.mean()
         self.extras['consecutive_successes'] = self.consecutive_successes.mean()
+        # PVD Log consecutive_successes to an external file
+        
+        # Ensure directory exists before writing
+        log_dir = os.path.dirname(LOG_PATH)
+        if not os.path.exists(log_dir):
+            print(f"Creating directory for log at {log_dir}")
+            os.makedirs(log_dir, exist_ok=True)
+
+        # Log consecutive_successes to an external file
+        with open(LOG_PATH, "a") as f:
+            f.write(f"{self.consecutive_successes.mean().item()}\n")
+
 
     def compute_observations(self):
         self.gym.refresh_dof_state_tensor(self.sim)

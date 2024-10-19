@@ -136,4 +136,4 @@ task:
         - 0.4
         schedule: linear
         schedule_steps: 3000
-  randomize: false
+  randomize: true

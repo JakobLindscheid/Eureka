@@ -1,8 +1,0 @@
-- task=HumanoidDS
-- wandb_activate=False
-- wandb_entity=koza
-- wandb_project=eureka
-- headless=True
-- capture_video=False
-- force_render=False
-- seed=2

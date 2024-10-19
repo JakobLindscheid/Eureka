@@ -1,2 +1,0 @@
-Importing module 'gym_38' (/home/vandriel/Documents/GitHub/Eureka/isaacgym/python/isaacgym/_bindings/linux-x86_64/gym_38.so)
-Setting GYM_USD_PLUG_INFO_PATH to /home/vandriel/Documents/GitHub/Eureka/isaacgym/python/isaacgym/_bindings/linux-x86_64/usd/plugInfo.json

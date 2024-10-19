@@ -1,0 +1,317 @@
+Importing module 'gym_38' (/home/vandriel/Documents/GitHub/Eureka/isaacgym/python/isaacgym/_bindings/linux-x86_64/gym_38.so)
+Setting GYM_USD_PLUG_INFO_PATH to /home/vandriel/Documents/GitHub/Eureka/isaacgym/python/isaacgym/_bindings/linux-x86_64/usd/plugInfo.json
+PyTorch version 2.0.0+cu117
+Device count 1
+/home/vandriel/Documents/GitHub/Eureka/isaacgym/python/isaacgym/_bindings/src/gymtorch
+Using /home/vandriel/.cache/torch_extensions/py38_cu117 as PyTorch extensions root...
+Emitting ninja build file /home/vandriel/.cache/torch_extensions/py38_cu117/gymtorch/build.ninja...
+Building extension module gymtorch...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+ninja: no work to do.
+Loading extension module gymtorch...
+2024-10-19 14:12:30,669 - INFO - logger - logger initialized
+<unknown>:3: DeprecationWarning: invalid escape sequence \*
+Error: FBX library failed to load - importing FBX data will not succeed. Message: No module named 'fbx'
+FBX tools must be installed from https://help.autodesk.com/view/FBX/2020/ENU/?guid=FBX_Developer_Help_scripting_with_python_fbx_installing_python_fbx_html
+/home/vandriel/anaconda3/envs/eureka/lib/python3.8/site-packages/matplotlib/__init__.py:169: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  if LooseVersion(module.__version__) < minver:
+/home/vandriel/anaconda3/envs/eureka/lib/python3.8/site-packages/setuptools/_distutils/version.py:337: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  other = LooseVersion(other)
+ROOT_DIR=/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs
+/home/vandriel/anaconda3/envs/eureka/lib/python3.8/site-packages/hydra/_internal/hydra.py:119: UserWarning: Future Hydra versions will no longer change working directory at job runtime by default.
+See https://hydra.cc/docs/1.2/upgrades/1.1_to_1.2/changes_to_job_working_dir/ for more information.
+  ret = run_job(
+/home/vandriel/anaconda3/envs/eureka/lib/python3.8/site-packages/torch/utils/tensorboard/__init__.py:4: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  if not hasattr(tensorboard, "__version__") or LooseVersion(
+task_name: HumanoidGPT
+experiment: 
+env_path: 
+num_envs: 
+seed: 42
+torch_deterministic: False
+max_iterations: 2000
+physics_engine: physx
+pipeline: gpu
+sim_device: cuda:0
+rl_device: cuda:0
+graphics_device_id: 0
+num_threads: 4
+solver_type: 1
+num_subscenes: 4
+test: False
+checkpoint: 
+sigma: 
+multi_gpu: False
+wandb_activate: False
+wandb_group: 
+wandb_name: HumanoidGPT
+wandb_entity: koza
+wandb_project: eureka
+wandb_tags: []
+wandb_logcode_dir: 
+capture_video: False
+capture_video_freq: 5000
+capture_video_len: 200
+force_render: False
+headless: True
+task: 
+    env: 
+        actionsCost: 0.01
+        angularVelocityScale: 0.25
+        asset: 
+            assetFileName: mjcf/nv_humanoid.xml
+        clipActions: 1.0
+        contactForceScale: 0.01
+        deathCost: -1.0
+        dofVelocityScale: 0.1
+        enableCameraSensors: False
+        enableDebugVis: False
+        energyCost: 0.05
+        envSpacing: 5
+        env_name: humanoidGPT
+        episodeLength: 1000
+        headingWeight: 0.5
+        jointsAtLimitCost: 0.25
+        numEnvs: 4096
+        plane: 
+            dynamicFriction: 1.0
+            restitution: 0.0
+            staticFriction: 1.0
+        powerScale: 1.0
+        terminationHeight: 0.8
+        upWeight: 0.1
+    name: HumanoidGPT
+    physics_engine: physx
+    sim: 
+        dt: 0.0166
+        gravity: [0.0, 0.0, -9.81]
+        physx: 
+            bounce_threshold_velocity: 0.2
+            contact_collection: 0
+            contact_offset: 0.02
+            default_buffer_size_multiplier: 5.0
+            max_depenetration_velocity: 10.0
+            max_gpu_contact_pairs: 8388608
+            num_position_iterations: 4
+            num_subscenes: 4
+            num_threads: 4
+            num_velocity_iterations: 0
+            rest_offset: 0.0
+            solver_type: 1
+            use_gpu: True
+        substeps: 2
+        up_axis: z
+        use_gpu_pipeline: True
+    task: 
+        randomization_params: 
+            actions: 
+                distribution: gaussian
+                operation: additive
+                range: [0.0, 0.02]
+            actor_params: 
+                humanoid: 
+                    color: True
+                    dof_properties: 
+                        damping: 
+                            distribution: uniform
+                            operation: scaling
+                            range: [0.5, 1.5]
+                            schedule: linear
+                            schedule_steps: 3000
+                        lower: 
+                            distribution: gaussian
+                            operation: additive
+                            range: [0, 0.01]
+                            schedule: linear
+                            schedule_steps: 3000
+                        stiffness: 
+                            distribution: uniform
+                            operation: scaling
+                            range: [0.5, 1.5]
+                            schedule: linear
+                            schedule_steps: 3000
+                        upper: 
+                            distribution: gaussian
+                            operation: additive
+                            range: [0, 0.01]
+                            schedule: linear
+                            schedule_steps: 3000
+                    rigid_body_properties: 
+                        mass: 
+                            distribution: uniform
+                            operation: scaling
+                            range: [0.5, 1.5]
+                            schedule: linear
+                            schedule_steps: 3000
+                            setup_only: True
+                    rigid_shape_properties: 
+                        friction: 
+                            distribution: uniform
+                            num_buckets: 500
+                            operation: scaling
+                            range: [0.7, 1.3]
+                            schedule: linear
+                            schedule_steps: 3000
+                        restitution: 
+                            distribution: uniform
+                            operation: scaling
+                            range: [0.0, 0.7]
+                            schedule: linear
+                            schedule_steps: 3000
+            frequency: 600
+            observations: 
+                distribution: gaussian
+                operation: additive
+                range: [0, 0.002]
+            sim_params: 
+                gravity: 
+                    distribution: gaussian
+                    operation: additive
+                    range: [0, 0.4]
+                    schedule: linear
+                    schedule_steps: 3000
+        randomize: True
+train: 
+    params: 
+        algo: 
+            name: a2c_continuous
+        config: 
+            bounds_loss_coef: 0.0001
+            clip_value: True
+            critic_coef: 4
+            e_clip: 0.2
+            entropy_coef: 0.0
+            env_name: rlgpu
+            full_experiment_name: HumanoidGPT
+            gamma: 0.99
+            grad_norm: 1.0
+            horizon_length: 32
+            kl_threshold: 0.008
+            learning_rate: 0.0005
+            lr_schedule: adaptive
+            max_epochs: 2000
+            mini_epochs: 5
+            minibatch_size: 32768
+            mixed_precision: True
+            multi_gpu: False
+            name: HumanoidGPT
+            normalize_advantage: True
+            normalize_input: True
+            normalize_value: True
+            num_actors: 4096
+            ppo: True
+            print_stats: True
+            reward_shaper: 
+                scale_value: 0.01
+            save_best_after: 200
+            save_frequency: 100
+            score_to_win: 20000
+            seq_len: 4
+            tau: 0.95
+            truncate_grads: True
+            value_bootstrap: True
+        load_checkpoint: False
+        load_path: 
+        model: 
+            name: continuous_a2c_logstd
+        network: 
+            mlp: 
+                activation: elu
+                d2rl: False
+                initializer: 
+                    name: default
+                regularizer: 
+                    name: None
+                units: [400, 200, 100]
+            name: actor_critic
+            separate: False
+            space: 
+                continuous: 
+                    fixed_sigma: True
+                    mu_activation: None
+                    mu_init: 
+                        name: default
+                    sigma_activation: None
+                    sigma_init: 
+                        name: const_initializer
+                        val: 0
+        seed: 42
+Setting seed: 42
+Network Directory: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-19_14-12-07/policy-2024-10-19_14-12-31/runs/HumanoidGPT-2024-10-19_14-12-31/nn
+Tensorboard Directory: /home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-19_14-12-07/policy-2024-10-19_14-12-31/runs/HumanoidGPT-2024-10-19_14-12-31/summaries
+self.seed = 42
+Started to train
+[W ir_emitter.cpp:4519] Warning: Dict values consist of heterogeneous types, which means that the dict has been typed as containing Dict[str, Union[Tensor, float]]. To use any of the values in this Dict, it will be necessary to add an `assert isinstance` statement before first use to trigger type refinement.
+  File "/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs/tasks/humanoidgpt.py", line 397
+
+    # Create reward components dictionary
+    reward_components = {
+                        ~
+        'speed_reward': normalized_speed_reward,
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        'time_penalty': time_penalty
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ <--- HERE
+    }
+    
+ (function operator())
+Error executing job with overrides: ['task=HumanoidGPT', 'wandb_activate=False', 'wandb_entity=koza', 'wandb_project=eureka', 'headless=True', 'capture_video=False', 'force_render=False', 'max_iterations=2000']
+Traceback (most recent call last):
+  File "/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs/utils/rlgames_utils.py", line 116, in create_rlgpu_env
+    module = importlib.import_module(module_name)
+  File "/home/vandriel/anaconda3/envs/eureka/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 843, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs/tasks/humanoidgpt.py", line 382, in <module>
+    def compute_reward(velocity: torch.Tensor, target_velocity: torch.Tensor, dt: float) -> Tuple[torch.Tensor, Dict[str, torch.Tensor]]:
+  File "/home/vandriel/anaconda3/envs/eureka/lib/python3.8/site-packages/torch/jit/_script.py", line 1341, in script
+    fn = torch._C._jit_script_compile(
+RuntimeError: 
+Return value was annotated as having type Tuple[Tensor, Dict[str, Tensor]] but is actually of type Tuple[Tensor, Dict[str, Union[Tensor, float]]]:
+  File "/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs/tasks/humanoidgpt.py", line 402
+    }
+    
+    return total_reward, reward_components
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ <--- HERE
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/vandriel/Documents/GitHub/Eureka/eureka/../isaacgymenvs/isaacgymenvs/train.py", line 207, in launch_rlg_hydra
+    statistics = runner.run({
+  File "/home/vandriel/Documents/GitHub/Eureka/rl_games/rl_games/torch_runner.py", line 124, in run
+    self.run_train(args)
+  File "/home/vandriel/Documents/GitHub/Eureka/rl_games/rl_games/torch_runner.py", line 98, in run_train
+    self.agent = self.algo_factory.create(self.algo_name, base_name='run', params=self.params)
+  File "/home/vandriel/Documents/GitHub/Eureka/rl_games/rl_games/common/object_factory.py", line 15, in create
+    return builder(**kwargs)
+  File "/home/vandriel/Documents/GitHub/Eureka/rl_games/rl_games/torch_runner.py", line 37, in <lambda>
+    self.algo_factory.register_builder('a2c_continuous', lambda **kwargs : a2c_continuous.A2CAgent(**kwargs))
+  File "/home/vandriel/Documents/GitHub/Eureka/rl_games/rl_games/algos_torch/a2c_continuous.py", line 16, in __init__
+    a2c_common.ContinuousA2CBase.__init__(self, base_name, params)
+  File "/home/vandriel/Documents/GitHub/Eureka/rl_games/rl_games/common/a2c_common.py", line 1076, in __init__
+    A2CBase.__init__(self, base_name, params)
+  File "/home/vandriel/Documents/GitHub/Eureka/rl_games/rl_games/common/a2c_common.py", line 121, in __init__
+    self.vec_env = vecenv.create_vec_env(self.env_name, self.num_actors, **self.env_config)
+  File "/home/vandriel/Documents/GitHub/Eureka/rl_games/rl_games/common/vecenv.py", line 222, in create_vec_env
+    return vecenv_config[vec_env_name](config_name, num_actors, **kwargs)
+  File "/home/vandriel/Documents/GitHub/Eureka/eureka/../isaacgymenvs/isaacgymenvs/train.py", line 165, in <lambda>
+    vecenv.register('RLGPU', lambda config_name, num_actors, **kwargs: RLGPUEnv(config_name, num_actors, **kwargs))
+  File "/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs/utils/rlgames_utils.py", line 253, in __init__
+    self.env = env_configurations.configurations[config_name]['env_creator'](**kwargs)
+  File "/home/vandriel/Documents/GitHub/Eureka/eureka/../isaacgymenvs/isaacgymenvs/train.py", line 149, in <lambda>
+    'env_creator': lambda **kwargs: create_isaacgym_env(**kwargs),
+  File "/home/vandriel/Documents/GitHub/Eureka/eureka/../isaacgymenvs/isaacgymenvs/train.py", line 115, in create_isaacgym_env
+    envs = isaacgymenvs.make(
+  File "/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs/__init__.py", line 59, in make
+    return create_rlgpu_env()
+  File "/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs/utils/rlgames_utils.py", line 119, in create_rlgpu_env
+    task_caller = isaacgym_task_map[task_name]
+KeyError: 'HumanoidGPT'
+
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.

@@ -1,5 +1,0 @@
-- test=True
-- headless=False
-- force_render=True
-- task=Quadcopter
-- checkpoint=/home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-09-23_21-46-02/policy-2024-09-23_22-05-34/runs/QuadcopterGPT-2024-09-23_22-05-34/nn/QuadcopterGPT.pth

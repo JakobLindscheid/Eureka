@@ -2,7 +2,7 @@ defaults:
   - _self_
   - task: Ant
   - train: ${task}PPO
-  - hydra/job_logging: disabled
+  - override hydra/job_logging: disabled
   - override hydra/launcher:  local
   - override hydra/output:  local
 
@@ -23,7 +23,7 @@ seed: 42
 torch_deterministic: False
 
 # set the maximum number of learning iterations to train for. overrides default per-environment setting
-max_iterations: ''
+max_iterations: 2000
 
 ## Device config
 #  'physx' or 'flex'
@@ -56,14 +56,15 @@ wandb_group: ''
 wandb_name: ${train.params.config.name}
 # wandb_entity: ''
 # wandb_project: 'isaacgymenvs'
-wandb_entity: 'jma2020'
-wandb_project: 'isaac_gpt'
+wandb_entity: 'koza'
+wandb_project: 'isaac'
 wandb_tags: []
 wandb_logcode_dir: '' 
 
 capture_video: False
 capture_video_freq: 5000
 capture_video_len: 200
+# force_render: True
 force_render: False
 
 # disables rendering

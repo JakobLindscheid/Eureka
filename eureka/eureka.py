@@ -12,13 +12,15 @@ import subprocess
 from pathlib import Path
 import shutil
 import time 
-
+from omegaconf import OmegaConf
 from utils.misc import * 
 from utils.file_utils import find_files_with_substring, load_tensorboard_logs
 from utils.create_task import create_task
 from utils.extract_task_code import *
 
 EUREKA_ROOT_DIR = os.getcwd()
+print(f"EUREKA_ROOT_DIR = {EUREKA_ROOT_DIR}")
+
 ISAAC_ROOT_DIR = f"{EUREKA_ROOT_DIR}/../isaacgymenvs/isaacgymenvs"
 
 @hydra.main(config_path="cfg", config_name="config", version_base="1.1")
@@ -27,7 +29,9 @@ def main(cfg):
     logging.info(f"Workspace: {workspace_dir}")
     logging.info(f"Project Root: {EUREKA_ROOT_DIR}")
 
-
+    # PVD: Print or log the cfg settings before starting the loop
+    # logging.info(f"Configuration settings:\n{OmegaConf.to_yaml(cfg)}")
+    # exit()
     task = cfg.env.task
     task_description = cfg.env.description
     suffix = cfg.suffix
@@ -39,6 +43,7 @@ def main(cfg):
     env_name = cfg.env.env_name.lower()
     env_parent = 'isaac' if f'{env_name}.py' in os.listdir(f'{EUREKA_ROOT_DIR}/envs/isaac') else 'dexterity'
     task_file = f'{EUREKA_ROOT_DIR}/envs/{env_parent}/{env_name}.py'
+    print(f"taskfile = {task_file}")
     task_obs_file = f'{EUREKA_ROOT_DIR}/envs/{env_parent}/{env_name}_obs.py'
     shutil.copy(task_obs_file, f"env_init_obs.py")
     task_code_string  = file_to_string(task_file)
@@ -188,14 +193,30 @@ def main(cfg):
 
             # Execute the python file with flags
             rl_filepath = f"env_iter{iter}_response{response_id}.txt"
+
+            train_args = [
+                'python', '-u', f'{ISAAC_ROOT_DIR}/train.py',  
+                'hydra/output=subprocess',
+                f'task={task}{suffix}', f'wandb_activate={cfg.use_wandb}',
+                f'wandb_entity={cfg.wandb_username}', f'wandb_project={cfg.wandb_project}',
+                f'headless={not cfg.capture_video}', f'capture_video={cfg.capture_video}', 'force_render=False',
+                f'max_iterations={cfg.max_iterations}'
+            ]
+
+            # Log the cfg parameters and the train call arguments
+            # logging.info(f"Configuration settings when calling train.py:\n{OmegaConf.to_yaml(cfg)}")
+            # logging.info(f"Subprocess arguments: {train_args}")
             with open(rl_filepath, 'w') as f:
-                process = subprocess.Popen(['python', '-u', f'{ISAAC_ROOT_DIR}/train.py',  
-                                            'hydra/output=subprocess',
-                                            f'task={task}{suffix}', f'wandb_activate={cfg.use_wandb}',
-                                            f'wandb_entity={cfg.wandb_username}', f'wandb_project={cfg.wandb_project}',
-                                            f'headless={not cfg.capture_video}', f'capture_video={cfg.capture_video}', 'force_render=False',
-                                            f'max_iterations={cfg.max_iterations}'],
-                                            stdout=f, stderr=f)
+                process = subprocess.Popen(train_args, stdout=f, stderr=f)
+
+            # with open(rl_filepath, 'w') as f:
+            #     process = subprocess.Popen(['python', '-u', f'{ISAAC_ROOT_DIR}/train.py',  
+            #                                 'hydra/output=subprocess',
+            #                                 f'task={task}{suffix}', f'wandb_activate={cfg.use_wandb}',
+            #                                 f'wandb_entity={cfg.wandb_username}', f'wandb_project={cfg.wandb_project}',
+            #                                 f'headless={not cfg.capture_video}', f'capture_video={cfg.capture_video}', 'force_render=False',
+            #                                 f'max_iterations={cfg.max_iterations}'],
+            #                                 stdout=f, stderr=f)
             block_until_training(rl_filepath, log_status=True, iter_num=iter, response_id=response_id)
             process.wait() # PVD
             rl_runs.append(process)
