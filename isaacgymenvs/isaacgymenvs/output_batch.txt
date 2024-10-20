@@ -316,3 +316,8 @@ Test success: 4.83 pm 0.12, Max: 5.02
 Test success: 4.89 pm 0.13, Max: 5.09
 Test success: 4.53 pm 0.07, Max: 4.68
 Test success: 4.62 pm 0.09, Max: 4.75
+Test success: 3.75 pm 0.08, Max: 3.90
+Test success: 3.93 pm 0.06, Max: 4.04
+Test success: 2.79 pm 0.10, Max: 3.00
+Test success: 4.14 pm 0.07, Max: 4.30
+Test success: 2.91 pm 0.05, Max: 3.00
