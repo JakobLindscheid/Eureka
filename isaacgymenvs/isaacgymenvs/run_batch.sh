@@ -4,31 +4,25 @@
 gravity_values=(
     "[0.0, 0.0, -9.81]"
     "[0.855, 0.0, -9.77]"
-    "[1.70, 0.0, -9.66]"
     "[2.54, 0.0, -9.475]"
-    "[3.36, 0.0, -9.22]"
     "[-0.855, 0.0, -9.77]"
-    "[-1.70, 0.0, -9.66]"
     "[-2.54, 0.0, -9.475]"
-    "[-3.36, 0.0, -9.22]"
 )
 
 # List of experiment suffixes for each gravity value
 experiment_suffixes=(
     "flat"
     "down05"
-    "down10"
     "down20"
     "up05"
-    "up10"
     "up20"
 )
 
 # List of tasks
-tasks=("Ant" "Ant3")
+tasks=("Humanoid")
 
 # Number of repetitions
-num_repeats=10
+num_repeats=5
 
 # Outer loop for each task
 for task in "${tasks[@]}"
