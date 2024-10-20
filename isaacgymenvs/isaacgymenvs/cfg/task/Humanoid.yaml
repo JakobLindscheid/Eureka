@@ -26,7 +26,7 @@ env:
   contactForceScale: 0.01
   jointsAtLimitCost: 0.25
   deathCost: -1.0
-  terminationHeight: 0.8
+  terminationHeight: 0.45
 
   asset:
     assetFileName: "mjcf/nv_humanoid.xml"
@@ -44,7 +44,7 @@ sim:
   substeps: 2
   up_axis: "z"
   use_gpu_pipeline: ${eq:${...pipeline},"gpu"}
-  gravity: [0.0, 0.0, -9.81] #10 degree steps is [0,5,10,20,30] = [0.0, 0.855, 1.70, 3.36, 4.91] and [9.81, 9.77, 9.66, 9.22, 8.50]
+  gravity: [1.70, 0.0, -9.66] #10 degree steps is [0,5,10,20,30] = [0.0, 0.855, 1.70, 3.36, 4.91] and [9.81, 9.77, 9.66, 9.22, 8.50]
   physx:
     num_threads: ${....num_threads}
     solver_type: ${....solver_type}
@@ -61,7 +61,7 @@ sim:
     contact_collection: 0 # 0: CC_NEVER (don't collect contact info), 1: CC_LAST_SUBSTEP (collect only contacts on last substep), 2: CC_ALL_SUBSTEPS (broken - do not use!)
 
 task:
-  randomize: True
+  randomize: False
   randomization_params:
     # specify which attributes to randomize for each actor type and property
     frequency: 600   # Define how many environment steps between generating new randomizations

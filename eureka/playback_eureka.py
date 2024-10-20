@@ -139,7 +139,7 @@ else:
         f"task={selected_task}GPT",
         f"checkpoint={selected_checkpoint}",
         f"+task.sim.gravity={gravity_str}",  # Pass formatted gravity here
-        "test=True", "num_envs=4096", "headless=False", "force_render=True"
+        "test=True", "num_envs=4096", "headless=True", "force_render=False"
     ]
 
     # Execute the command

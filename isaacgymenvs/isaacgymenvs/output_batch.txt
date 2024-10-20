@@ -1,74 +1,246 @@
-Test success: 6.2709014913737775 pm 2.3009616163159468 with maximum 8.249195098876953
-Test success: 5.277256861835718 pm 1.8900667261734216 with maximum 7.396885871887207
-Test success: 5.683861911132932 pm 1.9861660937288395 with maximum 7.730987548828125
-Test success: 5.412508756935597 pm 1.7519444762245198 with maximum 7.213440895080566
-Test success: 6.691890622004866 pm 1.9678678349854446 with maximum 8.94884204864502
-Test success: 5.363081033825875 pm 1.8212936528002157 with maximum 6.956639289855957
-Test success: 3.2000992577522993 pm 1.0676938170048729 with maximum 4.219021797180176
-Test success: 3.4763909487724303 pm 1.242722044466989 with maximum 4.577588081359863
-Test success: 2.894410966038704 pm 1.1479029301262138 with maximum 3.9749488830566406
-Test success: -0.09540629956137854 pm 0.27965802502540277 with maximum -0.0232402253895998
-Test success: -0.09703843472083098 pm 0.29140604853815055 with maximum -0.024141523987054825
-Test success: -0.10528706285807614 pm 0.2809986162361014 with maximum -0.031035155057907104
-Test success: -0.1264195593308347 pm 0.3039320646348069 with maximum -0.035667289048433304
-Test success: -0.1615854108297887 pm 0.34015864530496254 with maximum -0.06028088182210922
-Test success: -0.09156575070973486 pm 0.2749841339084113 with maximum -0.02086462453007698
-Test success: -0.09949760961039768 pm 0.2887729926292246 with maximum -0.021818898618221283
-Test success: -0.1443166721938178 pm 0.3393164364050222 with maximum -0.03579204902052879
-Test success: -0.1729414582576137 pm 0.39891739216743866 with maximum -0.05371364206075668
-Test success: 8.790292756677935 pm 2.5265640706156804 with maximum 10.790288925170898
-Test success: 15.476366586685181 pm 6.3562701586677655 with maximum 21.214691162109375
-Test success: 8.416682723999024 pm 2.4246925111751403 with maximum 10.710036277770996
-Test success: 5.646410530090332 pm 1.759295153553605 with maximum 6.62795352935791
-Test success: 0.027154495239257812 pm 0.121686728282884 with maximum 1.1750755310058594
-Test success: 0.002393867611885071 pm 0.015915983177379443 with maximum 0.06823158264160156
-Test success: 1.7923088068962096 pm 0.33079777071431976 with maximum 2.184762954711914
-Test success: 1.946751103858153 pm 0.35043734545018046 with maximum 2.322384834289551
-Test success: 6.240198258956274 pm 1.5517565021543354 with maximum 7.816936492919922
-Test success: 6.130961202045282 pm 1.8860997577666327 with maximum 7.986093521118164
-Test success: 2.0178010952472687 pm 0.5291355201777653 with maximum 2.6657047271728516
-Test success: 0.1193607617020607 pm 0.2445489776387822 with maximum 1.0714473724365234
-Test success: 4.826909362077713 pm 1.3857485570368295 with maximum 6.562189102172852
-Test success: 4.212222517649333 pm 1.244057522940423 with maximum 5.640686988830566
-Test success: 4.212222517649333 pm 1.244057522940423 with maximum 5.640686988830566
-Test success: 3.45164616616567 pm 0.8565760165947378 with maximum 4.346325874328613
-Test success: 7.32624732708931 pm 2.2222604702315456 with maximum 9.975669860839844
-Test success: 3.7960744044979413 pm 1.0098269320117168 with maximum 5.043160438537598
-Test success: 3.7983579294085503 pm 1.072855696072387 with maximum 5.1526994705200195
-Test success: 0.002393867611885071 pm 0.015915983177379443 with maximum 0.06823158264160156
-Test success: 3.5341114764809607 pm 1.0062427943073742 with maximum 4.533127784729004
-Test success: -1.4660210973620416 pm 0.4918980564128717 with maximum 0.22350692749023438
-Test success: 2.768290111362934 pm 0.5752974967579829 with maximum 3.2866735458374023
-Test success: 4.90113110435009 pm 1.5573172513124387 with maximum 6.349699974060059
-Test success: 9.921209849357606 pm 2.1433262717953916 with maximum 12.172759056091309
-Test success: 10.186141554832458 pm 2.0407754977086894 with maximum 11.937182426452637
-Test success: 10.8442026720047 pm 2.335871722900305 with maximum 13.43215560913086
-Test success: 8.790292756677935 pm 2.5265640706156804 with maximum 10.790288925170898
-Test success: 8.499814085960388 pm 1.886798532392886 with maximum 9.566312789916992
-Test success: 8.499814085960388 pm 1.886798532392886 with maximum 9.566312789916992
-Test success: 4.128882857322693 pm 0.7807654852865196 with maximum 4.69936466217041
-Test success: 7.465090070724488 pm 1.6884323598111877 with maximum 8.482661247253418
-Test success: 7.240205238342285 pm 1.6173063681158766 with maximum 8.184164047241211
-Test success: 7.010345178991556 pm 1.939218769917421 with maximum 8.773664474487305
-Test success: 10.212750234782696 pm 1.919645104038126 with maximum 11.613852500915527
-Test success: 6.617457825571298 pm 1.7252216889208543 with maximum 8.040031433105469
-Test success: 10.34914304870367 pm 2.2578106191611775 with maximum 11.957174301147461
-Test success: 5.125499997407198 pm 1.7735903906493355 with maximum 7.131373405456543
-Test success: 5.464029375344515 pm 1.9453156977569557 with maximum 8.363710403442383
-Test success: -0.10163980815792456 pm 0.30809915021818207 with maximum -0.018465286120772362
-Test success: -0.152957255352987 pm 0.3127814385765845 with maximum -0.04161341115832329
-Test success: 7.488791802406311 pm 1.593644835588405 with maximum 8.341437339782715
-Test success: 8.226624146461488 pm 2.068876748754265 with maximum 9.61068058013916
-Test success: -0.054159252820909026 pm 0.11718961612357004 with maximum -0.03979656100273132
-Test success: -0.028260887607932092 pm 0.11078586011099976 with maximum -0.01679137349128723
-Test success: 8.18100714302063 pm 2.101794754701325 with maximum 9.464980125427246
-Test success: 8.226624146461488 pm 2.068876748754265 with maximum 9.61068058013916
-Test success: 9.921209849357606 pm 2.1433262717953916 with maximum 12.172759056091309
-No successes logged.
-No successes logged.
-No successes logged.
-No successes logged.
-No successes logged.
-No successes logged.
-No successes logged.
-No successes logged.
+Test success: 11.16 pm 0.02, Max: 11.20
+Test success: 8.69 pm 0.02, Max: 8.74
+Test success: 11.16 pm 0.02, Max: 11.20
+Test success: 8.69 pm 0.02, Max: 8.74
+Test success: 10.83 pm 0.02, Max: 10.88
+Test success: 22.99 pm 0.40, Max: 23.64
+Test success: 8.66 pm 0.04, Max: 8.74
+Test success: 7.35 pm 0.02, Max: 7.40
+Test success: 8.68 pm 0.02, Max: 8.71
+Test success: 0.00 pm 0.00, Max: 0.00
+Test success: 10.42 pm 0.01, Max: 10.45
+Test success: 9.26 pm 0.02, Max: 9.32
+Test success: 10.65 pm 0.03, Max: 10.71
+Test success: 18.99 pm 0.03, Max: 19.06
+Test success: 20.37 pm 0.19, Max: 20.72
+Test success: 9.15 pm 0.01, Max: 9.17
+Test success: 8.30 pm 0.04, Max: 8.38
+Test success: 5.23 pm 0.01, Max: 5.27
+Test success: 6.47 pm 0.01, Max: 6.50
+Test success: 5.61 pm 0.23, Max: 6.04
+Test success: 5.61 pm 0.23, Max: 6.04
+Test success: 11.16 pm 0.02, Max: 11.20
+Test success: 8.69 pm 0.02, Max: 8.74
+Test success: 10.83 pm 0.02, Max: 10.88
+Test success: 22.99 pm 0.40, Max: 23.64
+Test success: 21.09 pm 0.21, Max: 21.46
+Test success: 8.66 pm 0.04, Max: 8.74
+Test success: 7.35 pm 0.02, Max: 7.40
+Test success: 8.68 pm 0.02, Max: 8.71
+Test success: 0.00 pm 0.00, Max: 0.00
+Test success: 10.42 pm 0.01, Max: 10.45
+Test success: 9.26 pm 0.02, Max: 9.32
+Test success: 10.65 pm 0.03, Max: 10.71
+Test success: 18.99 pm 0.03, Max: 19.06
+Test success: 20.37 pm 0.19, Max: 20.72
+Test success: 9.15 pm 0.01, Max: 9.17
+Test success: 8.30 pm 0.04, Max: 8.38
+Test success: 5.23 pm 0.01, Max: 5.27
+Test success: 6.47 pm 0.01, Max: 6.50
+Test success: 5.61 pm 0.23, Max: 6.04
+Test success: 5.61 pm 0.23, Max: 6.04
+Test success: 7.99 pm 0.01, Max: 8.00
+Test success: 9.15 pm 0.02, Max: 9.17
+Test success: 8.28 pm 0.03, Max: 8.32
+Test success: 8.28 pm 0.11, Max: 8.50
+Test success: 6.64 pm 0.24, Max: 7.06
+Test success: 4.22 pm 0.05, Max: 4.29
+Test success: 3.88 pm 0.08, Max: 3.98
+Test success: 1.91 pm 0.03, Max: 1.99
+Test success: -0.02 pm 0.00, Max: -0.02
+Test success: -0.02 pm 0.00, Max: -0.02
+Test success: -0.03 pm 0.00, Max: -0.02
+Test success: -0.03 pm 0.00, Max: -0.03
+Test success: -0.05 pm 0.00, Max: -0.05
+Test success: -0.02 pm 0.00, Max: -0.02
+Test success: -0.02 pm 0.00, Max: -0.02
+Test success: -0.03 pm 0.00, Max: -0.03
+Test success: -0.05 pm 0.00, Max: -0.05
+Test success: 10.41 pm 0.01, Max: 10.44
+Test success: 15.64 pm 0.03, Max: 15.71
+Test success: 9.25 pm 0.02, Max: 9.29
+Test success: 17.95 pm 0.03, Max: 18.00
+Test success: 8.18 pm 0.10, Max: 8.32
+Test success: 9.17 pm 0.04, Max: 9.23
+Test success: -0.01 pm 0.00, Max: -0.01
+Test success: -0.04 pm 0.00, Max: -0.04
+Test success: 6.32 pm 0.08, Max: 6.47
+Test success: 6.32 pm 0.08, Max: 6.47
+Test success: 6.32 pm 0.08, Max: 6.47
+Test success: 6.32 pm 0.08, Max: 6.47
+Test success: 6.32 pm 0.08, Max: 6.47
+Test success: 6.32 pm 0.08, Max: 6.47
+Test success: 6.32 pm 0.08, Max: 6.47
+Test success: 6.32 pm 0.08, Max: 6.47
+Test success: 6.32 pm 0.08, Max: 6.47
+Test success: 6.32 pm 0.08, Max: 6.47
+Test success: 5.59 pm 0.05, Max: 5.71
+Test success: 5.59 pm 0.05, Max: 5.71
+Test success: 5.59 pm 0.05, Max: 5.71
+Test success: 5.59 pm 0.05, Max: 5.71
+Test success: 5.59 pm 0.05, Max: 5.71
+Test success: 5.59 pm 0.05, Max: 5.71
+Test success: 5.59 pm 0.05, Max: 5.71
+Test success: 5.59 pm 0.05, Max: 5.71
+Test success: 5.59 pm 0.05, Max: 5.71
+Test success: 5.59 pm 0.05, Max: 5.71
+Test success: 5.69 pm 0.05, Max: 5.84
+Test success: 5.69 pm 0.05, Max: 5.84
+Test success: 5.69 pm 0.05, Max: 5.84
+Test success: 5.69 pm 0.05, Max: 5.84
+Test success: 5.69 pm 0.05, Max: 5.84
+Test success: 5.69 pm 0.05, Max: 5.84
+Test success: 5.69 pm 0.05, Max: 5.84
+Test success: 5.69 pm 0.05, Max: 5.84
+Test success: 5.69 pm 0.05, Max: 5.84
+Test success: 5.69 pm 0.05, Max: 5.84
+Test success: 10.22 pm 0.07, Max: 10.36
+Test success: 10.22 pm 0.07, Max: 10.36
+Test success: 10.22 pm 0.07, Max: 10.36
+Test success: 10.22 pm 0.07, Max: 10.36
+Test success: 10.22 pm 0.07, Max: 10.36
+Test success: 10.22 pm 0.07, Max: 10.36
+Test success: 10.22 pm 0.07, Max: 10.36
+Test success: 10.22 pm 0.07, Max: 10.36
+Test success: 10.22 pm 0.07, Max: 10.36
+Test success: 10.22 pm 0.07, Max: 10.36
+Test success: 10.40 pm 0.13, Max: 10.70
+Test success: 10.40 pm 0.13, Max: 10.70
+Test success: 10.40 pm 0.13, Max: 10.70
+Test success: 10.40 pm 0.13, Max: 10.70
+Test success: 10.40 pm 0.13, Max: 10.70
+Test success: 10.40 pm 0.13, Max: 10.70
+Test success: 10.40 pm 0.13, Max: 10.70
+Test success: 10.40 pm 0.13, Max: 10.70
+Test success: 10.40 pm 0.13, Max: 10.70
+Test success: 10.40 pm 0.13, Max: 10.70
+Test success: 5.70 pm 0.11, Max: 5.89
+Test success: 5.70 pm 0.11, Max: 5.89
+Test success: 5.70 pm 0.11, Max: 5.89
+Test success: 5.70 pm 0.11, Max: 5.89
+Test success: 5.70 pm 0.11, Max: 5.89
+Test success: 5.70 pm 0.11, Max: 5.89
+Test success: 5.70 pm 0.11, Max: 5.89
+Test success: 5.70 pm 0.11, Max: 5.89
+Test success: 5.70 pm 0.11, Max: 5.89
+Test success: 5.70 pm 0.11, Max: 5.89
+Test success: 3.91 pm 0.07, Max: 4.07
+Test success: 3.91 pm 0.07, Max: 4.07
+Test success: 3.91 pm 0.07, Max: 4.07
+Test success: 3.91 pm 0.07, Max: 4.07
+Test success: 3.91 pm 0.07, Max: 4.07
+Test success: 3.91 pm 0.07, Max: 4.07
+Test success: 3.91 pm 0.07, Max: 4.07
+Test success: 3.91 pm 0.07, Max: 4.07
+Test success: 3.91 pm 0.07, Max: 4.07
+Test success: 3.91 pm 0.07, Max: 4.07
+Test success: 3.69 pm 0.20, Max: 4.02
+Test success: 3.69 pm 0.20, Max: 4.02
+Test success: 3.69 pm 0.20, Max: 4.02
+Test success: 3.69 pm 0.20, Max: 4.02
+Test success: 3.69 pm 0.20, Max: 4.02
+Test success: 3.69 pm 0.20, Max: 4.02
+Test success: 3.69 pm 0.20, Max: 4.02
+Test success: 3.69 pm 0.20, Max: 4.02
+Test success: 3.69 pm 0.20, Max: 4.02
+Test success: 3.69 pm 0.20, Max: 4.02
+Test success: 1.33 pm 0.13, Max: 1.51
+Test success: 1.33 pm 0.13, Max: 1.51
+Test success: 1.33 pm 0.13, Max: 1.51
+Test success: 1.33 pm 0.13, Max: 1.51
+Test success: 1.33 pm 0.13, Max: 1.51
+Test success: 1.33 pm 0.13, Max: 1.51
+Test success: 1.33 pm 0.13, Max: 1.51
+Test success: 1.33 pm 0.13, Max: 1.51
+Test success: 1.33 pm 0.13, Max: 1.51
+Test success: 1.33 pm 0.13, Max: 1.51
+Test success: 6.03 pm 0.05, Max: 6.17
+Test success: 6.03 pm 0.05, Max: 6.17
+Test success: 6.03 pm 0.05, Max: 6.17
+Test success: 6.03 pm 0.05, Max: 6.17
+Test success: 6.03 pm 0.05, Max: 6.17
+Test success: 6.03 pm 0.05, Max: 6.17
+Test success: 6.03 pm 0.05, Max: 6.17
+Test success: 6.03 pm 0.05, Max: 6.17
+Test success: 6.03 pm 0.05, Max: 6.17
+Test success: 6.03 pm 0.05, Max: 6.17
+Test success: 5.96 pm 0.09, Max: 6.10
+Test success: 5.96 pm 0.09, Max: 6.10
+Test success: 5.96 pm 0.09, Max: 6.10
+Test success: 5.96 pm 0.09, Max: 6.10
+Test success: 5.96 pm 0.09, Max: 6.10
+Test success: 5.96 pm 0.09, Max: 6.10
+Test success: 5.96 pm 0.09, Max: 6.10
+Test success: 5.96 pm 0.09, Max: 6.10
+Test success: 5.96 pm 0.09, Max: 6.10
+Test success: 5.96 pm 0.09, Max: 6.10
+Test success: 7.00 pm 0.05, Max: 7.12
+Test success: 7.00 pm 0.05, Max: 7.12
+Test success: 7.00 pm 0.05, Max: 7.12
+Test success: 7.00 pm 0.05, Max: 7.12
+Test success: 7.00 pm 0.05, Max: 7.12
+Test success: 7.00 pm 0.05, Max: 7.12
+Test success: 7.00 pm 0.05, Max: 7.12
+Test success: 7.00 pm 0.05, Max: 7.12
+Test success: 7.00 pm 0.05, Max: 7.12
+Test success: 7.00 pm 0.05, Max: 7.12
+Test success: 10.30 pm 0.08, Max: 10.45
+Test success: 10.30 pm 0.08, Max: 10.45
+Test success: 10.30 pm 0.08, Max: 10.45
+Test success: 10.30 pm 0.08, Max: 10.45
+Test success: 10.30 pm 0.08, Max: 10.45
+Test success: 10.30 pm 0.08, Max: 10.45
+Test success: 10.30 pm 0.08, Max: 10.45
+Test success: 10.30 pm 0.08, Max: 10.45
+Test success: 10.30 pm 0.08, Max: 10.45
+Test success: 10.30 pm 0.08, Max: 10.45
+Test success: 10.21 pm 0.12, Max: 10.54
+Test success: 10.21 pm 0.12, Max: 10.54
+Test success: 10.21 pm 0.12, Max: 10.54
+Test success: 10.21 pm 0.12, Max: 10.54
+Test success: 10.21 pm 0.12, Max: 10.54
+Test success: 10.21 pm 0.12, Max: 10.54
+Test success: 10.21 pm 0.12, Max: 10.54
+Test success: 10.21 pm 0.12, Max: 10.54
+Test success: 10.21 pm 0.12, Max: 10.54
+Test success: 10.21 pm 0.12, Max: 10.54
+Test success: 5.07 pm 0.05, Max: 5.16
+Test success: 5.07 pm 0.05, Max: 5.16
+Test success: 5.07 pm 0.05, Max: 5.16
+Test success: 5.07 pm 0.05, Max: 5.16
+Test success: 5.07 pm 0.05, Max: 5.16
+Test success: 5.07 pm 0.05, Max: 5.16
+Test success: 5.07 pm 0.05, Max: 5.16
+Test success: 5.07 pm 0.05, Max: 5.16
+Test success: 5.07 pm 0.05, Max: 5.16
+Test success: 5.07 pm 0.05, Max: 5.16
+Test success: 4.80 pm 0.11, Max: 4.95
+Test success: 4.80 pm 0.11, Max: 4.95
+Test success: 4.80 pm 0.11, Max: 4.95
+Test success: 4.80 pm 0.11, Max: 4.95
+Test success: 4.80 pm 0.11, Max: 4.95
+Test success: 4.80 pm 0.11, Max: 4.95
+Test success: 4.80 pm 0.11, Max: 4.95
+Test success: 4.80 pm 0.11, Max: 4.95
+Test success: 4.80 pm 0.11, Max: 4.95
+Test success: 4.80 pm 0.11, Max: 4.95
+Test success: 3.77 pm 0.07, Max: 3.88
+Test success: 3.77 pm 0.07, Max: 3.88
+Test success: 3.77 pm 0.07, Max: 3.88
+Test success: 3.77 pm 0.07, Max: 3.88
+Test success: 3.77 pm 0.07, Max: 3.88
+Test success: 3.77 pm 0.07, Max: 3.88
+Test success: 3.77 pm 0.07, Max: 3.88
+Test success: 3.77 pm 0.07, Max: 3.88
+Test success: 3.77 pm 0.07, Max: 3.88
+Test success: 3.77 pm 0.07, Max: 3.88
+Test success: 2.37 pm 0.08, Max: 2.51
+Test success: 2.37 pm 0.08, Max: 2.51
+Test success: 2.37 pm 0.08, Max: 2.51
+Test success: 2.37 pm 0.08, Max: 2.51
+Test success: 2.37 pm 0.08, Max: 2.51
+Test success: 2.37 pm 0.08, Max: 2.51
+Test success: 2.37 pm 0.08, Max: 2.51
+Test success: 2.37 pm 0.08, Max: 2.51
+Test success: 2.37 pm 0.08, Max: 2.51
+Test success: 2.37 pm 0.08, Max: 2.51

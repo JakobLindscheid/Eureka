@@ -1,0 +1,7 @@
+- task=HumanoidGPT
+- checkpoint=/home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-19_14-12-07/policy-2024-10-19_18-57-13/runs/HumanoidGPT-2024-10-19_18-57-13/nn/HumanoidGPT.pth
+- +task.sim.gravity=[0.0, 0.0, -9.81]
+- test=True
+- num_envs=4096
+- headless=True
+- force_render=False

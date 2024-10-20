@@ -3,34 +3,34 @@
 # List of gravity values
 gravity_values=(
     "[0.0, 0.0, -9.81]"
-    # "[0.855, 0.0, -9.77]"
-    # "[1.70, 0.0, -9.66]"
+    "[0.855, 0.0, -9.77]"
+    "[1.70, 0.0, -9.66]"
     "[2.54, 0.0, -9.475]"
-    # "[3.36, 0.0, -9.22]"
-    # "[-0.855, 0.0, -9.77]"
-    # "[-1.70, 0.0, -9.66]"
-    # "[-2.54, 0.0, -9.475]"
-    # "[-3.36, 0.0, -9.22]"
+    "[3.36, 0.0, -9.22]"
+    "[-0.855, 0.0, -9.77]"
+    "[-1.70, 0.0, -9.66]"
+    "[-2.54, 0.0, -9.475]"
+    "[-3.36, 0.0, -9.22]"
 )
 
 # List of experiment suffixes for each gravity value
 experiment_suffixes=(
-    "random_flat"
-    "random_down10"
-    # "flat"
-    # "down05"
-    # "down10"
-    # "down15"
-    # "down20"
-    # "up05"
-    # "up10"
-    # "up15"
-    # "up20"
+    "flat"
+    "down05"
+    "down10"
+    "down15"
+    "down20"
+    "up05"
+    "up10"
+    "up15"
+    "up20"
 )
 
 # List of tasks
-tasks=("Ant" "Ant3" "Humanoid" "Anymal")
-# tasks=("Humanoid" "Anymal")
+tasks=("Ant" "Ant3" "Humanoid")
+
+# Number of repetitions
+num_repeats=10
 
 # Outer loop for each task
 for task in "${tasks[@]}"
@@ -48,8 +48,17 @@ do
         
         echo "Running simulation with gravity: $gravity and experiment: $experiment for task: $task"
         
-        # Call train.py with the overridden gravity value, experiment name, and task
-        python train.py task.sim.gravity="$gravity" experiment="$experiment" task="$task" task.task.randomize=True
+        # Run each simulation 10 times
+        for ((run=1; run<=num_repeats; run++))
+        do
+            echo "Running repetition $run for $experiment"
+            
+            # Call train.py with the overridden gravity value, experiment name, task, and randomize flag
+            python train.py task.sim.gravity="$gravity" experiment="$experiment" task="$task" task.task.randomize=True
+            
+            echo "Completed repetition $run for $experiment"
+        done
+        
     done
     
 done

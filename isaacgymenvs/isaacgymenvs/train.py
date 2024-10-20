@@ -215,11 +215,12 @@ def launch_rlg_hydra(cfg: DictConfig):
     try:
         with open(f"{ROOT_DIR}/consecutive_successes_log.txt", "r") as f:
             successes = [float(line.strip()) for line in f]
+            slice_index = int(len(successes) * 0.9)
 
         # Redirect output to a file
         with open(f"{ROOT_DIR}/output_batch.txt", "a") as output_file:
             if successes:
-                success_message = f"Test success: {np.mean(successes)} pm {np.std(successes)} with maximum {max(successes)}\n"
+                success_message = f"Test success: {np.mean(successes[slice_index:]):.2f} pm {np.std(successes[slice_index:]):.2f}, Max: {max(successes[slice_index:]):.2f}\n"
                 print(success_message)  # This will still print to the console
                 output_file.write(success_message)  # Write to file
             else:

@@ -203,20 +203,9 @@ def main(cfg):
                 f'max_iterations={cfg.max_iterations}'
             ]
 
-            # Log the cfg parameters and the train call arguments
-            # logging.info(f"Configuration settings when calling train.py:\n{OmegaConf.to_yaml(cfg)}")
-            # logging.info(f"Subprocess arguments: {train_args}")
             with open(rl_filepath, 'w') as f:
                 process = subprocess.Popen(train_args, stdout=f, stderr=f)
 
-            # with open(rl_filepath, 'w') as f:
-            #     process = subprocess.Popen(['python', '-u', f'{ISAAC_ROOT_DIR}/train.py',  
-            #                                 'hydra/output=subprocess',
-            #                                 f'task={task}{suffix}', f'wandb_activate={cfg.use_wandb}',
-            #                                 f'wandb_entity={cfg.wandb_username}', f'wandb_project={cfg.wandb_project}',
-            #                                 f'headless={not cfg.capture_video}', f'capture_video={cfg.capture_video}', 'force_render=False',
-            #                                 f'max_iterations={cfg.max_iterations}'],
-            #                                 stdout=f, stderr=f)
             block_until_training(rl_filepath, log_status=True, iter_num=iter, response_id=response_id)
             process.wait() # PVD
             rl_runs.append(process)

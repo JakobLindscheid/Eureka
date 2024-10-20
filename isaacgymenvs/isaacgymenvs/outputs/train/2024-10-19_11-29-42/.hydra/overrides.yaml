@@ -1,4 +1,0 @@
-- task.sim.gravity=[2.54, 0.0, -9.475]
-- experiment=Ant3_random_down10
-- task=Ant3
-- task.task.randomize=True

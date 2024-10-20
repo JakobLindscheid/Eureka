@@ -21,16 +21,16 @@ env:
     restitution: 0.0
     staticFriction: 1.0
   powerScale: 1.0
-  terminationHeight: 0.8
+  terminationHeight: 0.45
   upWeight: 0.1
 name: HumanoidGPT
 physics_engine: ${..physics_engine}
 sim:
   dt: 0.0166
   gravity:
+  - 1.7
   - 0.0
-  - 0.0
-  - -9.81
+  - -9.66
   physx:
     bounce_threshold_velocity: 0.2
     contact_collection: 0
@@ -136,4 +136,4 @@ task:
         - 0.4
         schedule: linear
         schedule_steps: 3000
-  randomize: true
+  randomize: false

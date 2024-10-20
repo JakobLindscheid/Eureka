@@ -1,7 +1,7 @@
 import os
 import re
 import subprocess
-import yaml  # To read the YAML config file
+import yaml
 
 # Base directory where all simulation runs are stored
 base_dir = "/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs/outputs/train"
@@ -36,6 +36,18 @@ def get_experiment_config(config_file_path):
             
         return experiment_name, gravity
 
+# Function to find the correct .pth file if the timestamp is slightly off
+def find_pth_file(runs_dir, experiment_name):
+    print(f"Searching for .pth file in {runs_dir} for experiment {experiment_name}")
+    for run_subdir in os.listdir(runs_dir):
+        nn_dir = os.path.join(runs_dir, run_subdir, "nn")
+        pth_file = os.path.join(nn_dir, f"{experiment_name}.pth")
+        if os.path.isfile(pth_file):
+            print(f"Found .pth file: {pth_file}")
+            return pth_file
+    print(f"No .pth file found for {experiment_name} in {runs_dir}")
+    return None
+
 # Collect and sort available simulation directories by date-time format (oldest first)
 tasks = []
 for subdir in sorted(os.listdir(base_dir)):
@@ -56,14 +68,12 @@ for subdir in sorted(os.listdir(base_dir)):
                         if os.path.isfile(config_file_path):
                             experiment_name, gravity = get_experiment_config(config_file_path)  # Fetch experiment and gravity
                             if experiment_name:
-                                # Construct the expected path to the .pth file using task, experiment_name, and date-time
-                                checkpoint_path = os.path.join(subdir_path, "runs", f"{experiment_name}-{subdir}", "nn", f"{experiment_name}.pth")
-                                print(f"Looking for .pth file at: {checkpoint_path}")
-                                if os.path.isfile(checkpoint_path):
-                                    print(f".pth file found: {checkpoint_path}")
+                                # Search for the correct .pth file in the runs directory
+                                pth_file = find_pth_file(runs_dir, experiment_name)
+                                if pth_file:
                                     tasks.append((task_name, experiment_name, subdir, gravity))  # Include gravity
                                 else:
-                                    print(f"No .pth file found in {checkpoint_path}")
+                                    print(f"No .pth file found for {experiment_name} in {runs_dir}")
                         else:
                             print(f"No config.yaml found in {config_file_path}")
                 else:
@@ -88,18 +98,22 @@ else:
     # Format gravity properly for command line use
     gravity_str = "[" + ", ".join(map(str, selected_gravity)) + "]"
 
-    # Construct the command
-    checkpoint_path = os.path.join(base_dir, selected_date, "runs", f"{selected_experiment}-{selected_date}", "nn", f"{selected_experiment}.pth")
-    print(f"\nRunning test with checkpoint at: {checkpoint_path}")
-    
-    command = [
-        "python", "/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs/train.py",
-        f"task={selected_task}",
-        f"checkpoint={checkpoint_path}",
-        f"+task.sim.gravity={gravity_str}",  # Pass formatted gravity here
-        "test=True", "num_envs=4096", "headless=False", "force_render=True"
-    ]
+    # Re-construct the correct checkpoint path using the found .pth file
+    runs_dir = os.path.join(base_dir, selected_date, "runs")
+    checkpoint_path = find_pth_file(runs_dir, selected_experiment)
+    if checkpoint_path:
+        print(f"\nRunning test with checkpoint at: {checkpoint_path}")
+        
+        command = [
+            "python", "/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs/train.py",
+            f"task={selected_task}",
+            f"checkpoint={checkpoint_path}",
+            f"+task.sim.gravity={gravity_str}",  # Pass formatted gravity here
+            "test=True", "num_envs=4096", "headless=True", "force_render=False"
+        ]
 
-    # Execute the command
-    print(f"Running test for {selected_task} (Experiment: {selected_experiment}, Gravity: {gravity_str}) from {selected_date}...")
-    subprocess.run(command)
+        # Execute the command
+        print(f"Running test for {selected_task} (Experiment: {selected_experiment}, Gravity: {gravity_str}) from {selected_date}...")
+        subprocess.run(command)
+    else:
+        print(f"Failed to find a valid checkpoint path for {selected_experiment}")
