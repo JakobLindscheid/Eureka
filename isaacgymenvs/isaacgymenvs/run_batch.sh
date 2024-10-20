@@ -18,16 +18,14 @@ experiment_suffixes=(
     "flat"
     "down05"
     "down10"
-    "down15"
     "down20"
     "up05"
     "up10"
-    "up15"
     "up20"
 )
 
 # List of tasks
-tasks=("Ant" "Ant3" "Humanoid")
+tasks=("Ant" "Ant3")
 
 # Number of repetitions
 num_repeats=10
