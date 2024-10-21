@@ -1,3 +1,4 @@
+import wandb
 from rl_games.common.algo_observer import AlgoObserver
 
 from isaacgymenvs.utils.utils import retry
@@ -11,13 +12,15 @@ class WandbAlgoObserver(AlgoObserver):
         super().__init__()
         self.cfg = cfg
 
+        self.successes = []
+        self.gpt_rewards = []
+        self.gt_rewards = []
+
     def before_init(self, base_name, config, experiment_name):
         """
         Must call initialization of Wandb before RL-games summary writer is initialized, otherwise
         sync_tensorboard does not work.
         """
-
-        import wandb
 
         cfg = self.cfg
         # ema = cfg.task.env.actionsMovingAverage
@@ -59,3 +62,21 @@ class WandbAlgoObserver(AlgoObserver):
             wandb.config.update(self.cfg, allow_val_change=True)
         else:
             wandb.config.update(omegaconf_to_dict(self.cfg), allow_val_change=True)
+
+    def process_infos(self, infos, done_indices):
+        assert isinstance(infos, dict), 'AlgoObserver expects dict info'
+        if "consecutive_successes" in infos:
+            self.successes.append(infos["consecutive_successes"])
+
+        if "gpt_reward" in infos:
+            self.gpt_rewards.append(infos["gpt_reward"])
+
+        if "gt_reward" in infos:
+            self.gt_rewards.append(infos["gt_reward"])
+
+    def after_print_stats(self, frame, epoch_num, total_time):
+        wandb.log({
+            k: sum(v) / len(v) 
+            for k, v in [('success', self.successes), ('gpt_reward', self.gpt_rewards), ('gt_reward', self.gt_rewards)] 
+            if len(v) > 0
+        })

@@ -11,6 +11,9 @@ def find_files_with_substring(directory, substring):
     return matches
 
 def load_tensorboard_logs(path):
+    import logging
+    httpx_logger = logging.getLogger("tensorboard")
+    httpx_logger.setLevel(logging.WARNING)
     data = defaultdict(list)
     event_acc = EventAccumulator(path)
     event_acc.Reload()  # Load all data written so far

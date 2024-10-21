@@ -32,11 +32,14 @@ import logging
 import os
 import datetime
 
-import isaacgym
+try:
+    import isaacgym
+except ImportError:
+    logging.warning("Isaac Gym is not installed. If you are running an Isaac Gym task, please install it.")
 
 import hydra
 from hydra.utils import to_absolute_path
-from isaacgymenvs.tasks import isaacgym_task_map
+# from isaacgymenvs.tasks import isaacgym_task_map
 from omegaconf import DictConfig, OmegaConf
 import gym
 import sys 
@@ -47,7 +50,7 @@ from isaacgymenvs.utils.reformat import omegaconf_to_dict, print_dict
 from isaacgymenvs.utils.utils import set_np_formatting, set_seed
 
 # ROOT_DIR = os.getcwd()
-ROOT_DIR = os.path.dirname(os.path.realpath(__file__))
+ROOT_DIR = os.path.dirname(os.path.realpath(__file__)) + "/isaacgymenvs"
 
 def preprocess_train_config(cfg, config_dict):
     """
@@ -72,7 +75,7 @@ def preprocess_train_config(cfg, config_dict):
     return config_dict
 
 
-@hydra.main(config_name="config", config_path="./cfg")
+@hydra.main(config_name="config", config_path="./isaacgymenvs/cfg", version_base="1.1")
 def launch_rlg_hydra(cfg: DictConfig):
 
     from isaacgymenvs.utils.rlgames_utils import RLGPUEnv, RLGPUAlgoObserver, MultiObserver, ComplexObsRLGPUEnv
@@ -87,8 +90,8 @@ def launch_rlg_hydra(cfg: DictConfig):
     import isaacgymenvs
 
 
-    time_str = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    run_name = f"{cfg.wandb_name}_{time_str}"
+    # time_str = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    run_name = cfg.wandb_name # f"{cfg.wandb_name}_{time_str}"
 
     # ensure checkpoints can be specified as relative paths
     if cfg.checkpoint:
@@ -183,17 +186,8 @@ def launch_rlg_hydra(cfg: DictConfig):
         wandb_observer = WandbAlgoObserver(cfg)
         observers.append(wandb_observer)
 
-    # dump config dict
-    exp_date = cfg.train.params.config.name + '-{date:%Y-%m-%d_%H-%M-%S}'.format(date=datetime.datetime.now())
-    experiment_dir = os.path.join('runs', exp_date)
-    print("Network Directory:", Path.cwd() / experiment_dir / "nn")
-    print("Tensorboard Directory:", Path.cwd() / experiment_dir / "summaries")
-
-    os.makedirs(experiment_dir, exist_ok=True)
-    with open(os.path.join(experiment_dir, 'config.yaml'), 'w') as f:
-        f.write(OmegaConf.to_yaml(cfg))
-    rlg_config_dict['params']['config']['log_dir'] = exp_date
-
+    rlg_config_dict['params']['config']['full_experiment_name'] = cfg.wandb_name
+    
     # convert CLI arguments into dictionary
     # create runner and set the settings
     runner = build_runner(MultiObserver(observers))
@@ -207,8 +201,15 @@ def launch_rlg_hydra(cfg: DictConfig):
         'sigma': cfg.sigma if cfg.sigma != '' else None
     })
 
-    if cfg.wandb_activate and rank == 0:
-        wandb.finish()
+    # dump config dict
+    if not cfg.test:
+        experiment_dir = os.path.join('runs', os.listdir('runs')[0])
+        print("Network Directory:", Path.cwd() / experiment_dir / "nn")
+        print("Tensorboard Directory:", Path.cwd() / experiment_dir / "summaries")
+
+        os.makedirs(experiment_dir, exist_ok=True)
+        with open(os.path.join(experiment_dir, 'config.yaml'), 'w') as f:
+            f.write(OmegaConf.to_yaml(cfg))
         
 if __name__ == "__main__":
     launch_rlg_hydra()

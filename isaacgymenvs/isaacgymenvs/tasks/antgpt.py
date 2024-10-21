@@ -1,30 +1,3 @@
-# Copyright (c) 2018-2023, NVIDIA Corporation
-# All rights reserved.
-#
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are met:
-#
-# 1. Redistributions of source code must retain the above copyright notice, this
-#    list of conditions and the following disclaimer.
-#
-# 2. Redistributions in binary form must reproduce the above copyright notice,
-#    this list of conditions and the following disclaimer in the documentation
-#    and/or other materials provided with the distribution.
-#
-# 3. Neither the name of the copyright holder nor the names of its
-#    contributors may be used to endorse or promote products derived from
-#    this software without specific prior written permission.
-#
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import numpy as np
 import os
@@ -38,7 +11,7 @@ from isaacgymenvs.utils.torch_jit_utils import *
 from isaacgymenvs.tasks.base.vec_task import VecTask
 
 
-class Ant(VecTask):
+class AntGPT(VecTask):
 
     def __init__(self, cfg, rl_device, sim_device, graphics_device_id, headless, virtual_screen_capture, force_render):
 
@@ -74,7 +47,6 @@ class Ant(VecTask):
             cam_target = gymapi.Vec3(45.0, 25.0, 0.0)
             self.gym.viewer_camera_look_at(self.viewer, None, cam_pos, cam_target)
 
-        # get gym GPU state tensors
         actor_root_state = self.gym.acquire_actor_root_state_tensor(self.sim)
         dof_state_tensor = self.gym.acquire_dof_state_tensor(self.sim)
         sensor_tensor = self.gym.acquire_force_sensor_tensor(self.sim)
@@ -89,7 +61,6 @@ class Ant(VecTask):
         self.initial_root_states = self.root_states.clone()
         self.initial_root_states[:, 7:13] = 0  # set lin_vel and ang_vel to 0
 
-        # create some wrapper tensors for different slices
         self.dof_state = gymtorch.wrap_tensor(dof_state_tensor)
         self.dof_pos = self.dof_state.view(self.num_envs, self.num_dof, 2)[..., 0]
         self.dof_vel = self.dof_state.view(self.num_envs, self.num_dof, 2)[..., 1]
@@ -99,7 +70,6 @@ class Ant(VecTask):
                                            torch.where(self.dof_limits_upper < zero_tensor, self.dof_limits_upper, self.initial_dof_pos))
         self.initial_dof_vel = torch.zeros_like(self.dof_vel, device=self.device, dtype=torch.float)
 
-        # initialize some data used later on
         self.up_vec = to_torch(get_axis_params(1., self.up_axis_idx), device=self.device).repeat((self.num_envs, 1))
         self.heading_vec = to_torch([1, 0, 0], device=self.device).repeat((self.num_envs, 1))
         self.inv_start_rot = quat_conjugate(self.start_rotation).repeat((self.num_envs, 1))
@@ -123,7 +93,6 @@ class Ant(VecTask):
         print(f'num envs {self.num_envs} env spacing {self.cfg["env"]["envSpacing"]}')
         self._create_envs(self.num_envs, self.cfg["env"]['envSpacing'], int(np.sqrt(self.num_envs)))
 
-        # If randomizing, apply once immediately on startup before the fist sim step
         if self.randomize:
             self.apply_randomizations(self.randomization_params)
 
@@ -149,7 +118,6 @@ class Ant(VecTask):
         asset_file = os.path.basename(asset_path)
 
         asset_options = gymapi.AssetOptions()
-        # Note - DOF mode is set in the MJCF file and loaded by Isaac Gym
         asset_options.default_dof_drive_mode = gymapi.DOF_MODE_NONE
         asset_options.angular_damping = 0.0
 
@@ -157,7 +125,6 @@ class Ant(VecTask):
         self.num_dof = self.gym.get_asset_dof_count(ant_asset)
         self.num_bodies = self.gym.get_asset_rigid_body_count(ant_asset)
 
-        # Note - for this asset we are loading the actuator info from the MJCF
         actuator_props = self.gym.get_asset_actuator_properties(ant_asset)
         motor_efforts = [prop.motor_effort for prop in actuator_props]
         self.joint_gears = to_torch(motor_efforts, device=self.device)
@@ -173,7 +140,6 @@ class Ant(VecTask):
         extremity_names = [s for s in body_names if "foot" in s]
         self.extremities_index = torch.zeros(len(extremity_names), dtype=torch.long, device=self.device)
 
-        # create force sensors attached to the "feet"
         extremity_indices = [self.gym.find_asset_rigid_body_index(ant_asset, name) for name in extremity_names]
         sensor_pose = gymapi.Transform()
         for body_idx in extremity_indices:
@@ -185,7 +151,6 @@ class Ant(VecTask):
         self.dof_limits_upper = []
 
         for i in range(self.num_envs):
-            # create env instance
             env_ptr = self.gym.create_env(
                 self.sim, lower, upper, num_per_row
             )
@@ -214,7 +179,10 @@ class Ant(VecTask):
             self.extremities_index[i] = self.gym.find_actor_rigid_body_handle(self.envs[0], self.ant_handles[0], extremity_names[i])
 
     def compute_reward(self, actions):
-        self.rew_buf[:], self.reset_buf[:], self.consecutive_successes[:] = compute_ant_reward(
+        self.rew_buf[:], self.rew_dict = compute_reward(self.root_states, self.actions)
+        self.extras['gpt_reward'] = self.rew_buf.mean().item()
+        for rew_state in self.rew_dict: self.extras[rew_state] = self.rew_dict[rew_state].mean()
+        self.gt_rew_buf, self.reset_buf[:], self.consecutive_successes[:] = compute_success(
             self.obs_buf,
             self.reset_buf,
             self.consecutive_successes,
@@ -231,15 +199,13 @@ class Ant(VecTask):
             self.death_cost,
             self.max_episode_length
         )
-
+        self.extras['gt_reward'] = self.gt_rew_buf.mean()
         self.extras['consecutive_successes'] = self.consecutive_successes.mean()
 
     def compute_observations(self):
         self.gym.refresh_dof_state_tensor(self.sim)
         self.gym.refresh_actor_root_state_tensor(self.sim)
         self.gym.refresh_force_sensor_tensor(self.sim)
-        #print("Feet forces and torques: ", self.vec_sensor_tensor[0, :])
-        # print(self.vec_sensor_tensor.shape)
 
         self.obs_buf[:], self.potentials[:], self.prev_potentials[:], self.up_vec[:], self.heading_vec[:] = compute_ant_observations(
             self.obs_buf, self.root_states, self.targets, self.potentials,
@@ -249,7 +215,6 @@ class Ant(VecTask):
             self.basis_vec0, self.basis_vec1, self.up_axis_idx)
 
     def reset_idx(self, env_ids):
-        # Randomization can happen only at reset time, since it can reset actor positions on GPU
         if self.randomize:
             self.apply_randomizations(self.randomization_params)
 
@@ -294,7 +259,6 @@ class Ant(VecTask):
         self.compute_observations()
         self.compute_reward(self.actions)
 
-        # debug viz
         if self.viewer and self.debug_viz:
             self.gym.clear_lines(self.viewer)
             self.gym.refresh_actor_root_state_tensor(self.sim)
@@ -342,7 +306,6 @@ def compute_ant_observations(obs_buf, root_states, targets, potentials,
 
     dof_pos_scaled = unscale(dof_pos, dof_limits_lower, dof_limits_upper)
 
-    # obs_buf shapes: 1, 3, 3, 1, 1, 1, 1, 1, num_dofs(8), num_dofs(8), 24, num_dofs(8)
     obs = torch.cat((torso_position[:, up_axis_idx].view(-1, 1), vel_loc, angvel_loc,
                      yaw.unsqueeze(-1), roll.unsqueeze(-1), angle_to_target.unsqueeze(-1),
                      up_proj.unsqueeze(-1), heading_proj.unsqueeze(-1), dof_pos_scaled,
@@ -351,13 +314,10 @@ def compute_ant_observations(obs_buf, root_states, targets, potentials,
 
     return obs, potentials, prev_potentials_new, up_vec, heading_vec
 
-#####################################################################
-###=========================jit functions=========================###
-#####################################################################
 
 
 @torch.jit.script
-def compute_ant_reward(
+def compute_success(
     obs_buf,
     reset_buf,
     consecutive_successes,
@@ -376,33 +336,75 @@ def compute_ant_reward(
 ):
     # type: (Tensor, Tensor, Tensor, Tensor, Tensor, float, float, Tensor, Tensor, float, float, float, float, float, float) -> Tuple[Tensor, Tensor, Tensor]
 
-    # reward from direction headed
     heading_weight_tensor = torch.ones_like(obs_buf[:, 11]) * heading_weight
     heading_reward = torch.where(obs_buf[:, 11] > 0.8, heading_weight_tensor, heading_weight * obs_buf[:, 11] / 0.8)
 
-    # aligning up axis of ant and environment
     up_reward = torch.zeros_like(heading_reward)
     up_reward = torch.where(obs_buf[:, 10] > 0.93, up_reward + up_weight, up_reward)
 
-    # energy penalty for movement
     actions_cost = torch.sum(actions ** 2, dim=-1)
     electricity_cost = torch.sum(torch.abs(actions * obs_buf[:, 20:28]), dim=-1)
     dof_at_limit_cost = torch.sum(obs_buf[:, 12:20] > 0.99, dim=-1)
 
-    # reward for duration of staying alive
     alive_reward = torch.ones_like(potentials) * 0.5
     progress_reward = potentials - prev_potentials
 
     total_reward = progress_reward + alive_reward + up_reward + heading_reward - \
         actions_cost_scale * actions_cost - energy_cost_scale * electricity_cost - dof_at_limit_cost * joints_at_limit_cost_scale
 
-    # adjust reward for fallen agents
     total_reward = torch.where(obs_buf[:, 0] < termination_height, torch.ones_like(total_reward) * death_cost, total_reward)
 
-    # reset agents
     consecutive_successes = progress_reward.mean()
     reset = torch.where(obs_buf[:, 0] < termination_height, torch.ones_like(reset_buf), reset_buf)
     reset = torch.where(progress_buf >= max_episode_length - 1, torch.ones_like(reset_buf), reset)
 
-    # total_reward = progress_reward
     return total_reward, reset, consecutive_successes
+
+from typing import Tuple, Dict
+import math
+import torch
+from torch import Tensor
+@torch.jit.script
+def compute_reward(root_states: torch.Tensor, actions: torch.Tensor) -> Tuple[torch.Tensor, Dict[str, torch.Tensor]]:
+    # Extract forward velocity
+    velocity = root_states[:, 7:10]
+    forward_velocity = velocity[:, 0]
+
+    # Speed reward (linear transformation)
+    speed_reward_lin = forward_velocity
+    speed_weight = 1.0
+
+    # Action penalty (reduced influence)
+    action_penalty = torch.sum(actions**2, dim=-1)
+    action_penalty_weight = 0.1  # Reduced weight to focus less on penalty
+
+    # Re-defined Upright reward with increased sensitivity
+    torso_position = root_states[:, 0:3]
+    upright_temp = 5.0  # Increased to be more sensitive
+    upright_deviation = (torso_position[:, 2] - 1.0) ** 2
+    upright_reward = torch.exp(-upright_temp * upright_deviation)
+
+    # Lateral stability penalty re-defined
+    lateral_temp = 0.2
+    lateral_movement = velocity[:, 1] ** 2  # Squared to penalize stronger deviations
+    lateral_stability_penalty = torch.exp(lateral_temp * lateral_movement)
+
+    # Total reward
+    total_reward = (
+        speed_weight * speed_reward_lin
+        - action_penalty_weight * action_penalty
+        + upright_reward
+        - lateral_stability_penalty
+    )
+
+    total_reward = torch.clamp(total_reward, min=0.0)
+
+    # Reward components dictionary
+    reward_components = {
+        "speed_reward_lin": speed_reward_lin,
+        "action_penalty": action_penalty,
+        "upright_reward": upright_reward,
+        "lateral_stability_penalty": lateral_stability_penalty
+    }
+
+    return total_reward, reward_components
