@@ -76,50 +76,51 @@ for idx, (task_name, experiment_name, subdir, gravity) in enumerate(tasks, 1):
     gravity_str = "[" + ", ".join(map(str, gravity)) + "]"
     runs_dir = os.path.join(base_dir, subdir, "runs")
     checkpoint_path = find_pth_file(runs_dir, experiment_name)
-
+    n_test=1
     if checkpoint_path:
         # Debug: Start of each simulation
-        print(f"Starting simulation {idx}: Task={task_name}, Experiment={experiment_name}, Gravity={gravity_str}")
-        
-        # Construct the command
-        command = [
-            "python", "/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs/train.py",
-            f"task={task_name}",
-            f"checkpoint={checkpoint_path}",
-            f"+task.sim.gravity={gravity_str}",
-            "test=True", "num_envs=4096", "headless=True", "force_render=False"
-        ]
+        for run_number in range(0, n_test):  # Run each simulation n_test times
+            print(f"Starting simulation {idx}: Task={task_name}, Experiment={experiment_name}, Gravity={gravity_str}")
+            
+            # Construct the command
+            command = [
+                "python", "/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs/train.py",
+                f"task={task_name}",
+                f"checkpoint={checkpoint_path}",
+                f"+task.sim.gravity={gravity_str}",
+                "test=True", "num_envs=4096", "headless=True", "force_render=False"
+            ]
 
-        # Run the simulation
-        subprocess.run(command)
+            # Run the simulation
+            subprocess.run(command)
 
-        # Read the consecutive success statistics from the log file
-        log_file_path = f"{log_dir}/consecutive_successes_log.txt"
-        try:
-            with open(log_file_path, "r") as log_file:
-                successes = [float(line.strip()) for line in log_file]
-                if successes:
-                    slice_index = int(len(successes) * 0.9)
-                    mean_success = round(np.mean(successes[slice_index:]), 3)
-                    stdev_success = round(np.std(successes[slice_index:]), 3)
-                    max_success = round(max(successes[slice_index:]), 3)
-                else:
-                    mean_success = stdev_success = max_success = "N/A"
-        except FileNotFoundError:
-            mean_success = stdev_success = max_success = "N/A"
+            # Read the consecutive success statistics from the log file
+            log_file_path = f"{log_dir}/consecutive_successes_log.txt"
+            try:
+                with open(log_file_path, "r") as log_file:
+                    successes = [float(line.strip()) for line in log_file]
+                    if successes:
+                        slice_index = int(len(successes) * 0.9)
+                        mean_success = round(np.mean(successes[slice_index:]), 3)
+                        stdev_success = round(np.std(successes[slice_index:]), 3)
+                        max_success = round(max(successes[slice_index:]), 3)
+                    else:
+                        mean_success = stdev_success = max_success = "N/A"
+            except FileNotFoundError:
+                mean_success = stdev_success = max_success = "N/A"
 
-        # Write the results to the CSV file
-        with open(csv_file_path, mode='a', newline='') as csv_file:  # Open in append mode to add each simulation result
-            writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-            writer.writerow({
-                'Number': idx,
-                'Task': task_name,
-                'Experiment': experiment_name,
-                'Gravity': gravity_str,
-                'Mean Consecutive Success': mean_success,
-                'Stdev Consecutive Success': stdev_success,
-                'Max Consecutive Success': max_success
-            })
+            # Write the results to the CSV file
+            with open(csv_file_path, mode='a', newline='') as csv_file:  # Open in append mode to add each simulation result
+                writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+                writer.writerow({
+                    'Number': idx,
+                    'Task': task_name,
+                    'Experiment': experiment_name,
+                    'Gravity': gravity_str,
+                    'Mean Consecutive Success': mean_success,
+                    'Stdev Consecutive Success': stdev_success,
+                    'Max Consecutive Success': max_success
+                })
 
-        # Debug: After each simulation, confirm result is written
-        print(f"Results for {task_name} - {experiment_name} written to CSV.")
+            # Debug: After each simulation, confirm result is written
+            print(f"Results for {task_name} - {experiment_name} written to CSV.")
