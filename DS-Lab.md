@@ -15,14 +15,19 @@ sh ./setup.sh
 ```
 
 # How to use
-## Access a terminal in the container
--v mounts the Eureka directory in the container  
--w specifies the working directory
+
+Run any command on the container by calling run.sh:
 ```
-udocker run -v ~/Eureka:/workspace/Eureka -w /workspace/Eureka/eureka eureka /bin/bash
+sh run.sh echo test
+```
+
+## Access a terminal in the container
+Just don't pass a command.
+```
+sh run.sh
 ```
 ## Run a Eureka experiment:
---env to pass an environment variable like API keys  
+Add API keys as environment variables. The run file automatically transfers the `OPENAI_API_KEY` and the `GROQ_KEY` variables to the container. You can easily add more in `run.sh`.  
 Modify arguments in the python call.
 ```
 sh run.sh python eureka.py env_parent=isaac env=humanoid use_wandb=True
@@ -32,9 +37,4 @@ sh run.sh python eureka.py env_parent=isaac env=humanoid use_wandb=True
 Set suffix to "" when evaluating the human reward, leave unchanged otherwise.
 ```
 sh run.sh python eureka.py env_parent=isaac env=humanoid evaluate_only=True reward_code_path=/path/to/env.py suffix="" use_wandb=True
-```
-
-## Capture a video of a specified training checkpoint:
-```
-sh run.sh python isaacgymenvs/train.py test=True capture_video=True headless=False force_render=True task=ShadowHandSpinGPT checkpoint=path/to/ckpt.pth
 ```

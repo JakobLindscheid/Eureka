@@ -1,6 +1,6 @@
 params:
   algo:
-    name: a2c_discrete
+    name: a2c_continuous
   config:
     bounds_loss_coef: 0.0001
     clip_value: true
@@ -37,7 +37,7 @@ params:
   load_checkpoint: ${if:${...checkpoint},True,False}
   load_path: ${...checkpoint}
   model:
-    name: discrete_a2c
+    name: continuous_a2c_logstd
   network:
     mlp:
       activation: elu
@@ -51,5 +51,13 @@ params:
     name: actor_critic
     separate: false
     space:
-      discrete: null
+      continuous:
+        fixed_sigma: true
+        mu_activation: None
+        mu_init:
+          name: default
+        sigma_activation: None
+        sigma_init:
+          name: const_initializer
+          val: 0
   seed: ${...seed}

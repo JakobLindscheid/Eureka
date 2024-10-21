@@ -2,16 +2,25 @@ params:
   seed: ${...seed}
 
   algo:
-    name: a2c_discrete
+    name: a2c_continuous
 
   model:
-    name: discrete_a2c
+    name: continuous_a2c_logstd
 
   network:
     name: actor_critic
     separate: False
     space:
-      discrete:
+      continuous:
+        mu_activation: None
+        sigma_activation: None
+
+        mu_init:
+          name: default
+        sigma_init:
+          name: const_initializer
+          val: 0
+        fixed_sigma: True
     mlp:
       units: [32, 32]
       activation: elu

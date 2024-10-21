@@ -257,7 +257,7 @@ def main(cfg):
                 exec_success = True
                 lines = stdout_str.split('\n')
                 for i, line in enumerate(lines):
-                    if line.startswith('Tensorboard Directory:'): # TODO: error handling for tensorboard logdir not found
+                    if line.startswith('Tensorboard Directory:'):
                         break 
                 tensorboard_logdir = line.split(':')[-1].strip() 
                 tensorboard_logs = load_tensorboard_logs(tensorboard_logdir)
