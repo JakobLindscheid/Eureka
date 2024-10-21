@@ -32,7 +32,10 @@ import logging
 import os
 import datetime
 
-import isaacgym
+try:
+    import isaacgym
+except ImportError:
+    logging.warning("Isaac Gym is not installed. If you are running an Isaac Gym task, please install it.")
 
 import hydra
 from hydra.utils import to_absolute_path
