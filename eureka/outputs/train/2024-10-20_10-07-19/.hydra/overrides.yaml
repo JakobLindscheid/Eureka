@@ -1,7 +1,0 @@
-- task=Ant3GPT
-- checkpoint=/home/vandriel/Documents/GitHub/Eureka/eureka/outputs/eureka/2024-10-19_01-36-59/policy-2024-10-19_02-54-18/runs/Ant3GPT-2024-10-19_02-54-18/nn/Ant3GPT.pth
-- +task.sim.gravity=[0.0, 0.0, -9.81]
-- test=True
-- num_envs=4096
-- headless=True
-- force_render=False

@@ -1,7 +1,0 @@
-- task=Ant
-- checkpoint=/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs/outputs/train/2024-10-20_18-54-35/runs/Ant_up10-2024-10-20_18-54-35/nn/Ant_up10.pth
-- +task.sim.gravity=[-1.7, 0.0, -9.66]
-- test=True
-- num_envs=4096
-- headless=True
-- force_render=False
