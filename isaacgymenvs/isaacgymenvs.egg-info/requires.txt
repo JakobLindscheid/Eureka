@@ -1,6 +1,0 @@
-gym==0.23.1
-torch
-omegaconf
-termcolor
-hydra-core>=1.1
-pyvirtualdisplay
