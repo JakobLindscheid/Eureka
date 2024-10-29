@@ -1,0 +1,14 @@
+openai==0.28
+wandb
+transformers
+google-generativeai
+groq
+pillow==10.3.0
+joblib
+gpustat
+numpy==1.19.5
+matplotlib
+imageio-ffmpeg
+-f https://download.pytorch.org/whl/torch_stable.html
+torch==1.8.0+cu111
+torchvision==0.9

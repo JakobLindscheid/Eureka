@@ -85,7 +85,7 @@ import ast
 
 def get_function_signature(code_string):
     # Parse the code string into an AST
-    module = ast.parse(code_string)
+    module = ast.parse(code_string.strip())
 
     # Find the function definitions
     function_defs = [node for node in module.body if isinstance(node, ast.FunctionDef)]
@@ -99,8 +99,11 @@ def get_function_signature(code_string):
 
     input_lst = []
     # Construct the function signature (within object class)
-    signature = function_def.name + '(self.' + ', self.'.join(arg.arg for arg in function_def.args.args) + ')'
+    signature = function_def.name + '(' + ', '.join( "self." + arg.arg for arg in function_def.args.args if arg.arg != "self") + ')'
     for arg in function_def.args.args:
-        input_lst.append(arg.arg)
+        if arg.arg == "self":
+            signature = "self." + signature
+        else:
+            input_lst.append(arg.arg)
     return signature, input_lst
 

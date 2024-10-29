@@ -52,12 +52,12 @@ sigma: ''
 multi_gpu: False
 
 wandb_activate: False
-wandb_group: ''
-wandb_name: ${train.params.config.name}
+wandb_group: '${train.params.config.name}_human_reward'
+wandb_name: "${train.params.config.name}_human-reward_${now:%Y-%m-%d}_${now:%H-%M-%S}"
 # wandb_entity: ''
 # wandb_project: 'isaacgymenvs'
-wandb_entity: 'koza'
-wandb_project: 'isaac'
+wandb_entity: 'liacs_eureka'
+wandb_project: 'eureka'
 wandb_tags: []
 wandb_logcode_dir: '' 
 

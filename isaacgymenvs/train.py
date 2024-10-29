@@ -32,7 +32,11 @@ import logging
 import os
 import datetime
 import numpy as np
-import isaacgym
+
+try:
+    import isaacgym
+except ImportError:
+    logging.warning("Isaac Gym is not installed. If you are running an Isaac Gym task, please install it.")
 
 import hydra
 from hydra.utils import to_absolute_path
@@ -48,7 +52,6 @@ from isaacgymenvs.utils.utils import set_np_formatting, set_seed
 
 # ROOT_DIR = os.getcwd()
 ROOT_DIR = os.path.dirname(os.path.realpath(__file__))
-print(f"ROOT_DIR={ROOT_DIR}")
 
 def preprocess_train_config(cfg, config_dict):
     """
@@ -72,11 +75,10 @@ def preprocess_train_config(cfg, config_dict):
 
     return config_dict
 
-# @hydra.main(config_name="config", config_path="./cfg")
+
 @hydra.main(config_name="config", config_path="./cfg", version_base="1.1")
 def launch_rlg_hydra(cfg: DictConfig):
-    # print(f"WARNING: {OmegaConf.to_yaml(cfg)}")  # This will print the merged config
-    # exit()
+
     from isaacgymenvs.utils.rlgames_utils import RLGPUEnv, RLGPUAlgoObserver, MultiObserver, ComplexObsRLGPUEnv
     from isaacgymenvs.utils.wandb_utils import WandbAlgoObserver
     from rl_games.common import env_configurations, vecenv
@@ -87,19 +89,21 @@ def launch_rlg_hydra(cfg: DictConfig):
     from isaacgymenvs.learning import amp_models
     from isaacgymenvs.learning import amp_network_builder
     import isaacgymenvs
-    # Initialize the log file by creating or clearing it at the start of training
+    """ # Initialize the log file by creating or clearing it at the start of training
     log_file_path = f"{ROOT_DIR}/consecutive_successes_log.txt"
     with open(log_file_path, "w") as f:
-        f.write("")  # This clears the file if it already exists or creates it if it doesn't
-    time_str = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    run_name = f"{cfg.wandb_name}_{time_str}"
+        f.write("")  # This clears the file if it already exists or creates it if it doesn't """
+
+
+    # time_str = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    run_name = cfg.wandb_name # f"{cfg.wandb_name}_{time_str}"
 
     # ensure checkpoints can be specified as relative paths
     if cfg.checkpoint:
         cfg.checkpoint = to_absolute_path(cfg.checkpoint)
 
     cfg_dict = omegaconf_to_dict(cfg)
-    print_dict(cfg_dict)
+    # print_dict(cfg_dict)
 
     # set numpy formatting for printing only
     set_np_formatting()
@@ -187,16 +191,7 @@ def launch_rlg_hydra(cfg: DictConfig):
         wandb_observer = WandbAlgoObserver(cfg)
         observers.append(wandb_observer)
 
-    # dump config dict
-    exp_date = cfg.train.params.config.name + '-{date:%Y-%m-%d_%H-%M-%S}'.format(date=datetime.datetime.now())
-    experiment_dir = os.path.join('runs', exp_date)
-    print("Network Directory:", Path.cwd() / experiment_dir / "nn")
-    print("Tensorboard Directory:", Path.cwd() / experiment_dir / "summaries")
-
-    os.makedirs(experiment_dir, exist_ok=True)
-    with open(os.path.join(experiment_dir, 'config.yaml'), 'w') as f:
-        f.write(OmegaConf.to_yaml(cfg))
-    rlg_config_dict['params']['config']['log_dir'] = exp_date
+    rlg_config_dict['params']['config']['full_experiment_name'] = cfg.wandb_name
 
     # convert CLI arguments into dictionary
     # create runner and set the settings
@@ -211,6 +206,16 @@ def launch_rlg_hydra(cfg: DictConfig):
         'sigma': cfg.sigma if cfg.sigma != '' else None
     })
 
+    # dump config dict
+    if not cfg.test:
+        experiment_dir = os.path.join('runs', os.listdir('runs')[0])
+        print("Network Directory:", Path.cwd() / experiment_dir / "nn")
+        print("Tensorboard Directory:", Path.cwd() / experiment_dir / "summaries")
+
+        os.makedirs(experiment_dir, exist_ok=True)
+        with open(os.path.join(experiment_dir, 'config.yaml'), 'w') as f:
+            f.write(OmegaConf.to_yaml(cfg))
+    
     # After runner.run() completes, read the log file for consecutive successes
     try:
         with open(f"{ROOT_DIR}/consecutive_successes_log.txt", "r") as f:

@@ -32,7 +32,11 @@ from rl_games.common import a2c_common
 from rl_games.common import schedulers
 from rl_games.common import vecenv
 
-from isaacgym.torch_utils import *
+try:
+    from isaacgym.torch_utils import *
+except ImportError:
+    print("Isaac Gym is not installed. If you are running an Isaac Gym task, please install it.")
+
 
 import time
 from datetime import datetime

@@ -10,8 +10,8 @@ from isaacgym.torch_utils import *
 from isaacgymenvs.utils.torch_jit_utils import *
 from isaacgymenvs.tasks.base.vec_task import VecTask
 
-ROOT_DIR='/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs'
-LOG_PATH = os.path.join(ROOT_DIR, "consecutive_successes_log.txt")
+""" ROOT_DIR='/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs'
+LOG_PATH = os.path.join(ROOT_DIR, "consecutive_successes_log.txt") """
 
 class HumanoidGPT(VecTask):
 
@@ -210,7 +210,8 @@ class HumanoidGPT(VecTask):
         )
         self.extras['gt_reward'] = self.gt_rew_buf.mean()
         self.extras['consecutive_successes'] = self.consecutive_successes.mean()
-        # PVD Log consecutive_successes to an external file       
+
+        """ # PVD Log consecutive_successes to an external file       
         # Ensure directory exists before writing
         log_dir = os.path.dirname(LOG_PATH)
         if not os.path.exists(log_dir):
@@ -219,7 +220,7 @@ class HumanoidGPT(VecTask):
 
         # Log consecutive_successes to an external file
         with open(LOG_PATH, "a") as f:
-            f.write(f"{self.consecutive_successes.mean().item()}\n")
+            f.write(f"{self.consecutive_successes.mean().item()}\n") """
 
     def compute_observations(self):
         self.gym.refresh_dof_state_tensor(self.sim)
