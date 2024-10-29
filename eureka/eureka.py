@@ -20,7 +20,7 @@ from utils.create_task import create_task
 from utils.extract_task_code import *
 
 EUREKA_ROOT_DIR = os.getcwd()
-print(f"EUREKA_ROOT_DIR = {EUREKA_ROOT_DIR}")
+# print(f"EUREKA_ROOT_DIR = {EUREKA_ROOT_DIR}")
 
 ISAAC_ROOT_DIR = f"{EUREKA_ROOT_DIR}/../isaacgymenvs/isaacgymenvs"
 
@@ -62,7 +62,7 @@ def main(cfg):
     env_name = cfg.env.env_name.lower()
     env_parent = cfg.env_parent # 'isaac' if f'{env_name}.py' in os.listdir(f'{EUREKA_ROOT_DIR}/envs/isaac') else 'dexterity'
     task_file = f'{EUREKA_ROOT_DIR}/envs/{env_parent}/{env_name}.py'
-    print(f"taskfile = {task_file}")
+    # print(f"taskfile = {task_file}")
     task_obs_file = f'{EUREKA_ROOT_DIR}/envs/{env_parent}/{env_name}_obs.py'
     shutil.copy(task_obs_file, f"env_init_obs.py")
     task_code_string  = file_to_string(task_file)
@@ -146,7 +146,7 @@ def main(cfg):
         code_runs = [] 
         rl_runs = []
         for response_id in range(cfg.sample):
-            response_cur = responses[response_id].message.content
+            response_cur = responses[response_id]["message"]["content"]
             logging.info(f"Iteration {iter}: Processing Code Run {response_id}")
 
             # Regex patterns to extract python code enclosed in GPT response
@@ -366,11 +366,11 @@ def main(cfg):
         # np.savez('summary.npz', max_successes=max_successes, execute_rates=execute_rates, best_code_paths=best_code_paths, max_successes_reward_correlation=max_successes_reward_correlation)
 
         if len(messages) == 2:
-            messages += [{"role": "assistant", "content": responses[best_sample_idx].message.content}]
+            messages += [{"role": "assistant", "content": responses[best_sample_idx]["message"]["content"]}]
             messages += [{"role": "user", "content": best_content}]
         else:
             assert len(messages) == 4
-            messages[-2] = {"role": "assistant", "content": responses[best_sample_idx].message.content}
+            messages[-2] = {"role": "assistant", "content": responses[best_sample_idx]["message"]["content"]}
             messages[-1] = {"role": "user", "content": best_content}
 
         # Save dictionary as JSON file

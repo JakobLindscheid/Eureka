@@ -1,4 +1,6 @@
 
+raise NotImplementedError("The paraphrase module was not used in the Eureka release and therefore not adapted for our project.")
+
 import sys
 import argparse
 from pathlib import Path

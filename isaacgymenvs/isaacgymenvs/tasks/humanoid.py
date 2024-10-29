@@ -37,8 +37,8 @@ from isaacgym.torch_utils import *
 from isaacgymenvs.utils.torch_jit_utils import *
 from isaacgymenvs.tasks.base.vec_task import VecTask
 
-ROOT_DIR='/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs'
-LOG_PATH = os.path.join(ROOT_DIR, "consecutive_successes_log.txt")
+""" ROOT_DIR='/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs'
+LOG_PATH = os.path.join(ROOT_DIR, "consecutive_successes_log.txt") """
 class Humanoid(VecTask):
 
     def __init__(self, cfg, rl_device, sim_device, graphics_device_id, headless, virtual_screen_capture, force_render):
@@ -241,7 +241,7 @@ class Humanoid(VecTask):
         )
 
         self.extras['consecutive_successes'] = self.consecutive_successes.mean()
-        # PVD Log consecutive_successes to an external file       
+        """ # PVD Log consecutive_successes to an external file       
         # Ensure directory exists before writing
         log_dir = os.path.dirname(LOG_PATH)
         if not os.path.exists(log_dir):
@@ -250,7 +250,7 @@ class Humanoid(VecTask):
 
         # Log consecutive_successes to an external file
         with open(LOG_PATH, "a") as f:
-            f.write(f"{self.consecutive_successes.mean().item()}\n")
+            f.write(f"{self.consecutive_successes.mean().item()}\n") """
 
     def compute_observations(self):
         self.gym.refresh_dof_state_tensor(self.sim)
