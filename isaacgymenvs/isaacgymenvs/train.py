@@ -31,6 +31,7 @@
 import logging
 import os
 import datetime
+import numpy as np
 
 try:
     import isaacgym
@@ -39,7 +40,7 @@ except ImportError:
 
 import hydra
 from hydra.utils import to_absolute_path
-# from isaacgymenvs.tasks import isaacgym_task_map
+from isaacgymenvs.tasks import isaacgym_task_map
 from omegaconf import DictConfig, OmegaConf
 import gym
 import sys 
@@ -50,7 +51,7 @@ from isaacgymenvs.utils.reformat import omegaconf_to_dict, print_dict
 from isaacgymenvs.utils.utils import set_np_formatting, set_seed
 
 # ROOT_DIR = os.getcwd()
-ROOT_DIR = os.path.dirname(os.path.realpath(__file__)) + "/isaacgymenvs"
+ROOT_DIR = os.path.dirname(os.path.realpath(__file__))
 
 def preprocess_train_config(cfg, config_dict):
     """
@@ -75,7 +76,7 @@ def preprocess_train_config(cfg, config_dict):
     return config_dict
 
 
-@hydra.main(config_name="config", config_path="./isaacgymenvs/cfg", version_base="1.1")
+@hydra.main(config_name="config", config_path="./cfg", version_base="1.1")
 def launch_rlg_hydra(cfg: DictConfig):
 
     from isaacgymenvs.utils.rlgames_utils import RLGPUEnv, RLGPUAlgoObserver, MultiObserver, ComplexObsRLGPUEnv
@@ -88,6 +89,10 @@ def launch_rlg_hydra(cfg: DictConfig):
     from isaacgymenvs.learning import amp_models
     from isaacgymenvs.learning import amp_network_builder
     import isaacgymenvs
+    """ # Initialize the log file by creating or clearing it at the start of training
+    log_file_path = f"{ROOT_DIR}/consecutive_successes_log.txt"
+    with open(log_file_path, "w") as f:
+        f.write("")  # This clears the file if it already exists or creates it if it doesn't """
 
 
     # time_str = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
@@ -187,7 +192,7 @@ def launch_rlg_hydra(cfg: DictConfig):
         observers.append(wandb_observer)
 
     rlg_config_dict['params']['config']['full_experiment_name'] = cfg.wandb_name
-    
+
     # convert CLI arguments into dictionary
     # create runner and set the settings
     runner = build_runner(MultiObserver(observers))
@@ -210,6 +215,29 @@ def launch_rlg_hydra(cfg: DictConfig):
         os.makedirs(experiment_dir, exist_ok=True)
         with open(os.path.join(experiment_dir, 'config.yaml'), 'w') as f:
             f.write(OmegaConf.to_yaml(cfg))
+    
+    # After runner.run() completes, read the log file for consecutive successes
+    try:
+        with open(f"{ROOT_DIR}/consecutive_successes_log.txt", "r") as f:
+            successes = [float(line.strip()) for line in f]
+            slice_index = int(len(successes) * 0.9)
+
+        # Redirect output to a file
+        with open(f"{ROOT_DIR}/output_batch.txt", "a") as output_file:
+            if successes:
+                success_message = f"Test success: {np.mean(successes[slice_index:]):.2f} pm {np.std(successes[slice_index:]):.2f}, Max: {max(successes[slice_index:]):.2f}\n"
+                print(success_message)  # This will still print to the console
+                output_file.write(success_message)  # Write to file
+            else:
+                no_success_message = "No successes logged.\n"
+                print(no_success_message)  # This will still print to the console
+                output_file.write(no_success_message)  # Write to file
+
+    except FileNotFoundError:
+        print("Log file not found. No successes were logged.")
+
+    if cfg.wandb_activate and rank == 0:
+        wandb.finish()
         
 if __name__ == "__main__":
     launch_rlg_hydra()

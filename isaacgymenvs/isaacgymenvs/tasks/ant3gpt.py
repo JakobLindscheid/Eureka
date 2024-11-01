@@ -10,10 +10,10 @@ from isaacgym.gymtorch import *
 from isaacgymenvs.utils.torch_jit_utils import *
 from isaacgymenvs.tasks.base.vec_task import VecTask
 
-""" ROOT_DIR='/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs'
-LOG_PATH = os.path.join(ROOT_DIR, "consecutive_successes_log.txt") """
+ROOT_DIR='/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs'
+LOG_PATH = os.path.join(ROOT_DIR, "consecutive_successes_log.txt")
 
-class AntGPT(VecTask):
+class Ant3GPT(VecTask):
 
     def __init__(self, cfg, rl_device, sim_device, graphics_device_id, headless, virtual_screen_capture, force_render):
 
@@ -152,6 +152,12 @@ class AntGPT(VecTask):
         self.dof_limits_lower = []
         self.dof_limits_upper = []
 
+        # PVD: Define the target leg's name prefix**
+        target_leg_prefix = "right_back" 
+
+        # PVD: Find the indices of the target leg's rigid bodies**
+        target_leg_indices = [i for i, name in enumerate(body_names) if target_leg_prefix in name.lower()]
+
 
         for i in range(self.num_envs):
             env_ptr = self.gym.create_env(
@@ -160,10 +166,10 @@ class AntGPT(VecTask):
             ant_handle = self.gym.create_actor(env_ptr, ant_asset, start_pose, "ant", i, 1, 0)
 
             for j in range(self.num_bodies):
-                # if j in target_leg_indices:
-                #     color = gymapi.Vec3(0.0, 1.0, 0.0)  # Green color for the target leg
-                # else:
-                color = gymapi.Vec3(0.97, 0.38, 0.06)  # Original color
+                if j in target_leg_indices:
+                    color = gymapi.Vec3(0.0, 1.0, 0.0)  # Green color for the target leg
+                else:
+                    color = gymapi.Vec3(0.97, 0.38, 0.06)  # Original color
 
                 self.gym.set_rigid_body_color(env_ptr, ant_handle, j, gymapi.MESH_VISUAL, color)
 
@@ -186,8 +192,8 @@ class AntGPT(VecTask):
             self.extremities_index[i] = self.gym.find_actor_rigid_body_handle(self.envs[0], self.ant_handles[0], extremity_names[i])
 
     def compute_reward(self, actions):
-        self.rew_buf[:], self.rew_dict = compute_reward(self.root_states, self.targets, self.actions)
-        self.extras['gpt_reward'] = self.rew_buf.mean().item()
+        self.rew_buf[:], self.rew_dict = compute_reward(self.root_states, self.dt, self.targets)
+        self.extras['gpt_reward'] = self.rew_buf.mean()
         for rew_state in self.rew_dict: self.extras[rew_state] = self.rew_dict[rew_state].mean()
         self.gt_rew_buf, self.reset_buf[:], self.consecutive_successes[:] = compute_success(
             self.obs_buf,
@@ -208,7 +214,8 @@ class AntGPT(VecTask):
         )
         self.extras['gt_reward'] = self.gt_rew_buf.mean()
         self.extras['consecutive_successes'] = self.consecutive_successes.mean()
-        """ # PVD Log consecutive_successes to an external file
+        # PVD Log consecutive_successes to an external file
+        
         # Ensure directory exists before writing
         log_dir = os.path.dirname(LOG_PATH)
         if not os.path.exists(log_dir):
@@ -217,7 +224,7 @@ class AntGPT(VecTask):
 
         # Log consecutive_successes to an external file
         with open(LOG_PATH, "a") as f:
-            f.write(f"{self.consecutive_successes.mean().item()}\n") """
+            f.write(f"{self.consecutive_successes.mean().item()}\n")
 
 
     def compute_observations(self):
@@ -238,6 +245,10 @@ class AntGPT(VecTask):
 
         positions = torch_rand_float(-0.2, 0.2, (len(env_ids), self.num_dof), device=self.device)
         velocities = torch_rand_float(-0.1, 0.1, (len(env_ids), self.num_dof), device=self.device)
+
+        disabled_leg_dofs = [6, 7]  # PVD: right_back leg and foot
+        positions[:, disabled_leg_dofs] = 0
+        velocities[:, disabled_leg_dofs] = 0
 
         self.dof_pos[env_ids] = tensor_clamp(self.initial_dof_pos[env_ids] + positions, self.dof_limits_lower, self.dof_limits_upper)
         self.dof_vel[env_ids] = velocities
@@ -383,34 +394,42 @@ import math
 import torch
 from torch import Tensor
 @torch.jit.script
-def compute_reward(root_states: torch.Tensor, targets: torch.Tensor, actions: torch.Tensor) -> Tuple[torch.Tensor, Dict[str, torch.Tensor]]:
-    # Extract variables from the state tensor
+def compute_reward(root_states: torch.Tensor, dt: float, targets: torch.Tensor) -> Tuple[torch.Tensor, Dict[str, torch.Tensor]]:
+    # Unpack the root states
+    torso_velocity = root_states[:, 7:10]  # Velocity components
+    forward_velocity = torso_velocity[:, 0]  # Forward velocity (x-axis)
     torso_position = root_states[:, 0:3]
-    velocity = root_states[:, 7:10]
-
-    # Increasing the forward reward scale to better incentivize forward movement
-    forward_reward_scale = 0.15
-    forward_reward = velocity[:, 0] * forward_reward_scale
-
-    # Maintain action penalty with the current effective transformation
-    action_penalty = torch.sum(actions**2, dim=-1)
-    action_penalty_temp = 5.0
-    action_penalty = torch.exp(-action_penalty / action_penalty_temp)
     
-    # Adjust height stability to introduce more variability and effective optimization
-    height = torso_position[:, 2]
-    height_target = height.clone().fill_(0.5)
-    height_stability_temp = 1.5
-    height_stability = torch.exp(-torch.abs(height - height_target) * height_stability_temp)
+    # Calculate distance to the target (2D, ignoring height)
+    to_target = targets - torso_position
+    distance_to_target = torch.sqrt(to_target[:, 0]**2 + to_target[:, 1]**2)
 
-    # Rebalance the total reward to place a higher weight on the forward reward
-    total_reward = 2.0 * forward_reward + height_stability * action_penalty
+    # New reward components
+    reward_forward_speed = forward_velocity  # Reward based on forward speed
+    sustained_speed = torch.max(forward_velocity, torch.tensor(0.0, device=root_states.device))  # Only positive forward velocity matters
+    
+    # New heading reward based on the direction towards the target
+    direction_to_target = to_target / (distance_to_target.unsqueeze(-1) + 1e-5)  # Normalize direction
+    heading_dot_product = torch.sum(torso_velocity * direction_to_target, dim=-1)  # Dot product gives alignment
 
-    # Include breakdown of components for debugging/comparative understanding
+    # Adjust the temperature parameters for transformations
+    temperature_forward = 5.0
+    temperature_sustained_speed = 8.0
+    temperature_heading = 5.0
+
+    # Transforming the rewards for scaling
+    transformed_reward_forward_speed = torch.exp(reward_forward_speed / temperature_forward) - 1
+    transformed_sustained_speed = torch.exp(sustained_speed / temperature_sustained_speed) - 1  
+    transformed_reward_heading = torch.exp(heading_dot_product / temperature_heading)  # Exponential for the heading
+
+    # Total reward calculation
+    total_reward = transformed_reward_forward_speed + transformed_sustained_speed + transformed_reward_heading
+
+    # Create a dictionary for the individual reward components
     reward_components = {
-        'forward_reward': forward_reward,
-        'action_penalty': action_penalty,
-        'height_stability': height_stability
+        'reward_forward_speed': transformed_reward_forward_speed,
+        'sustained_speed': transformed_sustained_speed,
+        'reward_heading': transformed_reward_heading,
     }
 
     return total_reward, reward_components

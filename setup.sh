@@ -1,12 +1,14 @@
+NAME=eureka
+
 # setup
 udocker pull mcr.microsoft.com/vscode/devcontainers/python:0-3.8
-udocker create --name=eureka mcr.microsoft.com/vscode/devcontainers/python:0-3.8
-udocker setup --nvidia --force eureka
+udocker create --name="$NAME" mcr.microsoft.com/vscode/devcontainers/python:0-3.8
+udocker setup --nvidia --force "$NAME"
 # for cmd: udocker run -v ~/Eureka:/workspace/Eureka -w /workspace/Eureka/eureka eureka /bin/bash
 
 # -v option to mount the Eureka directory to the container
 # eureka installation steps
-udocker run -v ~/Eureka:/workspace/Eureka eureka /bin/bash -c 'cd /workspace && \
+udocker run -v ~/Eureka:/workspace/Eureka "$NAME" /bin/bash -c 'cd /workspace && \
     wget https://developer.nvidia.com/isaac-gym-preview-4 -O IsaacGym_Preview_4_Package.tar.gz && \
     tar -xvf IsaacGym_Preview_4_Package.tar.gz && \
     pip install -e isaacgym/python && \

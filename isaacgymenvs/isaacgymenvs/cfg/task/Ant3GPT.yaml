@@ -1,36 +1,36 @@
 env:
-  actionsCost: 0.01
-  angularVelocityScale: 0.25
+  actionsCost: 0.005
   asset:
-    assetFileName: mjcf/nv_humanoid.xml
+    assetFileName: mjcf/nv_ant.xml
   clipActions: 1.0
-  contactForceScale: 0.01
-  deathCost: -1.0
-  dofVelocityScale: 0.1
+  contactForceScale: 0.1
+  controlFrequencyInv: 1
+  deathCost: -2.0
+  dofVelocityScale: 0.2
   enableCameraSensors: false
   enableDebugVis: false
   energyCost: 0.05
   envSpacing: 5
-  env_name: humanoidGPT
+  env_name: ant3GPT
   episodeLength: 1000
   headingWeight: 0.5
-  jointsAtLimitCost: 0.25
+  jointsAtLimitCost: 0.1
   numEnvs: ${resolve_default:4096,${...num_envs}}
   plane:
     dynamicFriction: 1.0
     restitution: 0.0
     staticFriction: 1.0
   powerScale: 1.0
-  terminationHeight: 0.8
+  terminationHeight: 0.31
   upWeight: 0.1
-name: HumanoidGPT
+name: Ant3GPT
 physics_engine: ${..physics_engine}
 sim:
   dt: 0.0166
   gravity:
-  - 1.7
   - 0.0
-  - -9.66
+  - 0.0
+  - -9.81
   physx:
     bounce_threshold_velocity: 0.2
     contact_collection: 0
@@ -57,7 +57,7 @@ task:
       - 0.0
       - 0.02
     actor_params:
-      humanoid:
+      ant:
         color: true
         dof_properties:
           damping:
@@ -66,32 +66,24 @@ task:
             range:
             - 0.5
             - 1.5
-            schedule: linear
-            schedule_steps: 3000
           lower:
             distribution: gaussian
             operation: additive
             range:
             - 0
             - 0.01
-            schedule: linear
-            schedule_steps: 3000
           stiffness:
             distribution: uniform
             operation: scaling
             range:
             - 0.5
             - 1.5
-            schedule: linear
-            schedule_steps: 3000
           upper:
             distribution: gaussian
             operation: additive
             range:
             - 0
             - 0.01
-            schedule: linear
-            schedule_steps: 3000
         rigid_body_properties:
           mass:
             distribution: uniform
@@ -99,27 +91,7 @@ task:
             range:
             - 0.5
             - 1.5
-            schedule: linear
-            schedule_steps: 3000
             setup_only: true
-        rigid_shape_properties:
-          friction:
-            distribution: uniform
-            num_buckets: 500
-            operation: scaling
-            range:
-            - 0.7
-            - 1.3
-            schedule: linear
-            schedule_steps: 3000
-          restitution:
-            distribution: uniform
-            operation: scaling
-            range:
-            - 0.0
-            - 0.7
-            schedule: linear
-            schedule_steps: 3000
     frequency: 600
     observations:
       distribution: gaussian
@@ -127,13 +99,4 @@ task:
       range:
       - 0
       - 0.002
-    sim_params:
-      gravity:
-        distribution: gaussian
-        operation: additive
-        range:
-        - 0
-        - 0.4
-        schedule: linear
-        schedule_steps: 3000
   randomize: false

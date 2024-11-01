@@ -1,6 +1,6 @@
 defaults:
   - _self_
-  - env: shadow_hand
+  - env: anymal
   - override hydra/launcher: local
   - override hydra/output: local
 
@@ -9,7 +9,7 @@ hydra:
     chdir: True
 
 # LLM parameters
-model: gpt-4o  # LLM model (llama-3.1-70b-versatile)
+model: gpt-4o  # LLM model (other options are gpt-4o-mini, gpt-4, gpt-4-0613, gpt-3.5-turbo-16k-0613, deepseek-chat, llama-3.1-70b-versatile)
 provider: openai # LLM provider (huggingface, gemini, groq, local, openai)
 temperature: 1.0
 suffix: GPT  # suffix for generated files (indicates LLM model)
@@ -21,7 +21,7 @@ reward_code_path: ""
 # Eureka parameters
 iteration: 5 # how many iterations of Eureka to run
 sample: 16 # number of Eureka samples to generate per iteration
-max_iterations: 1000 # RL Policy training iterations (decrease this to make the feedback loop faster)
+max_iterations: 3000 # RL Policy training iterations (decrease this to make the feedback loop faster)
 num_eval: 5 # number of evaluation episodes to run for the final reward
 capture_video: False # whether to capture policy rollout videos
 

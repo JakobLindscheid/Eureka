@@ -10,10 +10,8 @@ from isaacgym.gymtorch import *
 from isaacgymenvs.utils.torch_jit_utils import *
 from isaacgymenvs.tasks.base.vec_task import VecTask
 
-""" ROOT_DIR='/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs'
-LOG_PATH = os.path.join(ROOT_DIR, "consecutive_successes_log.txt") """
 
-class AntGPT(VecTask):
+class AntDS(VecTask):
 
     def __init__(self, cfg, rl_device, sim_device, graphics_device_id, headless, virtual_screen_capture, force_render):
 
@@ -152,7 +150,6 @@ class AntGPT(VecTask):
         self.dof_limits_lower = []
         self.dof_limits_upper = []
 
-
         for i in range(self.num_envs):
             env_ptr = self.gym.create_env(
                 self.sim, lower, upper, num_per_row
@@ -160,12 +157,8 @@ class AntGPT(VecTask):
             ant_handle = self.gym.create_actor(env_ptr, ant_asset, start_pose, "ant", i, 1, 0)
 
             for j in range(self.num_bodies):
-                # if j in target_leg_indices:
-                #     color = gymapi.Vec3(0.0, 1.0, 0.0)  # Green color for the target leg
-                # else:
-                color = gymapi.Vec3(0.97, 0.38, 0.06)  # Original color
-
-                self.gym.set_rigid_body_color(env_ptr, ant_handle, j, gymapi.MESH_VISUAL, color)
+                self.gym.set_rigid_body_color(
+                    env_ptr, ant_handle, j, gymapi.MESH_VISUAL, gymapi.Vec3(0.97, 0.38, 0.06))
 
             self.envs.append(env_ptr)
             self.ant_handles.append(ant_handle)
@@ -186,8 +179,8 @@ class AntGPT(VecTask):
             self.extremities_index[i] = self.gym.find_actor_rigid_body_handle(self.envs[0], self.ant_handles[0], extremity_names[i])
 
     def compute_reward(self, actions):
-        self.rew_buf[:], self.rew_dict = compute_reward(self.root_states, self.targets, self.actions)
-        self.extras['gpt_reward'] = self.rew_buf.mean().item()
+        self.rew_buf[:], self.rew_dict = compute_reward(self.torso_position, self.velocity, self.dt)
+        self.extras['gpt_reward'] = self.rew_buf.mean()
         for rew_state in self.rew_dict: self.extras[rew_state] = self.rew_dict[rew_state].mean()
         self.gt_rew_buf, self.reset_buf[:], self.consecutive_successes[:] = compute_success(
             self.obs_buf,
@@ -208,17 +201,6 @@ class AntGPT(VecTask):
         )
         self.extras['gt_reward'] = self.gt_rew_buf.mean()
         self.extras['consecutive_successes'] = self.consecutive_successes.mean()
-        """ # PVD Log consecutive_successes to an external file
-        # Ensure directory exists before writing
-        log_dir = os.path.dirname(LOG_PATH)
-        if not os.path.exists(log_dir):
-            print(f"Creating directory for log at {log_dir}")
-            os.makedirs(log_dir, exist_ok=True)
-
-        # Log consecutive_successes to an external file
-        with open(LOG_PATH, "a") as f:
-            f.write(f"{self.consecutive_successes.mean().item()}\n") """
-
 
     def compute_observations(self):
         self.gym.refresh_dof_state_tensor(self.sim)
@@ -383,34 +365,23 @@ import math
 import torch
 from torch import Tensor
 @torch.jit.script
-def compute_reward(root_states: torch.Tensor, targets: torch.Tensor, actions: torch.Tensor) -> Tuple[torch.Tensor, Dict[str, torch.Tensor]]:
-    # Extract variables from the state tensor
-    torso_position = root_states[:, 0:3]
-    velocity = root_states[:, 7:10]
+def compute_reward(torso_position: torch.Tensor, velocity: torch.Tensor, dt: float) -> Tuple[torch.Tensor, Dict[str, torch.Tensor]]:
+    # Calculate the forward velocity of the ant
+    forward_velocity = velocity[:, 0]  # Assuming forward direction is along the x-axis
 
-    # Increasing the forward reward scale to better incentivize forward movement
-    forward_reward_scale = 0.15
-    forward_reward = velocity[:, 0] * forward_reward_scale
+    # Reward for moving forward
+    forward_reward = forward_velocity
 
-    # Maintain action penalty with the current effective transformation
-    action_penalty = torch.sum(actions**2, dim=-1)
-    action_penalty_temp = 5.0
-    action_penalty = torch.exp(-action_penalty / action_penalty_temp)
-    
-    # Adjust height stability to introduce more variability and effective optimization
-    height = torso_position[:, 2]
-    height_target = height.clone().fill_(0.5)
-    height_stability_temp = 1.5
-    height_stability = torch.exp(-torch.abs(height - height_target) * height_stability_temp)
+    # Normalize the forward reward using a temperature parameter
+    temperature_forward = torch.tensor(0.1, device=forward_velocity.device)
+    normalized_forward_reward = torch.exp(forward_reward / temperature_forward)
 
-    # Rebalance the total reward to place a higher weight on the forward reward
-    total_reward = 2.0 * forward_reward + height_stability * action_penalty
+    # Total reward is the normalized forward reward
+    total_reward = normalized_forward_reward
 
-    # Include breakdown of components for debugging/comparative understanding
+    # Dictionary of individual reward components
     reward_components = {
-        'forward_reward': forward_reward,
-        'action_penalty': action_penalty,
-        'height_stability': height_stability
+        "forward_reward": forward_reward
     }
 
     return total_reward, reward_components

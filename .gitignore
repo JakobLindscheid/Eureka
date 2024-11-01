@@ -1,4 +1,6 @@
-outputs/
+outputs*
 **/__pycache__/
 *.egg-info/
 wandb
+*.tar.gz
+isaacgym/

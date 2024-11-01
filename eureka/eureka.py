@@ -12,14 +12,16 @@ import re
 import subprocess
 from pathlib import Path
 import shutil
-import time
-
+import time 
+from omegaconf import OmegaConf
 from utils.misc import * 
 from utils.file_utils import find_files_with_substring, load_tensorboard_logs
 from utils.create_task import create_task
 from utils.extract_task_code import *
 
 EUREKA_ROOT_DIR = os.getcwd()
+# print(f"EUREKA_ROOT_DIR = {EUREKA_ROOT_DIR}")
+
 ISAAC_ROOT_DIR = f"{EUREKA_ROOT_DIR}/../isaacgymenvs/isaacgymenvs"
 
 @hydra.main(config_path="cfg", config_name="config", version_base="1.1")
@@ -43,6 +45,9 @@ def main(cfg):
     logging.info(f"Workspace: {workspace_dir}")
     logging.info(f"Project Root: {EUREKA_ROOT_DIR}")
 
+    # PVD: Print or log the cfg settings before starting the loop
+    # logging.info(f"Configuration settings:\n{OmegaConf.to_yaml(cfg)}")
+    # exit()
     task = cfg.env.task
     task_description = cfg.env.description
     suffix = cfg.suffix
@@ -57,6 +62,7 @@ def main(cfg):
     env_name = cfg.env.env_name.lower()
     env_parent = cfg.env_parent # 'isaac' if f'{env_name}.py' in os.listdir(f'{EUREKA_ROOT_DIR}/envs/isaac') else 'dexterity'
     task_file = f'{EUREKA_ROOT_DIR}/envs/{env_parent}/{env_name}.py'
+    # print(f"taskfile = {task_file}")
     task_obs_file = f'{EUREKA_ROOT_DIR}/envs/{env_parent}/{env_name}_obs.py'
     shutil.copy(task_obs_file, f"env_init_obs.py")
     task_code_string  = file_to_string(task_file)
@@ -92,7 +98,7 @@ def main(cfg):
     max_success_overall = DUMMY_FAILURE
     max_success_reward_correlation_overall = DUMMY_FAILURE
     max_reward_code_path = None 
-    
+
     # Eureka generation loop
     for iter in range(cfg.iteration):
         # Get Eureka response
@@ -102,6 +108,7 @@ def main(cfg):
         total_token = 0
         total_completion_token = 0
         chunk_size = cfg.sample # if "gpt-3.5" in model else 4
+        # chunk_size = cfg.sample if "gpt-3.5" in model else 1 # DEEPSEEK can only handle 1 sample at a time
 
         logging.info(f"Iteration {iter}: Generating {cfg.sample} samples with {cfg.model}")
 
@@ -159,7 +166,7 @@ def main(cfg):
             for i, line in enumerate(lines):
                 if line.strip().startswith("def "):
                     code_string = "\n".join(lines[i:])
-                    
+
             # Add the Eureka Reward Signature to the environment code
             try:
                 gpt_reward_signature, input_lst = get_function_signature(code_string)
@@ -210,11 +217,11 @@ def main(cfg):
 
             # Find the freest GPU to run GPU-accelerated RL
             set_freest_gpu()
-            
+
             # Execute the python file with flags
             rl_filepath = f"iter{iter}/response{response_id}/env_iter{iter}_response{response_id}.txt"
             with open(rl_filepath, 'w') as f:
-                process = subprocess.Popen(['python', '-u', f'{ISAAC_ROOT_DIR}/../train.py',  
+                process = subprocess.Popen(['python', '-u', f'{ISAAC_ROOT_DIR}/train.py',  
                                             'hydra/output=subprocess',  f'hydra.run.dir=./iter{iter}/response{response_id}',
                                             f'task={task}{suffix}', 
                                             # f'wandb_activate={cfg.use_wandb}',
@@ -225,14 +232,14 @@ def main(cfg):
             block_until_training(rl_filepath, log_status=True, iter_num=iter, response_id=response_id)
             # process.wait()
             rl_runs.append(process)
-        
+
         # Gather RL training results and construct reward reflection
         code_feedbacks = []
         contents = []
         successes = []
         reward_correlations = []
         code_paths = []
-        
+
         exec_success = False 
         for response_id, (code_run, rl_run) in enumerate(zip(code_runs, rl_runs)):
             rl_run.communicate()
@@ -263,9 +270,9 @@ def main(cfg):
                 tensorboard_logs = load_tensorboard_logs(tensorboard_logdir)
                 max_iterations = np.array(tensorboard_logs['gt_reward']).shape[0]
                 epoch_freq = max(int(max_iterations // 10), 1)
-                
+
                 content += policy_feedback.format(epoch_freq=epoch_freq)
-                
+
                 # Compute Correlation between Human-Engineered and GPT Rewards
                 if "gt_reward" in tensorboard_logs and "gpt_reward" in tensorboard_logs:
                     gt_reward = np.array(tensorboard_logs["gt_reward"])
@@ -302,7 +309,7 @@ def main(cfg):
 
             content += code_output_tip
             contents.append(content) 
-        
+
         # Repeat the iteration if all code generation failed
         if not exec_success and cfg.sample != 1:
             execute_rates.append(0.)
@@ -315,7 +322,7 @@ def main(cfg):
         # Select the best code sample based on the success rate
         best_sample_idx = np.argmax(np.array(successes)) if cfg.sample > 1 else 0
         best_content = contents[best_sample_idx]
-            
+
         max_success = successes[best_sample_idx]
         max_success_reward_correlation = reward_correlations[best_sample_idx]
         execute_rate = np.sum(np.array(successes) >= 0.) / cfg.sample
@@ -406,12 +413,12 @@ def evaluate(cfg, max_reward_code_path):
     eval_runs = []
     for i in range(cfg.num_eval):
         set_freest_gpu()
-        
+
         # Execute the python file with flags
         os.mkdir(f"eval{i}")
         rl_filepath = f"eval{i}/reward_code_eval{i}.txt"
         with open(rl_filepath, 'w') as f:
-            process = subprocess.Popen(['python', '-u', f'{ISAAC_ROOT_DIR}/../train.py',  
+            process = subprocess.Popen(['python', '-u', f'{ISAAC_ROOT_DIR}/train.py',  
                                         'hydra/output=subprocess', f'hydra.run.dir=./eval{i}',
                                         f'task={task}{suffix}', 
                                         f'wandb_activate={cfg.use_wandb}',

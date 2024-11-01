@@ -11,7 +11,7 @@ env:
   enableDebugVis: false
   energyCost: 0.05
   envSpacing: 5
-  env_name: humanoidGPT
+  env_name: humanoidDS
   episodeLength: 1000
   headingWeight: 0.5
   jointsAtLimitCost: 0.25
@@ -23,14 +23,14 @@ env:
   powerScale: 1.0
   terminationHeight: 0.8
   upWeight: 0.1
-name: HumanoidGPT
+name: HumanoidDS
 physics_engine: ${..physics_engine}
 sim:
   dt: 0.0166
   gravity:
-  - 1.7
   - 0.0
-  - -9.66
+  - 0.0
+  - -9.81
   physx:
     bounce_threshold_velocity: 0.2
     contact_collection: 0

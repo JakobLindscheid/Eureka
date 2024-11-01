@@ -2,7 +2,7 @@ defaults:
   - _self_
   - task: Ant
   - train: ${task}PPO
-  - hydra/job_logging: disabled
+  - override hydra/job_logging: disabled
   - override hydra/launcher:  local
   - override hydra/output:  local
 
@@ -18,7 +18,7 @@ env_path: ''
 num_envs: ''
 
 # seed - set to -1 to choose random seed
-seed: 42
+seed: -1
 # set to True for deterministic performance
 torch_deterministic: False
 
@@ -62,8 +62,9 @@ wandb_tags: []
 wandb_logcode_dir: '' 
 
 capture_video: False
-capture_video_freq: 1
-capture_video_len: 1200
+capture_video_freq: 5000
+capture_video_len: 200
+# force_render: True
 force_render: False
 
 # disables rendering

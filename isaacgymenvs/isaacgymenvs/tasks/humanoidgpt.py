@@ -10,6 +10,8 @@ from isaacgym.torch_utils import *
 from isaacgymenvs.utils.torch_jit_utils import *
 from isaacgymenvs.tasks.base.vec_task import VecTask
 
+""" ROOT_DIR='/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs'
+LOG_PATH = os.path.join(ROOT_DIR, "consecutive_successes_log.txt") """
 
 class HumanoidGPT(VecTask):
 
@@ -184,7 +186,7 @@ class HumanoidGPT(VecTask):
         self.extremities = to_torch([5, 8], device=self.device, dtype=torch.long)
 
     def compute_reward(self, actions):
-        self.rew_buf[:], self.rew_dict = compute_reward(self.root_states, self.dt)
+        self.rew_buf[:], self.rew_dict = compute_reward(self.root_states, self.targets, self.up_vec)
         self.extras['gpt_reward'] = self.rew_buf.mean().item()
         for rew_state in self.rew_dict: self.extras[rew_state] = self.rew_dict[rew_state].mean()
         self.gt_rew_buf, self.reset_buf, self.consecutive_successes[:] = compute_success(
@@ -208,7 +210,18 @@ class HumanoidGPT(VecTask):
         )
         self.extras['gt_reward'] = self.gt_rew_buf.mean()
         self.extras['consecutive_successes'] = self.consecutive_successes.mean()
+        """ # PVD Log consecutive_successes to an external file
+        
+        # Ensure directory exists before writing
+        log_dir = os.path.dirname(LOG_PATH)
+        if not os.path.exists(log_dir):
+            print(f"Creating directory for log at {log_dir}")
+            os.makedirs(log_dir, exist_ok=True)
 
+        # Log consecutive_successes to an external file
+        with open(LOG_PATH, "a") as f:
+            f.write(f"{self.consecutive_successes.mean().item()}\n") """
+            
     def compute_observations(self):
         self.gym.refresh_dof_state_tensor(self.sim)
         self.gym.refresh_actor_root_state_tensor(self.sim)
@@ -379,34 +392,33 @@ import math
 import torch
 from torch import Tensor
 @torch.jit.script
-def compute_reward(root_states: torch.Tensor, dt: float) -> Tuple[torch.Tensor, Dict[str, torch.Tensor]]:
-    """Improved reward function for humanoid running task."""
+def compute_reward(root_states: torch.Tensor, targets: torch.Tensor, up_vec: torch.Tensor) -> Tuple[torch.Tensor, Dict[str, torch.Tensor]]:
+    # Extract relevant components from the root_states
+    torso_position = root_states[:, 0:3]
+    velocity = root_states[:, 7:10]
     
-    # Extract global velocity and angular velocity from root states
-    velocity = root_states[:, 7:10]  # Global velocity (vx, vy, vz)
-    angular_velocity = root_states[:, 10:13]  # Global angular velocity (wx, wy, wz)
+    # Calculate the velocity towards the target
+    to_target = targets - torso_position
+    to_target[:, 2] = 0  # Ignore the Z component, horizontal plane only
+    to_target_norm = torch.norm(to_target, p=2, dim=-1, keepdim=True)
+    to_target_unit = to_target / to_target_norm.clamp(min=1e-6)
+    forward_velocity = torch.sum(velocity * to_target_unit, dim=-1)
+    
+    # Reward for running fast towards the target
+    velocity_reward_temp = 0.5  # New temperature parameter for the velocity reward
+    velocity_reward = torch.exp(velocity_reward_temp * forward_velocity)  # Apply transformation to velocity
 
-    # Forward velocity reward encouraging fast forward movement
-    forward_velocity = velocity[:, 0]
-    forward_velocity_scale = 2.0  # Increase scale to enhance the learning signal
-    forward_velocity_temp = 0.5   # A lower temperature to sharpen sensitivity
+    # Reward for staying upright (using the up vector)
+    upright_reward_temp = 5.0  # Adjusted temperature parameter for the upright reward
+    upright_reward = torch.exp(upright_reward_temp * (up_vec[:, 2] - 1.0))  # Encourage upright orientation
 
-    forward_velocity_reward = forward_velocity_scale * torch.exp(forward_velocity_temp * forward_velocity).clamp(min=0.0)
+    # Total reward: Encourage both velocity towards the target and staying upright
+    total_reward = velocity_reward + upright_reward
 
-    # Angular velocity penalty: decrease high rotations to promote stability
-    angular_velocity_penalty = torch.norm(angular_velocity, p=2, dim=-1)
-    angular_penalty_scale = 0.1  # Reduced scale to adjust balance relative to velocity
-    angular_velocity_temp = 0.5  # Lower temperature to ensure sufficient penalty variance
-
-    angular_velocity_penalty = angular_penalty_scale * angular_velocity_temp * angular_velocity_penalty
-
-    # Total reward construction
-    total_reward = forward_velocity_reward - angular_velocity_penalty
-
-    # Dictionary with reward components for analysis and debugging
-    reward_components = {
-        "forward_velocity_reward": forward_velocity_reward,
-        "angular_velocity_penalty": -angular_velocity_penalty,  # Keep penalty negative for clarity
+    # Compile all rewards for diagnostics
+    reward_dict = {
+        "velocity_reward": velocity_reward,
+        "upright_reward": upright_reward
     }
 
-    return total_reward, reward_components
+    return total_reward, reward_dict
