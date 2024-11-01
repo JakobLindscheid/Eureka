@@ -186,8 +186,8 @@ class HumanoidGPT(VecTask):
         self.extremities = to_torch([5, 8], device=self.device, dtype=torch.long)
 
     def compute_reward(self, actions):
-        self.rew_buf[:], self.rew_dict = compute_reward(self.root_states, self.dof_force_tensor)
-        self.extras['gpt_reward'] = self.rew_buf.mean()
+        self.rew_buf[:], self.rew_dict = compute_reward(self.root_states, self.targets, self.up_vec)
+        self.extras['gpt_reward'] = self.rew_buf.mean().item()
         for rew_state in self.rew_dict: self.extras[rew_state] = self.rew_dict[rew_state].mean()
         self.gt_rew_buf, self.reset_buf, self.consecutive_successes[:] = compute_success(
             self.obs_buf,
@@ -210,8 +210,8 @@ class HumanoidGPT(VecTask):
         )
         self.extras['gt_reward'] = self.gt_rew_buf.mean()
         self.extras['consecutive_successes'] = self.consecutive_successes.mean()
-
-        """ # PVD Log consecutive_successes to an external file       
+        """ # PVD Log consecutive_successes to an external file
+        
         # Ensure directory exists before writing
         log_dir = os.path.dirname(LOG_PATH)
         if not os.path.exists(log_dir):
@@ -221,7 +221,7 @@ class HumanoidGPT(VecTask):
         # Log consecutive_successes to an external file
         with open(LOG_PATH, "a") as f:
             f.write(f"{self.consecutive_successes.mean().item()}\n") """
-
+            
     def compute_observations(self):
         self.gym.refresh_dof_state_tensor(self.sim)
         self.gym.refresh_actor_root_state_tensor(self.sim)
@@ -392,28 +392,33 @@ import math
 import torch
 from torch import Tensor
 @torch.jit.script
-def compute_reward(root_states: torch.Tensor, dof_force_tensor: torch.Tensor) -> Tuple[torch.Tensor, Dict[str, torch.Tensor]]:
-    # Extract the forward velocity (assuming the target running direction is along the x-axis)
+def compute_reward(root_states: torch.Tensor, targets: torch.Tensor, up_vec: torch.Tensor) -> Tuple[torch.Tensor, Dict[str, torch.Tensor]]:
+    # Extract relevant components from the root_states
+    torso_position = root_states[:, 0:3]
     velocity = root_states[:, 7:10]
-    forward_velocity = velocity[:, 0]
+    
+    # Calculate the velocity towards the target
+    to_target = targets - torso_position
+    to_target[:, 2] = 0  # Ignore the Z component, horizontal plane only
+    to_target_norm = torch.norm(to_target, p=2, dim=-1, keepdim=True)
+    to_target_unit = to_target / to_target_norm.clamp(min=1e-6)
+    forward_velocity = torch.sum(velocity * to_target_unit, dim=-1)
+    
+    # Reward for running fast towards the target
+    velocity_reward_temp = 0.5  # New temperature parameter for the velocity reward
+    velocity_reward = torch.exp(velocity_reward_temp * forward_velocity)  # Apply transformation to velocity
 
-    # Modified reward for forward velocity, with scaling
-    velocity_temperature = 0.3  # Reduced to moderate the scale
-    reward_velocity = torch.exp(forward_velocity * velocity_temperature) - 1.0
+    # Reward for staying upright (using the up vector)
+    upright_reward_temp = 5.0  # Adjusted temperature parameter for the upright reward
+    upright_reward = torch.exp(upright_reward_temp * (up_vec[:, 2] - 1.0))  # Encourage upright orientation
 
-    # Re-write the force penalty with a larger force threshold consideration
-    max_force_thr = 200.0  # Example threshold for normalizing
-    force_temperature = 0.01  # Fine-tuned temperature parameter
-    force_magnitude = torch.norm(dof_force_tensor, p=2, dim=1) / max_force_thr
-    penalty_force = torch.clamp(1.0 - force_temperature * force_magnitude, min=-1.0, max=0.0)
+    # Total reward: Encourage both velocity towards the target and staying upright
+    total_reward = velocity_reward + upright_reward
 
-    # Combine the reward components
-    total_reward = reward_velocity + penalty_force
-
-    # Create a reward dictionary for analysis
+    # Compile all rewards for diagnostics
     reward_dict = {
-        "reward_velocity": reward_velocity,
-        "penalty_force": penalty_force
+        "velocity_reward": velocity_reward,
+        "upright_reward": upright_reward
     }
 
     return total_reward, reward_dict

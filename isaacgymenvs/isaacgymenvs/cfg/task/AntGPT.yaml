@@ -28,9 +28,9 @@ physics_engine: ${..physics_engine}
 sim:
   dt: 0.0166
   gravity:
-  - -3.36
   - 0.0
-  - -9.22
+  - 0.0
+  - -9.81
   physx:
     bounce_threshold_velocity: 0.2
     contact_collection: 0

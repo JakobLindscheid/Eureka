@@ -418,7 +418,7 @@ def evaluate(cfg, max_reward_code_path):
         os.mkdir(f"eval{i}")
         rl_filepath = f"eval{i}/reward_code_eval{i}.txt"
         with open(rl_filepath, 'w') as f:
-            process = subprocess.Popen(['python', '-u', f'{ISAAC_ROOT_DIR}/../train.py',  
+            process = subprocess.Popen(['python', '-u', f'{ISAAC_ROOT_DIR}/train.py',  
                                         'hydra/output=subprocess', f'hydra.run.dir=./eval{i}',
                                         f'task={task}{suffix}', 
                                         f'wandb_activate={cfg.use_wandb}',
