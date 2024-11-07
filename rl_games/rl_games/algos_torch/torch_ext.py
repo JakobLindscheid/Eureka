@@ -61,7 +61,7 @@ def safe_filesystem_op(func, *args, **kwargs):
         try:
             return func(*args, **kwargs)
         except Exception as exc:
-            # print(f'Exception {exc} when trying to execute {func} with args:{args} and kwargs:{kwargs}...')
+            print(f'Exception {exc} when trying to execute {func} with args:{args} and kwargs:{kwargs}...')
             wait_sec = 2 ** attempt
             print(f'Waiting {wait_sec} before trying again...')
             time.sleep(wait_sec)

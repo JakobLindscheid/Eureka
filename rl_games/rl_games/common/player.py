@@ -7,6 +7,8 @@ from rl_games.common import vecenv
 from rl_games.common import env_configurations
 from rl_games.algos_torch import model_builder
 
+import os
+from tensorboardX import SummaryWriter
 
 class BasePlayer(object):
 
@@ -67,6 +69,31 @@ class BasePlayer(object):
         self.render_sleep = self.player_config.get('render_sleep', 0.002)
         self.max_steps = 108000 // 4
         self.device = torch.device(self.device_name)
+
+        # Additions for logging success values
+        
+        full_experiment_name = config.get('full_experiment_name', None)
+        if full_experiment_name:
+            print(f'Exact experiment name requested from command line: {full_experiment_name}')
+            self.experiment_name = full_experiment_name
+        else:
+            self.experiment_name = config['log_dir']
+        
+        self.algo_observer = config['features']['observer']
+        base_name = "run" # should not be relevant
+        self.algo_observer.before_init(base_name, config, self.experiment_name)
+        
+        self.train_dir = config.get('train_dir', 'runs')
+        self.experiment_dir = os.path.join(self.train_dir, self.experiment_name)
+        self.summaries_dir = os.path.join(self.experiment_dir, 'summaries')
+        
+        os.makedirs(self.train_dir, exist_ok=True)
+        os.makedirs(self.experiment_dir, exist_ok=True)
+        os.makedirs(self.summaries_dir, exist_ok=True)
+        
+        self.writer = SummaryWriter(self.summaries_dir)
+
+        self.algo_observer.after_init(self)
 
     def load_networks(self, params):
         builder = model_builder.ModelBuilder()
@@ -203,6 +230,8 @@ class BasePlayer(object):
 
         need_init_rnn = self.is_rnn
 
+        start_time = time.time()
+
         for i in range(n_games):
             if games_played >= n_games:
                 break
@@ -241,6 +270,8 @@ class BasePlayer(object):
                 done_count = len(done_indices)
                 games_played += done_count
 
+                self.algo_observer.process_infos(info, done_indices)
+
                 if done_count > 0:
                     if self.is_rnn:
                         for s in self.states:
@@ -264,6 +295,8 @@ class BasePlayer(object):
                             print_game_res = True
                             game_res = info.get('scores', 0.5)
 
+                        self.algo_observer.after_print_stats(frame=n, epoch_num=i, total_time=max(1e-6, time.time()-start_time))
+
                     if self.print_stats:
                         cur_rewards_done = cur_rewards/done_count
                         cur_steps_done = cur_steps/done_count
@@ -275,6 +308,7 @@ class BasePlayer(object):
                     sum_game_res += game_res
                     if batch_size//self.num_agents == 1 or games_played >= n_games:
                         break
+            self.algo_observer.after_steps()
 
         if print_game_res:
             print('av reward:', sum_rewards / games_played * n_game_life, 'av steps:', sum_steps /
@@ -283,6 +317,8 @@ class BasePlayer(object):
             print('average reward:', sum_rewards / games_played * n_game_life,
                   'average steps:', sum_steps / games_played * n_game_life)
             
+        self.algo_observer.after_print_stats(frame=n, epoch_num=i, total_time=max(1e-6, time.time()-start_time))
+        
         return {"average reward": sum_rewards / games_played * n_game_life,
                 "average steps": sum_steps / games_played * n_game_life}
     

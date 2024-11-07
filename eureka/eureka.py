@@ -227,7 +227,8 @@ def main(cfg):
                                             # f'wandb_activate={cfg.use_wandb}',
                                             # f'wandb_entity={cfg.wandb_username}', f'wandb_project={cfg.wandb_project}',
                                             f'headless={not cfg.capture_video}', f'capture_video={cfg.capture_video}', 'force_render=False',
-                                            f'max_iterations={cfg.max_iterations}'],
+                                            f'max_iterations={cfg.max_iterations}'
+                                            f'eval_episodes=0'],
                                             stdout=f, stderr=f)
             block_until_training(rl_filepath, log_status=True, iter_num=iter, response_id=response_id)
             # process.wait()
@@ -286,8 +287,29 @@ def main(cfg):
                         metric_cur = ['{:.2f}'.format(x) for x in tensorboard_logs[metric][::epoch_freq]]
                         metric_cur_max = max(tensorboard_logs[metric])
                         metric_cur_mean = sum(tensorboard_logs[metric]) / len(tensorboard_logs[metric])
+                        
                         if "consecutive_successes" == metric:
-                            successes.append(metric_cur_max)
+                            
+                            if cfg.eureka_selection == "max": # --> original method
+                                successes.append(metric_cur_max)
+                            
+                            elif cfg.eureka_selection == "mean":
+                                successes.append(metric_cur_mean)
+                            
+                            elif cfg.eureka_selection == "tail":
+                                # compute the length of the tail
+                                tail = int(cfg.tail_eval_fraction*len(tensorboard_logs[metric]))
+                                
+                                if cfg.tail_eval_method == "max":
+                                    successes.append(max(tensorboard_logs[metric][-tail:]))
+                                elif cfg.tail_eval_method == "mean":
+                                    successes.append(sum(tensorboard_logs[metric][-tail:]) / tail)
+                                else:
+                                    raise NotImplementedError
+                            
+                            else:
+                                raise NotImplementedError
+                        
                         metric_cur_min = min(tensorboard_logs[metric])
                         if metric != "gt_reward" and metric != "gpt_reward":
                             if metric != "consecutive_successes":
@@ -328,7 +350,8 @@ def main(cfg):
         execute_rate = np.sum(np.array(successes) >= 0.) / cfg.sample
 
         # Update the best Eureka Output
-        if max_success > max_success_overall:
+        new_best = max_success > max_success_overall
+        if new_best:
             max_success_overall = max_success
             max_success_reward_correlation_overall = max_success_reward_correlation
             max_reward_code_path = code_paths[best_sample_idx]
@@ -365,18 +388,25 @@ def main(cfg):
         plt.savefig('summary.png')
         # np.savez('summary.npz', max_successes=max_successes, execute_rates=execute_rates, best_code_paths=best_code_paths, max_successes_reward_correlation=max_successes_reward_correlation)
 
-        if len(messages) == 2:
-            messages += [{"role": "assistant", "content": responses[best_sample_idx]["message"]["content"]}]
-            messages += [{"role": "user", "content": best_content}]
-        else:
-            assert len(messages) == 4
-            messages[-2] = {"role": "assistant", "content": responses[best_sample_idx]["message"]["content"]}
-            messages[-1] = {"role": "user", "content": best_content}
+        if new_best or cfg.ea_selection == ",": # 
+            # TODO: This seems strange, we should discuss it.
+            if len(messages) == 2:
+                messages += [{"role": "assistant", "content": responses[best_sample_idx]["message"]["content"]}]
+                messages += [{"role": "user", "content": best_content}]
+            else:
+                assert len(messages) == 4
+                messages[-2] = {"role": "assistant", "content": responses[best_sample_idx]["message"]["content"]}
+                messages[-1] = {"role": "user", "content": best_content}
 
         # Save dictionary as JSON file
         with open('messages.json', 'w') as file:
             json.dump(messages, file, indent=4)
     
+    if cfg.use_wandb:
+        wandb.save("messages.json")
+        wandb.save("messages.txt")
+        wandb.save(max_reward_code_path.replace(".py", "_rewardonly.py"))
+
     if max_reward_code_path is None: 
         logging.info("All iterations of code generation failed, aborting...")
         logging.info("Please double check the output env_iter*_response*.txt files for repeating errors!")
@@ -397,6 +427,7 @@ def evaluate(cfg, max_reward_code_path):
                 group=cfg.wandb_name,
             )
             wandb.config.update(cfg)
+            wandb.save(max_reward_code_path)
     
     task = cfg.env.task
     suffix = cfg.suffix
@@ -425,6 +456,7 @@ def evaluate(cfg, max_reward_code_path):
                                         f'wandb_entity={cfg.wandb_username}', f'wandb_project={cfg.wandb_project}', 
                                         f'wandb_name={cfg.wandb_name}_eval{i}', f'wandb_group={cfg.wandb_name}',
                                         f'headless={not cfg.capture_video}', f'capture_video={cfg.capture_video}', 'force_render=False', f'seed={i}',
+                                        f'eval_episodes={cfg.eval_episodes}'
                                         ],
                                         stdout=f, stderr=f)
 
@@ -432,38 +464,75 @@ def evaluate(cfg, max_reward_code_path):
         # process.wait()
         eval_runs.append(process)
 
-    reward_code_final_successes = []
+    reward_code_final_successes = {"max": [], "mean": [], "tail": []}
     reward_code_correlations_final = []
-    for i, rl_run in enumerate(eval_runs):
-        rl_run.communicate()
-        rl_filepath = f"eval{i}/reward_code_eval{i}.txt"
-        with open(rl_filepath, 'r') as f:
-            stdout_str = f.read() 
-        
-        traceback_msg = filter_traceback(stdout_str)
-        if traceback_msg == '' and 'Tensorboard Directory:' in stdout_str:
-            lines = stdout_str.split('\n')
-            for i, line in enumerate(lines):
-                if line.startswith('Tensorboard Directory:'):
-                    break 
-            tensorboard_logdir = line.split(':')[-1].strip() 
-            tensorboard_logs = load_tensorboard_logs(tensorboard_logdir)
-            max_success = max(tensorboard_logs['consecutive_successes'])
-            reward_code_final_successes.append(max_success)
-
-            if "gt_reward" in tensorboard_logs and "gpt_reward" in tensorboard_logs:
-                gt_reward = np.array(tensorboard_logs["gt_reward"])
-                gpt_reward = np.array(tensorboard_logs["gpt_reward"])
-                reward_correlation = np.corrcoef(gt_reward, gpt_reward)[0, 1]
-                reward_code_correlations_final.append(reward_correlation)
-
-        else:
-            logging.error(f"Evaluation {i} failed.")
 
     if cfg.use_wandb:
-        wandb.log({"Final Success Mean": np.mean(reward_code_final_successes), "Final Success Std": np.std(reward_code_final_successes), "Final Correlation Mean": np.mean(reward_code_correlations_final), "Final Correlation Std": np.std(reward_code_correlations_final)})
-    logging.info(f"Final Success Mean: {np.mean(reward_code_final_successes)}, Std: {np.std(reward_code_final_successes)}, Raw: {reward_code_final_successes}")
-    logging.info(f"Final Correlation Mean: {np.mean(reward_code_correlations_final)}, Std: {np.std(reward_code_correlations_final)}, Raw: {reward_code_correlations_final}")
+        wandb_table = wandb.Table(columns=["run", "Max Success", "Mean Success", "Tail Success", "Correlation"])
+    for i, rl_run in enumerate(eval_runs):
+        rl_run.communicate()
+        if cfg.eval_episodes == 0:
+            rl_filepaths = [f"eval{i}/reward_code_eval{i}.txt"]
+        else:
+            rl_filepaths = [f"eval{i}/episode{j}/eval_episode{j}.txt" for j in range(cfg.eval_episodes)]
+        
+        for rl_filepath in rl_filepaths:
+            with open(rl_filepath, 'r') as f:
+                stdout_str = f.read() 
+            
+            traceback_msg = filter_traceback(stdout_str)
+            
+            if traceback_msg == '' and 'Tensorboard Directory:' in stdout_str:
+                lines = stdout_str.split('\n')
+                for i, line in enumerate(lines):
+                    if line.startswith('Tensorboard Directory:'):
+                        break 
+                tensorboard_logdir = line.split(':')[-1].strip() 
+                tensorboard_logs = load_tensorboard_logs(tensorboard_logdir)
+                
+                max_success = max(tensorboard_logs['consecutive_successes'])
+                mean_success = sum(tensorboard_logs['consecutive_successes']) / len(tensorboard_logs['consecutive_successes'])
+                tail = int(cfg.tail_eval_fraction*len(tensorboard_logs['consecutive_successes']))
+                tail_mean = sum(tensorboard_logs['consecutive_successes'][-tail:]) / tail
+                
+                # reward_code_final_successes.append(max_success)
+                reward_code_final_successes["max"].append(max_success)
+                reward_code_final_successes["mean"].append(mean_success)
+                reward_code_final_successes["tail"].append(tail_mean)
+
+                # Compute Correlation between Human-Engineered and GPT Rewards
+                if "gt_reward" in tensorboard_logs and "gpt_reward" in tensorboard_logs:
+                    gt_reward = np.array(tensorboard_logs["gt_reward"])
+                    gpt_reward = np.array(tensorboard_logs["gpt_reward"])
+                    reward_correlation = np.corrcoef(gt_reward, gpt_reward)[0, 1]
+                    reward_code_correlations_final.append(reward_correlation)
+
+                else:
+                    reward_correlation = None
+
+                if cfg.use_wandb:
+                    run_name = f"eval{i}_episode{rl_filepath.split('episode')[1][0]}" if "episode" in rl_filepath else f"eval{i}"
+                    wandb_table.add_data(run_name, max_success, mean_success, tail_mean, reward_correlation)
+
+            else:
+                logging.error(f"Evaluation {i} failed.")
+
+    
+    if cfg.use_wandb:
+        wandb.log({
+            "Final Max-Success Mean": np.mean(reward_code_final_successes["max"]), 
+            "Final Mean-Success Mean": np.mean(reward_code_final_successes["mean"]),
+            "Final Tail-Success Mean": np.mean(reward_code_final_successes["tail"]),
+            "Final Correlation Mean": np.mean(reward_code_correlations_final)
+        })
+    logging.info(f"Final Max-Success Mean: {np.mean(reward_code_final_successes['max'])}, Std: {np.std(reward_code_final_successes['max'])}")
+    logging.info(f"Final Max-Success Raw: {reward_code_final_successes['max']}\n")
+    logging.info(f"Final Mean-Success Mean: {np.mean(reward_code_final_successes['mean'])}, Std: {np.std(reward_code_final_successes['mean'])}")
+    logging.info(f"Final Mean-Success Raw: {reward_code_final_successes['mean']}\n")
+    logging.info(f"Final Tail-Success Mean: {np.mean(reward_code_final_successes['tail'])}, Std: {np.std(reward_code_final_successes['tail'])}")
+    logging.info(f"Final Tail-Success Raw: {reward_code_final_successes['tail']}\n")
+    logging.info(f"Final Correlation Mean: {np.mean(reward_code_correlations_final)}, Std: {np.std(reward_code_correlations_final)}")
+    logging.info(f"Final Correlation Raw: {reward_code_correlations_final}\n")
     # np.savez('final_eval.npz', reward_code_final_successes=reward_code_final_successes, reward_code_correlations_final=reward_code_correlations_final)
 
 
