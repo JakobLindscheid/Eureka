@@ -22,8 +22,15 @@ reward_code_path: ""
 iteration: 5 # how many iterations of Eureka to run
 sample: 16 # number of Eureka samples to generate per iteration
 max_iterations: 3000 # RL Policy training iterations (decrease this to make the feedback loop faster)
-num_eval: 5 # number of evaluation episodes to run for the final reward
+num_eval: 4 # number of evaluation episodes to run for the final reward
+eval_episodes: 4 # number of evaluation episodes to run after each eval training run, if 0 the metric will be calculated from the training data
 capture_video: False # whether to capture policy rollout videos
+ea_selection: ","
+ea_parents: 1
+
+eureka_selection: "tail" # which metric to use to select the best Eureka sample based on success values during training (max, mean, tail) 
+tail_eval_method: "mean" # if eureka_selection is tail, how to calculate the tail value (mean, max)
+tail_eval_fraction: 0.1 # if eureka_selection is tail, what fraction of the samples to consider as tail
 
 # Weights and Biases
 use_wandb: False # whether to use wandb for logging
