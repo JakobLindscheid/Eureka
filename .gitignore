@@ -4,3 +4,4 @@ outputs*
 wandb
 *.tar.gz
 isaacgym/
+*.out

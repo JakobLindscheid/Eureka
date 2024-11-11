@@ -27,7 +27,8 @@ ISAAC_ROOT_DIR = f"{EUREKA_ROOT_DIR}/../isaacgymenvs/isaacgymenvs"
 @hydra.main(config_path="cfg", config_name="config", version_base="1.1")
 def main(cfg):
 
-    if cfg.evaluate_only:
+    if cfg.eval_human or cfg.evaluate_only:
+        logging.warning("Human reward function selected. Skipping Eureka generation.")
         evaluate(cfg, cfg.reward_code_path)
         return
     
@@ -228,7 +229,7 @@ def main(cfg):
                                             # f'wandb_entity={cfg.wandb_username}', f'wandb_project={cfg.wandb_project}',
                                             f'headless={not cfg.capture_video}', f'capture_video={cfg.capture_video}', 'force_render=False',
                                             f'max_iterations={cfg.max_iterations}'
-                                            f'eval_episodes=0'],
+                                            ],
                                             stdout=f, stderr=f)
             block_until_training(rl_filepath, log_status=True, iter_num=iter, response_id=response_id)
             # process.wait()
@@ -244,6 +245,7 @@ def main(cfg):
         exec_success = False 
         for response_id, (code_run, rl_run) in enumerate(zip(code_runs, rl_runs)):
             rl_run.communicate()
+            logging.info(f"Iteration {iter}: Code Run {response_id} completed with return code {rl_run.returncode}")
             rl_filepath = f"iter{iter}/response{response_id}/env_iter{iter}_response{response_id}.txt"
             code_paths.append(f"iter{iter}/response{response_id}/env_iter{iter}_response{response_id}.py")
             try:
@@ -341,13 +343,15 @@ def main(cfg):
             logging.info("All code generation failed! Repeat this iteration from the current message checkpoint!")
             continue
 
+        logging.info(f"Iteration {iter}: Code Generation Successes: {successes}")
+        
         # Select the best code sample based on the success rate
         best_sample_idx = np.argmax(np.array(successes)) if cfg.sample > 1 else 0
         best_content = contents[best_sample_idx]
 
         max_success = successes[best_sample_idx]
         max_success_reward_correlation = reward_correlations[best_sample_idx]
-        execute_rate = np.sum(np.array(successes) >= 0.) / cfg.sample
+        execute_rate = np.sum(np.array(successes) != DUMMY_FAILURE) / cfg.sample
 
         # Update the best Eureka Output
         new_best = max_success > max_success_overall
@@ -427,19 +431,23 @@ def evaluate(cfg, max_reward_code_path):
                 group=cfg.wandb_name,
             )
             wandb.config.update(cfg)
-            wandb.save(max_reward_code_path)
+            
+            if not cfg.eval_human:
+                wandb.save(max_reward_code_path)
     
     task = cfg.env.task
-    suffix = cfg.suffix
+    suffix = cfg.suffix if not cfg.eval_human else ""
     env_name = cfg.env.env_name.lower()
     output_file = f"{ISAAC_ROOT_DIR}/tasks/{env_name}{suffix.lower()}.py"
     
     # Evaluate the best reward code many times    
     logging.info(f"Evaluating best reward code {cfg.num_eval} times")
-    try:
-        shutil.copy(max_reward_code_path, output_file)
-    except shutil.SameFileError:
-        pass
+    
+    if not cfg.eval_human:
+        try:
+            shutil.copy(max_reward_code_path, output_file)
+        except shutil.SameFileError:
+            pass
     
     eval_runs = []
     for i in range(cfg.num_eval):
@@ -455,36 +463,85 @@ def evaluate(cfg, max_reward_code_path):
                                         f'wandb_activate={cfg.use_wandb}',
                                         f'wandb_entity={cfg.wandb_username}', f'wandb_project={cfg.wandb_project}', 
                                         f'wandb_name={cfg.wandb_name}_eval{i}', f'wandb_group={cfg.wandb_name}',
-                                        f'headless={not cfg.capture_video}', f'capture_video={cfg.capture_video}', 'force_render=False', f'seed={i}',
-                                        f'eval_episodes={cfg.eval_episodes}'
+                                        f'headless={not cfg.capture_video}', f'capture_video={cfg.capture_video}', 'force_render=False', f'seed={i}'
                                         ],
                                         stdout=f, stderr=f)
 
         block_until_training(rl_filepath)
         # process.wait()
         eval_runs.append(process)
+    
+    for i, rl_run in enumerate(eval_runs):
+        rl_run.communicate()
 
+        if cfg.eval_episodes > 0:
+            rl_filepath = f"eval{i}/reward_code_eval{i}.txt"
+
+            with open(rl_filepath, 'r') as f:
+                stdout_str = f.read() 
+            lines = stdout_str.split('\n')
+            for line in lines:
+                if line.startswith('Network Directory:'):
+                    break 
+
+            network_dir = line.split(':')[-1].strip()
+            checkpoint = f"{network_dir}/{os.listdir(network_dir)[0]}"
+            logging.info(f"Evaluating checkpoint: {checkpoint}")
+
+            eval_episodes = []
+            for j in range(cfg.eval_episodes):
+                set_freest_gpu()
+
+                # Execute the python file with flags
+                os.mkdir(f"eval{i}/episode{j}")
+                path = f"eval{i}/episode{j}/eval_episode{j}.txt"
+                with open(path, 'w') as f:
+                    process = subprocess.Popen(['python', '-u', f"{ISAAC_ROOT_DIR}/train.py", 
+                                                'hydra/output=subprocess', f'hydra.run.dir=./eval{i}/episode{j}',
+                                                f'checkpoint={checkpoint}', f'test=True',
+                                                f'task={task}{suffix}', f'wandb_activate=False',
+                                                f'headless={not cfg.capture_video}', f'capture_video={cfg.capture_video}', 'force_render=False', f'seed={j}',
+                                                ],
+                                                stdout=f, stderr=f)
+                    
+                # block until start
+                while True:
+                    with open(path, 'r') as file:
+                        rl_log = file.read()
+                        if "reward:" in rl_log or "Traceback" in rl_log:                            
+                            break
+                        time.sleep(1)
+                
+                eval_episodes.append(process)
+    
     reward_code_final_successes = {"max": [], "mean": [], "tail": []}
     reward_code_correlations_final = []
 
     if cfg.use_wandb:
         wandb_table = wandb.Table(columns=["run", "Max Success", "Mean Success", "Tail Success", "Correlation"])
     for i, rl_run in enumerate(eval_runs):
-        rl_run.communicate()
+        # rl_run.communicate()
         if cfg.eval_episodes == 0:
             rl_filepaths = [f"eval{i}/reward_code_eval{i}.txt"]
         else:
-            rl_filepaths = [f"eval{i}/episode{j}/eval_episode{j}.txt" for j in range(cfg.eval_episodes)]
+            rl_filepaths = []
+            for j, eval_ep in enumerate(eval_episodes):
+                eval_ep.communicate()
+                rl_filepaths.append(f"eval{i}/episode{j}/eval_episode{j}.txt")
         
         for rl_filepath in rl_filepaths:
-            with open(rl_filepath, 'r') as f:
-                stdout_str = f.read() 
+            try:
+                with open(rl_filepath, 'r') as f:
+                    stdout_str = f.read() 
+            except Exception as e:
+                logging.error(f"Error opening {rl_filepath}: {e}")
+                continue
             
             traceback_msg = filter_traceback(stdout_str)
             
             if traceback_msg == '' and 'Tensorboard Directory:' in stdout_str:
                 lines = stdout_str.split('\n')
-                for i, line in enumerate(lines):
+                for line in lines:
                     if line.startswith('Tensorboard Directory:'):
                         break 
                 tensorboard_logdir = line.split(':')[-1].strip() 
@@ -515,7 +572,9 @@ def evaluate(cfg, max_reward_code_path):
                     wandb_table.add_data(run_name, max_success, mean_success, tail_mean, reward_correlation)
 
             else:
-                logging.error(f"Evaluation {i} failed.")
+                splitted = rl_filepath.split("/")
+                name = splitted[0] if len(splitted) == 1 else f"{splitted[0]}_{splitted[1]}"
+                logging.error(f"{name} failed.")
 
     
     if cfg.use_wandb:
@@ -525,14 +584,20 @@ def evaluate(cfg, max_reward_code_path):
             "Final Tail-Success Mean": np.mean(reward_code_final_successes["tail"]),
             "Final Correlation Mean": np.mean(reward_code_correlations_final)
         })
+        wandb.log({"eval_metrics_raw": wandb_table})
+
+    print()
     logging.info(f"Final Max-Success Mean: {np.mean(reward_code_final_successes['max'])}, Std: {np.std(reward_code_final_successes['max'])}")
-    logging.info(f"Final Max-Success Raw: {reward_code_final_successes['max']}\n")
+    logging.info(f"Final Max-Success Raw: {reward_code_final_successes['max']}")
+    print()
     logging.info(f"Final Mean-Success Mean: {np.mean(reward_code_final_successes['mean'])}, Std: {np.std(reward_code_final_successes['mean'])}")
-    logging.info(f"Final Mean-Success Raw: {reward_code_final_successes['mean']}\n")
+    logging.info(f"Final Mean-Success Raw: {reward_code_final_successes['mean']}")
+    print()
     logging.info(f"Final Tail-Success Mean: {np.mean(reward_code_final_successes['tail'])}, Std: {np.std(reward_code_final_successes['tail'])}")
-    logging.info(f"Final Tail-Success Raw: {reward_code_final_successes['tail']}\n")
+    logging.info(f"Final Tail-Success Raw: {reward_code_final_successes['tail']}")
+    print()
     logging.info(f"Final Correlation Mean: {np.mean(reward_code_correlations_final)}, Std: {np.std(reward_code_correlations_final)}")
-    logging.info(f"Final Correlation Raw: {reward_code_correlations_final}\n")
+    logging.info(f"Final Correlation Raw: {reward_code_correlations_final}")
     # np.savez('final_eval.npz', reward_code_final_successes=reward_code_final_successes, reward_code_correlations_final=reward_code_correlations_final)
 
 

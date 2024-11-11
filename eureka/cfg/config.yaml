@@ -16,6 +16,7 @@ suffix: GPT  # suffix for generated files (indicates LLM model)
 
 env_parent: isaac # isaac, gym, bidex
 evaluate_only: False
+eval_human: False
 reward_code_path: ""
 
 # Eureka parameters
