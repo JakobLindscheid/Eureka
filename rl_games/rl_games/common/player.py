@@ -295,7 +295,6 @@ class BasePlayer(object):
                             print_game_res = True
                             game_res = info.get('scores', 0.5)
 
-                        self.algo_observer.after_print_stats(frame=n, epoch_num=i, total_time=max(1e-6, time.time()-start_time))
 
                     if self.print_stats:
                         cur_rewards_done = cur_rewards/done_count
@@ -308,6 +307,9 @@ class BasePlayer(object):
                     sum_game_res += game_res
                     if batch_size//self.num_agents == 1 or games_played >= n_games:
                         break
+                
+                self.algo_observer.after_print_stats(frame=n, epoch_num=i, total_time=max(1e-6, time.time()-start_time))
+            
             self.algo_observer.after_steps()
 
         if print_game_res:
