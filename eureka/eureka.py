@@ -356,7 +356,16 @@ def main(cfg):
 
             # Merge the sample runs, mean success rate otherwise stats from better run for LLM feedback
             better_run = np.argmax(np.array(sample_successes)) if cfg.sample_runs > 1 else 0
-            successes.append(np.mean(sample_successes))
+            
+            if cfg.sample_runs == 1:
+                successes.append(sample_successes[0])
+            elif cfg.sample_selection == "mean":
+                successes.append(np.mean(sample_successes))
+            elif cfg.sample_selection == "ucb":
+                successes.append(np.mean(sample_successes) + cfg.ucb_coeff * np.std(sample_successes) / np.sqrt(cfg.sample_runs))
+            else:
+                raise NotImplementedError
+            
             reward_correlations.append(sample_reward_correlations[better_run])
             contents.append(sample_contents[better_run])
             if len(code_feedbacks) > 0:
