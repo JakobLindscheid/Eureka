@@ -296,8 +296,12 @@ def main(cfg):
                     if "gt_reward" in tensorboard_logs and "gpt_reward" in tensorboard_logs:
                         gt_reward = np.array(tensorboard_logs["gt_reward"])
                         gpt_reward = np.array(tensorboard_logs["gpt_reward"])
-                        reward_correlation = np.corrcoef(gt_reward, gpt_reward)[0, 1]
-                        sample_reward_correlations.append(reward_correlation)
+                        try: # There was a crash because of the length of the rewards did not match
+                            reward_correlation = np.corrcoef(gt_reward, gpt_reward)[0, 1]
+                            sample_reward_correlations.append(reward_correlation)
+                        except:
+                            logging.error(f"Correlation computation failed for response {response_id}, run {sample_run}. gt_rewards: {gt_reward.shape}, gpt_rewards: {gpt_reward.shape}")
+                            sample_reward_correlations.append(DUMMY_FAILURE)
 
                     # Add reward components log to the feedback
                     for metric in tensorboard_logs:
@@ -417,7 +421,6 @@ def main(cfg):
         # np.savez('summary.npz', max_successes=max_successes, execute_rates=execute_rates, best_code_paths=best_code_paths, max_successes_reward_correlation=max_successes_reward_correlation)
 
         if new_best or cfg.ea_selection == ",":
-            # TODO: This seems strange, we should discuss it.
             if len(messages) == 2:
                 messages += [{"role": "assistant", "content": responses[best_sample_idx]["message"]["content"]}]
                 messages += [{"role": "user", "content": best_content}]
@@ -427,7 +430,7 @@ def main(cfg):
                 messages[-1] = {"role": "user", "content": best_content}
 
         else:
-            raise NotImplementedError
+            logging.info("No sample exceeded the parent. Repeating the same message.")
 
         # Save dictionary as JSON file
         with open('messages.json', 'w') as file:

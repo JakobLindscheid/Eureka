@@ -5,3 +5,4 @@ wandb
 *.tar.gz
 isaacgym/
 *.out
+*.lock
