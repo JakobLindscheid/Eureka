@@ -10,8 +10,10 @@ from isaacgym.gymtorch import *
 from isaacgymenvs.utils.torch_jit_utils import *
 from isaacgymenvs.tasks.base.vec_task import VecTask
 
+""" ROOT_DIR='/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs'
+LOG_PATH = os.path.join(ROOT_DIR, "consecutive_successes_log.txt") """
 
-class Ant(VecTask):
+class AntSlope(VecTask):
 
     def __init__(self, cfg, rl_device, sim_device, graphics_device_id, headless, virtual_screen_capture, force_render):
 
@@ -96,12 +98,9 @@ class Ant(VecTask):
         if self.randomize:
             self.apply_randomizations(self.randomization_params)
 
-        # PVD: tilt plane here
     def _create_ground_plane(self):
         plane_params = gymapi.PlaneParams()
-        # plane_params.normal = gymapi.Vec3(0.0, 0.0, 1.0)
-        plane_params.normal = gymapi.Vec3(0.2588, 0, 0.9659)  # Sine and cosine of 15 degrees, to run down hill
-    
+        plane_params.normal = gymapi.Vec3(0.0, 0.0, 1.0)
         plane_params.static_friction = self.plane_static_friction
         plane_params.dynamic_friction = self.plane_dynamic_friction
         self.gym.add_ground(self.sim, plane_params)
@@ -153,6 +152,7 @@ class Ant(VecTask):
         self.dof_limits_lower = []
         self.dof_limits_upper = []
 
+
         for i in range(self.num_envs):
             env_ptr = self.gym.create_env(
                 self.sim, lower, upper, num_per_row
@@ -160,8 +160,12 @@ class Ant(VecTask):
             ant_handle = self.gym.create_actor(env_ptr, ant_asset, start_pose, "ant", i, 1, 0)
 
             for j in range(self.num_bodies):
-                self.gym.set_rigid_body_color(
-                    env_ptr, ant_handle, j, gymapi.MESH_VISUAL, gymapi.Vec3(0.97, 0.38, 0.06))
+                # if j in target_leg_indices:
+                #     color = gymapi.Vec3(0.0, 1.0, 0.0)  # Green color for the target leg
+                # else:
+                color = gymapi.Vec3(0.97, 0.38, 0.06)  # Original color
+
+                self.gym.set_rigid_body_color(env_ptr, ant_handle, j, gymapi.MESH_VISUAL, color)
 
             self.envs.append(env_ptr)
             self.ant_handles.append(ant_handle)
@@ -201,6 +205,17 @@ class Ant(VecTask):
         )
         self.extras['gt_reward'] = self.gt_rew_buf.mean()
         self.extras['consecutive_successes'] = self.consecutive_successes.mean()
+        """ # PVD Log consecutive_successes to an external file
+        # Ensure directory exists before writing
+        log_dir = os.path.dirname(LOG_PATH)
+        if not os.path.exists(log_dir):
+            print(f"Creating directory for log at {log_dir}")
+            os.makedirs(log_dir, exist_ok=True)
+
+        # Log consecutive_successes to an external file
+        with open(LOG_PATH, "a") as f:
+            f.write(f"{self.consecutive_successes.mean().item()}\n") """
+
 
     def compute_observations(self):
         self.gym.refresh_dof_state_tensor(self.sim)
@@ -242,18 +257,9 @@ class Ant(VecTask):
         self.progress_buf[env_ids] = 0
         self.reset_buf[env_ids] = 0
 
-        # PVD: disable leg to make ant limp
     def pre_physics_step(self, actions):
         self.actions = actions.clone().to(self.device)
-        # select leg (out of 4)
-        # limp_joint_indices = [0]  
-
         forces = self.actions * self.joint_gears * self.power_scale
-        
-        # set forces for the limp joints to zero
-        # for idx in limp_joint_indices:
-        #     forces[:, idx] = 0 
-
         force_tensor = gymtorch.unwrap_tensor(forces)
         self.gym.set_dof_actuation_force_tensor(self.sim, force_tensor)
 

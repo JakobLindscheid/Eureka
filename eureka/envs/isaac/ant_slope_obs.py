@@ -1,4 +1,4 @@
-class Ant(VecTask):
+class AntSlope(VecTask):
     """Rest of the environment definition omitted."""
     def compute_observations(self):
         self.gym.refresh_dof_state_tensor(self.sim)

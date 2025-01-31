@@ -28,6 +28,7 @@
 
 from .ant import Ant
 from .ant3 import Ant3
+from .ant_slope import AntSlope
 from .anymal import Anymal
 from .anymal_terrain import AnymalTerrain
 from .ball_balance import BallBalance
@@ -78,6 +79,7 @@ isaacgym_task_map = {
     "AllegroHandADR": AllegroHandDextremeADR,
     "Ant": Ant,
     "Ant3": Ant3,
+    "AntSlope":AntSlope,
     "Anymal": Anymal,
     "AnymalTerrain": AnymalTerrain,
     "BallBalance": BallBalance,

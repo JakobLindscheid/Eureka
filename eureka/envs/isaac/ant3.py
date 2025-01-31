@@ -243,10 +243,6 @@ class Ant3(VecTask):
         positions = torch_rand_float(-0.2, 0.2, (len(env_ids), self.num_dof), device=self.device)
         velocities = torch_rand_float(-0.1, 0.1, (len(env_ids), self.num_dof), device=self.device)
 
-        disabled_leg_dofs = [6, 7]  # PVD: right_back leg and foot
-        positions[:, disabled_leg_dofs] = 0
-        velocities[:, disabled_leg_dofs] = 0
-
         self.dof_pos[env_ids] = tensor_clamp(self.initial_dof_pos[env_ids] + positions, self.dof_limits_lower, self.dof_limits_upper)
         self.dof_vel[env_ids] = velocities
 
@@ -269,6 +265,7 @@ class Ant3(VecTask):
         self.reset_buf[env_ids] = 0
 
     def pre_physics_step(self, actions):
+        actions[:, :2] = 0.0  # JL: Disable the first two actions
         self.actions = actions.clone().to(self.device)
         forces = self.actions * self.joint_gears * self.power_scale
         force_tensor = gymtorch.unwrap_tensor(forces)

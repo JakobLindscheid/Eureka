@@ -16,21 +16,31 @@ suffix: GPT  # suffix for generated files (indicates LLM model)
 
 env_parent: isaac # isaac, gym, bidex
 evaluate_only: False
+eval_human: False
 reward_code_path: ""
 
 # Eureka parameters
 iteration: 5 # how many iterations of Eureka to run
 sample: 16 # number of Eureka samples to generate per iteration
+sample_runs: 1 # how often each reward function sample is trained during LLM sampling
 max_iterations: 3000 # RL Policy training iterations (decrease this to make the feedback loop faster)
-num_eval: 4 # number of evaluation episodes to run for the final reward
-eval_episodes: 4 # number of evaluation episodes to run after each eval training run, if 0 the metric will be calculated from the training data
-capture_video: False # whether to capture policy rollout videos
+overwrite_max_iterations: False # whether to use the tuned number of iterations or max_iterations for training when testing the sampled reward functions
+
+eureka_selection: "max" # which metric to use to select the best Eureka sample based on success values during training (max, mean, tail) 
+tail_eval_method: "mean" # if eureka_selection is tail, how to calculate the tail value (mean, max)
+tail_eval_fraction: 0.1 # if eureka_selection is tail, what fraction of the samples to consider as tail
+
+sample_selection: "mean" # how to aggregate the successes of the samples (mean, ucb)
+ucb_coeff: 1.0 # UCB parameter for sample selection
+
 ea_selection: ","
 ea_parents: 1
 
-eureka_selection: "tail" # which metric to use to select the best Eureka sample based on success values during training (max, mean, tail) 
-tail_eval_method: "mean" # if eureka_selection is tail, how to calculate the tail value (mean, max)
-tail_eval_fraction: 0.1 # if eureka_selection is tail, what fraction of the samples to consider as tail
+num_eval: 16 # number of evaluation runs for the final reward
+use_max_iter_for_eval: True #  whether to use max_iterations for evaluation
+eval_episodes: 1 # number of evaluation episodes to run after each eval training run, if 0 the metric will be calculated from the training data
+
+capture_video: False # whether to capture policy rollout videos
 
 # Weights and Biases
 use_wandb: False # whether to use wandb for logging

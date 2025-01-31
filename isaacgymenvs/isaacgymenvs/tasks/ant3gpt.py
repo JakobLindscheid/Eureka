@@ -10,8 +10,8 @@ from isaacgym.gymtorch import *
 from isaacgymenvs.utils.torch_jit_utils import *
 from isaacgymenvs.tasks.base.vec_task import VecTask
 
-ROOT_DIR='/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs'
-LOG_PATH = os.path.join(ROOT_DIR, "consecutive_successes_log.txt")
+""" ROOT_DIR='/home/vandriel/Documents/GitHub/Eureka/isaacgymenvs/isaacgymenvs'
+LOG_PATH = os.path.join(ROOT_DIR, "consecutive_successes_log.txt") """
 
 class Ant3GPT(VecTask):
 
@@ -192,8 +192,8 @@ class Ant3GPT(VecTask):
             self.extremities_index[i] = self.gym.find_actor_rigid_body_handle(self.envs[0], self.ant_handles[0], extremity_names[i])
 
     def compute_reward(self, actions):
-        self.rew_buf[:], self.rew_dict = compute_reward(self.root_states, self.dt, self.targets)
-        self.extras['gpt_reward'] = self.rew_buf.mean()
+        self.rew_buf[:], self.rew_dict = compute_reward(self.root_states, self.targets, self.dof_vel, self.up_vec)
+        self.extras['gpt_reward'] = self.rew_buf.mean().item()
         for rew_state in self.rew_dict: self.extras[rew_state] = self.rew_dict[rew_state].mean()
         self.gt_rew_buf, self.reset_buf[:], self.consecutive_successes[:] = compute_success(
             self.obs_buf,
@@ -214,7 +214,7 @@ class Ant3GPT(VecTask):
         )
         self.extras['gt_reward'] = self.gt_rew_buf.mean()
         self.extras['consecutive_successes'] = self.consecutive_successes.mean()
-        # PVD Log consecutive_successes to an external file
+        """ # PVD Log consecutive_successes to an external file
         
         # Ensure directory exists before writing
         log_dir = os.path.dirname(LOG_PATH)
@@ -224,7 +224,7 @@ class Ant3GPT(VecTask):
 
         # Log consecutive_successes to an external file
         with open(LOG_PATH, "a") as f:
-            f.write(f"{self.consecutive_successes.mean().item()}\n")
+            f.write(f"{self.consecutive_successes.mean().item()}\n") """
 
 
     def compute_observations(self):
@@ -245,10 +245,6 @@ class Ant3GPT(VecTask):
 
         positions = torch_rand_float(-0.2, 0.2, (len(env_ids), self.num_dof), device=self.device)
         velocities = torch_rand_float(-0.1, 0.1, (len(env_ids), self.num_dof), device=self.device)
-
-        disabled_leg_dofs = [6, 7]  # PVD: right_back leg and foot
-        positions[:, disabled_leg_dofs] = 0
-        velocities[:, disabled_leg_dofs] = 0
 
         self.dof_pos[env_ids] = tensor_clamp(self.initial_dof_pos[env_ids] + positions, self.dof_limits_lower, self.dof_limits_upper)
         self.dof_vel[env_ids] = velocities
@@ -272,6 +268,7 @@ class Ant3GPT(VecTask):
         self.reset_buf[env_ids] = 0
 
     def pre_physics_step(self, actions):
+        actions[:, :2] = 0.0  # JL: Disable the first two actions
         self.actions = actions.clone().to(self.device)
         forces = self.actions * self.joint_gears * self.power_scale
         force_tensor = gymtorch.unwrap_tensor(forces)
@@ -394,42 +391,44 @@ import math
 import torch
 from torch import Tensor
 @torch.jit.script
-def compute_reward(root_states: torch.Tensor, dt: float, targets: torch.Tensor) -> Tuple[torch.Tensor, Dict[str, torch.Tensor]]:
-    # Unpack the root states
-    torso_velocity = root_states[:, 7:10]  # Velocity components
-    forward_velocity = torso_velocity[:, 0]  # Forward velocity (x-axis)
+def compute_reward(root_states: torch.Tensor, targets: torch.Tensor, dof_vel: torch.Tensor, 
+                   up_vec: torch.Tensor) -> Tuple[torch.Tensor, Dict[str, torch.Tensor]]:
+    
     torso_position = root_states[:, 0:3]
+    velocity = root_states[:, 7:10]
+
+    # Reward for forward velocity
+    forward_velocity = velocity[:, 0]  # Assuming forward is in the x-direction
+    forward_velocity_reward = forward_velocity
+
+    # Penalty for excessive joint velocities
+    joint_vel_penalty = torch.sum(dof_vel**2, dim=-1)
+    joint_vel_penalty_coefficient = 0.001
+
+    # Enhanced reward for upright posture
+    # Provides a gradient by taking into account the deviation from being fully upright (vertical)
+    upright_var = torch.abs(1.0 - up_vec[:, 2])
+    upright_reward = 1.0 - upright_var  # Increases sensitivity to deviation
+    upright_reward_coefficient = 1.0  # Considerably increase coefficient for significance
+
+    # Total reward
+    total_reward = forward_velocity_reward - joint_vel_penalty_coefficient * joint_vel_penalty + upright_reward_coefficient * upright_reward
+
+    # Normalize each reward component
+    forward_velocity_temperature = 0.1
+    transformed_forward_velocity_reward = torch.exp(forward_velocity_temperature * forward_velocity_reward)
     
-    # Calculate distance to the target (2D, ignoring height)
-    to_target = targets - torso_position
-    distance_to_target = torch.sqrt(to_target[:, 0]**2 + to_target[:, 1]**2)
+    upright_reward_temperature = 1.0  # Changed to significantly affect during optimization
+    transformed_upright_reward = torch.exp(upright_reward_temperature * upright_var)
 
-    # New reward components
-    reward_forward_speed = forward_velocity  # Reward based on forward speed
-    sustained_speed = torch.max(forward_velocity, torch.tensor(0.0, device=root_states.device))  # Only positive forward velocity matters
-    
-    # New heading reward based on the direction towards the target
-    direction_to_target = to_target / (distance_to_target.unsqueeze(-1) + 1e-5)  # Normalize direction
-    heading_dot_product = torch.sum(torso_velocity * direction_to_target, dim=-1)  # Dot product gives alignment
+    total_temperature = 0.1
+    transformed_total_reward = torch.exp(total_temperature * total_reward)
 
-    # Adjust the temperature parameters for transformations
-    temperature_forward = 5.0
-    temperature_sustained_speed = 8.0
-    temperature_heading = 5.0
-
-    # Transforming the rewards for scaling
-    transformed_reward_forward_speed = torch.exp(reward_forward_speed / temperature_forward) - 1
-    transformed_sustained_speed = torch.exp(sustained_speed / temperature_sustained_speed) - 1  
-    transformed_reward_heading = torch.exp(heading_dot_product / temperature_heading)  # Exponential for the heading
-
-    # Total reward calculation
-    total_reward = transformed_reward_forward_speed + transformed_sustained_speed + transformed_reward_heading
-
-    # Create a dictionary for the individual reward components
-    reward_components = {
-        'reward_forward_speed': transformed_reward_forward_speed,
-        'sustained_speed': transformed_sustained_speed,
-        'reward_heading': transformed_reward_heading,
+    separated_rewards = {
+        'forward_velocity_reward': transformed_forward_velocity_reward,
+        'joint_vel_penalty': joint_vel_penalty * joint_vel_penalty_coefficient,
+        'upright_reward': transformed_upright_reward,
+        'transformed_total_reward': transformed_total_reward
     }
 
-    return total_reward, reward_components
+    return transformed_total_reward, separated_rewards

@@ -46,9 +46,6 @@ import gym
 import sys 
 import shutil
 from pathlib import Path
-import subprocess
-import json
-import time
 
 from isaacgymenvs.utils.reformat import omegaconf_to_dict, print_dict
 from isaacgymenvs.utils.utils import set_np_formatting, set_seed
@@ -77,41 +74,6 @@ def preprocess_train_config(cfg, config_dict):
         pass
 
     return config_dict
-
-# these functions are copied from eureka/utils/misc.py
-def set_freest_gpu():
-    freest_gpu = get_freest_gpu()
-    os.environ['CUDA_VISIBLE_DEVICES'] = str(freest_gpu)
-
-def get_freest_gpu():
-    gpu_found = False
-    while not gpu_found:
-        sp = subprocess.Popen(['gpustat', '--json'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        out_str, _ = sp.communicate()
-        gpustats = json.loads(out_str.decode('utf-8'))
-        # Find GPU with most free memory
-        # freest_gpu = min(gpustats['gpus'], key=lambda x: x['memory.used'])
-
-        for freest_gpu in sorted(gpustats['gpus'], key=lambda x: x['memory.used']):
-
-            free_memory = freest_gpu['memory.total'] - freest_gpu['memory.used']
-            if len(freest_gpu['processes']) == 0:
-                gpu_found = True
-                break
-            else:
-                largest_process = max(freest_gpu['processes'], key=lambda x: x['gpu_memory_usage'])
-                if (
-                    largest_process['gpu_memory_usage'] < free_memory and # if the new process will not exceed the free memory
-                    freest_gpu['utilization.gpu'] + freest_gpu['utilization.gpu']/len(freest_gpu['processes']) <= 95 # if adding a new process will not exceed 95% utilization
-                ):
-                    gpu_found = True
-                    break
-        
-        if not gpu_found:
-            time.sleep(5)
-
-    return freest_gpu['index']
-
 
 @hydra.main(config_name="config", config_path="./cfg", version_base="1.1")
 def launch_rlg_hydra(cfg: DictConfig):
@@ -256,38 +218,6 @@ def launch_rlg_hydra(cfg: DictConfig):
         checkpoint = os.listdir(f"{experiment_dir}/nn")[0]
         if cfg.wandb_activate and rank == 0:
             wandb.save(str(Path.cwd() / experiment_dir / "nn" / checkpoint))
-        if cfg.eval_episodes > 0:
-            print(f"Checkpoint: {checkpoint}")
-
-            eval_runs = []            
-            for i in range(cfg.eval_episodes):
-                set_freest_gpu()
-
-                # Execute the python file with flags
-                os.mkdir(f"episode{i}")
-                path = f"episode{i}/eval_episode{i}.txt"
-                with open(path, 'w') as f:
-                    process = subprocess.Popen(['python', '-u', f"{ROOT_DIR}/train.py", 
-                                                'hydra/output=subprocess', f'hydra.run.dir=./episode{i}',
-                                                f'checkpoint={Path.cwd() / experiment_dir / "nn" / checkpoint}', f'test=True',
-                                                f'task={cfg.task_name}',
-                                                f'wandb_activate=False',
-                                                # f'wandb_entity={cfg.wandb_username}', f'wandb_project={cfg.wandb_project}', 
-                                                # f'wandb_name={cfg.wandb_name}_eval{i}', f'wandb_group={cfg.wandb_name}',
-                                                f'headless={not cfg.capture_video}', f'capture_video={cfg.capture_video}', 'force_render=False', f'seed={i}',
-                                                ],
-                                                stdout=f, stderr=f)
-                # block until start
-                while True:
-                    with open(path, 'r') as file:
-                        rl_log = file.read()
-                        if "reward:" in rl_log or "Traceback" in rl_log:
-                            break
-                
-                eval_runs.append(process)
-
-        for process in eval_runs:
-            process.communicate()
     
     # After runner.run() completes, read the log file for consecutive successes
     try:

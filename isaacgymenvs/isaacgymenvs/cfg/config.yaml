@@ -71,8 +71,6 @@ force_render: False
 # headless: False
 headless: True 
 
-eval_episodes: 4
-
 # set default task and default training config based on task
 # defaults:
 #   - task: Ant
